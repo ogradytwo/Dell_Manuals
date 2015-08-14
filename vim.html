@@ -1,0 +1,465 @@
+<html lang="en"> 
+<head>
+<title>Vim</title>
+  <meta property='site_name'   content='Vim' />
+  <meta property='title'   content='Vim' />
+  <meta property='description'   content='Vim' />
+  <meta http-equiv='Content-Type'   content='text/html; charset=utf-8'/>
+  <!--
+  [if lt IE 9]>   <script src='html5shiv.js'>   </script>   <![endif]
+  -->
+  <style>
+       em { font-style: normal; color: red; }
+       body {color:GreenYellow;background-color:Black;font-family:arial}
+       p {color:GreenYellow;padding-left:18px}
+       h3 {color:Yellow}
+       h4 {color:White}
+       dl {color:White}
+       dt {color:GreenYellow}
+       a {color:Yellow;padding-left:18px}
+       td {padding-left:18px}
+   </style>
+</head> 
+
+<!--
+LINKS
+<a  href="http://www."  
+target="_blank">  </a>
+
+<a href="http://html-color-codes.info" title="HTML color codes">HTML color codes</a> 
+<body style="color:GreenYellow;background-color:Black;font-family:arial">
+-->
+<h3>
+Vim
+</h3>
+<body>
+<strong>
+<br>To invoke: vim filename1 filename2 ... or gvim etc
+<br>
+<br>terminology: start of line = first non-whitespace character
+<br>        columnzero = first character, whether or not whitespace
+<br>        whitespace = (space||tab)*
+<br>        alphanumeric = a-z||A-Z||(Latin chars with diacritical marks)||(chars in non-Latin alphabets)||0-9||underscore
+<br>        special = not (whitespace||alphanumeric)
+<br>        word = (sequence of alphanumeric chars, bounded by other)||(sequence of special chars, bounded by other)
+<br>        WORD, bigword = sequence of ( alphahnumeric||special) chars, bounded by whitepace
+<br>NORMAL MODE
+<br>***********
+<br>
+<h3>
+Motion commands.these only work within the line:  l h f F t T 0 ^ $ | ; ,
+</h3>
+<table>
+<tr><td>0 </td><td>back to columnzero </td><td></td><td> ^ </td><td>back to start of line </td><td></td><td> 7| </td><td>go to column 7 </td><td>
+          </td><td> $ </td><td>forward to end of line
+<tr><td>7h</td><td>back to previous char </td><td></td><td>7l </td><td>go to next char
+<tr><td>7F</td><td>back back to sought char, </td><td></td><td>7T </td><td>go back to char after sought char, </td><td></td><td> 7t 
+          </td><td>forward to char before sought char</td><td></td><td>7f </td><td>go forward to sought char
+<tr><td> ;</td><td>repeat forward find   </td><td></td><td>,</td><td>repeat backwards find
+</table>
+<h3>
+Motion commands.Characterwise commands: these work across line boundaries and treat end-of-line as whitespace:
+</h3>
+<br>7w go forward word(s), 7W go forward bigword(s)
+<br>                                           7e go forward to end of word(s), 7E go forward to end of bigword(s)
+<br>`a        go to char marked by a
+<br>/<RE><ENTER>    search forward                
+<br>/<ENTER>    repeat search in forward direction    
+<br>*        search for word matching word under cursor  
+<br>g*        search for word matching word under cursor  (also searches for part words)
+<br>
+<br>7B go back bigword(s), 7b go back word(s), 
+<br>`a        go to char marked by a
+<br>?<RE><ENTER>    search backwards            
+<br>?<ENTER>    repeat search in backwards direction    
+<br># search backwards for word matching word under cursor  
+<br>g# search backwards for word matching word under cursor  (also searches for part words)
+<br>
+<br>n           repeat search in same direction     
+<br>N            repeat search in opposite dirction
+<br>% searches for matching ( ) [ ] { }
+<h3>
+Motion commands.Linewise commands: these work at line level
+</h3>
+7G go to start of line 7
+<br>'a go to start of line containing char marked by a
+<br>2- go to start of previous line but one
+<br>- go to start of previous line         
+<br>7k go to previous line(same position)
+<br>7j go next line(same position)
+<br>+ or enter    go to start of next line, 2$ go to end of next line
+<br>2+ or 2<enter>    go to start of line after next, 3$ go to end of line after next
+<br>G  go to start of last line of file
+<br>CTRL-b        scroll (page-2) lines back         CTRL-f         go forward 1 page 
+<br>        cursor goes to bottom                     cursor goes to top
+<br>CTRL-u        scroll half page backwards         CTRL-d         scroll half page forward
+<br>        cursor stays same postion on screen            cursor stays same postion on screen
+<br>
+<h3>
+Marking commands
+</h3>
+ma                        mark this position as a
+<br>v,    followed by motion command        select this string of characters        
+<br>V,    followed by motion command        select these lines
+<br>CTRL-v, followed by motion command        select this rectangular block of characters        
+<br>
+<h3>
+Editing commands
+</h3>
+<br>preceding these commands by "a causes register a to be used instead of the default. "* ( or "+ ) uses the operating system clipboard.
+<br>
+<h3>
+Insert(goes into insert mode, ESC to return to normal mode)
+</h3>
+<table>
+<tr><td>gI </td><td>before columnzero </td><td></td><td>I</td><td>before start of line</td><td>
+          </td><td>A</td><td>after last char
+<tr><td>i</td><td>before current char </td><td></td><td>a</td><td>after current char
+<tr><td>O</td><td>open line above   </td><td></td><td>o</td><td>open line below
+</table>
+<br>    insert from buffer(stays in normal mode) P p "zP "zp "*P "*p "+P "+p
+<br>
+<br>When in insert mode
+<br>
+<br>CTRL-k        following two characters are a digraph
+<br>CTRL-v,u    following 4 hexadecimal digits are unicode (On Microsoft Windows, Ctrl+Q may be required instead of Ctrl+V)
+<br>CTRL-v        following 3 decimal digits are unicode (On Microsoft Windows, Ctrl+Q may be required instead of Ctrl+V)
+<br>CTRL-v        following char has its literal meaning
+<br><BS>    this separates the two chars when digraph option is on
+<br><ENTER>        end-of-line-marker
+<br><TAB>        when set expandatab is on, inserts spaces
+<br><ESC>        return to normal mode
+<br> >> inserts shiftwidth spaces(or tabs) at start of line.  << removes the above
+<br>
+<h3>
+Delete commands.these only work within the line:  d0 d^ d7| d$ X x dF dT dt df
+</h3>
+<table>
+<tr><td>d0</td><td> delete from column zero to char before cursor </td><td></td><td> d^ </td><td>delete from start of line to char before cursor</td><td></td><td> d7| </td><td>delete to char before column 7 </td><td></td><td> d$ </td><td>delete to end of line
+<tr><td>7X </td><td>delete previous char </td><td></td><td>7x </td><td>delete current char
+<tr><td>7dF </td><td>delete back to sought char, </td><td></td><td>7dT </td><td>delete back to char after sought char </td><td></td><td>7dt </td><td>delete to char before sought char, </td><td></td><td>7df </td><td>delete to sought char
+</table>
+<h3>
+deleting (also moves to the unnamed register, if preceded by "a (say), also moves to register a)
+</h3>
+<br>characterwise deletes:
+<br>7dw      delete word(s), deletes upto, but not including, first char of next word, i.e. also deletes following whitespace
+<br>    has a problem deleting across blank lines
+<br>7dW     similar
+<br>d`a    deletes all chars from current char to char marked by a, including first char but excluding last char
+<br>---
+<br>linewise deletes:
+<br>7dd     delete current line(s)
+<br>d'a    deletes all lines from the current line to the line containing mark a
+<br>dG    delete all lines from current line to last line in file
+<br>d7G    delete all lines from current line to line 7
+<br>7J    delete next end of line marker, i.e. join lines
+<br>---
+<br>linewise, characterwise or blockwise deletes depending on whether visual selection was v, V or ctrl-v:
+<br>d
+<br>
+<h3>
+changing
+</h3>
+<br>--------
+<br>Like deleting, but goes into Insert mode afterwards
+<br>'s' instead of 'x' 
+<br>'c' instead of 'd'.
+<br>cw doesn't delete following whitespace, but 7cw deletes whitespace between words
+<br>cW similar
+<br>7ra     deletes current character and inserts a's (stays in normal mode, no need for ESC)
+<br>R       changes from current character for as long as characters are entered and at end of line go into insert mode
+<br>
+<br>yanking(stays in normal mode)
+<br>-----------------------
+<br>Like deleting but only moves to register(s)
+<br>'y' instead of 'd'.No equivalent of 'x'.
+<br>( but Y copies all of line, same as yy. to copy all text from current position to end of line, use y$ )
+<br>
+<h3>
+editing commands using calls to operating system commands
+</h3>
+<br>---------------------------------------------------------
+<br>!<motioncommand><unixcommand><enter>
+<br>!!<unixcommand><enter>        operates on current line
+<br>!7G        sort        sorts from current line to line 7
+<br>!G    sort        sorts from current line to end of file
+<br>!-    sort        sorts line and preceding line
+<br>!+    sort        sorts line and following line
+<br>!<ENT>        sort    sorts line and following line
+<br>!'a    sort        sorts from current line to line marked by a
+<br>!!    date        replaces current line with date/time
+<br>!!    ls        replaces current line with list of files in current directory
+<br>!!    grep RE filename    <ENT>   replaces current line with output from grep
+<br>
+<h3>
+Repeat,Undo,Macro commands
+</h3>
+<br>==========================
+<br>.    repeats previous editing command
+<br>qa    records commands in register a
+<br>qA    appends to commands in register a
+<br>q    stops recoding
+<br>@a    performs commands recorded in a
+<br>u    undo
+<br>U    undo all on current line
+<br>Ctrl+R    redo
+<br>
+<h3>
+Multiple screen commands
+</h3>
+<br>========================
+<br>CTRL-w    go to other screen
+<br>
+<h3>
+Information commands
+</h3>
+<br>====================
+<br>    CTRL-g        line number, file size
+<br>    ga            hex/ascii number of current character
+<br>:   args    <ENT>    list of files
+<br>:   ascii    <ENT>    same as ga
+<br>:   dig        <ENT>    displays mnemonics
+<br>
+<h3>
+Ex
+</h3>
+<br>to invoke: vim -es filename < command-file-name
+<br>
+<br>COMMAND MODE(these are introduced by : and terminated by ENTER)
+<br>****************************************************************
+<br>
+<br>Motion commands
+<br>===============
+<br>:7<ENT>    go to line 7
+<br>
+<br>Editing commands(these may start with a range, e.g.  .  .,$  1,$  .,.+3)
+<br>========================================================================
+<br>:   s/oldstring/newstring/gci    <ENT>
+<br>:   !<unixcommand><ENT>
+<br> 
+<br>
+<h3>
+File level motion commands for multiple files
+</h3>
+<br>=============================================
+<br>:   q        <ENT> 
+<br>:   q!        <ENT>
+<br>:   rewind    <ENT>    first file
+<br>:   n        <ENT>        next file
+<br>:   7n        <ENT>    next 7th file
+<br>:   N        <ENT>        previous file
+<br>:   7N        <ENT>    previous 7th file
+<br>:   previ    <ENT>    same as :N
+<br>:   7previ    <ENT>    same as :7N
+<br>:   last    <ENT>    last file
+<br>:   vi        <ENT>    edit another file
+<br>    CTRL-^        alternate file
+<br>    7CTRL-^        7th file on command line
+<br>
+<h3>
+File level editing commands
+</h3>
+<br>===========================
+<br>:w :w! ':w filemane' :wq ZZ :x
+<br>
+<h3>
+Multiple screen commands
+</h3>
+<br>========================
+<br>:split
+<br>:new
+<br>
+<h3>
+Setting options
+</h3>
+<br>===============
+<br>:set list
+<br>:set expandtab
+<br>:set digraph
+<br>:set wrapscan
+<br>:set ignorecase
+<br>:set tabstop=4
+<br>:set tabstop=8
+<br>:set softtabstop=4
+<br>:set shiftwidth=4
+<br>:dig 2mn decimal     sets custom mnemonic  
+<br>
+<br>INSERT MODE
+<br>***********
+<br>
+<h3>
+
+
+REGULAR EXPRESSION MODE
+</h3>
+<br>	TO MATCH ANY CHARACTER FROM A CLASS
+<br>.        any character ( except newline )
+<br>\a        any alphabetic character
+<br>\d        any digit
+<br>
+<br>	TO MATCH ITERATIONS
+<br>*        any number (including zero) of the previous character
+<br>\+        any number ( greater than zero) of the previous character
+<br>\?        zero or one occurence of the previous character
+<br>\(pattern\)*    any number(?including zero) of string
+<br>
+<br>	TO MATCH CONTROL CHARACTERS
+<br>\n        newline
+<br>\r	carriage return        
+<br>\t        horizontal tab
+<br>
+<br>	TO MATCH A POSITION IN THE LINE
+<br>^        start of line
+<br>$        end of line
+<br>\<        start of word
+<br>\>        end of word
+<br>
+<br>[ start of range
+<br>] end of range
+<br>-  separator within range (n.b. within a range the only characters needing to be escaped are \ ] and non-initial -)
+<br>^ at start of range, negates the range
+<br>%
+<br>/
+<br>~
+<br>\(pattern\) stores pattern for further use and may be referenced by \1 \2 ...:w
+
+<br>^        within [...] means not
+<br>\        removes special significance from following character or makes it a special character
+<br>\|        either of the searches
+<br><ENT>        return to normal mode and search
+<br>
+<br>
+<br>Modes
+<br>=====
+<br>Command
+<br>    Bottom-Line
+<br>    Ex
+<br>    Search/RE
+<br>    Normal
+<br>    Mark commands
+<br>    Motion commands
+<br>    Editing commands
+<br>    Visual
+<br>Insert
+<br>
+<h3>
+Characters with special significance in certain modes
+</h3>
+<br>=====================================================
+<br>
+<br>$    command    last line
+<br>$    normal    go to end of line
+<br>$    RE    end of line
+<br>^    normal    go to first non-whitespace character on line
+<br>^    RE    start of line
+<br>^    RE    after [ negates following list
+<br>'    normal
+<br>-    normal    go to start of previous line
+<br>.    command    current line
+<br>.    RE    any character
+<br>.    normal    repeat previous editing command
+<br>\<    RE    start of word
+<br>\>    RE    end of word
+<br>\|    RE    or
+<br>/    normal
+<br>@    normal    execute commands from named clipboard
+<br>0    normal    go to column zero
+<br><ENT>    normal    go to start of next line
+<br><ENT>    RE    return to normal mode and search
+<br><ENT>    command    do command and return to normal mode
+<br>A    normal    insert at end of line
+<br>B    normal
+<br>C    normal    delete rest of line then do insert
+<br>D    normal    delete rest of line (same as d$)
+<br>G    normal    go to end of file
+<br>H    normal
+<br>I    normal    insert at start of line
+<br>J    normal    delete next end of line marker, i.e. join lines
+<br>N    normal    repeat previous search in opposite direction
+<br>O    normal    insert on new line above
+<br>P    normal    put before cursor OR put on new line above
+<br>R    normal    delete and insert character by character, at end of line do insert
+<br>S    normal
+<br>W    normal    go to start of next big word
+<br>X    normal    delete previous character
+<br>Y    normal    yank line (same as yy)
+<br>CTRL-b    normal
+<br>CTRL-d    normal
+<br>CTRL-f    normal    scroll forward one page
+<br>CTRL-g    normal
+<br>CTRL-k    insert    following two characters are a digraph
+<br>CTRL-u    normal
+<br>CTRL-v    Insert    following characters are unicode
+<br>'    normal    go to start of line containing mark specified by following character
+<br>a    normal    insert after
+<br>b    normal    
+<br>c    normal    change, i.e. delete and go into insert mode
+<br>d    normal    delete
+<br>e    normal    go to end of word
+<br>f    normal    go to next occurence on the line of character following the 'f'
+<br>g    normal
+<br>h    normal    go left
+<br>i    normal    insert before
+<br>j    normal    go down
+<br>k    normal    go up
+<br>l    normal    go right
+<br>m    normal
+<br>n    command    edit next file
+<br>n    normal    repeat previous search in same direction
+<br>o    normal    open line below
+<br>p    normal    put below or after
+<br>q    command    quit
+<br>q    normal    start or finish recording commands into named clipboard
+<br>r    normal    replace character
+<br>s    normal
+<br>t    normal    go to character before next occurence on the line of character following the 't'
+<br>u    Insert    after CTRL-v means following 4 characters are hexadecimal unicode
+<br>u    Normal    undo
+<br>v
+<br>w    normal    go to next keyword
+<br>x    command    write file ( if changed ) then quit
+<br>x    normal
+<br>y    normal
+<br>z
+<br>~    normal    delete char then insert char of opposite case
+<br>:    normal    enter Ex mode
+<br>F    normal
+<br>T    normal
+<br>N    normal
+<br>?    normal
+<br>!    normal
+
+<h3>
+Linux
+</h3>
+<dl>tar -xzvf xxxxxxx,tar.gz
+  <dt>unpacks a compressed file.
+</dl>
+<dl>ifconfig
+  <dt>gives the Ethernet connection, "indet addr" shows IP address, "Mask" shows subnet mask, "HWaddr" shows MAC address.
+</dl>
+<dl>ip route
+  <dt>default gateway is the IP address after "default via"
+</dl>
+<dl>sudo dhclient 
+  <dt>tells system to seek DHCP server and accept an address
+</dl>
+<dl>sudo dhclient  -r
+  <dt>releases IP address
+</dl>
+<dl>sudo cp /etc/network/interfaces ~
+  <dt>backs up the interfaces file to the home directory
+</dl>
+<dl>sudo vim /etc/network/interfaces
+  <dt>backs up the interfaces file to the home directory
+    opens interfaces file in order to add:
+</dl>
+<dl>sudo vim /etc/resolv.conf
+  <dt>for adding a static DNS server, add
+  nameserver 192.168.1.10
+<dl>sudo ifup eth0
+  <dt>forces Linux to re-read the configuration files, the system will then have a static IP address.
+</dl>
+<br></body>
+<br></html>

@@ -1,0 +1,86 @@
+Pythonanywhere
+==============
+set up a virtual environment
+----------------------------
+$ mkvirtualenv 34(say) --python=/usr/bin/python3.4      # pythonanywhere has virtualenvwrapper preinstalled
+  # this automatically activates the virtual environment, without need of workon 34
+$ pip install django==1.8(say)
+
+set up a project
+----------------
+$ mkdir project-name_django-version_python version
+$ cd project-name_django-version_python version
+$ git clone https://github.com/<github-username>/project-name_django-version_python-version
+$ workon 34
+#   $ virtualenv --python=python3.4 myvenv
+#   $ source myvenv/bin/activate
+$ python manage.py collectstatic
+$ python manage.py migrate
+$ python manage.py createsuperuser
+using pythonanywhere GUI, App, Add a new web app, manual configuration, python3.4, under virtualenv: /home/<username>/project-name/myvenv/
+under code, wsgi configuration file, add:
+import os
+import sys
+path = '/home/username>/project-name' 
+if path not in sys.path:
+    sys.path.append(path)
+os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings'
+from django.core.wsgi import get_wsgi_application
+from whitenoise.django import DjangoWhiteNoise
+application = DjangoWhiteNoise(get_wsgi_application())
+
+
+Heroku 1st attempt, python
+==========================
+
+heroku create          
+heroku run python manage.py migrate
+heroku run python manage.py createsuperuser         
+
+Heroku
+=====
+$ heroku version
+$ heroku login
+$ heroku create          
+$ git push heroku master
+in browser, xxxx-yyyy-nnnn.herokuapp.com
+$ heroku rename abcd
+$ heroku run console
+>> Rails.env
+=> "production"
+>> Rails.env.production?
+=> true
+
+
+Github
+======
+$ ssh-keygen -t rsa -C "YOUR@EMAIL.com"
+      The next step is to take the newly generated SSH key and add it to your Github account. You want to copy and
+      paste the             output     of the following command and paste it here.
+$ cat ~/.ssh/id_rsa.pub
+       Once you've done this, you can check and see if it worked:
+$ ssh -T git@github.com
+       You should get a message like this:
+       Hi excid3! You've successfully authenticated, but GitHub does not provide shell access.
+  
+
+Bitbucket
+=========
+  
+
+Pythonanywhere
+==============
+  
+$ mkvirtualenv --python=/usr/bin/python3.4 <myenv>
+$ pip install django==1.8
+$ which django-admin.py
+$ django-admin.py --version
+$ django-admin.py startproject <projname>
+$ django-admin.py startproject <projname> .
+
+
+
+
+
+
+

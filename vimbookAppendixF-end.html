@@ -1,0 +1,5856 @@
+!Doctype>
+<html>
+<head>
+<style>
+  body{ color:GreenYellow;background-color:Black;font-family:arial}
+  h3   {color:Yellow}
+</style>
+</head>
+<body>
+<strong>
+
+<br>504 Appendix F Insert-Mode Commands 
+<br>
+<br>CTRL-X CTRL-K 
+<br>CTRL-X CTRL-L 
+<br>
+<br>
+<br>CTRL-X CTRL-N 
+<br>
+<br>CTRL-X CTRL-P 
+<br>
+<br>CTRL-X CTRL-Y 
+<br>CTRL-Y 
+<br>
+<br>CTRL-Z 
+<br>^ CTRL-D 
+<br>
+<br>0 CTRL-D 
+<br>
+<br>Complete identifiers from dictionary. (See page 128.) 
+<br>
+<br>Search the line completion of the line under of the 
+<br>
+<br>cursor. (See pages 128 and 131.) 
+<br>
+<br>Search for next word that matches the word under 
+<br>
+<br>
+<br>the cursor. (See page 128.) 
+<br>
+<br>
+<br>Search for previous word that matches the word 
+<br>
+<br>
+<br>under the cursor. (See page 128.) 
+<br>
+<br>
+<br>Scroll down. (See page 131.) 
+<br>
+<br>
+<br>Insert the character that is above the cursor. (See pages 
+<br>
+<br>
+<br>229 and 230.) 
+<br>When in insert mode, suspend Vim. 
+<br>Delete all indent in the current line, and restore it in 
+<br>
+<br>
+<br>the next. (See page 262.) 
+<br>Delete all indent in the current line. (See page 262.) 
+<br>
+<br>
+<br>
+<br>Option List 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>aleph al Number Global MS-DOS: 128 
+<br>Others: 224 
+<br>Define the first character of the Hebrew alphabet. (See page 177.) 
+<br>
+<br>allowrevins ari 
+<br>
+<br>Boolean Global Off 
+<br>Allow the CTRL-_ command toggle the 'revins' option. (See page 175.) 
+<br>altkeymap akm Boolean Global Off 
+<br>Define which keyboard map to use as the alternate one. (See pages 176-177.) 
+<br>
+<br>autoindent ai 
+<br>
+<br>Boolean Buffer Off 
+<br>Automatically indent each line like the previous one. (See pages 70, 72, 97, 262, 396.) 
+<br>autoprint ap Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>autowrite aw Global 
+<br>
+<br>Boolean Off 
+<br>Automatically write files as needed. (See pages 42 and 97.) 
+<br>background bg String Global Depends on GUI background 
+<br>Light or dark, depending on the background color. (See pages 68 and 343.) 
+<br>backspace bs String Global “” 
+<br>Define how <BS> works in insert mode. (See page 94.) 
+<br>
+<br>continues 
+<br>
+<br>
+<br>506 Appendix G Option List 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>
+<br>backup bk Boolean Global Off 
+<br>Produce a backup file. (See pages 146-147.) 
+<br>backupdir bdir String Global Amiga: “.,t:” 
+<br>MS-DOS: “.,c:/tmp,c:/temp” 
+<br>UNIX: “.,~/tmp,~/” 
+<br>Specify where the backup files are to go. (See page 147.) 
+<br>backupext bex String Global VMS: “_” 
+<br>Others: “~” 
+<br>Define the extension to append to a backup file. (See page 146.) 
+<br>beautify bf Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>binary bin Boolean Buffer Off 
+<br>This option enables you to edit binary files. (See pages 121 and 178.) 
+<br>
+<br>bioskey biosk 
+<br>
+<br>Boolean Global On 
+<br>On Microsoft Windows, use the BIOS to read keys. (See page 340.) 
+<br>breakat brk String Global “ ^I!@*-+_;:,./?” 
+<br>Define character at which a line can be broken. (See page 236.) 
+<br>browsedir bsdir String Global “last” 
+<br>Define which directory in which to start the :browse command. (See page 340.) 
+<br>cindent cin 
+<br>
+<br>Boolean Buffer Off 
+<br>Do C-style indentation. (See pages 70, 71, and 396.) 
+<br>
+<br>cinkeys cink 
+<br>“0{,0},:,0#,!^F,o,O,e” 
+<br>
+<br>String Buffer 
+<br>Define the keys that cause a re-indent. (See page 272.) 
+<br>cinoptions cino String Buffer “” 
+<br>Define how C indentation is performed. (See pages 272-274.) 
+<br>cinwords cinw String Buffer “if,else,while,do,for,switch” 
+<br>Define keywords that cause an extra indent. (See pages 71, 272, and 275.) 
+<br>clipboard cb String Global 
+<br>
+<br>“” 
+<br>
+<br>Define how the GUI interacts with the system clipboard. (See page 343.) 
+<br>cmdheight ch Number Global 1 
+<br>Define the height of the command window. (See page 386.) 
+<br>
+<br>columns co 
+<br>
+<br>Number Global 80 or terminal width 
+<br>Number of columns in a window. (See page 325.) 
+<br>comments com String Buffer “s1:/*,mb:*,ex:*/,://,b:#,:%, 
+<br>:XCOMM,n:>,fb:
+<br>
+<br>
+<br>Define what Vim considers a comment. (See pages 269-270.) 
+<br>
+<br>compatible cp 
+<br>
+<br>Boolean Global 
+<br>On (but turned off when a 
+<br>Vimrc file is found) 
+<br>
+<br>Enable Vi compatibility. (See pages 4 and 401.) 
+<br>
+<br>
+<br>Appendix G Option List 507 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>complete cpt String Global “.,w,b,u,t,I” 
+<br>Define where Vim searches for words to complete. (See pages 127-128.) 
+<br>confirm cf Boolean Global Off 
+<br>Enable a confirmation dialog for some commands. (See page 386.) 
+<br>conskey consk Boolean Global Off 
+<br>Do direct console I/O on Microsoft Windows. (See page 384.) 
+<br>cpoptions cpo String Global Vim mode: “aABceFs” 
+<br>Vi mode: All flags 
+<br>Set compatibility options. (See page 401.) 
+<br>cscopeprg csprg String Global “cscope” 
+<br>Define where the CScope program resides. (See page 172.) 
+<br>cscopetag cst Boolean Global Off 
+<br>Use CScope for tag navigation. (See page 172.) 
+<br>cscopetagorder csto Number Global 0 
+<br>Define the search order for CScope tag commands. (See page 172.) 
+<br>cscopeverbose csverb Boolean Global Off 
+<br>Output verbose information when using CScope. (See page 172.) 
+<br>define def String Global “^#\s*define” 
+<br>Define the string that indicates a macro definition. (See page 284.) 
+<br>dictionary dict String Global “” 
+<br>Define the files to be searched for dictionary words. (See pages 127-128.) 
+<br>digraph dg Boolean Global Off 
+<br>If set, allow digraphs to be entered with as ch1<BS>ch2. (See page 200.) 
+<br>directory dir String Global Amiga: “.,t:” 
+<br>MS-DOS: “.,c:\tmp,c:\temp” 
+<br>UNIX: “.,~/tmp,/var/tmp,/tmp” 
+<br>Define the directory where the swap files go. (See page 151.) 
+<br>display dy String Global “” 
+<br>If set to “lastline”, display partial lines as the last line of a screen. (See page 236.) 
+<br>edcompatible ed Boolean Global Off 
+<br>Change the g and c flags for the substitute command to be ed like. (See page 401.) 
+<br>endofline eol Boolean Buffer On 
+<br>Put an <EOL> at the end of an incomplete last line. (See page 121.) 
+<br>equalalways ea Boolean Global On 
+<br>When creating windows, make all window sizes equal. (See page 247.) 
+<br>equalprg ep String Global “” 
+<br>Define the program to use for the = command. (See page 269.) 
+<br>
+<br>continues 
+<br>
+<br>
+<br>508 Appendix G Option List 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>
+<br>errorbells eb 
+<br>
+<br>Boolean Global Off 
+<br>If set, beep on error. (See page 389.) 
+<br>errorfile ef String Global Amiga: “AztecC.Err” 
+<br>Others: “errors.err” 
+<br>Define the default error file for the :clist and related commands. (See page 89.) 
+<br>errorformat efm String Global A long and complex string. 
+<br>Define how Vim parses errors coming out of make command. (See page 385.) 
+<br>esckeys ek Boolean Global On 
+<br>Tell Vim to accept function keys that send an <ESC> string in insert mode. (See page 139.) 
+<br>eventignore ei String Global “” 
+<br>Define a set of events to ignore. (See pages 85 and 267.) 
+<br>expandtab et Boolean Buffer Off 
+<br>If set, expand tabs to spaces on insert. (See pages 85 and 267.) 
+<br>
+<br>exrc ex 
+<br>
+<br>Boolean Global Off 
+<br>Allow reading of initialization files in the current directory. (See page 383.) 
+<br>fileencoding fe String Buffer “ansi” 
+<br>Define the encoding of the file. Used for foreign languages. (See pages 137, 176, and 178.) 
+<br>fileformat ff String Buffer MS-DOS, OS/2: “dos” 
+<br>UNIX: “unix” 
+<br>Macintosh: “mac” 
+<br>The format of the current file. (See page 120.) 
+<br>
+<br>fileformats ffs String Global 
+<br>MS-DOS, OS/2: “dos,unix” 
+<br>UNIX: “unix,dos” 
+<br>Macintosh: “mac,unix,dos” 
+<br>
+<br>Others: “” 
+<br>Define the file formats recognized. (See page 120.) 
+<br>filetype ft String Buffer “” 
+<br>The type of the current file. (See pages 69, 136, and 138.) 
+<br>
+<br>fkmap fk 
+<br>
+<br>Boolean Global Off 
+<br>Turn on Farsi keyboard mapping. (See page 176.) 
+<br>
+<br>flash fl 
+<br>
+<br>Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>formatoptions fo String Buffer “tcq” 
+<br>Define how text is formatted. (See pages 97, 117-119, and 396.) 
+<br>formatprg fp String Global “” 
+<br>Define an external command to perform formatting. (See page 119.) 
+<br>gdefault gd Boolean Global Off 
+<br>Make the g flag the default for :substitute commands. (See page 311.) 
+<br>
+<br>
+<br>Appendix G Option List 509 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>
+<br>graphic gr Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>grepformat gfm String Global “%f:%l%m,%f %l%m” 
+<br>
+<br>Defines how Vim interprets the output of :grep. (See page 289.) 
+<br>grepprg gp String Global “grep -n”, Win32: “findstr /n” 
+<br>Define the command to run for :grep. (See pages 170 and 289.) 
+<br>
+<br>guicursor gcr String Global Complex string 
+<br>Define how the cursor looks in Microsoft Windows Vim. (See page 345.) 
+<br>
+<br>“”
+<br>
+<br>guifont gfn String Global 
+<br>
+<br>Define the font to use for the GUI. (See page 344.) 
+<br>
+<br>guiheadroom ghr Number Global 50 
+<br>Define the amount of space above and below the window used by the window manager. 
+<br>(See page 346.) 
+<br>
+<br>guifontset gfs String Global “” 
+<br>Define fonts for English and a foreign language. (See page 175.) 
+<br>
+<br>guioptions go String Global GTK: “agimrtT” 
+<br>UNIX: “gmrt” 
+<br>Sets various GUI options. (See pages 234, 325, 329, and 343.) 
+<br>
+<br>guipty Boolean Global On 
+<br>Use a “pty” rather than a pipe to connect to :shell commands. (See pag 346.) 
+<br>
+<br>hardtabs ht Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>
+<br>helpfile hf String Global MS-DOS: 
+<br>“$VIMRUNTIME\doc\help.txt” 
+<br>
+<br>Others: 
+<br>
+<br>“$VIMRUNTIME/doc/help.txt” 
+<br>
+<br>Define the location of the main help file. (See page 401.) 
+<br>
+<br>helpheight hh Number Global Half the current screen. 
+<br>The height of the help window. (See page 392.) 
+<br>
+<br>hidden hid Boolean Global Off 
+<br>Automatically hide buffers that are no longer visible. (See page 52.) 
+<br>
+<br>highlight hl String Global Complex string 
+<br>Define the highlighting for the Vim messages. (See pages 394-395.) 
+<br>
+<br>hlsearch hls Boolean Global Off 
+<br>Highlight search strings. (See pages 29, 97, 203, and 293.) 
+<br>
+<br>history hi Number Global 20 
+<br>Define the size of the command (:) history. (See page 321.) 
+<br>
+<br>continues 
+<br>
+<br>
+<br>510 Appendix G Option List 
+<br>
+<br>Option Abbreviation Type Scope 
+<br>Default 
+<br>
+<br>hkmap hk 
+<br>
+<br>Boolean Global Off 
+<br>Enable Hebrew keyboard mapping. (See page 177.) 
+<br>
+<br>hkmapp hkp 
+<br>
+<br>Boolean Global Off 
+<br>Enable Hebrew with a phonetic keyboard. (See page 177.) 
+<br>
+<br>icon Boolean Global Off (but on when title can be 
+<br>restored) 
+<br>If set, display the current filename in the icon. (See page 330.) 
+<br>iconstring String Global “” 
+<br>
+<br>The string to be displayed in the icon text. (See page 330.) 
+<br>
+<br>ignorecase ic 
+<br>
+<br>Boolean Global Off 
+<br>Ignore case differences in a search and name completion. (See pages 126 and 204.) 
+<br>include inc String Global “^#\s*include” 
+<br>
+<br>Define the format of an “include” directive. (See page 284.) 
+<br>incsearch is 
+<br>
+<br>
+<br>Boolean Global Off 
+<br>Perform incremental searches. (See pages 30 and 97.) 
+<br>
+<br>infercase inf 
+<br>
+<br>Boolean Buffer Off 
+<br>Figure out case of insert completion matches from the current text. (See page 127.) 
+<br>
+<br>insertmode im 
+<br>
+<br>Boolean Global Off 
+<br>Enter the strange world where insert mode is the default. (See page 179.) 
+<br>
+<br>isfname isf String Global Complex string 
+<br>Determine which characters make up a filename. (See pages 186 and 216.) 
+<br>
+<br>isident isi String Global Complex string 
+<br>Determine which characters make up an identifier. (See page 186.) 
+<br>
+<br>iskeyword isk 
+<br>
+<br>String Buffer Complex string 
+<br>Define what characters make up a word. (See pages 184-185 and 217.) 
+<br>
+<br>isprint isp String Global MS-DOS: “@,~-255” 
+<br>Others: “@,161-255” 
+<br>Determine which characters are printable. (See pages 186 and 217.) 
+<br>
+<br>joinspaces js 
+<br>
+<br>Boolean Global On 
+<br>Put spaces between lines joined with the > command. (See page 116.) 
+<br>
+<br>key String Buffer “” 
+<br>The encryption key. (See page 143.) 
+<br>keymodel km String Global “” 
+<br>Define how special keys affect selection mode. (See pages 108 and 333.) 
+<br>
+<br>keywordprg kp String Global 
+<br>Solaris: “man -s” 
+<br>Other UNIX: “man” 
+<br>DOS: “” 
+<br>OS/2: “view /” 
+<br>VMS: “help” 
+<br>
+<br>Define the command to run for the K command. (See page 79.) 
+<br>
+<br>
+<br>Appendix G Option List 511 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>
+<br>langmap lmap 
+<br>“”
+<br>
+<br>String Global 
+<br>Define a set of mappings for a foreign keyboard. (See page 175.) 
+<br>
+<br>
+<br>laststatus ls 
+<br>
+<br>Number Global 1 
+<br>Determine which windows get a status line. (See pages 246-247.) 
+<br>
+<br>
+<br>lazyredraw lz 
+<br>
+<br>Boolean Global Off 
+<br>Do not redraw the screen during macro execution. (See page 400.) 
+<br>
+<br>
+<br>linebreak lbr 
+<br>
+<br>Boolean Window Off 
+<br>Break long lines at nice places. (See page 236.) 
+<br>
+<br>
+<br>lines 
+<br>
+<br>Number Global Screen height 
+<br>Set the number of lines in the edit window. (See page 325.) 
+<br>
+<br>
+<br>lisp 
+<br>
+<br>Boolean Buffer Off 
+<br>Set options that make editing Lisp programs easier. (See pages 396 and 401.) 
+<br>
+<br>
+<br>list 
+<br>
+<br>Boolean Window Off 
+<br>Make invisible characters visible. (See pages 84 and 392.) 
+<br>
+<br>
+<br>listchars lcs 
+<br>“eol:$” 
+<br>
+<br>String Global 
+<br>Define how list mode appears. (See pages 85, 392, and 393.) 
+<br>
+<br>
+<br>magic 
+<br>
+<br>Boolean Global On 
+<br>Turn on or off the magic properties of some search characters. (See pages 214 and 309.) 
+<br>
+<br>makeef mef 
+<br>
+<br>String Global 
+<br>Amiga: “t:vim##.Err” 
+<br>UNIX: “/tmp/vim##.err” 
+<br>Others: “vim##.err” 
+<br>
+<br>Define the name of the file to use for :make and :grep output. (See page 284.) 
+<br>makeprg mp “make” 
+<br>
+<br>String Global 
+<br>Define the program to run for the :make command. (See pages 87 and 285.) 
+<br>matchpairs mps “(:),{:},[:]” 
+<br>
+<br>String Buffer 
+<br>Define characters to match for “%” and show match. (See page 278.) 
+<br>matchtime mat 
+<br>
+<br>Number Global 5 
+<br>Define the time (in 1/10 seconds) for 'showmatch' to work. (See page 278.) 
+<br>maxfuncdepth mfd 
+<br>
+<br>Number Global 100 
+<br>Define how deeply function calls may be nested. (See page 400.) 
+<br>
+<br>
+<br>maxmapdepth mmd 
+<br>
+<br>Number Global 1000 
+<br>Define the maximum number of nested key mappings. (See page 400.) 
+<br>
+<br>
+<br>maxmem mm 
+<br>
+<br>Number Global 512 
+<br>Define the maximum amount of memory for a single buffer. (See page 399.) 
+<br>
+<br>
+<br>maxmemtot mmt number global 
+<br>
+<br>2048, or half the amount of 
+<br>memory available 
+<br>Define the maximum amount of memory total. (See page 400.) 
+<br>
+<br>
+<br>continues 
+<br>
+<br>
+<br>512 Appendix G Option List 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>
+<br>mesg 
+<br>
+<br>Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>
+<br>modeline ml modeline 
+<br>
+<br>Boolean Buffer 
+<br>If set, look for modelines in the file. (See page 382.) 
+<br>
+<br>modelines mls 
+<br>
+<br>Number Global 5 
+<br>The number of lines at the top and bottom to look for modelines. (See page 152.) 
+<br>
+<br>modified mod 
+<br>
+<br>Boolean Buffer Off 
+<br>Set to true if the buffer has been modified. (See page 152.) 
+<br>
+<br>more Boolean Global On 
+<br>When displaying more output than a screen of data, page things through more. (See page 
+<br>395.) 
+<br>
+<br>mouse 
+<br>
+<br>String Global GUI, MS-DOS: “a” 
+<br>Others: “” 
+<br>Define which modes enables you to use a mouse. (See page 332.) 
+<br>
+<br>mousefocus mousef 
+<br>
+<br>Boolean Global Off 
+<br>If set, the window focus follows the mouse. (See page 331.) 
+<br>
+<br>mousehide mh 
+<br>
+<br>Boolean Global Off 
+<br>Hide the mouse while typing in character. (See page 333.) 
+<br>
+<br>mousemodel mousem 
+<br>
+<br>String Global MS-DOS: popup: 
+<br>Others: extend 
+<br>Define how the mouse is to be used. (See pages 108 and 331.) 
+<br>
+<br>mousetime mouset 
+<br>
+<br>Number Global 500 
+<br>Time between mouse clicks for a double-click. (See page 332.) 
+<br>
+<br>
+<br>Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>
+<br>Define which formats are recognized for CTRL-A and CTRL-X. (See pages 198 and 395.) 
+<br>
+<br>Boolean Window Off 
+<br>Display line numbers. (See pages 18 and 100.) 
+<br>
+<br>open 
+<br>
+<br>Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See pages 402.) 
+<br>
+<br>optimize 
+<br>
+<br>Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See pages 402.) 
+<br>
+<br>osfiletype oft 
+<br>
+<br>String Buffer RISC OS: “Text” 
+<br>Others: “” 
+<br>The file type as determined by the OS. (See page 179.) 
+<br>paragraphs para String Global “IPLPPPQPP LIpplpipbp” 
+<br>
+<br>Define the troff macros that begin a paragraph. (See pages 122-123.) 
+<br>
+<br>
+<br>Appendix G Option List 513 
+<br>
+<br>Option Abbreviation Type Scope 
+<br>Default 
+<br>
+<br>paste 
+<br>
+<br>Boolean Global Off 
+<br>Define how Vim interacts with the system clipboard. (See page 396.) 
+<br>
+<br>
+<br>pastetoggle pt 
+<br>“”
+<br>
+<br>String Global 
+<br>Define a key to switch between paste and nopaste. (See page 396.) 
+<br>
+<br>
+<br>patchmode pm 
+<br>“”
+<br>
+<br>String Global 
+<br>Turn on patchmode, which saves the original file once. (See page 147.) 
+<br>
+<br>
+<br>path pa String Global 
+<br>UNIX: “.,/usr/include,,” 
+<br>OS/2: “.,/emx/include,,” 
+<br>Others: “.,,” 
+<br>
+<br>Set the path to be used for locating #include and :find files. (See pages 127 and 281.) 
+<br>
+<br>previewheight pvh 
+<br>
+<br>Number Global 12 
+<br>Define the height of the preview window. (See page 392.) 
+<br>
+<br>
+<br>prompt 
+<br>
+<br>Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>
+<br>
+<br>readonly ro 
+<br>
+<br>Boolean Buffer Off 
+<br>Set to indicate that the buffer is read-only. (See pages 152-153.) 
+<br>
+<br>
+<br>redraw 
+<br>
+<br>Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>
+<br>
+<br>remap 
+<br>
+<br>Boolean Global On 
+<br>Allow recursive remapping. (See page 300.) 
+<br>
+<br>
+<br>report 
+<br>
+<br>Number Global 2 
+<br>Set the number of lines that must be changed before a message is issued. (See page 392.) 
+<br>
+<br>
+<br>restorescreen rs 
+<br>
+<br>Boolean Global On 
+<br>Try and restore the screen after editing. (See page 395.) 
+<br>
+<br>
+<br>revins ri 
+<br>
+<br>Boolean Global Off 
+<br>Insert character in reverse (for foreign language). (See pages 175 and 396.) 
+<br>
+<br>
+<br>rightleft rl 
+<br>
+<br>Boolean Window Off 
+<br>If set, indicates that the file contains right-to-left encoding. (See page 174.) 
+<br>
+<br>
+<br>ruler ru 
+<br>
+<br>Boolean Global Off 
+<br>Display the status ruler. (See pages 392 and 396.) 
+<br>
+<br>
+<br>rulerformat ruf String Global Empty 
+<br>Define the format of a ruler. (See page 392.) 
+<br>
+<br>scroll scr Number Window Half the screen height 
+<br>Define the number of lines to scroll for CTRL-D and CTRL-U. (See page 190.) 
+<br>scrollbind scb 
+<br>
+<br>Boolean Window Off 
+<br>The window that scrolls with other scroll-bound windows. (See page 275.) 
+<br>
+<br>
+<br>continues 
+<br>
+<br>
+<br>514 Appendix G Option List 
+<br>
+<br>Option Abbreviation Type Scope 
+<br>Default 
+<br>
+<br>scrolljump sj Number Global 1 
+<br>Define the number of lines to scroll at one time. (See page 193.) 
+<br>
+<br>
+<br>scrolloff so 
+<br>
+<br>Number Global 0 
+<br>Number of lines to keep above or below the cursor. (See page 193.) 
+<br>scrollopt sbo String Global “ver,jump” 
+<br>Define how synchronized scrolling works. (See page 276.) 
+<br>sections sect String Global “SHNHH HUnhsh” 
+<br>Define the troff macros that define a section boundary. (See page 123.) 
+<br>
+<br>secure 
+<br>
+<br>Boolean Global Off 
+<br>Enable secure mode, which prevents the execution of some risky commands. (See page 383.) 
+<br>selection sel String Global “inclusive” 
+<br>Define how a selection behaves. (See pages 108 and 344.) 
+<br>selectmode slm String Global “” 
+<br>Defines the events that can begin select mode. (See pages 108, 258, and 333.) 
+<br>sessionoptions ssop String Global “buffers,winsize,options, 
+<br>help,blank” 
+<br>Defines what is saved by a :mksession command. (See page 248.) 
+<br>shell sh String Global MS-DOS: command 
+<br>OS/2: cmd 
+<br>UNIX: $SHELL or “sh” 
+<br>The name of the command parser. (See page 319.) 
+<br>
+<br>shellcmdflag shcf String Global 
+<br>MS-DOS: “/c” or “-c” depending 
+<br>on the value of shell 
+<br>others: “-c” 
+<br>
+<br>The flag that tells the shell that a command follows. (See page 319.) 
+<br>shellpipe sp String Global “>”, “| tee”, “|& tee”, or “2>&1| 
+<br>tee”, depending on the value of 
+<br>“shell” 
+<br>
+<br>The string to pipe the output of the command into something else. (See page 319.) 
+<br>shellquote shq String Global MS-DOS: “” or “/”,depending on 
+<br>the value of ‘shell” 
+<br>Others: “” 
+<br>The quote character to put around the command name. (See page 319.) 
+<br>shellredir srr String Global “>”, “>&”, or “>%s 2>&1” 
+<br>String to redirect the shell output. (See page 319.) 
+<br>
+<br>shellslash ssl 
+<br>
+<br>Boolean Global Off 
+<br>If set, always use “/” in filenames, even under MS-DOS. (See page 319.) 
+<br>shelltype st Number Global 0 
+<br>Define the Amiga shell type. (See page 179.) 
+<br>
+<br>
+<br>Appendix G Option List 515 
+<br>
+<br>Option Abbreviation Type Scope 
+<br>Default 
+<br>
+<br>shellxquote sxq String Global 
+<br>MS-DOS: “” or “/”, depending on 
+<br>the value of shell. 
+<br>UNIX: “\” 
+<br>
+<br>The shell quoting characters for commands and redirection. (See page 319.) 
+<br>shiftround sr Global 
+<br>
+<br>Boolean Off 
+<br>Adjust all shifts to a shiftwidth boundary. (See page 269.) 
+<br>shiftwidth sw 
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>Number Buffer 8 
+<br>Define the width of a shift for the << and >> commands. (See pages 60, 69, 263, 266, and 
+<br>269.) 
+<br>
+<br>
+<br>shortmess shm String Global filnxtToO 
+<br>Shorten some messages. (See page 387.) 
+<br>
+<br>shortname sn 
+<br>
+<br>Boolean Buffer Off 
+<br>If set, use short filenames for swap filenames. (See page 152.) 
+<br>showbreak sbr String Global “” 
+<br>String to display at the beginning of the second part of broken lines. (See page 236.) 
+<br>
+<br>showcmd sc 
+<br>
+<br>Boolean Global UNIX: Off 
+<br>Others: On 
+<br>showfulltag sft Boolean Global Off 
+<br>Show the complete tag when doing a tag search. (See page 130.) 
+<br>
+<br>showmatch sm 
+<br>
+<br>Boolean Global Off 
+<br>Show matching brackets in insert mode. (See pages 345 and 396.) 
+<br>
+<br>
+<br>showmode smd 
+<br>
+<br>Boolean Global On 
+<br>Display the current mode on the status line. (See pages 386 and 394.) 
+<br>
+<br>
+<br>sidescroll ss 
+<br>
+<br>Number Global 0 
+<br>Define the distance that each horizontal scroll moves. (See page 193.) 
+<br>slowopen slow Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>
+<br>smartcase scs 
+<br>
+<br>Boolean Global Off 
+<br>When 'ignorecase' is set, assume search strings that are all uppercase want the case to be 
+<br>matched. (See page 204.) 
+<br>
+<br>
+<br>smartindent si 
+<br>
+<br>Boolean Buffer Off 
+<br>Indent like 'autoindent', only smarter. (See pages 70-71 and 396.) 
+<br>smarttab sta 
+<br>
+<br>Boolean Global Off 
+<br>Insert indents at the beginning of a line, normal tabs elsewhere. (See page 266.) 
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>softtabstop sts Number Buffer 0 
+<br>Define what tabstop is to be simulated when Tab is pressed. (See pages 265-266 and 396.) 
+<br>sourceany 
+<br>
+<br>Boolean Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>continues 
+<br>
+<br>
+<br>516 Appendix G Option List 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>
+<br>splitbelow sb Boolean Global Off 
+<br>Make :split open window at the bottom rather than the top. (See page 247.) 
+<br>startofline sol 
+<br>
+<br>Boolean Global On 
+<br>Allow some commands to go past the start or end of a line. (See page 369.) 
+<br>statusline stl String Global Empty 
+<br>Define the format of the status line. (See pages 293 and 389.) 
+<br>suffixes su String Global “.bak,~,.o,.h,.info,.swp,.obj” 
+<br>List of file suffixes to ignore when searching for files that match a wildcard pattern. (See 
+<br>page 397.) 
+<br>swapfile swf Boolean Buffer On 
+<br>Turn on or off the use of a swap file. (See page 150.) 
+<br>swapsync sws String Global “fsync” 
+<br>Tell the operating system to write the swap file to disk. (See page 151.) 
+<br>
+<br>switchbuf swb “”
+<br>
+<br>String Global 
+<br>Define how the editor behaves when switching buffers. (See page 288.) 
+<br>syntax syn String Buffer Empty 
+<br>The current language used for syntax highlighting. (See pages 136 and 294.) 
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>tabstop ts Number Buffer 8 
+<br>Define how big a tab is. (See pages 263, 267, and 411.) 
+<br>tagbsearch tbs Boolean Global On 
+<br>Do a binary search of a sorted tag file. (See page 289.) 
+<br>taglength tl Number Global 0 
+<br>Define the number of significant characters in a tag. (See page 290.) 
+<br>
+<br>tagrelative tr 
+<br>
+<br>Boolean Global On 
+<br>Tags are relative to the directory containing the tag files. (See page 290.) 
+<br>tags tag String Global “./tags,tags” 
+<br>Define the list of tag files. (See page 290.) 
+<br>tagstack tgst Boolean Global On 
+<br>Maintain a tag stack. (See page 290.) 
+<br>term String Global $TERM, or operating 
+<br>system–dependent value. 
+<br>Define the name of the terminal. (See pages 137 and 400.) 
+<br>
+<br>terse 
+<br>
+<br>Boolean Global Off 
+<br>Makes some error messages a little shorter. (See page 388.) 
+<br>
+<br>textauto ta 
+<br>
+<br>Boolean Global On 
+<br>Obsolete. Use the fileformats option instead. (See page 402.) 
+<br>textmode tx Boolean Buffer MS-DOS, OS/2: On 
+<br>Others: Off 
+<br>Obsolete, use fileformats instead. (See page 402.) 
+<br>
+<br>
+<br>Appendix G Option List 517 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>
+<br>textwidth tw 
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>Number Buffer 0 
+<br>Set the width of a line. (See pages 97, 114-115, 118-119, and 396.) 
+<br>
+<br>
+<br>tildeop top 
+<br>
+<br>Boolean Global Off 
+<br>Define how the ~ operator works. (See pages 200 and 401.) 
+<br>
+<br>
+<br>timeout to 
+<br>
+<br>Boolean Global On 
+<br>Enable time outs for keyboard input for mapping. (See page 385.) 
+<br>
+<br>
+<br>timeoutlen tm 
+<br>
+<br>Number Global 1000 
+<br>Set the amount of time to wait after a key arrives to see whether it is the start of a function 
+<br>key. (See page 385.) 
+<br>
+<br>
+<br>title Boolean Global Off (but on when title can be 
+<br>restored) 
+<br>If set, display the current filename in the title bar. (See page 329.) 
+<br>
+<br>titlelen 
+<br>
+<br>Number Global 85 
+<br>Maximum percentage size of the title bar to be used for a title. (See page 330.) 
+<br>titleold String Global “Thanks for flying Vim” 
+<br>The fallback old title, which is restored if the real one cannot be restored. (See page 330.) 
+<br>
+<br>titlestring String Global “” 
+<br>Define the string to be displayed on the title bar rather than the current filename. (See page 
+<br>330.) 
+<br>
+<br>toolbar tb String Global “icons,tooltips” 
+<br>Define how the toolbar appears. (See page 329.) 
+<br>
+<br>ttimeout 
+<br>
+<br>Boolean Global Off 
+<br>Enable time outs for keyboard input. (See page 385.) 
+<br>
+<br>
+<br>ttimeoutlen ttm 
+<br>
+<br>Number Global -1 
+<br>Set time out for waiting for mapped keyboard input. (See page 385.) 
+<br>
+<br>
+<br>ttybuiltin tbi 
+<br>
+<br>Boolean Global On 
+<br>Search built-in termcap before using the system one. (See page 400.) 
+<br>
+<br>
+<br>ttyfast tf Boolean Global System and terminal dependent 
+<br>Connection to the terminal is fast. (See page 329.) 
+<br>
+<br>ttymouse ttym String Global Depends on the term option 
+<br>Define how the terminal mouse works. (See page 400.) 
+<br>
+<br>ttyscroll tsl 
+<br>
+<br>Number Global 999 
+<br>Number of lines to scroll. More than this jumps. (See page 401.) 
+<br>
+<br>
+<br>ttytype tty String Global Alias for “term” 
+<br>See the term option. (See page 137.) 
+<br>undolevels ul 
+<br>
+<br>Number Global UNIX, OS/2: 1000 
+<br>Others: 100 
+<br>Define the number of changes remembered for undo. (See page 202.) 
+<br>
+<br>
+<br>continues 
+<br>
+<br>
+<br>518 Appendix G Option List 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>
+<br>updatecount uc Number Global 200 
+<br>Specify the character typed before data is saved in the swap file. (See page 150.) 
+<br>
+<br>updatetime ut Number Global 4000 
+<br>Specify the amount of time (in milliseconds) to wait after typing stops before writing the 
+<br>data to the swap file. (See pages 136 and 150.) 
+<br>
+<br>verbose vbs 
+<br>
+<br>Number Global 0 
+<br>Turn on verbose messages. (See page 402.) 
+<br>viminfo vi String Global “” 
+<br>Define a file in which to save information between edits. (See pages 231-233.) 
+<br>
+<br>visualbell vb 
+<br>
+<br>Boolean Global Off 
+<br>Beep by flashing the screen. (See apge 389.) 
+<br>
+<br>warn 
+<br>
+<br>Boolean Global On 
+<br>Turn on some warning messages. (See page 388.) 
+<br>
+<br>weirdinvert wiv 
+<br>
+<br>Boolean Global Off 
+<br>Old compatibility option for some weird terminals. (See page 402.) 
+<br>
+<br>whichwrap ww String Global “b,s” 
+<br>Define what type of commands can wrap past the beginning or end of a line. (See page 
+<br>189.) 
+<br>
+<br>wildchar wc <Tab> 
+<br>
+<br>Number Global 
+<br>Define which character starts wildcard completion. (See pages 397-398.) 
+<br>wildcharm wcm Number Global None (0) 
+<br>Define the character that starts wildcard completion in mappings. (See page 397.) 
+<br>wildignore wig String Global “” 
+<br>Pattern of filenames to ignore during wildcard completion. (See page 398.) 
+<br>
+<br>wildmenu wmnu 
+<br>
+<br>Boolean Global Off 
+<br>When completing wildcards, display a menu of possible files. (See pages 293 and 398.) 
+<br>wildmode wim String Global “full” 
+<br>Define how Vim handles matches. (See pages 398-399.) 
+<br>
+<br>winaltkeys wak “menu” 
+<br>
+<br>String Global 
+<br>Define how Vim uses the <Alt> key in Microsoft Windows. (See page 384.) 
+<br>
+<br>window wi 
+<br>
+<br>Numeric Global Off 
+<br>Inoperative option put in for Vi compatibility. (See page 402.) 
+<br>winheight wh Number Global 1 
+<br>Define the minimum size of the current window. (See page 247.) 
+<br>winminheight wmh Number Global 1 
+<br>Define the minimum size of the windows that are not current. (See page 247.) 
+<br>
+<br>
+<br>Appendix G Option List 519 
+<br>
+<br>Option Abbreviation Type Scope Default 
+<br>
+<br>wrap 
+<br>
+<br>Boolean Window On 
+<br>Wrap long lines so that they can be seen on the screen. (See pages 233, 236, and 393.) 
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>wrapmargin wm Number Buffer 0 
+<br>Define the margin at which to start text wrapping. (See page 114 and 396.) 
+<br>
+<br>wrapscan ws 
+<br>
+<br>Boolean Global On 
+<br>Define which commands wrap past the beginning or end of a line. (See page 205.) 
+<br>
+<br>write 
+<br>
+<br>Boolean Global On 
+<br>Allows the writing of files. (See page 144 and 399.) 
+<br>writeany wa Boolean Global Off 
+<br>Automatically write files without the aide of overrides (!). (See page 399.) 
+<br>writebackup wb Boolean Global On 
+<br>Write backup file over the existing one. (See pages 147-148.) 
+<br>writedelay wd Number Global 0 
+<br>Delay between output characters for debugging. (See page 402.) 
+<br>
+<br>w300 Numeric Global Off 
+<br>Inoperative option put in for Vi compatibility. ( 
+<br>w1200 Numeric Global Off 
+<br>Inoperative option put in for Vi compatibility. 
+<br>w9600 Numeric Global Off 
+<br>Inoperative option put in for Vi compatibility. 
+<br>
+<br>
+<br>Vim License Agreement 
+<br>
+<br>By Bram Moolenaar 
+<br>
+<br>Summary 
+<br>
+<br>The Vim editor is Charityware.You can use and copy it as much as you like, but you 
+<br>are seriously encouraged to make a donation to orphans in Uganda. See the section 
+<br>on “Kibaale Children’s Centre” later in this appendix. 
+<br>
+<br>Details 
+<br>
+<br>There are no restrictions on distributing an unmodified copy of Vim. Parts of Vim 
+<br>may also be distributed, but this text must always be included.You are allowed to 
+<br>include executables that you made from the unmodified Vim sources, your own usage 
+<br>examples, and Vim scripts. 
+<br>
+<br>If you distribute a modified version of Vim, you are encouraged to send the maintainer 
+<br>a copy, including the source code. Or make it available to the maintainer 
+<br>through FTP; let him know where he can find it. If the number of changes is small 
+<br>(for example, a modified Makefile) emailing the changes will do.When the maintainer 
+<br>asks for it (in any way), you must make your changes, including source code, available 
+<br>to him. 
+<br>
+<br>The maintainer reserves the right to include any changes in the official version of 
+<br>Vim.This is negotiable.You are not allowed to distribute a modified version of Vim 
+<br>when you are not willing to make the source code available to the maintainer. 
+<br>
+<br>
+<br>522 Vim License Agreement 
+<br>
+<br>The current maintainer is Bram Moolenaar (Bram@vim.org). If this changes, it will 
+<br>be announced in appropriate places (most likely www.vim.org and comp.editors). 
+<br>When it is completely impossible to contact the maintainer, the obligation to send 
+<br>him modified source code ceases. 
+<br>
+<br>It is not allowed to remove these restrictions from the distribution of the Vim 
+<br>sources or parts of it.These restrictions may also be used for previous Vim releases 
+<br>rather than the text that was included with it. 
+<br>
+<br>If you are happy with Vim, please express that by reading the rest of this appendix. 
+<br>You can also have a look at http://www.vim.org/iccf/. 
+<br>
+<br>Kibaale Children’s Centre 
+<br>
+<br>Kibaale Children’s Centre (KCC) is located in Kibaale, a small town in the south of 
+<br>Uganda, near Tanzania, in East Africa.The area is known as the Rakai District. Farmers 
+<br>comprise the bulk of the population. Although people are poor, there is enough food. 
+<br>But this district is suffering from more cases of AIDS per capita than any other part of 
+<br>the world. Some say that it originated in this region. (Estimates are that 10% to 30% of 
+<br>Ugandans are infected with HIV.) Parents are dying, leaving many orphans. In this 
+<br>district, about 60,000 children have lost one or both parents (out of a total population 
+<br>of about 350,000).The deaths are continuing daily. 
+<br>
+<br>The children need a lot of help.The KCC works hard to provide the needy with 
+<br>food, medical care, and education—food and medical care to keep them healthy now, 
+<br>and education so that they can take care of themselves in the future. KCC works on a 
+<br>Christian base, but help is given to children of any religion. 
+<br>
+<br>The key to solving the problems in this area is education.The regime of President 
+<br>Idi Amin and the following civil wars have negatively impacted on education in the 
+<br>area. Now that the government is stable again, the children and parents have to learn 
+<br>how to take care of themselves and how to avoid infections.There is also help for people 
+<br>who are ill and hungry, but the primary goal is to prevent people from getting ill 
+<br>and to teach them how to grow healthy food. 
+<br>
+<br>Most of the orphans live in an extended family. An uncle or older sister takes care 
+<br>of them. Because these families are big and the income (if any) is low, a child is lucky 
+<br>if he or she receives healthy food. Clothes, medical care, and schooling are beyond 
+<br>most children’s reach.To help these children in crisis, a sponsorship program was put 
+<br>into place. A child can be financially adopted. For a few dollars per month, KCC sees 
+<br>to it that the financially adopted child gets indispensable items, is healthy, and goes to 
+<br>school; KCC takes care of anything else that needs to be done for the child and the 
+<br>family who supports it. 
+<br>
+<br>Besides helping the child directly, the environment where the child grows up needs 
+<br>to be improved. KCC helps schools to improve their teaching methods.There is a 
+<br>demonstration school at the centre, and teacher training is given. Health workers are 
+<br>being trained, hygiene education is carried out, and households are encouraged to 
+<br>build a proper latrine. (I helped setting up a production site for cement slabs.These are 
+<br>used to build a good latrine and are sold below cost.) 
+<br>
+<br>
+<br>Kibaale Children’s Centre 523 
+<br>
+<br>There is a small clinic at the project, which provides children and their families 
+<br>with medical help.When needed, transport to a hospital is offered. Immunization programs 
+<br>are carried out, and help is provided when an epidemic threatens (measles and 
+<br>cholera, for example). 
+<br>
+<br>From the summer of 1994 to the summer of 1995, I spent a whole year at the centre, 
+<br>working as a volunteer. I helped to expand the centre and worked in the area of 
+<br>water and sanitation. I learned that the help that the KCC provides really makes an 
+<br>impact. Now that I am back in Holland, I want to continue supporting KCC.To do 
+<br>this, I am raising funds and organizing the sponsorship program. Please consider one of 
+<br>these possibilities: 
+<br>
+<br>1. 
+<br>Sponsor a child: $15 a month (Holland: fl 27,50) 
+<br>2. 
+<br>Sponsor a child and the improvement of its environment: $25 a month 
+<br>(Holland: fl 45) 
+<br>3. 
+<br>Sponsor the health team: Any amount a month or quarter 
+<br>4. 
+<br>A one-time donation 
+<br>Compared with other organizations that provide child sponsorship, these amounts are 
+<br>very low.This is because the money goes directly to the centre. Less than 5% is used 
+<br>for administration.This remains possible because this is a small organization that works 
+<br>with volunteers. If you would like to sponsor a child, you should intend to do this for 
+<br>at least one year. 
+<br>
+<br>How do you know that the money will be spent right? First of all, you have my 
+<br>personal guarantee as the author of Vim. I trust the people working at the centre. I 
+<br>know them personally. The centre is visited at least once a year to check its progress 
+<br>(at our own cost). I have been back to visit the centre myself in 1996, 1998, and 2000. 
+<br>
+<br>If you have any further questions, contact the centre directly or send the Vim main
+<br>
+<br>
+<br>tainer your queries by email at Bram@vim.org. 
+<br>The address of the centre is as follows: 
+<br>Kibaale Children’s Centre 
+<br>
+<br>P.O. Box 1658 
+<br>Masaka, Uganda 
+<br>East Africa 
+<br>Note 
+<br>
+<br>These are Year 2000 prices. Please check the Web page at http://www.vim.org/iccf for the current prices. 
+<br>
+<br>
+<br>524 Vim License Agreement 
+<br>
+<br>Sending Money 
+<br>
+<br>United States and Canada 
+<br>
+<br>Contact the Kibaale Children’s Fund (KCF) in Surrey, Canada.You can send them a 
+<br>one-time donation or your sponsorship money directly. Please send me a note so that 
+<br>I know what has been donated because of Vim. KCF can also provide more information 
+<br>about sponsorship. 
+<br>
+<br>Kibaale Children’s Fund 
+<br>c/o Pacific Academy 
+<br>10238-168 Street 
+<br>Surrey, B.C.V4N 1Z4 
+<br>Canada 
+<br>Phone: 604-581-5353 
+<br>
+<br>
+<br>Holland 
+<br>
+<br>Transfer to the account of Stichting ICCF Holland in Venlo.You might be eligible for 
+<br>a tax deduction based on your contribution(s) to KCC. For more information about 
+<br>this possibility, check with your tax preparer. 
+<br>
+<br>Postbank, nr. 4548774 
+<br>
+<br>Europe 
+<br>
+<br>To avoid banking costs, you should send Bram Moolenaar a Eurocheque, written out 
+<br>to Bram Moolenaar in Dutch Guilders (DFL). But any other method should work. 
+<br>Ask for information about sponsorship. 
+<br>
+<br>Stichting ICCF Holland 
+<br>Bram Moolenaar 
+<br>Clematisstraat 30 
+<br>5925 BE Venlo 
+<br>The Netherlands 
+<br>
+<br>
+<br>Others 
+<br>
+<br>Transfer to one of these accounts if possible: 
+<br>Postbank, nr. 4548774 
+<br>Swift code: INGB NL 2A, IBAN: NL47 PSTB 0004 5487 74 
+<br>
+<br>under the name Stichting ICCF Holland,Venlo 
+<br>If that does not work: Rabobank Venlo, nr. 3765.05.117 
+<br>Swift code: RABO NL 2U 
+<br>
+<br>under the name Bram Moolenaar,Venlo 
+<br>
+<br>Otherwise, send a cheque in U.S. dollars to the address in the preceding section. 
+<br>The minimal amount is $70. (My bank does not accept smaller amounts for foreign 
+<br>cheques, sorry.) 
+<br>
+<br>An alternative is to send a postal money order.That should be possible from any 
+<br>country. Use this name: Abraham Moolenaar (which is how it appears on my passport). 
+<br>
+<br>
+<br>Author’s Note 525 
+<br>
+<br>Author’s Note 
+<br>
+<br>By Steve Oualline 
+<br>
+<br>The people behind Vim have spent a lot of time and effort to make one of the best 
+<br>editors in the world.Yet they do not ask anything for themselves; instead, they ask that 
+<br>you help some of the poorest and most needy people in Africa. Please send them a 
+<br>donation. 
+<br>
+<br>If you work for a medium-size or large company, please take the time to tell your 
+<br>boss how much using Vim has helped you and encourage your company to make a 
+<br>substantial donation. 
+<br>
+<br>The people behind Vim are good people. Please help them out. 
+<br>
+<br>
+<br>Quick Reference 
+<br>
+<br>Karanjit S. Siyan, Ph.D 
+<br>
+<br>The following pages contain the maximum amount of useful information in the minimum 
+<br>space, and thus provide a quick reference. Not all commands are covered, but we 
+<br>have tried to include every command you will encounter in day-to-day editing. 
+<br>
+<br>
+<br>528 Quick Reference 
+<br>
+<br>h 
+<br>
+<br>u 
+<br>CTRL-R 
+<br>
+<br>U 
+<br>
+<br>ZZ 
+<br>:q! 
+<br>
+<br>[count]f{char} 
+<br>[count]F{char} 
+<br>/{string} 
+<br>?{string} 
+<br>
+<br>[count]n 
+<br>[count]N 
+<br>/ 
+<br>? 
+<br>
+<br>Basic Commands 
+<br>
+<br>
+<br>Movement 
+<br>k 
+<br>
+<br>l 
+<br>
+<br>j 
+<br>
+<br>Undo/Redo 
+<br>
+<br>Undo the last change 
+<br>Redo the last change that was 
+<br>undone 
+<br>Undo all changes on the line. 
+<br>
+<br>Getting Out 
+<br>
+<br>Write file and exit 
+<br>Discard changes and exit 
+<br>
+<br>
+<br>Searching 
+<br>
+<br>Forward search for
+<br>
+<br>character on a line 
+<br>Backward search for 
+<br>character on a line 
+<br>
+<br>Search forward for 
+<br>string. 
+<br>Search backward for 
+<br>string 
+<br>Repeat last search 
+<br>Repeat last search in 
+<br>opposite direction 
+<br>Repeat last search 
+<br>forward 
+<br>Repeat last search 
+<br>backward 
+<br>
+<br>[count]itext<Esc> 
+<br>[count]atext<Esc> 
+<br>o 
+<br>O 
+<br>[count]cw 
+<br>[count]cc 
+<br>[count]c{motion} 
+<br>
+<br>[count]dd 
+<br>[count]dw 
+<br>[count]x 
+<br>[count]d{motion} 
+<br>
+<br>:help {topic} 
+<br>
+<br>CTRL-] 
+<br>CTRL-T 
+<br>
+<br>ZZ 
+<br>
+<br>m{letter} 
+<br>‘{letter} 
+<br>G 
+<br>gg 
+<br>[count]G 
+<br>CTRL-U 
+<br>CTRL-D 
+<br>z<Enter> 
+<br>
+<br>zz 
+<br>
+<br>Inserting Text 
+<br>
+<br>Insert text (before cursor) 
+<br>
+<br>Insert text (after cursor) 
+<br>Open line below cursor. 
+<br>Open line above cursor. 
+<br>Change word 
+<br>Change entire line 
+<br>Change from cursor to 
+<br>{motion}. 
+<br>
+<br>Deleting Text 
+<br>
+<br>Delete lines. 
+<br>Delete words. 
+<br>Delete characters 
+<br>Delete from cursor to 
+<br>
+<br>
+<br>{motion}. 
+<br>
+<br>Help 
+<br>
+<br>Display help on the given 
+<br>topic. 
+<br>Follow help “hyper-link.” 
+<br>Return to location before 
+<br>last CTRL-]. 
+<br>Exit help 
+<br>
+<br>
+<br>Additional Movement 
+<br>
+<br>Place mark 
+<br>Go to mark 
+<br>Last line 
+<br>First line 
+<br>Go to [count] line 
+<br>Up 1/2 screen 
+<br>Down 1/2 screen 
+<br>Make this line the top one on 
+<br>the screen 
+<br>Center window around the 
+<br>current line. 
+<br>
+<br>
+<br>Text Formatting Commands 529 
+<br>
+<br>Additional Editing Commands 
+<br>
+<br>
+<br>Editing 
+<br>. Repeat last change 
+<br>[count][“register]d{motion} Delete from cursor to {motion} 
+<br>[count][“register]dd Delete lines 
+<br>[count][“register]c{motion} Change from cursor to {motion} 
+<br>[count][“register]cc Change lines. 
+<br>[count][“register]y{motion} Yank from cursor to {motion} 
+<br>[count][“register]yy Yank lines 
+<br>[count][“register]p Put after cursor 
+<br>[count][“register]P Put before cursor 
+<br>xp Twiddle characters 
+<br>[count]r{char} Replace one character 
+<br>[count]R{string}<ESC> Replace characters until stopped 
+<br>[count]J Join lines 
+<br>
+<br>Windows Keyboard Macros 
+<br>:split {file} Split window q{register} Record commands into a {register}. 
+<br>:q Close current window q Stop recording 
+<br>CTRL-Wj Go up a window [count]@{register} 
+<br>CTRL-Wk Go down a window Execute the keyboard macro in 
+<br>CTRL-Wo Make the current {register} 
+<br>window the only one. 
+<br>
+<br>Text Formatting Commands 
+<br>
+<br>[count]gq{motion} Format selected text 
+<br>
+<br>[count]gqq Format lines 
+<br>
+<br>[count]gq} Format paragraphs 
+<br>
+<br>:set textwidth={width} Set the width of the text line (turn auto wrapping on) 
+<br>
+<br>:[range]center Center the text 
+<br>
+<br>:[range]left Left-align the text 
+<br>
+<br>:[range]right Right-align the text 
+<br>
+<br>:set formatoptions={characters} Set options which control formatting. Options include: 
+<br>t Automatically wrap text 
+<br>2 When formatting text, use the second line of the paragraph to determine what 
+<br>indent to use. 
+<br>q Allow formatting of comments with gq command. 
+<br>
+<br>
+<br>530 Quick Reference 
+<br>
+<br>Commands for Programmers 
+<br>
+<br>General 
+<br>:syntax on Turn on syntax highlighting 
+<br>% Go to matching brace, comment or #ifdef 
+<br>:set autoindent Indent each new line the same as the previous one 
+<br>:set cindent Use C style indentation 
+<br>CTRL-D In insert mode, unindent one level of auto indent. 
+<br>[count]>> Shift lines right 
+<br>[count]>{motion} Shift right 
+<br>[count]<< Shift lines left 
+<br>[count]<{motion} Shift left 
+<br>[count]={motion} Indent code from cursor to {motion} 
+<br>CTRL-] Jump to tag (function definition). 
+<br>[count]CTRL-T Go to location before last tag jump. 
+<br>[count]CTRL-W CTRL-] Split the window and jump to tag under the cursor. 
+<br>
+<br>K Run man on the word under the cursor 
+<br>Making the program Grep 
+<br>:make 
+<br>:cc 
+<br>:cn 
+<br>:cp 
+<br>Run make and capture thoutput 
+<br>Jump to current error 
+<br>Jump to next error 
+<br>Jump to previous error 
+<br>e :grep ‘{string}’ {files} 
+<br>Run grep and capture the output. 
+<br>Treat matches like :make errors. 
+<br>
+<br>Include File Searches 
+<br>
+<br>[count] ]CTRL-D Find the definition of the macro under the cursor 
+<br>
+<br>[count] ]CTRL-I Search for the word under the cursor 
+<br>
+<br>[count] ]d List first macro definition for the macro the cursor is on. 
+<br>
+<br>[count] ]D List all macro definitions 
+<br>
+<br>Commands for directory searches 
+<br>:set path={directory},.... Tell Vim where to search for files 
+<br>:checkpath Make sure that Vim can find all the files that are referenced in 
+<br>#include directives. 
+<br>:find {file} Edit the {file}. If the file is not in the current directory, search 
+<br>through the ‘path’ to find it. 
+<br>gf Edit the file who’s name is under the cursor. Search through 
+<br>the ‘path’ if the file is not in the current directory. 
+<br>
+<br>
+<br>Insert Mode Commands 531 
+<br>
+<br>Visual Mode Commands 
+<br>
+<br>Basic Commands Editing Commands 
+<br>
+<br>v Enter character visual~mode [“register]d Delete the selected text. 
+<br>V Enter line visual mode [“register]y Yank the text into 
+<br>CTRL-V Enter block visual mode register 
+<br>$ Move the right side of the block > Shift text right 
+<br>
+<br>to the end of each line. < Shift text left 
+<br>= Run the lines through the 
+<br>indent program
+<br>
+<br>Selection Commands 
+<br>
+<br>J Join the highlighted lines 
+<br>[count]a( Select () block 
+<br>
+<br>gq{motion} Format text to 
+<br>[count]a[ Select [] block 
+<br>
+<br>'textwidth' 
+<br>[count]a{ Select {} block 
+<br>
+<br>U Convert text to all 
+<br>[count]aw Select word and space after 
+<br>
+<br>UPPER CASE 
+<br>[count]iw Select word only. 
+<br>
+<br>u Convert text to all lower 
+<br>[count]as Select sentence and following 
+<br>
+<br>case. 
+<br>space 
+<br>
+<br>~ Invert the case of the 
+<br>[count]is Select sentence only. 
+<br>
+<br>text. 
+<br>
+<br>Insert Mode Commands 
+<br>
+<br>Insert Mode Commands 
+<br>CTRL-V{char} Insert character literally . 
+<br>CTRL-D Unindent one level 
+<br>0 CTRL-D Remove all automatic indentation 
+<br>CTRL-T Insert one ‘shiftwidth’ 
+<br>
+<br>CTRL-Y Copy the character above the cursor 
+<br>CTRL-E Copy the character below the cursor 
+<br>CTRL-N Find next match for word before the cursor 
+<br>CTRL-P Find previous match for word before the cursor 
+<br>CTRL-R{register} 
+<br>
+<br>Insert contents of a register 
+<br>CTRL-K{char1}{char2} 
+<br>Insert digraphs 
+<br>
+<br>CTRL-W Delete word before cursor 
+<br>
+<br>Abbreviations 
+<br>
+<br>:abbreviate {abbr} {expansion} 
+<br>Define abbreviation. 
+<br>
+<br>
+<br>532 Quick Reference 
+<br>
+<br>Ex Mode Commands 
+<br>
+<br>Basic Commands 
+<br>Q Enter Ex mode 
+<br>:vi Enter normal mode 
+<br>:[range]s/{old}/{new}/{flags} 
+<br>
+<br>:[range]write [file] 
+<br>
+<br>:[line]read [file] 
+<br>
+<br>:rewind 
+<br>:next 
+<br>:prev 
+<br>:last 
+<br>:args 
+<br>
+<br>:[range]delete 
+<br>:[range]copy[line] 
+<br>
+<br>:[range]move[line] 
+<br>
+<br>:[range]print 
+<br>:[range]number 
+<br>:[range]list 
+<br>:dlist {name} 
+<br>
+<br>Substitute {new} for {old}. If a flag of “g” is present substitute all 
+<br>occurrences on a line. Otherwise just change the first one. 
+<br>
+<br>Write text to a file 
+<br>Read text from another file into the current file. 
+<br>
+<br>File Selection Commands 
+<br>
+<br>Edit the first file 
+<br>Edit next file 
+<br>Edit previous file 
+<br>Edit the last file in the list 
+<br>List the files in the edit list. 
+<br>
+<br>
+<br>Editing 
+<br>
+<br>Delete the specified lines 
+<br>
+<br>Copy the specified lines to [line] (default = after current line) 
+<br>
+<br>Like:copy but delete the lines as well. 
+<br>
+<br>Miscellaneous Commands 
+<br>
+<br>Print the specified lines 
+<br>Print the specified lines with line numbers 
+<br>Print the specified lines with ‘list’ option on. 
+<br>List definitions for {name} 
+<br>
+<br>
+<br>:[range]retab[!] {tabstop} 
+<br>
+<br>:exit[!] 
+<br>:suspend 
+<br>:source {file} 
+<br>:redir >{file} 
+<br>
+<br>Change the tabbing from the existing setting to the new {tabstop}. 
+<br>Close the current file. If it’s the last one, exit the editor 
+<br>Suspend the editor 
+<br>Read commands from the specified file. 
+<br>Record the output of the commands in the specified file. 
+<br>
+<br>
+<br>
+<br>Options 
+<br>
+<br>Setting 
+<br>
+<br>:set {option}= {value} Set an option 
+<br>:set {option}? 
+<br>
+<br>Display the value of an option 
+<br>:set Display the value of options that are set to something other 
+<br>
+<br>than the default. 
+<br>:set all Display the value of all options 
+<br>:set {option}& Set an option to the default 
+<br>:browse set Set options using a full screen based dialog. 
+<br>:set {option}+= {value} Add a value to a list of options (string option). Add a number 
+<br>
+<br>to a numeric option. 
+<br>:set {option}-= {value} Remove a value from a list of options (string option). Subtract 
+<br>
+<br>a number from a numeric option. 
+<br>:set {option} Turn on a boolean option 
+<br>:set no {option} Turn off a boolean option 
+<br>:set inv{option} Invert a boolean option 
+<br>
+<br>Indent / Tabbing 
+<br>
+<br>:set cindent Turn on C style indentation 
+<br>:set autoindent Indent each line the same as the previous one 
+<br>:set expandtabs Turn all tabs into space 
+<br>
+<br>:set softtabstop 
+<br>Set the amount of space that the <Tab> key uses. (Note: This 
+<br>is not the same as the number of spaces for a Tab.) 
+<br>
+<br>Listing Options 
+<br>
+<br>:set list Turn on list mode where everything is visible 
+<br>:set number Display line numbers 
+<br>
+<br>Searching Options 
+<br>
+<br>:set hlsearch Highlight matching search strings 
+<br>:set incsearch Do incremental searches 
+<br>:set wrapscan If a search reaches the bottom of the file wrap to the top and 
+<br>
+<br>keep searching. (Also will wrap from the top to the bottom for 
+<br>
+<br>reverse searches) 
+<br>:set ignorecase Make searches case insensitive 
+<br>:set autowrite Automatically write files as needed to preserve data. 
+<br>
+<br>Options 533 
+<br>
+<br>
+<br>534 Quick Reference 
+<br>
+<br>Regular Expressions 
+<br>
+<br>Simple Atoms 
+<br>
+<br>x The literal character “x” 
+<br>^ Start of line 
+<br>$ End of line. 
+<br>. A single character . 
+<br>\< Start of a word. 
+<br>\> End of word. 
+<br>
+<br>
+<br>Range Atoms 
+<br>[abc] Match either “a”, “b”, or “c”. 
+<br>[^abc] Match anything except “a”, “b”, or “c”. 
+<br>[a-z] Match all characters from “a” through “z”. 
+<br>[a-zA-Z] Match all characters from “a” through “z” and “A” through “Z”. 
+<br>
+<br>Sub Patterns 
+<br>
+<br>\(pattern\) Mark the pattern for later use. The first set of \(.\) marks a pattern as \1, the 
+<br>second \2 and so on. 
+<br>\1 Matches the same string that was matched by the first sub-expression in \ (and 
+<br>
+<br>\). Example: “\([a-z]\).\1” matches “ata”, “ehe”, “tot”,etc. 
+<br>\2 Like “\1”, but uses second sub-expression, 
+<br>\9 Like “\1”, but uses ninth sub-expression. 
+<br>
+<br>Modifiers 
+<br>
+<br>* Match the previous atom 0 or more times. As much as possible. 
+<br>\+ Match the previous atom 1 or more times. As much as possible. 
+<br>\= Match the previous atom 0 or 1 times. 
+<br>\{} Match the previous atom 0 or more times. (Same as the “*” modifier.) 
+<br>Match the previous atom n times. 
+<br>\{n,m} Match the previous atom n to m times. 
+<br>\{n,} Match the previous atom n or more times. 
+<br>\{,m} Match the previous atom from 0 to m times. 
+<br>\{-n,m} Match the previous atom n to m times. Match as little as possible. 
+<br>\{-n,} Match the previous atom at least n times. Match as little as possible. 
+<br>\{-,m} Match the previous atom up to m times. Match as little as possible. 
+<br>\{-} Match the previous atom 0 or more times. Match as little as possible. 
+<br>str1|str2 Match str1 or str2. 
+<br>
+<br>\{n} 
+<br>
+<br>
+<br>See also all the command indices in 
+<br>
+<br>Appendix B: Normal Mode Commands 
+<br>Appendix C: Command mode commands 
+<br>Appendix D:Visual Mode Commands 
+<br>Appendix E: Insert Mode Commands 
+<br>Appendix F: Options 
+<br>
+<br><abuf>, 354 
+<br><afile>, 353 
+<br><amatch>, 354 
+<br><bang>, 361 
+<br><Break>, 384 
+<br><cfile>, 353 
+<br><count>, 361 
+<br><CR>, regular expression (\r), 217 
+<br><cword>, 353 
+<br><cWORD>, 353 
+<br><Enter> as argument to replace character 
+<br>(r<Enter>), 23 
+<br><Line feed> (line ending), 120 
+<br><line1>/<line2> (keywords), 361 
+<br><register>, 361 
+<br><Return> (line ending), 120 
+<br><sfile> (file being sourced), 354 
+<br>! (override), 9 
+<br>:bdelete, 246 
+<br>:bunload, 246 
+<br>:checkpath, 283 
+<br>:djump, 314 
+<br>:dlist, 314 
+<br>:dsearch, 314 
+<br>:global, 312 
+<br>:ijump, 314 
+<br>:ilist, 314 
+<br>:next, 42 
+<br>:quit, 9 
+<br>:recover, 152 
+<br>
+<br>Index 
+<br>
+<br>
+<br>:unlet, 353 
+<br>:vi, 41 
+<br>:wqall, 242 
+<br>:write, 41, 168, 202 
+<br>:wviminfo, 233 
+<br>
+<br>
+<br>!= (operator), 352 
+<br>
+<br>!=? (operator), 353 
+<br>
+<br>!~ (operator), 352 
+<br>
+<br>“ (special mark), 221 
+<br>
+<br>“* (clipboard register), 163 
+<br># 
+<br>
+<br>alternate filename, 353 
+<br>instant word search backwards, 206 
+<br>special register, 223 
+<br>
+<br>#ifdef / #endif matching (%), 77 
+<br>
+<br>#include files, 281 
+<br>
+<br>automatic completion search 
+<br>(CTRL-X CTRL-I), 128 
+<br>jump to pattern (:ijump), 312 
+<br>list pattern (:ilist), 312 
+<br>search (:isearch), 313 
+<br>go to end of line, block visual mode, 63 
+<br>last line number, 100, 160 
+<br>last line, 168 
+<br>move to end of line, 16, 234 
+<br>
+<br>% 
+<br>
+<br>current filename, 353 
+<br>line range, 161 
+<br>match braces, 73, 278 
+<br>match pairs, 76-77 
+<br>operator, 352 
+<br>range101, 160 
+<br>special register, 223 
+<br>
+<br>
+<br>‘, line range, 101 
+<br>
+<br>‘<, line range, 102, 105 
+<br>
+<br>‘>, line range, 102, 105 
+<br>
+<br>
+<br>536 * 
+<br>
+<br>* 
+<br>
+<br>operator, 352 
+<br>repeat, regular expression, 104, 167, 168 
+<br>special register, 223, 225 
+<br>
+<br>+ (operator), 352 
+<br>+cmd, 226 
+<br>+cmd and :split, 47 
+<br>-(operator), 352 
+<br>--help (command line option), 142 
+<br>--version (command line option), 142 
+<br>-b (command line option), 146 
+<br>-bang (user defined commands), 361 
+<br>-C (command line option), 146 
+<br>-count (user defined commands), 361 
+<br>-d (command line option), 146 
+<br>-e (command line option), 144-145 
+<br>-f (command line option), 145 
+<br>-F (command line option), 146, 176 
+<br>-g (command line option), 145 
+<br>-geometry (GUI option), 324 
+<br>-H (command line option), 146, 177 
+<br>-l (command line option), 146 
+<br>-m (command line option), 144 
+<br>-n (command line option), 143 
+<br>-N (command line option), 146 
+<br>-nargs (user defined commands), 360 
+<br>-r (command line option), 149, 152 
+<br>-R (command line option), 142, 144 
+<br>-range (user defined commands), 361 
+<br>-register (user defined commands), 361 
+<br>-s (command line option), 144-145 
+<br>-t (command line option), 165 
+<br>-T (command line option), 146 
+<br>-u (command line option), 145 
+<br>-U (command line option), 145 
+<br>-v (command line option), 145 
+<br>-V (command line option), 145 
+<br>-w (command line option), 145 
+<br>-W (command line option), 145 
+<br>-x (command line option), 143 
+<br>-Z (command line option), 144 
+<br>. 
+<br>
+<br>match single character, regular 
+<br>
+<br>expression, 33-34, 104, 168 
+<br>
+<br>special register, 223 
+<br>
+<br>line range, 101 
+<br>
+<br>.exrc (initialization file), 96 
+<br>.gvimrc (initialization file), 95 
+<br>.viminfo file, 136, 350, 402 
+<br>.vimrc (initialization file), 4, 95 
+<br>
+<br>local version, 383 
+<br>
+<br>/ 
+<br>
+<br>operator, 352 
+<br>special register, 223 
+<br>
+<br>
+<br>/pattern/ (line range), 304 
+<br>0 [zero], special register, 223 
+<br><# (operator), 353 
+<br><= (operator), 352 
+<br><=# (operator), 353 
+<br><=? (operator), 353 
+<br><? (operator), 353 
+<br>=, special register, 223, 224 
+<br>== (operator), 352 
+<br>==# (operator), 353 
+<br>==? (operator), 353 
+<br>=~ (operator), 352 
+<br>> (operator), 352 
+<br>># (operator), 353 
+<br>>= (operator), 352 
+<br>>=# (operator), 353 
+<br>>=? (operator), 353 
+<br>>? (operator), 353 
+<br>[ (special mark), 221 
+<br>[:lower], regular expressions, 212 
+<br>[:upper], regular expressions, 212 
+<br>[^x], match except, regular expres
+<br>
+<br>
+<br>sions, 104, 168 
+<br>
+<br>
+<br>argv() function 537 
+<br>
+<br>\ (escape character, regular expression), 
+<br>34 
+<br>
+<br>\(...\), regular expression, 104 
+<br>
+<br>\1 (first match, regular expression), 
+<br>103, 168 
+<br>
+<br>\s (whitespace, regular expression), 167 
+<br>
+<br>] (special mark), 221 
+<br>
+<br>^ (start of line, regular expression), 
+<br>32-33 
+<br>
+<br>^M (Line end problem), 120 
+<br>
+<br>_ (special register), 223-224 
+<br>
+<br>_gvirmc (initialization file), 95 
+<br>
+<br>_virmc (initialization file), 95 
+<br>
+<br>| (command separator), 355 
+<br>
+<br>~ (special register), 223 
+<br>
+<br>~ empty line indicator, 4 
+<br>
+<br>: (special register), 223 
+<br>
+<br><£> (instant word search backwards), 
+<br>206 
+<br>
+<br>A 
+<br>
+<br>a( (select parenthesis block), 254 
+<br>
+<br>a: (function agreements), 357 
+<br>a< (select angle bracket block), 254 
+<br>abbreviations 
+<br>command mode, clear (:cabclear), 296 
+<br>insert mode, clear (:iabclear), 296 
+<br>clearing, 296 
+<br>
+<br>abbreviate, 97, 166 
+<br>in command mode (:cabbrev), 296 
+<br>in insert mode (:iabbrev), 296 
+<br>command mode, no remap 
+<br>(:cnoreabbrev), 296 
+<br>insert mode, no remap (:inoreabbrev), 
+<br>296 
+<br>
+<br>abbreviation, 91-92, 95, 296 
+<br>command mode, remove (:cunabbrev), 
+<br>296 
+<br>insert (CTRL-]), 297 
+<br>insert mode, remove (:iunabbrev), 296 
+<br>listing, 92, 296 
+<br>
+<br>remapping, 300 
+<br>removing, 296 
+<br>
+<br>
+<br>abort, search, 18 
+<br>active, buffer, 49 
+<br>add to option (:set option +=), 380 
+<br>advanced text entry, 228 
+<br>all files, open windows (:all), 243 
+<br>all modes 
+<br>remove menu item (:aunmenu), 339 
+<br>all printable characters ([:graph:]), 216 
+<br>alphabetic characters, regular expression 
+<br>(\a), 216 
+<br>alternate buffer, 49 
+<br>alternate file, 44, 244 
+<br>
+<br>file name (# special register), 223, 353 
+<br>editing, new window 
+<br>(CTRL-W CTRL-^), 244 
+<br>Amiga, 179 
+<br>Amiga device specification (-d), 146 
+<br>angle bracket block 
+<br>inner, select (i<), 254 
+<br>select (a<), 254 
+<br>ap (select paragraph), visual mode, 254 
+<br>append (a), 9 
+<br>append 
+<br>lines (:append), 307 
+<br>string, option (:set option +=), 381 
+<br>text to register, 222 
+<br>text, block visual mode (A), 63 
+<br>to end of line (A), 197 
+<br>append() function, 362 
+<br>Apple text file format, 120 
+<br>argc() function, 362 
+<br>args (specify file list), 170 
+<br>argument 
+<br>
+<br>list, 43 
+<br>edit specific file, 225 
+<br>specific file list, 243 
+<br>
+<br>
+<br>agreements, function, 350, 357 
+<br>argv() function, 362 
+<br>
+<br>
+<br>538 arithmetic operators 
+<br>
+<br>arithmetic operators, 352 
+<br>as (select sentence), visual mode, 254 
+<br>ascii, 155 
+<br>
+<br>ASCII characters, regular expression 
+<br>([:ASCII:]), 215 
+<br>
+<br>ascii number (ga), 155 
+<br>
+<br>asm, syntax options, 403 
+<br>asmh8300, syntax options, 403 
+<br>asmsyntax variable, 403 
+<br>
+<br>assembly language, syntax option, 403 
+<br>atoms, special, regular expressions, 211 
+<br>
+<br>augroup, 134 
+<br>autocmd, 71, 97, 134-135, 293, 422 
+<br>
+<br>buffer number (<abuf>), 354 
+<br>
+<br>file (<afile>), 353 
+<br>
+<br>autocommand event 
+<br>
+<br>BufCreate, 136 
+<br>BufDelete, 136 
+<br>BufEnter, 136, 138 
+<br>BufFilePost, 135 
+<br>BufFilePre, 135 
+<br>BufLeave, 136 
+<br>BufNewFile, 135 
+<br>BufRead, 135 
+<br>BufReadPost, 135 
+<br>BufReadPre, 135 
+<br>BufUnload, 136 
+<br>BufWrite, 136 
+<br>BufWritePost, 136 
+<br>BufWritePre, 136 
+<br>CursorHold, 136 
+<br>FileAppendPost, 136 
+<br>FileAppendPre, 136 
+<br>FileChangedShell, 136 
+<br>FileEncoding, 137 
+<br>FileReadPost, 135 
+<br>FileReadPre, 135, 137 
+<br>FileType, 136, 138 
+<br>FileWritePost, 136 
+<br>FileWritePre, 134, 136 
+<br>FilterWritePost, 136 
+<br>FilterWritePre, 136 
+<br>FocusGained, 136 
+<br>FocusLost, 136 
+<br>GuiEnter, 136 
+<br>
+<br>StdinReadPre, 136 
+<br>StdReadPost, 136, 138 
+<br>Syntax, 136-137 
+<br>TermChanged, 137 
+<br>User, 137 
+<br>VimEnter, 136 
+<br>VimLeave, 136 
+<br>VimLeavePre, 136 
+<br>WinEnter, 136 
+<br>WinLeave, 136 
+<br>
+<br>
+<br>autocommand events, ignoring, 138 
+<br>autocommand, 133 
+<br>execute (:doautocmd), 135 
+<br>execute, each buffer (:doautoall), 135 
+<br>removing, 138 
+<br>file patterns, 137 
+<br>listing (:autocmd), 138 
+<br>
+<br>autoindent, 72 
+<br>automatic completion 
+<br>CTRL-N, 126, 128 
+<br>CTRL-P, 125-126, 128 
+<br>dictionary words (CTRL-X CTRL-K), 
+<br>128 
+<br>filenames (CTRL-X CTRL-F), 
+<br>128, 130 
+<br>macro definitions 
+<br>(CTRL-X CTRL-D), 128-129 
+<br>tags (CTRL-X CTRL-]), 128-130 
+<br>whole lines (CTRL-X CTRL-L), 
+<br>128, 131 
+<br>word in this file and #included files 
+<br>(CTRL-X CTRL-I), 126 
+<br>words (CTRL-X CTRL-N), 128 
+<br>words (CTRL-X CTRL-P), 128 
+<br>automatic indent 
+<br>undo (CTRL-D), 72, 262 
+<br>undo all (0 CTRL-D), 262 
+<br>undo once (^ CTRL-D), 262 
+<br>
+<br>automatic reselection, stopping 
+<br>(gV), 260 
+<br>automatically setting options, mode-
+<br>lines, 382 
+<br>
+<br>automatically wrap 
+<br>comments (c flag, ‘formatoptions’), 
+<br>117 
+<br>text (a flag, ‘formatoptions’), 117 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>buffer 539 
+<br>
+<br>autoselect, gui option, 326, 343 
+<br>aw (select word), visual mode, 253-254 
+<br>aW (select WORD), visual mode, 254 
+<br>a[ (select square bracket block), 254 
+<br>a{ (select curly bracket block), 254 
+<br>
+<br>B 
+<br>
+<br>back to comment start ([/, [*), 280 
+<br>background color, GUI, 343 
+<br>backspace 
+<br>
+<br>regular expression character (\b), 216 
+<br>regular expression ([:backspace:]), 215 
+<br>
+<br>Backspace key, 94 
+<br>backward 
+<br>end of WORD (gE), 186 
+<br>method end, search ([M), 279 
+<br>method start, search ([m), 279 
+<br>move to word start (ge), 184 
+<br>paragraph (}), 121 
+<br>repeat single character search (,), 187 
+<br>search for { in column 1 ([[), 279 
+<br>search for } in column 1 ([]), 279 
+<br>search, instant, partial word (g#, g£), 
+<br>206 
+<br>search (?), 31-32 
+<br>sections ([[), 122 
+<br>sentence ( ) ), 121 
+<br>word (b), 16 
+<br>WORD (B), 186 
+<br>ball (open window for each 
+<br>buffer), 246 
+<br>bang (user defined commands), 361 
+<br>bang, keyword, 361 
+<br>bash_is_sh, shell syntax variable, 411 
+<br>Basic, syntax options, 404 
+<br>batch files (scripts), 144 
+<br>begin word, regular expression 
+<br>(\<), 209 
+<br>beginning of line (0, ^), 187 
+<br>beginning of word move (ge), 184 
+<br>binary 
+<br>
+<br>editing (vim -b), 146 
+<br>files, 178 
+<br>
+<br>
+<br>black hole register (_), 223-224 
+<br>block select, start (g CTRL-H), 258 
+<br>block shift, visual mode, 78 
+<br>block, format, visual mode (gq), 256 
+<br>block, visual mode, start (CTRL-V), 
+<br>57, 60 
+<br>boolean type option 
+<br>resetting (:set nooption), 380 
+<br>setting (:set option), 380 
+<br>bottom line, setting (zb, z-), 194 
+<br>bottom of screen, move cursor (L), 188 
+<br>bottom window, go to 
+<br>(CTRL-Wb), 240 
+<br>bottom, scrollbar, gui option, 328 
+<br>boxes (external command), 166 
+<br>break lines at blank (b flag, 
+<br>‘formatoptions’), 117 
+<br>break out of a loop, 356 
+<br>broswe set, 342 
+<br>browse, 339 
+<br>browse edit, 339 
+<br>browse read, 340 
+<br>browse write, 340 
+<br>browse() function, 362 
+<br>BufCreate, autocommand event, 136 
+<br>BufDelete, autocommand event, 136 
+<br>BufEnter, autocommand event, 
+<br>136, 138 
+<br>bufexists() function, 363 
+<br>buffer number, autocmd (<abuf>), 354 
+<br>buffer switching and :make, 288 
+<br>buffer, 49, 245 
+<br>
+<br>active, 49 
+<br>add (:badd), 245 
+<br>alternate, 49 
+<br>current, 49 
+<br>delete (:bdelete), 246 
+<br>execute autocommand (:doautoall), 135 
+<br>first (:brewind), 52 
+<br>hide, 49 
+<br>inactive, 49 
+<br>last (:blast), 52 
+<br>
+<br>
+<br>540 buffer_exists() function, obsolete 
+<br>
+<br>listing (:buffers), 49-50 
+<br>modified, go to (:bmodified), 52 
+<br>modified, split then go to 
+<br>(:sbmodified), 52 
+<br>previous (:bNext, :bprevious), 51 
+<br>split and first (:sbrewind), 52 
+<br>split and last (:sblast), 52 
+<br>split and next (:sbnext), 51 
+<br>split and previous (:sbNext, 
+<br>:sbprevious), 51-52 
+<br>switching (:buffer), 50 
+<br>unload (:bunload), 246 
+<br>windows for all (:ball), 246 
+<br>buffer_exists() function, obsolete, 378 
+<br>buffer_name() function, obsolete, 378 
+<br>buffer_number() function, 
+<br>obsolete, 378 
+<br>BufFilePost, autocommand event, 135 
+<br>BufFilePre, autocommand event, 135 
+<br>BufLeave, autocommand event, 136 
+<br>bufloaded() function, 363 
+<br>bufname() function, 363 
+<br>BufNewFile, autocommand event, 135 
+<br>bufnr() function, 363 
+<br>BufRead, autocommand event, 135 
+<br>BufReadPost, autocommand event, 135 
+<br>BufReadPre, autocommand event, 135 
+<br>BufUnload, autocommand event, 136 
+<br>bufwinnr() function, 364 
+<br>BufWrite, autocommand event, 136 
+<br>BufWritePost, autocommand event, 
+<br>136 
+<br>BufWritePre, autocommand 
+<br>event, 136 
+<br>build program (:make), 87, 284 
+<br>built-in termcap, 400 
+<br>byte2line() function, 364 
+<br>
+<br>C 
+<br>
+<br>c flag, substitute, 103, 161 
+<br>
+<br>C style indentation (‘cindent’), 70 
+<br>
+<br>C, C++, syntax options, 404 
+<br>
+<br>Call, 134, 358, 361 
+<br>
+<br>cancel window operation (CTRL-W 
+<br>CTRL-C), 46 
+<br>
+<br>carriage return, regular expression 
+<br>(\r), 217 
+<br>
+<br>case ignore, syntax, 413 
+<br>
+<br>case match, syntax, 413 
+<br>
+<br>case 
+<br>change (g~), 201, 401 
+<br>change (~), 24, 200-201, 401 
+<br>change, line (g~~, g~g~), 201 
+<br>invert, visual mode (~), 255 
+<br>lower case line (guu, gugu), 201 
+<br>lower, visual mode (u), 255 
+<br>upper case line (gUU, gUgU), 201 
+<br>upper, visual mode (U), 255 
+<br>
+<br>center (lines), 115 
+<br>
+<br>center line, setting (zz, z.), 194-195 
+<br>
+<br>change 
+<br>block visual mode (c), 62 
+<br>change (c), 21 
+<br>case on line(g~~, g~g~), 201 
+<br>case (g~), 201, 401 
+<br>case (~), 24, 200-201, 401 
+<br>directory (:cd), 314 
+<br>lines (:change), 317 
+<br>to end of line (c$), 22 
+<br>to end of line (C), 195 
+<br>to end of line, block visual mode (C), 62 
+<br>visual mode (c, C), 59 
+<br>word (cw), 21, 161 
+<br>
+<br>changing search direction, 31-32 
+<br>
+<br>changing window size with mouse, 48 
+<br>
+<br>char2nr() function, 364 
+<br>
+<br>character 
+<br>
+<br>alphabetic, regular expression (\a), 216 
+<br>ASCII, regular expression 
+<br>([:ASCII:]), 215 
+<br>classes, regular expression, 212, 215 
+<br>
+<br>
+<br>delete (:delcommand) 541 
+<br>
+<br>delete (x), 7, 13, 36-37, 160, 196-197 
+<br>index (g CTRL-G), 156 
+<br>lower case (gu), 201 
+<br>lower case, regular expression 
+<br>([:lower:]), 216 
+<br>(\A), 216 
+<br>
+<br>quote (CTRL-V), 268 
+<br>range, regular expression ([]), 211 
+<br>
+<br>
+<br>replace, block visual mode (r{char}), 64 
+<br>replace (r{char}), 23, 199 
+<br>replace, virtual (gr{char}), 199-200 
+<br>replace, with <Enter> (r<Enter>), 23 
+<br>select, start (gh), 258 
+<br>set, regular expressions ([]), 104 
+<br>single, regular expression (.), 215 
+<br>
+<br>twiddling (xp), 37, 160 
+<br>upper case (gU), 201 
+<br>upper case, regular expression (\u), 217 
+<br>upper case, regular expression 
+<br>([:upper:]), 216 
+<br>
+<br>visual mode (v), 56, 164 
+<br>
+<br>Chinese, 175 
+<br>
+<br>clear abbreviations (:abclear), 296 
+<br>
+<br>clear command mode abbreviations 
+<br>(:cabclear), 296 
+<br>
+<br>clear command mode mappings 
+<br>(:cmapclear), 301 
+<br>
+<br>clear insert mode abbreviations (:iabclear), 
+<br>296 
+<br>
+<br>clear insert mode mappings (:imapclear), 
+<br>301 
+<br>
+<br>clear insert/command mode mappings 
+<br>(:mapclear!), 301 
+<br>
+<br>clear mappings (:mapclear), 299 
+<br>
+<br>clear normal mode mappings (:nmapclear), 
+<br>301 
+<br>
+<br>clear operator pending mode mappings 
+<br>(:omapclear), 301 
+<br>clear user defined command (:comclear), 
+<br>360 
+<br>
+<br>clear visual mode mappings (:vmapclear), 
+<br>301 
+<br>
+<br>clear, syntax, 413 
+<br>
+<br>clipboard register (* special register), 
+<br>163, 223, 225 
+<br>
+<br>close preview window (:pclose), 276 
+<br>
+<br>close window (ZZ, :q), 46 
+<br>
+<br>clusters, syntax, 419 
+<br>
+<br>cmap (key mapping, command 
+<br>mode), 298 
+<br>
+<br>cnfile (first error, next file), 90 
+<br>
+<br>COBOL, syntax options, 405 
+<br>cobol_legacy_code, COBOL syntax variable, 
+<br>405 
+<br>
+<br>col() function, 364 
+<br>
+<br>color chart, 294 
+<br>
+<br>color terminals, 291 
+<br>
+<br>color test, 69 
+<br>
+<br>command history (:history), 320 
+<br>
+<br>command line editing, help, 13 
+<br>
+<br>command mode 
+<br>:map with no remapping 
+<br>(:cnoremap), 301 
+<br>abbreviations, clear (:cabclear), 296 
+<br>abbreviate (:cabbrev), 296 
+<br>commands, visual mode (:), 257 
+<br>
+<br>menu (:cmenu), 334 
+<br>abbreviation, remove (:cunabbrev), 296 
+<br>entry (Q, :ex), 100 
+<br>key mapping (:cmap), 298 
+<br>mappings, clear (:cmapclear), 301 
+<br>(:cnoreabbrev), 296 
+<br>remove mapping (:cunmap), 301 
+<br>remove menu item (:cunmenu), 339 
+<br>
+<br>command separator (|), 355 
+<br>
+<br>command, gvim, 4 
+<br>
+<br>command, user defined (:command), 
+<br>360-361 
+<br>
+<br>-bang, 361 
+<br>-count, 361 
+<br>-nargs, 360 
+<br>-range, 361 
+<br>-register, 361 
+<br>clear (:comclear), 360 
+<br>
+<br>
+<br>delete (:delcommand), 360 
+<br>
+<br>
+<br>542 command, vim 
+<br>
+<br>command, vim, 5 
+<br>command/insert mode 
+<br>:map with no remapping (:noremap!), 
+<br>301 
+<br>mode, key mapping (:map!), 298 
+<br>mode, mappings, clear (:mapclear!), 301 
+<br>mode, remove mapping (:unmap!), 301 
+<br>comment end, move to (]/ ,]*), 280 
+<br>comment formatting, 269 
+<br>comment leader insert (o/r flags, 
+<br>‘formatoptions’), 117-118 
+<br>comment start, move to ([/ ,[*), 280 
+<br>comparing files, 275 
+<br>compatibility option (-C), 146 
+<br>compatibly, Vi, 8 
+<br>completion, automatic (CTRL-N), 
+<br>126, 128 
+<br>completion, automatic (CTRL-P), 
+<br>125-126, 128 
+<br>confirm dialog, gui, 386 
+<br>confirm substitution (c flag), 161 
+<br>confirm substitutions, 103 
+<br>confirm() function, 365 
+<br>confirmation (:confirm), 341 
+<br>confirmed quit, 341 
+<br>constants, 351 
+<br>continue (a loop), 356 
+<br>control characters ([:cntrl:]), 216 
+<br>control characters, help, 13 
+<br>control statements, 355 
+<br>cookbook 
+<br>
+<br>changing last, first to first, last, 168 
+<br>character twiddling (xp), 160 
+<br>copying text between files, 162 
+<br>drawing comment boxes, 166 
+<br>editing all files which contain a 
+<br>word, 169 
+<br>find C procedure, 165 
+<br>interactive, replacing words, 160 
+<br>moving text, 161 
+<br>protected files, 168 
+<br>reading UNIX man pages, 167 
+<br>
+<br>replacing words, 160 
+<br>replacing words, interactive, 160 
+<br>sorting lines, 163 
+<br>trimming ending spaces, 167 
+<br>
+<br>
+<br>copy (text to clipboard), see yank, 39 
+<br>copy character above (CTRL-Y), 
+<br>229-230 
+<br>copy lines (:copy), 306 
+<br>copy, toolbar, 111 
+<br>copying text between files, 162 
+<br>count (internal variable), 351 
+<br>count (user defined commands), 361 
+<br>count, keyword, 361 
+<br>count1 (internal variable), 351 
+<br>cscope, 171 
+<br>ctags (external program), 79, 129, 165 
+<br>cterm, terminal type, 290, 291 
+<br>ctermbg argument, 291 
+<br>ctermfg argument, 291 
+<br>CTRL characters, help, 12-13 
+<br>curly bracket block 
+<br>inner, select (i{), 254 
+<br>select (a{), 254 
+<br>current buffer, 49 
+<br>current directory, print (:pwd), 314 
+<br>current error (:cc), 88 
+<br>current file name (% special 
+<br>register), 223 
+<br>current file, display / set (:file), 315 
+<br>current filename (%), 353 
+<br>current line number, print (:=), 316 
+<br>current location, display (CTRL-G), 
+<br>19-20, 190 
+<br>cursor to bottom of screen (L), 188 
+<br>cursor to middle of screen (M), 188 
+<br>cursor to top of screen (H), 188 
+<br>cursor, shape, 345 
+<br>CursorHold, autocommand event, 136 
+<br>custom menus, 333 
+<br>
+<br>
+<br>digraphs 543 
+<br>
+<br>customization 
+<br>
+<br>mouse, 331 
+<br>syntax highlighting, 290 
+<br>
+<br>
+<br>cut, toolbar, 111 
+<br>c_ansi_constants, C/C++ syntax 
+<br>variable, 404 
+<br>c_ansi_typedefs, C/C++ syntax 
+<br>variable, 404 
+<br>c_comment_strings, C/C++ syntax 
+<br>variable, 404 
+<br>c_no_ansi, C/C++ syntax variable, 404 
+<br>c_no_cformat, C/C++ syntax 
+<br>variable, 404 
+<br>c_no_if0, C/C++ syntax variable, 404 
+<br>c_no_tab_space_error, C/C++ syntax 
+<br>variable, 404 
+<br>c_no_trail_space_error, C/C++ syntax 
+<br>variable, 404 
+<br>c_no_utf, C/C++ syntax variable, 404 
+<br>c_space_errors, C/C++ syntax 
+<br>variable, 404 
+<br>
+<br>D 
+<br>
+<br>decrease window size (CTRL-W-), 48 
+<br>
+<br>decrement number (CTRL-X), 
+<br>197-198, 395 
+<br>default all options (:set all&), 382 
+<br>default value, set option 
+<br>(:set option&), 380 
+<br>definition, macro 
+<br>jump to (:djump), 314 
+<br>jump to, start search at cursor 
+<br>([CTRL-D), 75 
+<br>jump to, start search at top of file 
+<br>(]CTRL-D), 75 
+<br>list first (:dlist), 314 
+<br>list starting at cursor (]D), 73, 76 
+<br>list starting at top of file ([D), 73, 76 
+<br>listing (:dlist), 314 
+<br>show in new window 
+<br>(CTRL-W CTRL-D), 245 
+<br>
+<br>delete 
+<br>buffer (:bdelete), 246 
+<br>character (x), 7, 13, 36-37, 160, 196-197 
+<br>function (:delfunction), 360 
+<br>key, 94 
+<br>last small (~ special register), 223 
+<br>left (X), 196-197 
+<br>line (dd), 10, 20, 36, 224 
+<br>lines (:delete), 303 
+<br>lines, visual mode (D), 58 
+<br>select mode, 258-259 
+<br>to end of line (d$, D), 21, 195 
+<br>toolbar, 111 
+<br>user defined command 
+<br>(:delcommand), 360 
+<br>visual mode (d), 56, 251 
+<br>variable, 353 
+<br>word (dw), 20 
+<br>delete command (d), 20, 21, 36, 161, 
+<br>195 
+<br>delete() function, 366 
+<br>deleting with a count, 306 
+<br>
+<br>dialog 
+<br>
+<br>horizontal, gui option, 328 
+<br>vertical, gui option, 328 
+<br>
+<br>
+<br>dictionary words, automatic completion 
+<br>(CTRL-X CTRL-K), 128 
+<br>did_filetype() function, 366 
+<br>digit character, regular expression 
+<br>(\d), 216 
+<br>digit 
+<br>
+<br>hexidecimal digit, regular expression 
+<br>([:xdigit:]), 216 
+<br>hexidecimal, regular expression (\x), 217 
+<br>octal, regular expression (\o), 217 
+<br>regular expression (\d), 211 
+<br>
+<br>digits, regular expressions 
+<br>([:digit:]), 216 
+<br>
+<br>digits and letters, regular expression 
+<br>([:alnum:]), 215 
+<br>
+<br>digraph, insert (CTRL-K), 25, 200 
+<br>
+<br>digraphs, 200 
+<br>listing (:digraphs), 25 
+<br>
+<br>
+<br>544 directories, multiple 
+<br>
+<br>directories, multiple, 280 
+<br>
+<br>directory 
+<br>change (:cd), 314 
+<br>print current (:pwd), 314 
+<br>
+<br>display 
+<br>character number (ga), 155 
+<br>current file (:file), 315 
+<br>first macro definition ([d), 73, 75 
+<br>macro definition below cursor (]d), 
+<br>
+<br>73, 75 
+<br>
+<br>display options (:set all), 382, 394 
+<br>
+<br>display options (:set), 382 
+<br>
+<br>display recent messages 
+<br>(:messages), 321 
+<br>
+<br>djump after split (:dsplit), 314 
+<br>
+<br>doautocmd, 135, 137 
+<br>
+<br>down (j), 6, 235 
+<br>1/2 page, scroll (CTRL-D), 191-192 
+<br>first non-blank (_), 188 
+<br>line, scroll (CTRL-E), 192 
+<br>lines (+), 187 
+<br>move, insert mode (<Down>), 228 
+<br>one screen (<PageDown>), 192 
+<br>one screen (<S-Down>), 192 
+<br>page, scroll (CTRL-F), 192 
+<br>rotate, window (CTRL-Wr), 241 
+<br>screen space (gj, g<Down>), 235 
+<br>window (CTRL-Wj), 46 
+<br>window with wrapping (CTRL-Ww), , 
+<br>
+<br>46, 240 
+<br>
+<br>DTD, syntax options, 405 
+<br>
+<br>dtd_ignore_case, DTD syntax 
+<br>variable, 405 
+<br>
+<br>dtd_no_parameter_entries, DTD syntax 
+<br>variable, 405 
+<br>
+<br>dtd_no_tag_errors, DTD syntax 
+<br>variable, 405 
+<br>
+<br>E 
+<br>
+<br>echo (:echo), 354-355 
+<br>highlighted (:echohl), 355 
+<br>
+<br>edit 
+<br>alternate file, new window (CTRL-W 
+<br>CTRL-^), 244 
+<br>:browse, 339 
+<br>
+<br>file (:edit), 41 
+<br>file (:vi), 41 
+<br>file in new window (:split), 46 
+<br>file who’s name is under the cursor 
+<br>
+<br>(gf), 281 
+<br>first file (:rewind), 44, 170 
+<br>found file (:find), 281 
+<br>last file (:last), 44 
+<br>previous file (:Next, :previous), 43 
+<br>repeat (.), 22, 161 
+<br>
+<br>editing all files containing a specific 
+<br>word, 225 
+<br>
+<br>editing multiple files, 41 
+<br>
+<br>Eiffel, syntax options, 406 
+<br>
+<br>eiffel_hex_constants, Eiffel syntax 
+<br>option, 406 
+<br>
+<br>eiffel_ignore_case, Eiffel syntax 
+<br>option, 406 
+<br>
+<br>eiffel_ise, Eiffel syntax option, 406 
+<br>
+<br>eiffel_lower_case_predef, Eiffel syntax 
+<br>option, 406 
+<br>
+<br>eiffel_pedantic, Eiffel syntax option, 406 
+<br>
+<br>eiffel_strict, Eiffel syntax option, 406 
+<br>
+<br>else, 356 
+<br>
+<br>elseif, 356 
+<br>
+<br>encryption, 143 
+<br>
+<br>encryption key, reading (:X), 143 
+<br>
+<br>end insert (<Esc>), 6, 10 
+<br>
+<br>end of file, insert mode 
+<br>(<C-End>), 228 
+<br>
+<br>end of line 
+<br>$, visual mode, 252 
+<br><Enter>, <CR>, <NL>, regular expression 
+<br>([:return:]), 216 
+<br>
+<br>go to, block visual mode ($), 63 
+<br>insert mode (<End>), 228 
+<br>move to ($), 16, 234 
+<br>move to (g$, g<End>), 234 
+<br>
+<br>
+<br>regular expression ($), 32-34, 167-168, 
+<br>215 
+<br>
+<br>
+<br>Ex mode, starting (-e) 545 
+<br>
+<br>end of word 
+<br>move (e), 184 
+<br>regular expression (\>), 215 
+<br>end of WORD 
+<br>backward (gE), 186 
+<br>forward (E), 186 
+<br>end visual mode (CTRL-C), 57 
+<br>end visual mode (<Esc>), 57 
+<br>end word, regular expression (\>), 209 
+<br>end, comment, move (]/, ]*), 280 
+<br>endfunction, 134, 357 
+<br>endif, 356 
+<br>endwhile, 356 
+<br>environment variable, 350 
+<br>equalize window size (CTRL-W=), 48 
+<br>erase line in insert mode 
+<br>(CTRL-U), 228 
+<br>erase word in insert mode 
+<br>(CTRL-W), 228 
+<br>ERLANG, syntax options, 406 
+<br>erlang_characters, ERLANG syntax 
+<br>option, 406 
+<br>erlang_keywords, ERLANG syntax 
+<br>option, 406 
+<br>errmsg (internal variable), 351 
+<br>error file, selecting (:cfile), 89 
+<br>error list 
+<br>older (:colder), 284-288 
+<br>error 
+<br>current (:cc), 88 
+<br>first (:crewind), 88 
+<br>first, next file (:cnfile), 88 
+<br>last (:clast), 88 
+<br>previous (:cNext, :cprevious), 88, 170 
+<br>errors, list (:clist), 88 
+<br>escape character ([:escape:]), 216 
+<br>escape character 
+<br>
+<br>regular expression (\), 34 
+<br>regular expression (\e), 216 
+<br>
+<br>
+<br>escape next character (CTRL-V), 229 
+<br>
+<br>escape() function, 366 
+<br>
+<br>event, autocommand 
+<br>
+<br>BufCreate, 136 
+<br>BufDelete, 136 
+<br>BufEnter, 136, 138 
+<br>BufFilePost, 135 
+<br>BufFilePre, 135 
+<br>BufLeave, 136 
+<br>BufNewFile, 135 
+<br>BufRead, 135 
+<br>BufReadPost, 135 
+<br>BufUnload, 136 
+<br>BufWrite, 136 
+<br>BufWritePost, 136 
+<br>BufWritePre, 136 
+<br>CursorHold, 136 
+<br>FileAppendPost, 136 
+<br>FileAppendPre, 136 
+<br>FileChangedShell, 136 
+<br>FileEncoding, 137 
+<br>FileReadPost, 135 
+<br>FileReadPre, 135, 137 
+<br>FileType, 136, 138 
+<br>FileWritePost, 136 
+<br>FileWritePre, 136 
+<br>FilterWritePost, 136 
+<br>FilterWritePre, 136 
+<br>FocusGained, 136 
+<br>FocusLost, 136 
+<br>GuiEnter, 136 
+<br>StdinReadPre, 136 
+<br>StdReadPost, 136, 138 
+<br>Syntax, 136-137 
+<br>TermChanged, 137 
+<br>User, 137 
+<br>VimEnter, 136 
+<br>VimLeave, 136 
+<br>VimLeavePre, 136 
+<br>WinEnter, 136 
+<br>WinLeave, 136 
+<br>
+<br>
+<br>events, ignoring, autocommands, 138 
+<br>
+<br>ex commands, 145 
+<br>
+<br>line ranges, 100 
+<br>help, 13 
+<br>visual mode (:), 257 
+<br>
+<br>
+<br>Ex mode, starting (-e), 145 
+<br>
+<br>
+<br>546 ex mode (command mode), entry (Q, :ex) 
+<br>
+<br>ex mode (command mode), entry (Q, 
+<br>:ex), 100 
+<br>exchange window (CTRL-Wx), 242 
+<br>
+<br>excludenl, syntax, 418 
+<br>execute 
+<br>
+<br>command, 357 
+<br>keyboard macro (@{char}), 24 
+<br>menu item (:emenu), 338 
+<br>register (:@), 317 
+<br>register, repeat (:@@), 317 
+<br>script (-s), 145 
+<br>shell command (:!), 319 
+<br>shell command, repeat (:!!), 319 
+<br>
+<br>exists() function, 367 
+<br>exit (ZZ), 9 
+<br>after write modified (:xit), 202 
+<br>help (ZZ), 12 
+<br>
+<br>with error code (:cquit), 89 
+<br>expand function, 354 
+<br>expand ~ modifier (:~), 354 
+<br>expand() function, 367 
+<br>
+<br>expression, 351 
+<br>expression (= special register), 223-224 
+<br>extension modifier (:e), 354 
+<br>
+<br>external format program, 119 
+<br>
+<br>F 
+<br>
+<br>Faris mode (vim -F), 146, 176 
+<br>Farsi, 176 
+<br>file (command), 135 
+<br>
+<br>file 
+<br>
+<br>alternate, 44, 244 
+<br>comparing, 275 
+<br>edit first (:rewind), 170 
+<br>edit next (:next), 42, 170, 226-228 
+<br>#include, 281 
+<br>text, 111 
+<br>update (:update), 316 
+<br>.viminfo, 350 
+<br>
+<br>file being sourced (<sfile>), 354 
+<br>file formats, 120 
+<br>file list, specifying (:args), 170 
+<br>
+<br>file name 
+<br>
+<br>alternate (# special register), 223 
+<br>current (% special register), 223 
+<br>
+<br>file patterns, autocommands, 137 
+<br>
+<br>file read (:read), 135 
+<br>file recovery, 148-149 
+<br>
+<br>file recovery (-r), 149, 152 
+<br>file writing and visual mode, 105 
+<br>FileAppendPost, autocommand 
+<br>
+<br>event, 136 
+<br>
+<br>FileAppendPre, autocommand 
+<br>event, 136 
+<br>FileChangedShell, autocommand 
+<br>event, 136 
+<br>Fileencoding, 176 
+<br>FileEncoding, autocommand 
+<br>event, 137 
+<br>filename character, 
+<br>
+<br>regular expression (\f), 216 
+<br>
+<br>filename definition, isfname 
+<br>option, 186 
+<br>
+<br>filename under cursor (<cfile>), 353 
+<br>filename 
+<br>
+<br>alternate (#), 353 
+<br>automatic completion (CTRL-X 
+<br>CTRL-F), 128, 130 
+<br>current (%), 353 
+<br>
+<br>filereadable() function, 367 
+<br>FileReadPost, autocommand event, 135 
+<br>
+<br>FileReadPre, autocommand event, 
+<br>135, 137 
+<br>
+<br>FileType (autocmd event), 97 
+<br>
+<br>FileType, autocommand event, 136, 138 
+<br>FileWritePost, autocommand 
+<br>event, 136 
+<br>
+<br>FileWritePre (autocommand event), 
+<br>134, 136 
+<br>
+<br>file_readable() function, obsolete, 378 
+<br>filter (!), 40, 85, 120, 164, 166-167 
+<br>
+<br>visual mode, 257 
+<br>
+<br>filter line (!!), 40 
+<br>
+<br>
+<br>global substitute 547 
+<br>
+<br>filtering, 40 
+<br>FilterWritePost, autocommand 
+<br>event, 136 
+<br>FilterWritePre, autocommand 
+<br>event, 136 
+<br>
+<br>find and edit file (:find), 281 
+<br>find end of method 
+<br>backward ([M), 279 
+<br>forward (]M), 279 
+<br>
+<br>find file in new window 
+<br>(CTRL-W f), 245 
+<br>find file under the cursor (gf), 281 
+<br>
+<br>find next, toolbar, 111 
+<br>find previous, toolbar, 111 
+<br>find start of method 
+<br>backward ([m), 279 
+<br>forward (]m), 279 
+<br>find unmatched #if 
+<br>backward ([#), 279 
+<br>forward (]#), 279 
+<br>find unmatched {, backward ([{), 278 
+<br>
+<br>find unmatched }, forward (]}), 278 
+<br>first buffer (:brewind), 52 
+<br>first buffer with split (:sbrewind), 52 
+<br>
+<br>first error (:crewind), 88 
+<br>first error, next file (:cnfile), 88, 90 
+<br>
+<br>first file, editing (:rewind), 44, 170 
+<br>first match, regular expression (\1), 
+<br>168, 216 
+<br>first tag (:trewind), 83 
+<br>
+<br>fixdel, 94 
+<br>fnamemodify() function, 368 
+<br>
+<br>FocusGained, autocommand event, 136 
+<br>FocusLost, autocommand event, 136 
+<br>foreground, gui option, 326 
+<br>
+<br>foreground, running (-f), 145 
+<br>foreign languages, 174 
+<br>
+<br>format 
+<br>
+<br>based on second line indext (2 flag, 
+<br>‘formatoptions’), 117-119 
+<br>block, visual mode (gq), 256 
+<br>
+<br>line, (gqgq, gqq), 115 
+<br>program, external, 119 
+<br>text (gq{motion}), 115, 117, 119, 
+<br>269, 271 
+<br>
+<br>formatting comments, 269 
+<br>gq (q flag, ‘formatoptions’), 117 
+<br>forward method 
+<br>end search (]M), 279 
+<br>start search (]m), 279 
+<br>
+<br>forward 
+<br>comment end (]/, ]*), 280 
+<br>end of WORD (E), 186 
+<br>sentence ( ( ), 121 
+<br>word (w), 16, 20, 184 
+<br>WORD (<C-Right>), 186 
+<br>WORD (W), 186 
+<br>repeat single character search (;), 187 
+<br>sections (][), 122 
+<br>word end (e), 184 
+<br>
+<br>forward paragraph ({), 121 
+<br>forward search (/), 27-30, 32, 161, 
+<br>203, 227 
+<br>for { in column 1 (]]), 279 
+<br>for } in column 1 (][), 279 
+<br>function, 134, 357, 359 
+<br>function arguments, 350, 357 
+<br>function 
+<br>delete (:delfunction), 360 
+<br>listing, 359 
+<br>
+<br>FVWM, syntax options, 406 
+<br>
+<br>G 
+<br>
+<br>getcwd() function, 368 
+<br>getftime() function, 368 
+<br>getline() function, 368 
+<br>getting out (:exit), 322 
+<br>getwinposx() function, 368 
+<br>getwinposy() function, 368 
+<br>glob() function, 369 
+<br>global marks, 227 
+<br>global substitute, 103, 160 
+<br>
+<br>(g flag), 161 
+<br>modifier (:gs), 354 
+<br>
+<br>
+<br>
+<br>548 global variable 
+<br>
+<br>global variable, 350 
+<br>search for definition (gD), 73-74 
+<br>globally execute command 
+<br>(:global), 311 
+<br>go to 
+<br>character (go, :goto), 156 
+<br>file (CTRL-^), 44, 244 
+<br>line (G), 40, 161 
+<br>line, (g), 18, 188 
+<br>mark, 37, 228 
+<br>mark (‘), 161-162, 164 
+<br>marked line, 37 
+<br>matching brace (%), 73, 278 
+<br>modified buffer (:bmodified), 52 
+<br>previous jump (CTRL-O), 189 
+<br>tag (:tag), 81 
+<br>tag in preview window (:ptag), 276 
+<br>gray, gui option, 327 
+<br>grep, 89, 170, 284, 289 
+<br>grep (external command), 169, 225 
+<br>groff related commands, 121 
+<br>grouphere, syntax, 421 
+<br>grouping, regular expression ( \(..\) ), 
+<br>104, 213, 216 
+<br>groups 
+<br>
+<br>match, syntax, 418 
+<br>syntax match, 416 
+<br>
+<br>groupthere, syntax, 421 
+<br>GTK/UNIX GUI, 107 
+<br>GUI, 107 
+<br>
+<br>Color, 343 
+<br>confirm dialog, 386 
+<br>definition, 291 
+<br>initialization file, specifying (-U), 145 
+<br>mode starting (-g), 145 
+<br>mode, enter (:gui), 323 
+<br>replace (:promptrepl), 340 
+<br>search (:promptfind), 340 
+<br>terminal type, 290-291 
+<br>toolbar, 110 
+<br>
+<br>guibg argument, 291 
+<br>GuiEnter, autocommand event, 136 
+<br>guifg argument, 291 
+<br>
+<br>gview command, 145 
+<br>gvim command, 4, 44-45, 107, 145 
+<br>gvimrc (initialization file), 95 
+<br>
+<br>H 
+<br>
+<br>has() function, 369 
+<br>head modifier (:h), 354 
+<br>head of word character, regular expression 
+<br>(\h), 216 
+<br>Hebrew, 177 
+<br>
+<br>mode (vim -H), 146, 177 
+<br>
+<br>help, 11, 50, 401 
+<br>
+<br>CTRL characters, 13 
+<br>CTRL keys, 12 
+<br>GUI (:helpfind), 341 
+<br>command line editing, 13 
+<br>command line option, 142 
+<br>control characters, 13 
+<br>ex-mode commands, 13 
+<br>exiting (ZZ), 12 
+<br>insert mode commands,, 13 
+<br>options, 13 
+<br>search, toolbar, 111 
+<br>special keys, 13 
+<br>tags, 81 
+<br>toolbar, 111 
+<br>visual block mode, 65 
+<br>visual mode commands, 13 
+<br>
+<br>
+<br>hexadeimal digit 
+<br>
+<br>regular expression ([:xdigit:]), 216 
+<br>regular expression (\x), 217 
+<br>
+<br>hide 
+<br>
+<br>buffer, 49 
+<br>mouse pointer, 333 
+<br>
+<br>
+<br>highlight, 355 
+<br>highlight off, search (:nohlsearch), 29 
+<br>highlighted echo (:echohl), 355 
+<br>highlightID() function, obsolete, 378 
+<br>highlighting 
+<br>
+<br>customization, 394 
+<br>syntax, 292 
+<br>syntax, customization, 290 
+<br>syntax, keywords, 293 
+<br>
+<br>
+<br>
+<br>inner curly bracket block, select 549 
+<br>
+<br>highlight_balanced_quotes, shell syntax 
+<br>variable, 411 
+<br>highlight_exists() function, 
+<br>obsolete, 378 
+<br>highlight_function_name, shell syntax 
+<br>variable, 411 
+<br>highlight_setabs, sed syntax variable, 411 
+<br>highlight_types, speedup syntax 
+<br>variable, 411 
+<br>hightlight (define syntax 
+<br>highlighting), 290 
+<br>histadd() function, 369 
+<br>histdel() function, 369 
+<br>histget() function, 370 
+<br>histnr() function, 370 
+<br>history 
+<br>command (:history), 320 
+<br>search, 28 
+<br>
+<br>hlexists() function, 370 
+<br>
+<br>hlID() function, obsolete, 378 
+<br>
+<br>horizontal dialog, gui option, 328 
+<br>
+<br>horizontal scrolling, 234 
+<br>
+<br>hostname() function, 370 
+<br>
+<br>hpterm, 402 
+<br>
+<br>HTML highlight tags, 407 
+<br>
+<br>HTML, syntax options, 407 
+<br>
+<br>html_no_rendering, HTML syntax variable, 
+<br>407 
+<br>
+<br>html_wrong_comments, HTML syntax 
+<br>variable, 407 
+<br>
+<br>hyperlink, follow (CTRL-]), 12 
+<br>
+<br>I 
+<br>
+<br>i[ (select inner square bracket 
+<br>block), 254 
+<br>
+<br>i{ (select inner curly bracket 
+<br>block), 254 
+<br>
+<br>i} (select inner block), 78 
+<br>
+<br>icons for toolbar, 335 
+<br>
+<br>icons, toolbar customization, 334 
+<br>identifier character, regular expression 
+<br>(\i), 216 
+<br>identifier definition, ‘isident’ 
+<br>option, 186 
+<br>if, 356 
+<br>ignoring events, autocommands, 138 
+<br>ijump after split (:isplit), 313 
+<br>imap (key mapping, insert mode), 298 
+<br>inactive, buffer, 49 
+<br>include file search (:isearch), 313 
+<br>include file search, list pattern 
+<br>(:ilist), 312 
+<br>include file, checking, 282 
+<br>include files, 281 
+<br>jump to pattern (:ijump), 312 
+<br>included files, automatic completion 
+<br>search (CTRL-X CTRL-I), 128 
+<br>increase window size (CTRL-W+), 48 
+<br>increment number (CTRL-A), 197, 395 
+<br>incremental search, 30 
+<br>indent block, visual mode (=), 60 
+<br>indent lines (=), 73 
+<br>indent 
+<br>automatic, undo (CTRL-D), 72, 262 
+<br>automatic, undo all (0 CTRL-D), 262 
+<br>automatic, undo once 
+<br>(^ CTRL-D), 262 
+<br>redo (CTRL-F), 272 
+<br>initialization file (.gvimrc), 95 
+<br>
+<br>.exrc, 96 
+<br>.gvimrc, 95 
+<br>GUI, specifying (-U), 145 
+<br>specifying (-u), 145 
+<br>menu.vim, 95 
+<br>.vimrc, 4, 95 
+<br>
+<br>
+<br>inner angle bracket block, select 
+<br>(i<), 254 
+<br>inner block, select (i}), 78 
+<br>inner curly bracket block, select 
+<br>(i{), 254 
+<br>
+<br>
+<br>550 inner paragraph (ip) 
+<br>
+<br>inner paragraph (ip), 115 
+<br>inner paragraph (ip), visual mode, 254 
+<br>inner parentsis block, select (i( ), 254 
+<br>inner sentence (is), visual mode, 254 
+<br>inner square bracket block, select 
+<br>(i[), 254 
+<br>inner word (iw), visual mode, 253-254 
+<br>inner WORD (iW), visual mode, 254 
+<br>input() function, 371 
+<br>insert (i), 7, 9 
+<br>insert 
+<br>abbreviation (CTRL-]), 297 
+<br>at start of line (I, gI), 197 
+<br>command (i), 5 
+<br>last insert (CTRL-A), 229 
+<br>literally (CTRL-V), 85 
+<br>insert mode, 5 
+<br>:map with no remapping 
+<br>(:inoremap), 301 
+<br>abbreviate (:iabbrev), 296 
+<br>abbreviation, remove (:iunabbrev), 296 
+<br>abbreviations, clear (:iabclear), 296 
+<br>automatic completion (CTRL-N), 
+<br>126, 128 
+<br>automatic completion (CTRL-P), 
+<br>125-126, 128 
+<br>block visual mode (I), 60 
+<br>commands, help, 13 
+<br>digraph (CTRL-K), 25, 200 
+<br>end (<Esc>), 6 
+<br>ex mode (:insert), 308 
+<br>go to normal mode 
+<br>(CTRL-\_CTRL-N), 230 
+<br>key mapping (:imap), 298 
+<br>mappings, clear (:imapclear), 301 
+<br>menu (:imenu), 334 
+<br>(:inoreabbrev), 296 
+<br>remove mapping (:iunmap), 301 
+<br>remove menu item (:iunmenu), 339 
+<br>stop, no abbreviations (CTRL-C), 297 
+<br>tab (CTRL-T), 263 
+<br>wrapping (i flag, ‘formatoptions’), 117 
+<br>
+<br>insert register (CTRL-R), 230, 263-264 
+<br>263-264 
+<br>reindent (CTRL-R CTRL-P), 263-264 
+<br>without interpretation 
+<br>(CTRL-R CTRL-O), 230 
+<br>insert/command mode 
+<br>, :map with no remapping (:noremap!), 
+<br>301 
+<br>, key mapping (:map!), 298 
+<br>, mappings, clear (:mapclear!), 301 
+<br>inserted text, last (. special 
+<br>register), 223 
+<br>instant partial word search (g*), 206 
+<br>instant partial word search backwards 
+<br>(g#, g£), 206 
+<br>instant word search (*), 206 
+<br>instant word search backwards 
+<br>(#, £), 206 
+<br>internal variable, 350 
+<br>interrupt search 
+<br>(CTRL-C, CTRL-BREAK), 206 
+<br>intro, 157 
+<br>invert case (~), 200, 201 
+<br>invert case (g~), 201, 401 
+<br>invert case on line(g~~, g~g~), 201 
+<br>invert case, visual mode (~), 255 
+<br>invert, boolean option 
+<br>(:set option!), 380 
+<br>ip (select inner paragraph), visual 
+<br>mode, 254 
+<br>ip selction (inner paragraph), 115 
+<br>is (select inner sentence), visual 
+<br>mode, 254 
+<br>isdirectory() function, 371 
+<br>iw (select word), visual mode, 253-254 
+<br>iW (select WORD), visual mode, 254 
+<br>
+<br>
+<br>J 
+<br>
+<br>Japanese, 178 
+<br>Java, syntax options, 407 
+<br>java_allow_cpp_keywords, Java syntax 
+<br>
+<br>variable, 408 
+<br>java_css, Java syntax variable, 408 
+<br>java_highlight_debug, Java syntax vari
+<br>
+<br>
+<br>able, 408 
+<br>java_highlight_function, Java syntax variable, 
+<br>408 
+<br>java_highlight_java_lang_ids, Java syntax 
+<br>variable, 407 
+<br>java_ignore_javadoc, Java syntax 
+<br>
+<br>variable, 408 
+<br>java_javascript, Java syntax variable, 408 
+<br>java_mark_bracesIn_parens_as_errors, Java 
+<br>
+<br>syntax variable, 407 
+<br>java_vb, Java syntax variable, 408 
+<br>join lines (:join), 318 
+<br>join lines (J), 23, 116, 198 
+<br>join lines, no spaces (gJ), 59, 198, 256 
+<br>join, visual mode (J), 59, 256 
+<br>jump 
+<br>
+<br>go to next (<Tab>), 189 
+<br>go to previous (CTRL-O), 189 
+<br>jump table, listing (:jumps), 188 
+<br>jump to macro 
+<br>definition (:djump), 314 
+<br>definition, start search at cursor 
+<br>([CTRL-D), 75 
+<br>definition, start search at top of file 
+<br>(]CTRL-D), 75 
+<br>jump to pattern, #include files 
+<br>(:ijump), , 312 
+<br>jump to tag 
+<br>
+<br>CTRL-], 12, 79 
+<br>:tjump, 83 
+<br>in split window (CTRL-W]), 82 
+<br>in split window (:stag), 81 
+<br>
+<br>
+<br>toolbar, 111 
+<br>visual mode (CTRL-]), 60 
+<br>
+<br>
+<br>language syntax options 551 
+<br>
+<br>justify.vim (package), 116 
+<br>
+<br>justifying text, 116 
+<br>
+<br>K 
+<br>
+<br>key 
+<br>
+<br>backspace, 94 
+<br>delete, 94 
+<br>
+<br>
+<br>key mapping, 93, 293, 297, 394 
+<br>command mode (:cmap), 298 
+<br>insert mode (:imap), 298 
+<br>insert/command mode (:map!), 298 
+<br>operating pending mode (:omap), 298 
+<br>visual mode (:vmap), 297-298 
+<br>listing, 93, 394 
+<br>
+<br>keyboard macros (q), 24 
+<br>execute (@{char}), 24 
+<br>
+<br>keyboard mappings 
+<br>clear (:mapclear), 299 
+<br>command mode, clear 
+<br>
+<br>(:cmapclear), 301 
+<br>insert mode, clear (:imapclear), 301 
+<br>insert/command mode, clear 
+<br>
+<br>(:mapclear!), 301 
+<br>operator pending mode, clear 
+<br>
+<br>(:omapclear), 301 
+<br>visual mode, clear (:vmapclear), 301 
+<br>
+<br>keyboard options, 384 
+<br>
+<br>Microsoft Windows, 384 
+<br>
+<br>keyword characters, non-digit, regular 
+<br>expression (\k), 217 
+<br>
+<br>keyword, syntax, 414 
+<br>
+<br>Korean, 178 
+<br>
+<br>L 
+<br>
+<br>Lace, syntax options, 408 
+<br>
+<br>lace_case_insensitive, Lace syntax variable, 
+<br>408 
+<br>
+<br>language dependent options, 403 
+<br>
+<br>language syntax options 
+<br>
+<br>asm, 403 
+<br>asmh8300, 403 
+<br>Basic, 404 
+<br>
+<br>
+<br>
+<br>552 language syntax options 
+<br>
+<br>C, 404 
+<br>C++, 404 
+<br>COBOL, 405 
+<br>DTD, 405 
+<br>Eiffel, 406 
+<br>ERLANG, 406 
+<br>FVWM, 406 
+<br>HTML, 407 
+<br>Java, 407 
+<br>Lace, 408 
+<br>Lex, 408 
+<br>Lite, 408 
+<br>Maple, 409 
+<br>Masm, 403 
+<br>Nasm, 403 
+<br>Perl, 409 
+<br>Php3, 410 
+<br>Phtm, 410 
+<br>PostScript, 410 
+<br>Printcap, 410 
+<br>Rexx, 410 
+<br>Sed, 411 
+<br>Shell, 411 
+<br>Speedup, 411 
+<br>Termcap, 410 
+<br>TeX, 411 
+<br>TinyFugue, 412 
+<br>
+<br>languages, foreign, 174 
+<br>last “:” command (: special 
+<br>
+<br>register), 223 
+<br>last buffer (:blast), 52 
+<br>last buffer with split (:sblast), 52 
+<br>last error (:clast), 88 
+<br>last file, editing (:last), 44 
+<br>last inserted text (. special 
+<br>
+<br>register), 223 
+<br>last line ($), 168 
+<br>last line number ($), 160 
+<br>last small delete (~ special 
+<br>
+<br>register), 223 
+<br>last substitute string, regular 
+<br>expression (\~), 217 
+<br>last subsutition 
+<br>repeat (&), 311 
+<br>repeat (:&), 311 
+<br>repeat, with search string (:~), 311 
+<br>
+<br>last tag (:tlast), 83 
+<br>
+<br>last window, :tlast (:ptlast), 277 
+<br>
+<br>last yanked text (special register 0), 223 
+<br>
+<br>last_buffer_nr() function, obsolete, 378 
+<br>
+<br>leader, comment, insert (o/r flag, 
+<br>‘formatoptions’), 117-118 
+<br>
+<br>left (h), 6 
+<br>
+<br>left justify (:left), 116 
+<br>
+<br>left mouse button, 109 
+<br>
+<br>left shift 
+<br>:<, 317 
+<br><<, 6, 9, 70 
+<br>block visual mode (<), 64 
+<br>visual mode (<), 60 
+<br>
+<br>left to right, 174 
+<br>
+<br>left word, insert mode (<C-Left>), 228 
+<br>
+<br>left, move, insert mode (<Left>), 228 
+<br>
+<br>left, scrollbar, gui option, 328 
+<br>
+<br>let (variable), 349 
+<br>letter 
+<br>
+<br>any, regular expression (\a), 211 
+<br>lowercase, regular expression (\l), 217 
+<br>upper case, regular expression 
+<br>
+<br>([:upper:]), 216 
+<br>upper case, regular expression (\u), 217 
+<br>letters and digits, regular expression 
+<br>
+<br>([:alnum:], 215 
+<br>lower case ([:lower:]), 216 
+<br>
+<br>
+<br>Lex 
+<br>
+<br>minlines, syntax option, 408 
+<br>syntax options, 408 
+<br>
+<br>
+<br>libcall() function, 371 
+<br>
+<br>line 
+<br>beginning (^), 187 
+<br>delete (dd), 10, 20, 36, 224 
+<br>filter (!!), 40 
+<br>go to end, block visual mode ($), 63 
+<br>go to (g), 18, 188 
+<br>go to (G), 18, 40, 161, 188 
+<br>join, no spaces (gJ), 198 
+<br>open above (O), 11 
+<br>yank (yy), 39, 221-222 
+<br>
+<br>line count and delete, 306 
+<br>
+<br>line end problems (^M), 120 
+<br>
+<br>
+<br>macro definitions 553 
+<br>
+<br>line number, current, print (:=), 316 
+<br>
+<br>line open (o), 10 
+<br>
+<br>line range, 100 
+<br>
+<br>
+<br>/pattern/, 304 
+<br>$, 100 
+<br>%, 101, 161 
+<br>‘, 101 
+<br>‘<, 102, 105 
+<br>‘>, 102, 105 
+<br>., 101 
+<br>mark, 101 
+<br>
+<br>
+<br>line select, start (gH), 258 
+<br>
+<br>line specification, visual mode, 102 
+<br>
+<br>line substitute (S), 196 
+<br>
+<br>line visual mode, start (V), 56, 86, 
+<br>162-163 
+<br>
+<br>line() function, 371 
+<br>line1 / line2 (keywords), 361 
+<br>
+<br>line2byte() function, 372 
+<br>
+<br>lines 
+<br>append (:append), 307 
+<br>copy (:copy), 306 
+<br>delete (:delete), 303 
+<br>delete, visual mode (D), 58 
+<br>down (+), 187 
+<br>join (:join), 318 
+<br>join (J), 23, 116, 198 
+<br>joining, visual mode, 59, 256 
+<br>
+<br>move (:move), 306 
+<br>print (:print), 308 
+<br>print, list mode (:list), 308 
+<br>print, neighborhood (:z), 309 
+<br>print, with numbers (:#), 308 
+<br>put (:put), 318 
+<br>up (-), 187 
+<br>whole, automatic completion (CTRL-X 
+<br>CTRL-L), 128, 131 
+<br>yank (:yank), 318 
+<br>yank (Y), 39 
+<br>
+<br>lisp mode (-l), 146 
+<br>
+<br>list agreements (:args), 43, 226 
+<br>
+<br>list buffers (:buffers), 49-50 
+<br>list errors (:clist), 88 
+<br>
+<br>list first macro definition 
+<br>(:dsearch), 314 
+<br>
+<br>list macro definitions (:dlist), 314 
+<br>starting at cursor (]D), 73, 76 
+<br>starting at top of file ([D), 73, 76 
+<br>list mode line printing (:list), 308 
+<br>list pattern, search #include files 
+<br>(:ilist), 312 
+<br>list registers (:registers), 222 
+<br>list tags (:tags), 80 
+<br>listing 
+<br>
+<br>abbreviations, 92, 296 
+<br>autocommands (:autocmd), 138 
+<br>function, 359 
+<br>mapping, 93, 394 
+<br>syntax, 420 
+<br>
+<br>Lite, syntax options, 408 
+<br>lite_minlines, Lite syntax option, 408 
+<br>lite_sql_query, Lite syntax option, 408 
+<br>load session, toolbar, 111 
+<br>local .vimrc file, 383 
+<br>local variable, definition, search for 
+<br>(gd), 73-74 
+<br>local variables, 350 
+<br>localtime() function, 372 
+<br>loop 
+<br>
+<br>:break, 356 
+<br>:continue, 356 
+<br>
+<br>
+<br>lower case characters (gu), 201 
+<br>lower case letters ([:lower:]), 216 
+<br>lower case line (guu, gugu), 201 
+<br>lower case, visual mode (u), 255 
+<br>lowercase letter, regular expression 
+<br>(\l), 217 
+<br>
+<br>M 
+<br>
+<br>macro definitions, 284 
+<br>
+<br>automatic completion 
+<br>(CTRL-X CTRL-D), 128-129 
+<br>find below cursor (]d), 73, 75 
+<br>find first ([d), 73, 75 
+<br>jump to (:djump), 314 
+<br>jump to, start search at cursor 
+<br>([CTRL-D), 75 
+<br>
+<br>
+<br>554 macro definitions 
+<br>
+<br>jump to, start search at top of file 
+<br>(]CTRL-D), 75 
+<br>list first (:dsearch), 314 
+<br>list, start at cursor (]D), 73, 76 
+<br>
+<br>list, start at top of file ([D), 73, 76 
+<br>listing (:dlist), 314 
+<br>show in new window (CTRL-W 
+<br>
+<br>CTRL-D), 245 
+<br>
+<br>macros, keyboard (q), 24 
+<br>
+<br>make program (:make), , 87, 284 
+<br>
+<br>make session, toolbar, 111 
+<br>
+<br>make tags, toolbar, 111 
+<br>
+<br>make 
+<br>
+<br>buffer switching, 288 
+<br>toolbar, 111 
+<br>
+<br>Makefiles 
+<br>
+<br>Editing, 84 
+<br>sorting lines, 85 
+<br>
+<br>making a program, 86 
+<br>
+<br>man page 
+<br>display (K), 78 
+<br>visual mode (K), 60 
+<br>
+<br>map, 93, 95, 134, 156, 293, 297, 394 
+<br>
+<br>map! (key mapping, insert/command 
+<br>mode), 298 
+<br>
+<br>maparg() function, 372 
+<br>
+<br>mapcheck() function, 372 
+<br>
+<br>Maple, syntax options, 409 
+<br>
+<br>mappings 
+<br>clear (:mapclear), 299 
+<br>command mode, clear (:cmapclear), 
+<br>
+<br>301 
+<br>
+<br>insert mode, clear (:imapclear), 301 
+<br>insert/command mode, clear 
+<br>
+<br>(:mapclear!), 301 
+<br>operator pending mode, clear 
+<br>
+<br>(:omapclear), 301 
+<br>visual mode, clear (:vmapclear), 301 
+<br>
+<br>mark (m), 85, 161-162, 164, 227 
+<br>
+<br>global, 227 
+<br>
+<br>goto line (‘{mark}), 37, 85, 
+<br>161-162, 164 
+<br>goto (`{mark}), 37, 228 
+<br>
+<br>line specification, 101 
+<br>lists (:marks), 38 
+<br>:mark, :k, 318 
+<br>
+<br>
+<br>special, 38 
+<br>special “, 38 
+<br>special ‘, 38 
+<br>special [, 38 
+<br>special ], 38 
+<br>
+<br>
+<br>masm, syntax options, 403 
+<br>match any character, regular expres
+<br>
+<br>
+<br>sion (.), 104 
+<br>
+<br>match braces (%), 73, 278 
+<br>
+<br>match end, regular expression ($), 104 
+<br>
+<br>match except, regular expression 
+<br>
+<br>([^x]), 104, 168 
+<br>
+<br>match groups, syntax, 418 
+<br>
+<br>match pairs (%), 76-77 
+<br>
+<br>match() function, 373 
+<br>
+<br>match, first, regular expression (\1), 
+<br>
+<br>213 
+<br>
+<br>match, syntax, 414 
+<br>
+<br>matchend() function, 373 
+<br>
+<br>matches, show, 278 
+<br>
+<br>matchstr() function, 373 
+<br>
+<br>maxlines, syntax, 421 
+<br>
+<br>memory size option (‘maxmem’), 399 
+<br>
+<br>menu bar, gui option, 326 
+<br>
+<br>menu definition (:menu), 333 
+<br>
+<br>menu 
+<br>all modes (:amenu), 334 
+<br>command mode (:cmenu), 334 
+<br>insert mode (:imenu), 334 
+<br>
+<br>(:cnoremenu), 338 
+<br>
+<br>(:inoremenu), 338 
+<br>
+<br>
+<br>(:nnoremenu), 338 
+<br>
+<br>
+<br>(:onoremenu), 338 
+<br>
+<br>
+<br>(:vnoremenu), 338 
+<br>
+<br>
+<br>
+<br>multiple by option (:set option ^=) 555 
+<br>
+<br>operator pending mode (:omenu), 334 
+<br>priority, 334 
+<br>tear-off, 109-110 
+<br>
+<br>tearoff (:tearoff), 339 
+<br>visual mode (:vmenu), 334 
+<br>
+<br>
+<br>menu item 
+<br>execute (:emenu), 338 
+<br>remove (:unmenu), 339 
+<br>remove, all modes (:aunmenu), 339 
+<br>
+<br>remove, command mode 
+<br>
+<br>(:cunmenu), 339 
+<br>remove, insert mode (:iunmenu), 339 
+<br>remove, normal mode (:nunmenu), 339 
+<br>remove, operator pending mode 
+<br>
+<br>(:ounmenu), 339 
+<br>remove, visual mode (:vunmenu), 339 
+<br>
+<br>menu mappings, list (:menu), 338 
+<br>menu.vim (initialization file), 95 
+<br>
+<br>menus, custom, 333 
+<br>
+<br>message, display recent 
+<br>(:messages), 321 
+<br>
+<br>messages, customization, 386 
+<br>
+<br>method end 
+<br>find, backward ([M), 279 
+<br>find, forward (]M), 279 
+<br>
+<br>method start 
+<br>find, backward ([m), 279 
+<br>find, forward (]m), 279 
+<br>
+<br>Microsoft Windows 
+<br>
+<br>GUI, 108 
+<br>keyboard options, 384 
+<br>text file format, 120 
+<br>
+<br>
+<br>middle line, setting (zz, z.), 194-195 
+<br>
+<br>middle mouse button, 109 
+<br>
+<br>middle of screen 
+<br>move (gm), 234 
+<br>move cursor (M), 188 
+<br>
+<br>minlines, syntax, 421 
+<br>
+<br>minlines, syntax, Lex, 408 
+<br>
+<br>mode 
+<br>
+<br>indicator, 5 
+<br>insert mode, 5 
+<br>
+<br>
+<br>screen, MS-DOS (:mode), 347 
+<br>visual mode, 5 
+<br>
+<br>
+<br>modeless editing, 179 
+<br>
+<br>modelines, 268 
+<br>
+<br>modifications, prohibit (vim -m), 144 
+<br>modified buffer 
+<br>go to (:bmodified), 52 
+<br>split and go to (:sbmodified), 52 
+<br>
+<br>modified, buffer, go to (:bmodified), 52 
+<br>
+<br>modifier 
+<br>
+<br>extension (:e), 354 
+<br>global subsitute (:gs), 354 
+<br>head (:h), 354 
+<br>root (:r), 354 
+<br>substitute (:s), 354 
+<br>tail (:t), 354 
+<br>
+<br>
+<br>Motif/UNIX GUI, 108 
+<br>
+<br>mouse 
+<br>
+<br>changing window size with, 48 
+<br>customization, 331 
+<br>focus option, 331 
+<br>hiding, 333 
+<br>text selected with (* special 
+<br>
+<br>
+<br>register), 223 
+<br>usage, 109, 332 
+<br>wheel, 332 
+<br>
+<br>
+<br>move 
+<br>down, first non-blank (_), 188 
+<br>forward word (w), 184 
+<br>lines, 161 
+<br>lines (:move), 306 
+<br>to a specific line (G), 18, 188 
+<br>to a specific line (gg), 18, 88 
+<br>to end of line ($), 16, 234 
+<br>to end of line (g$, g<End>), 234 
+<br>to start of line (^), 16, 234 
+<br>to start of line, screen space (g^, 
+<br>
+<br>g<Home>), 234 
+<br>
+<br>MS-DOS 
+<br>screen mode (:mode), 347 
+<br>text file format, 120 
+<br>windows, 5 
+<br>
+<br>multiple by option (:set option ^=), 380 
+<br>
+<br>
+<br>556 multiple directories 
+<br>
+<br>multiple directories, 280 
+<br>multiple files, editing, 41 
+<br>
+<br>N 
+<br>
+<br>substitute, 103 
+<br>Next buffer (:bnext), 51 
+<br>Next buffer and split (:sbnext), 51 
+<br>only), 298 
+<br>abbreviation (:noreabbrev), 301 
+<br>menu (:noremenu), 338 
+<br>menu, all modes (:anoremenu), 338 
+<br>menu, command mode 
+<br>(:cnoremenu), 338 
+<br>menu, insert mode (:inoremenu), 338 
+<br>menu, normal mode (:nnoremenu, 338 
+<br>menu, operator pending mode 
+<br>(:onoremenu), 338 
+<br>menu, visual mode (:vnoremenu), 338 
+<br>expression (\A), 216 
+<br>(\D), 216 
+<br>
+<br>expression (\H), 216 
+<br>
+<br>expression (\X), 217 
+<br>
+<br>expression (\I), 216 
+<br>
+<br>(\l), 217 
+<br>
+<br>expression (\U), 217 
+<br>
+<br>expression (\S), 217 
+<br>
+<br>(\W), 217 
+<br>
+<br>
+<br>:map with no remapping 
+<br>(:nnoremap), 301 
+<br>changing to (CTRL-\_CTRL-N), 58 
+<br>command (:normal), 322 
+<br>command from insert mode 
+<br>(CTRL-O), 231 
+<br>commands, help, 13 
+<br>
+<br>go to (CTRL-\_CTRL-N), 230 
+<br>mappings, clear (:nmapclear), 301 
+<br>menu (:nmenu), 334 
+<br>only, key mapping (:nmap), 298 
+<br>remove mapping (:nunmap), 301 
+<br>remove menu item (:nunmenu), 339 
+<br>
+<br>mapping (:unmap!), 301 
+<br>
+<br>
+<br>
+<br>decrement (CTRL-X), 197-198, 395 
+<br>increment (CTRL-A), 197, 395 
+<br>option, 18 
+<br>
+<br>
+<br>
+<br>
+<br>override (!) 557 
+<br>
+<br>O 
+<br>
+<br>obsolete options, 402 
+<br>octal digit, regular expression (\o), 217 
+<br>offset 
+<br>
+<br>begin, search, 207 
+<br>end, search, 207 
+<br>search, , 206, 207, 208 
+<br>search, reference, 215 
+<br>start, search, 207 
+<br>
+<br>
+<br>older error list (:colder), 284 
+<br>
+<br>ole, 172 
+<br>
+<br>omap (key mapping, operating pending 
+<br>mode), 298 
+<br>
+<br>oneline, syntax, 417 
+<br>
+<br>oneline_comments, speedup syntax 
+<br>variable, 411 
+<br>
+<br>only, window (CTRL-Wo), 243 
+<br>
+<br>open, 157 
+<br>
+<br>Open file, read-only (:view), 41 
+<br>
+<br>open line (o), 10 
+<br>
+<br>open line above (O), 11 
+<br>
+<br>open new window (:split), 45, 247 
+<br>
+<br>open, toolbar, 110 
+<br>
+<br>operator 
+<br>!=, 352 
+<br>!=?, 353 
+<br>!~, 352 
+<br>%, 352 
+<br>*, 352 
+<br>+, 352 
+<br>-, 352 
+<br>/, 352 
+<br><#, 353 
+<br><=, 352 
+<br><=#, 353 
+<br><=?, 353 
+<br><?, 353 
+<br>==, 352 
+<br>==#, 353 
+<br>==?, 353 
+<br>=~, 352 
+<br>>, 352 
+<br>>#, 353 
+<br>
+<br>>=, 352 
+<br>>=#, 353 
+<br>>=?, 353 
+<br>>?, 353 
+<br>
+<br>
+<br>operator pending mode 
+<br>:map with no remapping (:onoremap), 
+<br>301 
+<br>key mapping (:omap), 298 
+<br>mappings, clear (:omapclear), 301 
+<br>menu (:omenu), 334 
+<br>remove mapping (:ounmap), 301 
+<br>remove menu item (:ounmenu), 339 
+<br>operators 
+<br>
+<br>arithmetic, 352 
+<br>string, 352 
+<br>
+<br>
+<br>option 
+<br>
+<br>GUI, 342 
+<br>add to (:set option +=), 380 
+<br>default all (:set all&), 382 
+<br>display value (:set option?), 380 
+<br>help, 13 
+<br>inside files, 268 
+<br>language dependent, 403 
+<br>multiple by (:set option ^=), 380 
+<br>obsolete, 402 
+<br>reset boolean (:set option), 380 
+<br>saving, 95 
+<br>search, 29 
+<br>set boolean (:set option), 380 
+<br>set to default value (:set option&), 380 
+<br>setting, 18, 379 
+<br>subtract from (:set option +=), 380 
+<br>toggle boolean (:set option!), 380 
+<br>or operator, regular expression (\|), 
+<br>214, 218 
+<br>other corner, visual select (O), 255 
+<br>other end, visual select (o), 254-255 
+<br>output redirection (:redir), 321 
+<br>override (!), 9 
+<br>:bdelete, 246 
+<br>:bunload, 246 
+<br>:checkpath, 283 
+<br>:clist, 88 
+<br>:djump, 314 
+<br>:dlist, 314 
+<br>
+<br>
+<br>558 override (!) 
+<br>
+<br>:dsearch, 314 
+<br>:function, 358 
+<br>:global, 312 
+<br>:ijump, 314 
+<br>:ilist, 314 
+<br>:next, 42 
+<br>:quit, 9 
+<br>:recover, 152 
+<br>:unlet, 353 
+<br>:vi, 41 
+<br>:wqall, 242 
+<br>:write, 41, 168, 202 
+<br>:wviminfo, 233 
+<br>
+<br>P 
+<br>
+<br>p flag, substitute, 103 
+<br>page down, insert mode 
+<br>
+<br>(<PageDown>), 228 
+<br>page up, insert mode (<PageUp>), 228 
+<br>pairs, match, 76-77 
+<br>paragraph 
+<br>
+<br>backward (}), 121 
+<br>forward ({), 121 
+<br>select (ap), visual mode, 254 
+<br>select (ip), visual mode, 254 
+<br>
+<br>parenthesis block 
+<br>inner, select (i( ), 254 
+<br>select (a( ), 254 
+<br>
+<br>paste, toolbar, 111 
+<br>path only modifier (:p), 354 
+<br>path option, 127, 281 
+<br>
+<br>checking, 282 
+<br>
+<br>path, relative, modifier (:.), 354 
+<br>pclose (close preview window), 276 
+<br>perl, 173 
+<br>Perl, syntax options, 409 
+<br>perl_extended_variable, Perl syntax 
+<br>
+<br>variable, 409 
+<br>perl_no_sync_on_global, Perl syntax 
+<br>variable, 409 
+<br>perl_no_sync_on_sub, Perl syntax 
+<br>variable, 409 
+<br>
+<br>perl_string_as_statement, Perl syntax variable, 
+<br>409 
+<br>perl_sync_dist, Perl syntax variable, 409 
+<br>perl_want_scope_in_variables, Perl syntax 
+<br>variable, 409 
+<br>Php3, syntax options, 410 
+<br>php3_baselib, Php3 syntax variables, 410 
+<br>php3_minlines, Php3 syntax 
+<br>variables, 410 
+<br>php3_sql_query, Php3 syntax 
+<br>variables, 410 
+<br>Phtm, syntax options, 410 
+<br>phtml_minlines, Phtm syntax 
+<br>variable, 410 
+<br>phtml_sql_query, Phtm syntax 
+<br>variable, 410 
+<br>pointer callback fix, gui option, 328 
+<br>popup, special menu, 334 
+<br>position, window (:winpos), 324-325 
+<br>PostScript, syntax options, 410 
+<br>postscr_andornot_binary, PostScript 
+<br>syntax variable, 410 
+<br>postscr_display, PostScript syntax 
+<br>variable, 410 
+<br>postscr_encoding, PostScript syntax 
+<br>variable, 410 
+<br>postscr_fonts, PostScript syntax 
+<br>variable, 410 
+<br>postscr_ghostscript, PostScript syntax 
+<br>variable, 410 
+<br>postscr_level, PostScript syntax 
+<br>variable, 410 
+<br>ppop (:pop in preview window), 276 
+<br>prepend string, option 
+<br>(:set option ^=), 381 
+<br>preserve, 151 
+<br>preserve changes (:preserve), 319 
+<br>
+<br>preview window, 276 
+<br>:pop (:ppop), 276 
+<br>:tjump (:ptjump), 276 
+<br>:tnext (:ptnext), 276 
+<br>:tprevious (:ptprevious), 277 
+<br>
+<br>
+<br>quote next character (CTRL-V) 
+<br>
+<br>:tselect (:ptselect), 276 
+<br>close (:pclose), 276 
+<br>go to tag (:ptag), 276 
+<br>tag (CTRL-Wg}), 277 
+<br>tag (CTRL-W}), 277 
+<br>tags, 276-277 
+<br>
+<br>
+<br>previous buffer 
+<br>:bNext, :bprevious, 51 
+<br>and split (:sbNext, :sbprevious), 51-52 
+<br>previous error (:cNext, :cprevious), , 
+<br>88, 170 
+<br>previous file (CTRL-^), 44, 244 
+<br>previous file 
+<br>after writing (:wNext, :wprevious), 43 
+<br>editing (:Next, :previous), 43 
+<br>previous jump, go to (CTRL-O), 189 
+<br>previous tag (:tNext, :tprevious), 83 
+<br>previous window (CTRL-Wp), 162163, 
+<br>240 
+<br>print, 100 
+<br>print and substitution, 103 
+<br>print lines (:print), 308 
+<br>in list mode (:list), 308 
+<br>with numbers (:number, :#), 293, 308 
+<br>print neighborhood (:z), 309 
+<br>print working directory (:pwd), 314 
+<br>print, substitute, 103 
+<br>print, toolbar, 110 
+<br>printable character, regular expression 
+<br>
+<br>\p, 217 
+<br>[:print:], 216 
+<br>
+<br>
+<br>printable non-digit character, regular 
+<br>expression (\P), 217 
+<br>Printcap, syntax options, 410 
+<br>printing character definition, ‘isprint’ 
+<br>option, 186 
+<br>priority, menu, 334 
+<br>program, building (:make), 87, 284 
+<br>prohibit modifications (vim -m), 144 
+<br>ptag (go to tag in preview 
+<br>window), 276 
+<br>
+<br>ptcap_minlines, Termcap / Printcap 
+<br>syntax variable, 410 
+<br>ptjump (:tjump in preview 
+<br>window), 276 
+<br>ptlast (:tlast in preview window), 277 
+<br>ptnext (:tnext in preview window), 276 
+<br>ptNext (see :ptprevious), 277 
+<br>ptprevious (:tprevious in preview 
+<br>window), 277 
+<br>ptrewind (:trewind in preview 
+<br>window), 277 
+<br>ptselect (:tselect in preview 
+<br>window), 276 
+<br>punctuation, regular expression 
+<br>([:punct:]), 216 
+<br>put (p), 36-37, 39, 160-161, 220, 224 
+<br>put (text), 36 
+<br>and move cursor (gp), 220 
+<br>before and move cursor(gP), 220 
+<br>before cursor (P), 37, 162-163, 220 
+<br>before with reindent ([P, ]P), 265 
+<br>lines (:put), 318 
+<br>toolbar, 111 
+<br>with reindent (]p), 265 
+<br>pyfile, 173 
+<br>python, 173 
+<br>
+<br>Q 
+<br>
+<br>qall (quit all), 242 
+<br>quit (:q!), 9, 202 
+<br>quit (:quit), 144, 242-243 
+<br>quit after write (:wq), 202, 322 
+<br>quit after write modified (:xit), 202 
+<br>quit all (:qall), 242 
+<br>quit all after writing (:wqall), 242 
+<br>quit and discard changes (ZQ), 202 
+<br>quit with error code (:cquit), 89 
+<br>quitting (ZZ), 9 
+<br>quote next character (CTRL-V), 85, 
+<br>229, 268 
+<br>
+<br>
+<br>560 range 
+<br>
+<br>R 
+<br>
+<br>range 
+<br>
+<br>$, 100 
+<br>%, 101, 160 
+<br>‘, 101 
+<br>., 101 
+<br>line,‘<, 102, 105 
+<br>line,‘>, 102, 105 
+<br>line, visual mode, 102 
+<br>regular expression ([]), 215 
+<br>user defined commands, 361 
+<br>
+<br>ranges, 100 
+<br>read, 104, 317 
+<br>:browse, 340 
+<br>file (:read), 135 
+<br>from command, 317 
+<br>wildcards, 396 
+<br>
+<br>read-only 
+<br>
+<br>opening file (-R), 142, 144 
+<br>opening file (:view), 41 
+<br>recover 
+<br>file (:recover), 152 
+<br>file (-r), 149, 152 
+<br>
+<br>redirection, output (:redir), 321 
+<br>redo (CTRL-R), 8 
+<br>redo (:redo), 318 
+<br>redo, toolbar, 110 
+<br>redraw screen (CTRL-L), 156 
+<br>reference, regular expression, 215 
+<br>region, syntax, 415 
+<br>registers, 50 
+<br>
+<br>appending text, 222 
+<br>execute (:@), 317 
+<br>insert (CTRL-R), 263-264 
+<br>keyword, 361 
+<br>list registers, 222 
+<br>repeat execute (:@@), 317 
+<br>special, 223 
+<br>unnamed, 221 
+<br>user defined commands, 361 
+<br>visual mode, 251 
+<br>yank delete, put, 221 
+<br>
+<br>regular expression, 32-33, 103, 168, 209 
+<br>$, 104 
+<br>*, 104 
+<br><CR> (\r), 217 
+<br><Tab> (\t), 217 
+<br>ASCII characters ([:ASCII:]), 215 
+<br>[:lower], 212 
+<br>[:upper], 212 
+<br>[], 104 
+<br>\1, 103 
+<br>alphabetic characters (\a), 216 
+<br>and tags, 82 
+<br>any letter (\a), 211 
+<br>backspace ([:backspace:]), 215 
+<br>backspace character (\b), 216 
+<br>begin word (\<), 209 
+<br>carriage return (\r), 217 
+<br>character classes, 212 
+<br>character classes, 215 
+<br>character range ([]), 211 
+<br>character, single (.), 215 
+<br>character, upper case (\u), 217 
+<br>characters, ASCII ([:ASCII:]), 215 
+<br>characters, alphabetic (\a), 216 
+<br>characters, non-alphabetic (\A), 216 
+<br>characters, upper case ([:upper:]), 216 
+<br>digit (\d), 211 
+<br>digit character (\d), 216 
+<br>digit, hexidecimal (\x), 217 
+<br>digit, octal (\o), 217 
+<br>digits and letters ([:alnum:]), 215 
+<br>end of line ($), 167 
+<br>end of line ($), 32-34, 168, 215 
+<br>end of line (<Enter>, <CR>, <NL>) 
+<br>([:return:]), 216 
+<br>end of word (\>), 215 
+<br>end word (\>), 209 
+<br>escape character (\), 34 
+<br>escape character (\e), 216 
+<br>filename character (\f), 216 
+<br>filename character, non-digit (\F), 216 
+<br>first group (\1), 216 
+<br>first match (\1), 168 
+<br>first match (\1), 213 
+<br>grouping ( \(..\) ), 213, 216 
+<br>grouping \(..\), 104 
+<br>head of word character (\h), 216 
+<br>hexidecimal digit ([:xdigit:]), 216 
+<br>
+<br>
+<br>repeat 1 or more times, regular expression (\+) 561 
+<br>
+<br>hexidecimal digit (\x), 217 
+<br>identifier character (\i), 216 
+<br>keyword character, non-digit (\k), 217 
+<br>keyword characters (\k), 217 
+<br>last substitute string (\~), 217 
+<br>letter, lowercase (\l), 217 
+<br>letter, upper case ([:upper:]), 216 
+<br>letter, upper case (\u), 217 
+<br>letters and digits ([:alnum:]), 215 
+<br>lowercase letter (\l), 217 
+<br>match any character (.), 104 
+<br>match except ([^x]), 104, 168 
+<br>octal digit (\o), 217 
+<br>or operator (\|), 214 
+<br>or operator (\|), 218 
+<br>printable character (\p), 217 
+<br>printable characters ([:print:]), 216 
+<br>printable non-digit character (\P), 217 
+<br>puncuation ([:punct:]), 216 
+<br>range ([]), 215 
+<br>reference, 215 
+<br>repeat (*), 167-168 
+<br>repeat (\{m,n}), 212 
+<br>repeat 0 or 1 times (\=), 217 
+<br>repeat 0 or more times (*), 104, 217 
+<br>repeat 1 or more times (\+), 217 
+<br>repeat a given number of times ({}), 217 
+<br>repeat atom (*), 210 
+<br>repeat atom (\+), 210 
+<br>single character (.), 215 
+<br>single character match (.), 33-34, 168 
+<br>spaces ([:space:]), 216 
+<br>special atoms, 211 
+<br>start of line (^), 32-33, 215 
+<br>start of word (\<), 215 
+<br>tab ([:tab:]), 216 
+<br>tab (\t), 217 
+<br>upper case letter (\u), 217 
+<br>upper case letters ([:upper:]), 216 
+<br>whitespace ([:space:]), 216 
+<br>
+<br>whitespace (\s), 167 
+<br>whitespace character (\s), 217 
+<br>word character (\w), 217 
+<br>
+<br>
+<br>reindent (CTRL-F), 272 
+<br>put (]p), 265 
+<br>put before ([P, ]P), 265 
+<br>
+<br>relative path modifier (:.), 354 
+<br>
+<br>remapping abbreviations, 300 
+<br>
+<br>remove abbreviation (:unabbreviate), 
+<br>296 
+<br>
+<br>remove command mode abbreviation 
+<br>(:cunabbrev), 296 
+<br>
+<br>remove insert mode abbreviation 
+<br>(:iunabbrev), 296 
+<br>
+<br>remove mapping 
+<br>command mode (:cunmap), 301 
+<br>insert mode (:iunmap), 301 
+<br>
+<br>301 
+<br>
+<br>operator pending mode (:ounmap), 301 
+<br>:unmap, 299, 301 
+<br>visual mode (:vunmap), 301 
+<br>
+<br>remove string, option 
+(:set option -=), 381 
+<br>
+<br>remove tooltip (:tunmenu), 339 
+<br>
+<br>remove, menu item (:unmenu), 339 
+<br>all modes (:aunmenu), 339 
+<br>command mode (:cunmenu), 339 
+<br>insert mode (:iunmenu), 339 
+<br>operator pending mode 
+<br>
+<br>(:ounmenu), 339 
+<br>visual mode (:vunmenu), 339 
+<br>
+<br>
+<br>removing a variable, 353 
+<br>
+<br>removing autocommands, 138 
+<br>
+<br>rename() function, 373 
+<br>
+<br>repeat 0 or 1 times, regular expression 
+<br>(\=), 217 
+<br>repeat 0 or more times, regular 
+<br>expression (*), 104, 210, 217 
+<br>
+<br>repeat 1 or more times, regular 
+<br>expression (\+), 210, 217 
+<br>
+<br>
+<br>562 repeat a given number of times, regular expression ({}) 
+<br>
+<br>repeat a given number of times, 
+<br>regular expression ({}), 217 
+<br>repeat edit (.), 22, 161 
+<br>repeat execute register (:@@), 317 
+<br>repeat last substitution 
+<br>&, 311 
+<br>:&, 311 
+<br>with search string (:~), 311 
+<br>repeat search (n), 161 
+<br>repeat shell command (:!!), 319 
+<br>repeat single character search backwards 
+<br>(,), 187 
+<br>repeat single character search forward 
+<br>(;), 187 
+<br>repeat visual selection, 252-253 
+<br>repeat 
+<br>regular expression (*), 167-168 
+<br>regular expressions (\{m,n}), 212 
+<br>
+<br>replace character 
+<br>block visual mode (r{char}), 64 
+<br>r{char}, 23, 199 
+<br>virtual (gr{char}), 199-200 
+<br>with <Enter> (r<Enter>), 23 
+<br>replace mode (R), 199 
+<br>replace string, virtual (gR{string}), 200 
+<br>replace, GUI (:promptrepl), 340 
+<br>replace, select mode, 259 
+<br>replace, toolbar, 111 
+<br>reset, boolean option (:set option), 380 
+<br>restricted mode (-Z), 144 
+<br>retab, 267-268 
+<br>return, 358 
+<br>reverse and search again (N), 31-32 
+<br>reverse single character search 
+<br>(F{char}), 17 
+<br>reverse single character search until 
+<br>(T{char}), 17 
+<br>rewind window, :trewind 
+<br>(:ptrewind), 277 
+<br>Rexx, syntax options, 410 
+<br>rexx_minlines, Rexx syntax variable, 410 
+<br>
+<br>rgb_file, FVWM syntax variable, 406 
+<br>rgview command, 145 
+<br>rgvim command, 145 
+<br>right (l), 6 
+<br>right justify (:right), 115 
+<br>right mouse button, 109 
+<br>right shift (:>), 317 
+<br>right shift (>), 77 
+<br>right shift (>>), 69-70 
+<br>right shift {} block, 77 
+<br>right shift, block visual mode (>), 64 
+<br>right shift, visual mode (>), 60 
+<br>right to left, 174 
+<br>right word, insert mode 
+<br>(<C-Right>), 228 
+<br>right, move, insert mode 
+<br>(<Right>), 228 
+<br>right, scrollbar, gui option, 328 
+<br>root modifier (:r), 354 
+<br>rot13 encode / decode 
+<br>(g?{motion}), 123 
+<br>rot13 encode / decode, visual mode 
+<br>(g?), 257 
+<br>rot13 encode line (g?g?, g??), 123 
+<br>rotate down, window (CTRL-Wr), 241 
+<br>rotate up, window (CTRL-WR), 241 
+<br>rview command, 145 
+<br>rvim command, 145 
+<br>rviminfo, 233 
+<br>
+<br>S 
+<br>
+<br>save all, toolbar, 110 
+<br>save, toolbar, 110 
+<br>saving options, 95 
+<br>screen down (<PageDown>), 192 
+<br>screen mode, MS-DOS (:mode), 347 
+<br>screen up (CTRL-B), 191 
+<br>
+<br>
+<br>search 563 
+<br>
+<br>screen 
+<br>changing bottom line (zb, z-), 194 
+<br>changing center line (zz, z.), 194-195 
+<br>changing top line (z<Enter>), 193 
+<br>changing top line (zt), 193-194 
+<br>down 1/2 page (CTRL-D), 192 
+<br>down line (CTRL-E), 192 
+<br>down page (CTRL-F), 192 
+<br>redraw (CTRL-L), 156 
+<br>restore, option, 395 
+<br>scroll up 1/2 (CTRL-D), 20, 190-191 
+<br>scroll up 1/2 (CTRL-U), 20, 190-191 
+<br>up 1/2 page (CTRL-U), 192 
+<br>up line (CTRL-Y), 191-192 
+<br>up page (CTRL-B), 192 
+<br>script 
+<br>
+<br>executing (-s), 145 
+<br>toolbar, 111 
+<br>
+<br>
+<br>scripts, 144 
+<br>scroll down (CTRL-X CTRL-Y), 131 
+<br>1/2 page (CTRL-D), 192 
+<br>1/2 screen (CTRL-D), 20, 190-191 
+<br>line (CTRL-E), 192 
+<br>page (CTRL-F), 192 
+<br>scroll up (CTRL-X CTRL-E), 131 
+<br>1/2 page (CTRL-U), 192 
+<br>1/2 screen (CTRL-U), 20, 190-191 
+<br>line (CTRL-Y), 191-192 
+<br>page (CTRL-B), 192 
+<br>scrollbar 
+<br>
+<br>bottom, gui option, 328 
+<br>left, gui option, 328 
+<br>right, gui option, 328 
+<br>
+<br>
+<br>scrolling, horizontal, 234 
+<br>search 
+<br>#include files (:isearch), 313 
+<br>Abort, 18 
+<br>again (n), 31-32, 227 
+<br>again, reverse (N), 31-32 
+<br>backward for { in column 1 ([[), 279 
+<br>backward for } in column 1 ([]), 279 
+<br>backwards (?), 31-32 
+<br>backwards, instant word (#, £), 206 
+<br>backwards, instant word, partial (g#, 
+<br>g£), 206 
+<br>changing direction, 31-32 
+<br>
+<br>for global variable definition (gD), 7374 
+<br>for local variable definition (gd), 73-74 
+<br>for word under the cursor, start at cursor 
+<br>(]CTRL-I), 73-74 
+<br>for word under the cursor, start at top of 
+<br>file ([CTRL-I), 73-74 
+<br>forward (/), 27-30, 32, 161, 203, 227 
+<br>forward for { in column 1 (]]), 279 
+<br>forward for } in column 1 (][), 279 
+<br>GUI (:promptfind), 340 
+<br>highlight off (:nohlsearch), 29 
+<br>highlighting (‘hlsearch’), 203 
+<br>history, 28 
+<br>in new window (CTRL-W CTRL-I), 
+<br>244 
+<br>incremental, 30 
+<br>instant word (*), 206 
+<br>instant word, partial (g*), 206 
+<br>interrupting (CTRL-C, CTRLBREAK), 
+<br>206 
+<br>method end, backward ([M), 279 
+<br>method end, forward (]M), 279 
+<br>method start, backward ([m), 279 
+<br>method start, forward (]m), 279 
+<br>offset, 206-208 
+<br>offset, begin, 207 
+<br>offset, end, 207 
+<br>offset, reference, 215 
+<br>offset, start, 207 
+<br>option, highlight, 29 
+<br>options, 29 
+<br>regular expressions, 209 
+<br>repeat (n), 161 
+<br>single character (f{char}), 17, 187 
+<br>single character reverse (F{char}), 17 
+<br>single character, repeat backwards 
+<br>(,), 187 
+<br>single character, repeat forward (;), 187 
+<br>string, last (/ special register), 223 
+<br>string, repeat last substitute (:~), 311 
+<br>tags, 289 
+<br>toolbar, 111 
+<br>until, single character (t{char}), 17 
+<br>until, single character reverse 
+<br>(T{char}), 17 
+<br>wrapping, 205 
+<br>
+<br>
+<br>564 second line, formatting based on (2 flag, ‘formatoptions’) 
+<br>
+<br>second line, formatting based on (2 
+<br>flag, ‘formatoptions’), 117-119 
+<br>sections backwards ([[), 122 
+<br>
+<br>sections forwards (][), 122 
+<br>sed, syntax options, 411 
+<br>
+<br>
+<br>select 
+<br>angle bracket block (a<), 254 
+<br>curly bracket block (a{), 254 
+<br>delete, 258-259 
+<br>error file (:cfile), 89 
+<br>inner angle bracket block (i<), 254 
+<br>inner block (i}), 78 
+<br>inner curly bracket block (i{), 254 
+<br>inner parenthsis block (i( ), 254 
+<br>inner square bracket block (i[), 254 
+<br>mode, 258 
+<br>paragraph (ap), visual mode, 254 
+<br>paragraph (ip), visual mode, 254 
+<br>parenthsis block (a( ), 254 
+<br>replace, 259 
+<br>sentence (as), visual mode, 254 
+<br>sentence (is), visual mode, 254 
+<br>square bracket block (a[), 254 
+<br>switching ends (CTRL-O), 259 
+<br>tag (:tselect), 83 
+<br>word (aw), visual mode, 253-254 
+<br>word (iw), visual mode, 253-254 
+<br>WORD (aW), visual mode, 254 
+<br>WORD (iW), visual mode, 254 
+<br>sentence 
+<br>backward ( ) ), 121 
+<br>forward ( ( ), 121 
+<br>select (as), visual mode, 254 
+<br>select (is), visual mode, 254 
+<br>
+<br>separator, command (|), 355 
+<br>
+<br>session, load, toolbar, 111 
+<br>session, make, toolbar, 111 
+<br>
+<br>
+<br>sessions, 248, 350 
+<br>set (options), 18, 95, 100, 379 
+<br>boolean option (:set option), 380 
+<br>invoption, 380 
+<br>option, 380 
+<br>option +=, 380-381 
+<br>option -=, 380-381 
+<br>
+<br>option ^=, 380-381 
+<br>option!, 380 
+<br>option&, 380 
+<br>option?, 380 
+<br>
+<br>
+<br>set, :browse, 342 
+<br>set 
+<br>current file (:file), 315 
+<br>window size (CTRL-W_), 49 
+<br>window size (z{Height}), 157 
+<br>
+<br>setline() function, 374 
+<br>shell, 104, 144, 152, 346 
+<br>command (:!), 319 
+<br>command, repeat (:!!), 319 
+<br>start (:shell), 319 
+<br>shell_error (internal variable), 351 
+<br>
+<br>shift lift 
+<br>:<, 317 
+<br><<, 69-70 
+<br>block visual mode (<), 64 
+<br>visual mode (<), 60 
+<br>
+<br>shift right 
+<br>:>, 317 
+<br>>, 77 
+<br>>>, 69-70 
+<br>block visual mode (>), 64 
+<br>visual mode (>), 60 
+<br>shifting a block of text, 77 
+<br>
+<br>show matches, 278 
+<br>sh_maxlines, shell syntax variable, 411 
+<br>sh_minlines, shell syntax variable, 411 
+<br>
+<br>simulate <ALT> (:simalt), 344 
+<br>single character search 
+<br>forward (f{char}), 17, 187 
+<br>repeat backwards (,), 187 
+<br>repeat forward (;), 187 
+<br>reverse (F{char}), 17 
+<br>until (t{char}), 17 
+<br>until, reverse (T{char}), 17 
+<br>
+<br>single character, regular expression (.), 
+<br>33-34, 168, 215 
+<br>
+<br>size 
+<br>
+<br>window, 324-325 
+<br>window and :split, 47 
+<br>window, decrease (CTRL-W-), 48 
+<br>
+<br>
+<br>StdinReadPre, autocommand event 
+<br>
+<br>window, equalize (CTRL-W=), 48 
+<br>window, increase (CTRL-W+), 48 
+<br>window, set (CTRL-W_), 49 
+<br>skipnl, syntax, 417 
+<br>skipwhite, syntax, 417 
+<br>sleep (gs), 156 
+<br>smagic (substitute assuming 
+<br>‘magic’), 310 
+<br>sniff, 174 
+<br>Sniff+, 173 
+<br>snomagic (substitute assuming 
+<br>‘nomagic’), 310 
+<br>sort (external command), 40, 85-86, 
+<br>164, 257 
+<br>sorting lines, 85 
+<br>
+<br>in visual mode, 86 
+<br>
+<br>source (commands), 95, 294, 402 
+<br>
+<br>sourced file name (<sfile>), 354 
+<br>
+<br>spaces and tabs ([:blank:]), 216 
+<br>
+<br>spaces, regular expression 
+<br>([:space:]), 216 
+<br>
+<br>special atoms, regular expressions, 211 
+<br>
+<br>special keys, help, 13 
+<br>
+<br>special marks, 221 
+<br>
+<br>special menu, popup, 334 
+<br>
+<br>special menu, toolbar, 334 
+<br>
+<br>special registers, 223 
+<br>
+<br>special variable names, 350 
+<br>
+<br>specify GUI initialization file (-U), 145 
+<br>
+<br>specify initialization file (-u), 145 
+<br>
+<br>speedup, syntax options, 411 
+<br>
+<br>split, 162 
+<br>
+<br>split and :djump (:dsplit), 314 
+<br>
+<br>split and :ijump (:isplit), 313 
+<br>
+<br>split and find macro definition 
+<br>(CTRL-W CTRL-D), 245 
+<br>
+<br>split and first buffer (:sbrewind), 52 
+<br>
+<br>split and go to modified buffer 
+<br>(:sbmodified), 52 
+<br>
+<br>split and jump to tag (CTRL-W]), 82 
+<br>
+<br>split and jump to tag (:stag), 81 
+<br>split and jump to tag (:stjump), 84 
+<br>split and last buffer (:sblast), 52 
+<br>split and next buffer (:sbnext), 51 
+<br>split and previous buffer (:sbNext, 
+<br>:sbprevious), 51-52 
+<br>split and select tag (:stselect), 84 
+<br>split window (:split), 48 
+<br>split, search (CTRL-W CTRL-I), 244 
+<br>splitting current window (:split), 
+<br>45, 247 
+<br>square bracket block 
+<br>inner, select (i[), 254 
+<br>select (a[), 254 
+<br>start block select (g CTRL-H), 258 
+<br>start block visual mode (CTRL-V), 
+<br>57, 60 
+<br>start character select (gh), 258 
+<br>start character visual mode (v), 164 
+<br>start line select (gH), 258 
+<br>start line visual mode (V), 56, 162-163 
+<br>start of file, insert mode 
+<br>(<C-Home>), 228 
+<br>start of line, insert mode 
+<br>(<Home>), 228 
+<br>start of line, movement (^), 16, 234 
+<br>start of line, regular expression (^), 3233, 
+<br>215 
+<br>start of screen line, movement (g^, 
+<br>g<Home>), 234 
+<br>start of word, regular expression 
+<br>(\<), 215 
+<br>start shell (:shell), 319 
+<br>start visual mode (v), 56 
+<br>start, comment, move ([/, [*), 280 
+<br>startinsert (enter insert mode), 318 
+<br>statements, control, 355 
+<br>statusmsg (internal variable), 351 
+<br>StdinReadPre, autocommand 
+<br>event, 136 
+<br>
+<br>
+<br>566 StdReadPost, autocommand event 
+<br>
+<br>StdReadPost, autocommand event, 
+<br>136, 138 
+<br>stopping automatic reslection 
+<br>(gV), 260 
+<br>strftime() function, 374 
+<br>strict_subsections, speedup syntax 
+<br>variable, 411 
+<br>string operators, 352-353 
+<br>string, append, option 
+<br>(:set option +=), 381 
+<br>string, prepend, option 
+<br>(:set option ^=), 381 
+<br>string, remove, option 
+<br>(:set option -=), 381 
+<br>string, replace, virtual (gR{string}), 200 
+<br>strlen() function, 374 
+<br>strpart() function, 374 
+<br>strtrans() function, 375 
+<br>subsitute, global, modifier (:gs), 354 
+<br>substitute, , 102, 160, 167-168, 309, 401 
+<br>
+<br>and print, 103 
+<br>assuming ‘magic’ (:smagic), 310 
+<br>assuming ‘nomagic’ (:snomagic), 310 
+<br>c flag, 103 
+<br>confirm, 103 
+<br>confirm (c flag), 161 
+<br>g flag, 103, 160 
+<br>global, 103 
+<br>global (g flag), 161 
+<br>last, repeat (&), 311 
+<br>last, repeat (:&), 311 
+<br>last, repeat, with search string (:~), 311 
+<br>line (S), 196 
+<br>modifier (:s), 354 
+<br>p flag, 103 
+<br>print, 103 
+<br>:s, 144 
+<br>substitute() function, 375 
+<br>subtract from option 
+<br>(:set option -=), 380 
+<br>suspend (CTRL-Z), 156 
+<br>suspend (:suspend), 156 
+<br>
+<br>swap files, 150 
+<br>swapname, 150 
+<br>switch to block visual mode 
+<br>(CTRL-V), 59 
+<br>switch to character visual mode (v), 59 
+<br>switching buffer (:buffer), 50 
+<br>switching buffers, :make, 288 
+<br>switching ends, select mode 
+<br>(CTRL-O), 259 
+<br>switching visual modes, 59 
+<br>swtich to line visual mode (V), 59 
+<br>sync, syntax, 420 
+<br>syncbind (synchronize windows), 276 
+<br>synchornize windows (:syncbind), 276 
+<br>synID() function, 375 
+<br>synIDattr() function, 376 
+<br>synIDtrans() function, 376 
+<br>syntax, 96, 394 
+<br>
+<br>autocommand event, 136-137 
+<br>case ignore, 413 
+<br>case match, 413 
+<br>clear, 413 
+<br>clusters, 419 
+<br>coloring, 68 
+<br>coloring, bad colors, 68 
+<br>coloring, color test, 69 
+<br>coloring, no color problem, 68 
+<br>excludenl, 418 
+<br>file, 422 
+<br>file, adding to system, 422 
+<br>grouphere, 421 
+<br>groupthere, 421 
+<br>highlighting, 292 
+<br>highlighting, customization, 290 
+<br>highlighting, define (:highlight), 290 
+<br>highlighting, keywords, 293 
+<br>including other files, 420 
+<br>keyword, 414 
+<br>language option, 136, 294 
+<br>
+<br>asm, 403 
+<br>asmh8300, 403 
+<br>assembly language, 403 
+<br>Basic, 404 
+<br>C, 404 
+<br>
+<br>
+<br>terminal 567 
+<br>
+<br>C++, 404 
+<br>COBOL, 405 
+<br>DTD, 405 
+<br>Eiffel, 406 
+<br>ERLANG, 406 
+<br>FVWM, 406 
+<br>HTML, 407 
+<br>Java, 407 
+<br>Lace, 408 
+<br>Lex, 408 
+<br>Lex, minlines, 408 
+<br>Lite, 408 
+<br>Maple, 409 
+<br>Masm, 403 
+<br>Nasm, 403 
+<br>Perl, 409 
+<br>Php3, 410 
+<br>Phtm, 410 
+<br>PostScript, 410 
+<br>Printcap, 410 
+<br>Rexx, 410 
+<br>Sed, 411 
+<br>speedup, speedup syntax variable, 411 
+<br>Termcap, 410 
+<br>TeX, 411 
+<br>TinyFugue, 412 
+<br>
+<br>Listing, 420 
+<br>
+<br>Match, 414 
+<br>
+<br>match, groups, 416 
+<br>
+<br>match groups, 418 
+<br>
+<br>maxlines, 421 
+<br>
+<br>minlines, 421 
+<br>
+<br>oneline, 417 
+<br>
+<br>region, 415 
+<br>
+<br>skipnl, 417 
+<br>
+<br>skipwhite, 417 
+<br>
+<br>sync, 420 
+<br>
+<br>transparent, 417 
+<br>
+<br>system() function, 376 
+<br>
+<br>T 
+<br>
+<br>tab size, 265 
+<br>tab 
+<br>
+<br>:retab, 267-268 
+<br>
+<br>insert (CTRL-T), 263 
+<br>
+<br>regular expression ([:tab:]), 216 
+<br>
+<br>regular expression (\t), 217 
+<br>tabs and spaces ([:blank:]), 216 
+<br>
+<br>
+<br>tags, 79, 129, 165 
+<br>
+<br>and help, 81 
+<br>
+<br>automatic completion (CTRL-X 
+<br>CTRL-]), 128-130 
+<br>first (:trewind), 83 
+<br>go to (:tag), 81 
+<br>go to in preview window (:ptag), 276 
+<br>in preview window (CTRL-W}), 277 
+<br>jump to (:tjump), 83 
+<br>jump to, visual mode (CTRL-]), 60 
+<br>jump word (g]), 83 
+<br>jump, toolbar, 111 
+<br>
+<br>last (:tlast), 83 
+<br>list (:tags), 80 
+<br>pop (CTRL-T), 12, 80-81 
+<br>preview window, 276-277 
+<br>
+<br>
+<br>previous (:tNext, :tprevious), 83 
+<br>search, 289 
+<br>
+<br>search after :split (CTRL-Wg]), 245 
+<br>select (:tselect), 83 
+<br>select word (g CTRL-]), 83 
+<br>
+<br>tags, make, toolbar, 111 
+<br>
+<br>tail modifier (:t), 354 
+<br>
+<br>Tcl, 174 
+<br>
+<br>Tcldo, 174 
+<br>
+<br>Tclfile, 174 
+<br>
+<br>tear-off menu, 109-110, 327 
+<br>
+<br>gui option, 327 
+<br>:tearoff, 339 
+<br>
+<br>
+<br>tempname() function, 377 
+<br>
+<br>term, terminal type, 290 
+<br>
+<br>Termcap, built-in, 400 
+<br>
+<br>Termcap, syntax options, 410 
+<br>
+<br>TermChanged, autocommand 
+<br>event, 137 
+<br>
+<br>terminal specification (vim -T), 146 
+<br>
+<br>terminal type, 400 
+<br>
+<br>terminal 
+<br>
+<br>cterm, 290-291 
+<br>fast, 400 
+<br>gui, 290-291 
+<br>
+<br>
+<br>
+<br>568 TeX, syntax options 
+<br>
+<br>hpterm, 402 
+<br>slow, 400-401 
+<br>term, 290 
+<br>
+<br>TeX, syntax options, 411 
+<br>text 
+<br>
+<br>entry, advanced, 228 
+<br>files, 111 
+<br>justifying, 116 
+<br>register, 350 
+<br>selected with the mouse (* special 
+<br>register), 223, 225 
+<br>wrapping, 7, 113 
+<br>
+<br>tf_minlines, TinyFugue syntax 
+<br>variable, 412 
+<br>this_session (internal variable), 351 
+<br>TinyFugue, syntax options, 412 
+<br>tips, toolbar, 337 
+<br>tjump in preview window 
+<br>(:ptjump), 276 
+<br>tlast in preview window (:ptlast), 277 
+<br>tnext in preview window (:ptnext), 276 
+<br>toggle, boolean option 
+<br>(:set option!), 380 
+<br>toolbar, 110, 328 
+<br>
+<br>copy (yank), 111 
+<br>cut (delete), 111 
+<br>find next, 111 
+<br>find previous, 111 
+<br>gui option, 328 
+<br>help, 111 
+<br>help search, 111 
+<br>icons, 334-335 
+<br>load session, 111 
+<br>make, 111 
+<br>make session, 111 
+<br>make tags, 111 
+<br>open, 110 
+<br>option, 329 
+<br>paste (put), 111 
+<br>print, 110 
+<br>redo, 110 
+<br>remove (:tunmenu), 339 
+<br>replace, 111 
+<br>save, 110 
+<br>save all, 110 
+<br>
+<br>script, 111 
+<br>search, 111 
+<br>special menu, 334 
+<br>tag jump, 111 
+<br>tip (:tmenu), 337 
+<br>undo, 110 
+<br>
+<br>
+<br>tooltips, 329 
+<br>top line 
+<br>setting (z<Enter>), 193 
+<br>setting (zt), 193-194 
+<br>top of screen, move cursor (H), 188 
+<br>top window, go to (CTRL-Wt), 240 
+<br>topics not covered, 171 
+<br>tprevious in preview window 
+<br>(:ptprevious), 277 
+<br>transparent, syntax, 417 
+<br>trewind in preview window 
+<br>(:ptrewind), 277 
+<br>troff related commands, 121 
+<br>trouble, getting out of, 6 
+<br>tselect in preview window 
+<br>(:ptselect), 276 
+<br>tutorial, Vim, 14 
+<br>twiddling characters (xp), 37, 160 
+<br>
+<br>U 
+<br>
+<br>ul (external program), 167 
+<br>undo 
+<br>all indent (0 CTRL-D), 262 
+<br>automatic indent (CTRL-D), 72, 262 
+<br>indent once (^ CTRL-D), 262 
+<br>line (U), 8 
+<br>toolbar, 110 
+<br>u, 8 
+<br>:undo, 318 
+<br>unhide, windows (:unhide), 244 
+<br>UNIX text file format, 120 
+<br>UNIX/GTK GUI, 107 
+<br>UNIX/Motif GUI, 108 
+<br>Unlet, 353 
+<br>
+<br>
+<br>vim (command line) 569 (command line) 569 
+<br>
+<br>unload buffer (:bunload), 246 
+<br>
+<br>unmatched 
+<br>#if find, backward ([#), 279 
+<br>#if find, forward (]#), 279 
+<br>{, find, backward ([{), 278 
+<br>}, find, forward (]}), 278 
+<br>
+<br>unnamed register, 221 
+<br>
+<br>until 
+<br>single character search (t{char}), 17 
+<br>single character search reverse 
+<br>
+<br>(T{char}), 17 
+<br>
+<br>up (k), 6, 13 
+<br>1/2 page, scroll (CTRL-U), 191-192 
+<br>line, scroll (CTRL-Y), 191-192 
+<br>lines (-), 187 
+<br>move, insert mode (<Up>), 228 
+<br>one screen (<PageUp>), 192 
+<br>one screen (<S-Up>), 192 
+<br>one screen (CTRL-B), 191, 192 
+<br>rotate, window (CTRL-WR), 241 
+<br>screen space (gk, g<Up>), 235 
+<br>window (CTRL-Wj), 46 
+<br>window with wrapping 
+<br>(CTRL-WW), 240 
+<br>
+<br>update file (:update), 316 
+<br>
+<br>upper case characters (gU), 201 
+<br>
+<br>upper case letter, regular expression 
+<br>(\u), 217 
+<br>
+<br>upper case letters, regular expression 
+<br>([:upper:]), 216 
+<br>
+<br>upper case line (gUU, gUgU), 201 
+<br>
+<br>upper case, visual mode (U), 255 
+<br>
+<br>user defined command 
+<br>
+<br>-bang, 361 
+<br>
+<br>delete (:delcommand), 360 
+<br>clear (:comclear), 360 
+<br>:command, 360-361 
+<br>-count, 361 
+<br>-nargs, 360 
+<br>-range, 361 
+<br>-register, 361 
+<br>
+<br>
+<br>User, autocommand event, 137 
+<br>
+<br>V 
+<br>
+<br>v:count, 351 
+<br>
+<br>v:count1, 351 
+<br>
+<br>v:errmsg, 351 
+<br>
+<br>v:shell_error, 351 
+<br>
+<br>v:statusmsg, 351 
+<br>
+<br>v:this_session, 351 
+<br>
+<br>v:version, 351 
+<br>
+<br>v:warningmsg, 351 
+<br>
+<br>variable names, special, 350 
+<br>
+<br>variable, 349 
+<br>
+<br>deleting, 353 
+<br>environment, 350 
+<br>global, 350 
+<br>global, search for definition (gD), 73-74 
+<br>internal, 350 
+<br>local, 350 
+<br>
+<br>local, definition, search for (gd), 73-74 
+<br>
+<br>verbose messages (-V), 145 
+<br>
+<br>version, 95-96 
+<br>
+<br>command line option, 142 
+<br>
+<br>version (internal variable), 351 
+<br>
+<br>vertical dialog, gui option, 328 
+<br>Vi, 8 
+<br>
+<br>Compatibility, 8 
+<br>
+<br>style wrapping (v flag, ‘formatoptions’), 
+<br>117, 119 
+<br>compatibility, 4 
+<br>compatibility option (-C), 146 
+<br>
+<br>vi alias, 145 
+<br>view command, 142, 145 
+<br>
+<br>View file (:view), 41 
+<br>vim (command line), 5, 42, 145 
+<br>
+<br>--help, 142 
+<br>-b (binary mode), 146 
+<br>-C (compatible mode), 146 
+<br>-d (specify Amiga device), 146 
+<br>
+<br>
+<br>-e (start Vim in Ex mode), 144-145 
+<br>-f (run in foreground), 145 
+<br>-F (start in Farsi mode), 146, 176 
+<br>
+<br>
+<br>570 vim (command line) (command line) 
+<br>
+<br>-g (start Vim in GUI mode), 145 
+<br>-H (Hebrew mode), 146, 177 
+<br>-l (lisp mode), 146 
+<br>-m (prohibit modifications), 144 
+<br>-n (no swap file option), 143 
+<br>-N (noncompatible mode), 146 
+<br>-R (read only), 142, 144 
+<br>-r (recover), 149, 152 
+<br>-s (execute script), 145 
+<br>-s (silent mode), 144 
+<br>-t (find tag), 165 
+<br>-T (specify terminal), 146 
+<br>-U (specify GUI initialization file), 145 
+<br>-u (specify initialization file), 145 
+<br>-V (display verbose messages), 145 
+<br>-v (start Vim in Visual mode), 145 
+<br>-w (write input to file), 145 
+<br>-W (write input to file), 145 
+<br>-x (encode file), 143 
+<br>-Z (restricted mode), 144 
+<br>
+<br>VimEnter, autocommand event, 136 
+<br>
+<br>viminfo file, 136, 231-233, 350, 402 
+<br>
+<br>VimLeave, autocommand event, 136 
+<br>
+<br>VimLeavePre, autocommand 
+<br>event, 136 
+<br>
+<br>vimrc (initialiation file), 4, 95 
+<br>
+<br>vimtutor, 14 
+<br>
+<br>Virgin Edna, 160 
+<br>
+<br>virtcol() function, 377 
+<br>
+<br>virtual replace characters (gr{char}), 
+<br>199-200 
+<br>
+<br>virtual replace string (gR{string}), 200 
+<br>
+<br>visual block mode, 58-61 
+<br>
+<br>visual block mode help, 65 
+<br>
+<br>visual line mode (V), 86 
+<br>
+<br>visual mode, 5 
+<br>
+<br>block shift, 78 
+<br>
+<br>change to normal mode 
+<br>
+<br>(CTRL-\ CTRL-N), 58 
+<br>
+<br>commands, help, 13 
+<br>
+<br>delete, 251 
+<br>
+<br>end (CTRL-C), 57 
+<br>
+<br>end (<Esc>), 57 
+<br>
+<br>file writing, 105 
+<br>
+<br>key mapping (:vmap), 297-298 
+<br>
+<br>line range specification, 102 
+<br>line, start (V), 56, 162-163 
+<br>:map with no remapping 
+<br>(:vnoremap), 301 
+<br>mappings, clear (:vmapclear), 301 
+<br>menu (:vmenu), 334 
+<br>registers, 251 
+<br>remove mapping (:vunmap), 301 
+<br>remove menu item (:vunmenu), 339 
+<br>start block (CTRL-V), 57, 60 
+<br>start (v), 56, 164 
+<br>starting (-v), 145 
+<br>switching, 59 
+<br>yank (y), 162-163 
+<br>
+<br>visual select 
+<br>other corner (O), 255 
+<br>other end (o), 254-255 
+<br>repeat, 252-253 
+<br>
+<br>visualmode() function, 377 
+<br>vmap (key mapping, visual mode), 
+<br>297-298 
+<br>
+<br>W 
+<br>
+<br>wall (write all), 242 
+<br>warningmsg (internal variable), 351 
+<br>while, 356 
+<br>whitespace character, regular expression 
+<br>(\s), 217 
+<br>whitespace, regular expression 
+<br>([:space:]), 216 
+<br>whitespace, regular expression (\s), 167 
+<br>whole lines, automatic completion 
+<br>(CTRL-X CTRL-L), 128, 131 
+<br>wildcards, 396 
+<br>winbufnr() function, 377 
+<br>windo, cancel operations 
+<br>(CTRL-W CTRL-C), 46 
+<br>window only (CTRL-Wo), 243 
+<br>window 
+<br>close (ZZ, :q), 46 
+<br>creating blank (:new), 48 
+<br>down (CTRL-Wj), 46 
+<br>down (CTRL-Ww), 46 
+<br>
+<br>
+<br>Write 571 
+<br>
+<br>exchange (CTRL-Wx), 242 
+<br>go down, wrapping (CTRL-Ww), 240 
+<br>go to bottom (CTRL-Wb), 240 
+<br>go to previous (CTRL-Wp), 240 
+<br>go to top (CTRL-Wt), 240 
+<br>go up, wrapping (CTRL-WW), 240 
+<br>open for all files (:all), 243 
+<br>opening and edit file (:split), 46 
+<br>opening new (:split), 45, 247 
+<br>position (:winpos), 325 
+<br>
+<br>position and size, 324 
+<br>preview, 276 
+<br>
+<br>
+<br>preview, :pop (:ppop), 276 
+<br>preview, close (:pclose), 276 
+<br>previous (CTRL-Wp), 162-163 
+<br>rotate down (CTRL-Wr), 241 
+<br>rotate up (CTRL-WR), 241 
+<br>
+<br>size, 325 
+<br>
+<br>:split, 47 
+<br>changing with mouse, 48 
+<br>
+<br>decrease (CTRL-W-), 48 
+<br>increase (CTRL-W+), 48 
+<br>make equal (CTRL-W=), 48 
+<br>position, 324 
+<br>search (CTRL-W CTRL-I), 244 
+<br>set (CTRL-W_), 49 
+<br>setting (z{Height}), 157 
+<br>
+<br>split, 162 
+<br>
+<br>split and view (:sview), 48 
+<br>up (CTRL-Wj), 46 
+<br>
+<br>
+<br>windows for all, buffer (:ball), 246 
+<br>
+<br>Windows, Microsoft, GUI, 108 
+<br>
+<br>WinEnter, autocommand event, 136 
+<br>
+<br>winheight() function, 377 
+<br>
+<br>WinLeave, autocommand event, 136 
+<br>
+<br>winnr() function, 377 
+<br>
+<br>word character, regular expression 
+<br>(\w), 217 
+<br>
+<br>word definition, ‘iskeyword’ option, 
+<br>184-185 
+<br>
+<br>word end, move (e), 184 
+<br>
+<br>word 
+<br>
+<br>automatic completion 
+<br>(CTRL-X CTRL-N), 128 
+<br>
+<br>
+<br>automatic completion 
+<br>(CTRL-X CTRL-P), 128 
+<br>backward (b), 16 
+<br>change (cw), 21, 161 
+<br>delete (dw), 20 
+<br>
+<br>
+<br>forward (w), 16, 20, 184 
+<br>instant search (*), 206 
+<br>instant search backwards (#, £), 206 
+<br>
+<br>
+<br>move to start (ge), 184 
+<br>partial, instant search backwards (g#, 
+<br>
+<br>
+<br>g£), 206 
+<br>partial, instant search (g*), 206 
+<br>select (aw), visual mode, 253-254 
+<br>select (iw), visual mode, 253-254 
+<br>under cursor (<cword>), 353 
+<br>
+<br>
+<br>under cursor, :ptag (CTRL-W}), 
+<br>277-278 
+<br>
+<br>word versus WORD, 186 
+<br>
+<br>WORD 
+<br>backward (B), 186 
+<br>backward to end (gE), 186 
+<br>forward (<C-Right>), 186 
+<br>forward (W), 186 
+<br>forward to end (E), 186 
+<br>select (aW), visual mode, 254 
+<br>select (iW), visual mode, 254 
+<br>under cursor (<cWORD>), 353 
+<br>
+<br>wq (write and quit), 202 
+<br>
+<br>wqall (write and quit all), 242 
+<br>
+<br>wrap comments automatically (c flag, 
+<br>‘formatoptions’), 117 
+<br>
+<br>wrap text automatically (a flag, 
+<br>‘formatoptions’), 117 
+<br>
+<br>wrapmargin, 114 
+<br>
+<br>wrapping text, 7, 113 
+<br>controlling (‘whichwrap’ option), 189 
+<br>insert mode (i flag, 
+<br>
+<br>‘formatoptions’), 117 
+<br>Vi style (v flag, ‘formatoptions’), 
+<br>117, 119 
+<br>
+<br>Write, 104, 134, 144, 168 
+<br>all (:wall), 242 
+<br>:browse, 340 
+<br>
+<br>file (:write), 41-42, 151, 315-316 
+<br>file (:write), visual mode, 257 
+<br>input to file (-W), 145 
+<br>
+<br>
+<br>
+<br>572 Write 
+<br>
+<br>modified and quit (:xit), 202 
+<br>option, 144, 399 
+<br>to command (:write), 316 
+<br>:write, 242 
+<br>write / append (:write), 316 
+<br>write and edit next file (:wnext), 42-43 
+<br>write and edit previous file (:wNext, 
+<br>
+<br>:wprevious), 43 
+<br>write and quit (:wq), 202, 322 
+<br>write and quit (:wqall), 242 
+<br>
+<br>
+<br>writing files and visual mode, 105 
+<br>wviminfo, 233 
+<br>
+<br>X 
+<br>
+<br>X11, pointer callback fix, gui 
+<br>option, 328 
+<br>xterm command, 5, 108 
+<br>
+<br>Y-Z 
+<br>
+<br>yank (y), 39, 162 
+<br>yank line (yy), 39, 221-222 
+<br>yank lines (:yank), 318 
+<br>yank lines (Y), 39 
+<br>yank lines, visual mode (Y), 59 
+<br>yank, toolbar, 111 
+<br>yank, visual mode (y), 59, 162-163 
+<br>yanked, last text (special register 
+<br>
+<br>0), 223 
+<br>
+<br<br>>
+</body>
+</html>

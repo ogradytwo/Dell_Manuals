@@ -1,0 +1,591 @@
+Python
+======
+if <condition>:
+  indent
+elif <condition>:
+  indent
+else:
+  indent
+
+Search for item in list
+  list.index(x)
+Insert within list
+  list[i:i] = L
+  list.insert(i,x)
+Insert at end of list
+  list[len(a):] = L
+  list.extend(L)
+  list.append(x)
+  list.insert(len(a),x)
+Delete from list
+  list[i:j] = []
+  list.pop(i)  , also returns the deleted item
+  list.pop()   , equivalent to a.pop(0)
+Change items in list
+  list[i:j] = L
+ 
+list.count(x)
+list.sort()
+list.reverse()
+
+to operate on a file-type object.
+
+file.write(string)
+file.close
+string = file.readline()
+
+Python CLI
+==========
+sudo apt-get update
+sudo apt-get install python3-pip
+sudo pip3 install virtualenv
+
+Virtual Environments using virtualenvwrapper
+============================================
+Once
+----
+    $ sudo apt-get update
+    $ sudo apt-get install python3-pip                                             # if necessary
+    $ sudo apt-get install virtualenvwrapper or $ pip3 install virtualenvwrapper
+    $ export WORKON_HOME=~/Envs
+    $ source /usr/local/bin/virtualenvwrapper.sh
+    $ cp -r Envs/<venv> .virtualenvs
+Create a virtualenv globally
+----------------------------
+    $ mkvirtualenv <venv> Or $ mkvirtualenv -p /usr/bin/python3.4 <venv>
+    then, within the venv
+    $ pip install django==1.8(say)
+Each use
+--------
+    $ workon <venv>
+    $ deactivate
+
+Virtual Environments without using virtualenvwrapper
+====================================================
+Once
+----
+    $ sudo pip3 install virtualenv Or $ pip install virtualenv
+Create a virtualenv within a directory
+--------------------------------------
+    $ virtualenv -p /usr/bin/python3.4 <myvenv>    # linux
+    > C:\Python34\python(say) -m venv <myvenv>   # windows
+Each use
+--------
+    $ source <myvenv>/bin/activate               # linux
+    > myvenv\Scripts\activate                    # windows
+    $ deactivate
+
+Virtual Environments generally
+==============================
+$ pip freeze > requirements.txt      # in case it is necessary to reinstall
+$ pip install -r requirements.txt    # this installs the versions that had been frozen
+
+Pip
+===
+$ sudo apt-get install python3-pip Or ($ wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python3 $ easy_install pip)
+
+ 
+Django
+======
+
+Prerequisites
+-------------
+$ sudo apt-get update
+$ pip install django==1.8
+sudo apt-get install git  
+
+Create a Django project with a virtual environment, from scratch
+----------------------------------------------------------------
+$ mkdir Projectname && cd Projectname
+If using virtualenvwrapper
+  workon <venv>
+  the venv should already have been set up for python3.4 and django1.8, but check by:
+  django-admin --version
+Else
+  create a venv for this directory
+  $ virtualenv -p /usr/bin/python3.4 <venv>
+  $ pip install django==1.8
+  $ django-admin --version      which will return 1.8.1(say)
+End
+django-admin startproject mysite .
+        check that manage.py points to correct directory, normally mysite,
+python manage.py startapp appname
+edit mysite/settings.py
+python manage.py migrate
+python manage.py createsuperuser      
+python manage.py runserver 0.0.0.0:8000
+# in browser: server_ip_address:8000
+# in browser: server_ip_address:8000/admin
+CTRL-C
+edit mysite/settings.py
+edit mysite/wsgi.py
+  see dj-example-wsgi.py
+edit appname/models.py by:
+  from django.db import models
+  from django.utils import timezone
+  class Post(models.Model):
+      author = models.ForeignKey('auth.User')
+      title = models.CharField(max_length=200)
+      text = models.TextField()
+      created_date = models.DateTimeField(
+              default=timezone.now)
+      published_date = models.DateTimeField(
+              blank=True, null=True)
+      def publish(self):
+          self.published_date = timezone.now()
+          self.save()
+      def __str__(self):
+          return self.title
+edit appname/admin.py by:
+    from django.contrib import admin
+    from .models import Post
+    admin.site.register(Post)
+edit mysite/urls.py,
+    add url(r'', include('appname.urls')), to the bottom of  giving:
+    from django.conf.urls import include, url
+    from django.contrib import admin
+    urlpatterns = [
+    url(r'^admin/', include(admin.site.urls)),               # if admin ends in '$' fails due to lack of reverse
+    url(r'', include('appname.urls')),
+    ]
+create appname/urls.py and insert:
+    from django.conf.urls import include, url
+    from . import views
+    urlpatterns = [
+        url(r'^$', views.post_list),
+    ]
+create appname/views.py and insert:
+    from django.shortcuts import render
+
+    from django.utils import timezone
+    from django.shortcuts import render
+    from .models import Post
+    def xxxxxx(request):
+        return render(request, 'appname/xxxxxx.html', {})
+        OR
+        posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+        return render(request, 'appname/xxxxxx.html', {'posts': posts})
+python manage.py makemigrations appname
+python manage.py migrate appname                       
+create appname/templates/appname/post_list.html and insert:
+    <html>
+    <head>
+        <title> title</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="/"> title</a></h1>
+        </div>
+        {% for post in posts %}
+        <div>
+            <p>published: {{ post.published_date }}</p>
+            <h1><a href="">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaks }}</p>
+        </div>
+        {% endfor %}
+        
+    </body>
+    </html>
+create .gitignore
+    *.pyc
+    __pycache__
+    e7
+    db.sqlite3
+    .DS_Store
+    README.txt
+    it/all.txt
+    *~
+set up git ( see below )
+
+To get a project from Github
+----------------------------
+
+To work on an existing Django project
+-------------------------------------
+$ cd <project-name>
+Either
+  workon <venv>
+Or
+  source <venv>/bin/activate
+End
+$ python manage.py runserver
+open localhost:8000 in browser to check that it is working
+edit mysite/urls.py, myapp/urls.py, myapp/views.py, myapp/models.py myapp/templates/myapp/templates/base.html etc
+if myapp/models has been changed
+  $ python manage.py makemigrations
+  $ python manage.py migrate
+$ python manage.py runserver, then open localhost:8000 in browser to check that it is working
+edit .gitignore ( if necessary )
+edit README.txt
+$ git add --all
+$ git commit -m "message"
+$ git status -s
+If wish to upload to Github
+  $ git push -u [url|shortname] [branchname]
+  log into github to see that it is there
+If wish to download from Github to Pythonanywhere
+  $ log into pythonanywhere
+  delete old version of project
+  $ git clone https://github.com/<github-username>/project-name.git
+  $ cd <project-name>
+  if necessary:
+  $ virtualenv --python=python3.4 myvenv
+  $ source myvenv/bin/activate
+  $ pip install django==1.8
+  $ python manage.py collectstatic
+  $ python manage.py makemigrations
+  $ python manage.py migrate
+  $ python manage.py createsuperuser
+
+
+
+
+Django-CLI
+=========
+
+
+$ python -c "import django; print(django.get_version())"            to see which version
+$ django-admin startproject mysite .
+    creates manage.py 
+    creates mysite/settings.py
+        needs to have app name added
+        needs to have added at bottom
+    creates mysite/urls.py
+        contains url(r/admin.py', include(admin.site.urls))
+    creates mysite/wsgi.py
+        doesn't need to be changed
+    creates mysite/__init__.py
+        empty
+$ django-admin startapp myapp 
+    creates myapp/admin.py
+        empty, with instruction to add Models
+    creates myapp/__init__.py
+        empty
+    creates myapp/models.py
+        empty
+    creates myapp/tests.py
+        empty
+    creates myapp/views.py
+        empty
+
+
+
+Django Directory Structure
+==========================
+Project_Name
+  appname
+    admin.py
+    __init__.py
+    migrations
+      0001_initial.py
+      __init__.py
+      __pycache__
+        0001_initial.cpython-34.pyc
+        __init__.cpython-34.pyc
+    models.py
+    __pycahe__
+      admin.cpython-34.pyc
+      __init__.cpython-34.pyc
+      models.cpython-34.pyc
+    tests.py
+    views.py
+  db.sqlite3
+  env5
+    bin
+      many mostly .py or no suffix
+    include
+      python3.4m
+        many all .h
+    lib
+      python3.4
+        many mostly .py
+    pip-selfcheck.json
+  manage.py
+  polls
+
+  post
+
+  Procfile
+  proj5
+
+  requirements.txt
+
+Django file contents
+====================
+mysite/ settings.py                              # for example, see settings.py
+  Add 'appname' (say) under INSTALLED_APPS
+  check that ROOT_URLCONF points to correct directory,                             normally mysite.
+  TIME_ZONE = 'Europe/London
+  LOGIN_REDIRECT_URL = '/'
+  STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+  STATICFILES_DIRS = os.path.join(BASE_DIR, 'static')
+  DATABASES may be changed if not using sqlite3
+mysite/urls.py                                Two types of url
+                                           Those that need no further expansion. Are of the form:
+                                               url(r'^abcd$' 'appname.filename.functionname'),
+                                           Those that are to be completed in the app urls file. Are of the form:
+                                               url(r'appname/', include(adcd.efgh.urls))
+                                           
+    url(r'^$', 'mysite.urls.home_page'),
+    url(r'admin/', include(admin.site.urls)),
+mysite/wsgi.py
+appname
+    admin.py                               Replace contents from above
+    models.py                              Replace contents from above, then python manage.py makemigrations appname, then python
+    static
+        css
+            appname.css
+    templates
+        appname
+            post_list.html                 {% load staticfiles %}
+                                           <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/
+                                           3.2.0/css/bootstrap.min.css">
+                                           <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/
+                                           3.2.0/css/bootstrap-theme.min.css">
+                                           <link rel="stylesheet" href="{% static 'css/appname.css' %}">
+                                           <link href="http://fonts.googleapis.com/css?family=
+                                           Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+                                           {% for post in posts %} {% endfor %}
+        registration
+            login.html
+    tests.py
+appname/urls.py                                # for example, see urls.py
+  usually end in '$', but for admin this causes fil due to lack of reverse, so use '/'
+  These complete the url. Are of the form: url(r'^(?P<abcdefgh>[A-Z][a-z]*)/$', functionname),
+  from django.conf import settings
+  from django.conf.urls.static import static
+  from django.conf.urls import url
+  from . import views
+  urlpatterns
+    ...
+    ] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+appname/views.py
+manage.py
+.gitignore                                 Add   *.pyc   __pycache__   myvenv   db.sqlite3   .DS_Store
+.git
+--------------------------------------------------frpm DjangoGirls---
+Django 30/05/15 to install Django
+mkdir django2
+cd django2
+sudo apt-get install python-virtualenv
+virtualenv --python=python3.4 venv2        (these two instead of python3 -m venv venv2, which doesnt work on ubuntu 14.04)
+source venv2/bin/activate
+pip install django==1.8
+django-admin startproject venv2 .
+python manage.py migrate
+python manage.py runserver
+check in browser http://127.0.0.1:8000/ that is is there
+
+
+06/05/15 Deploy
+cd django2
+source venv2/bin/activate
+pip install dj-database-url gunicorn whitenoise
+pip freeze > requirements.txt
+add psycopg2==2.5.4 to bottom of requirements.txt
+create file Procfile and add line:        web: gunicorn venv2.wsgi
+create runtime.txt and add line:          python-3.4.2
+create venv2/local_settings.py and add lines
+    import os
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+    DEBUG = True
+add the following lines at the end of venv2/settings.py
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    ALLOWED_HOSTS = ['*']
+    STATIC_ROOT = 'staticfiles'
+    DEBUG = False
+    try:
+        from .local_settings import *
+    except ImportError:
+        pass
+add the following lines to the end of venv2/wsgi.py
+    from whitenoise.django import DjangoWhiteNoise
+    application = DjangoWhiteNoise(application)
+install heroku toolbelt using:
+https://toolbelt.heroku.com/install-ubuntu.sh
+heroku login
+create .gitignore and add lines:
+    myvenv
+    __pycache__
+    staticfiles
+    local_settings.py
+    db.sqlite3
+    *.py[co]
+
+Django CLI
+==========
+$ python manage.py make
+
+migrations
+$ python manage.py migrate
+$ python manage.py runserver
+$ python manage.py shell
+$ django-admin shell
+
+
+
+Django Shell
+============
+$   python manage.py shell
+$   django-admin shell
+>>> from django.utils import timezone
+>>> Question.objects.all()
+>>> Question.objects.filter(id=1)
+>>> Question.objects.filter(question_text__startswith='What')
+>>> current_year = timezone.now().year
+>>> Question.objects.get(pub_date__year=current_year)
+>>> Question.objects.get(pk=1)
+>>> q.was_published_recently()
+
+
+Django Date formats
+===================
+Formats a date according to the given format.
+
+Uses a similar format as PHP’s date() function (http://php.net/date) with some differences.
+
+Note
+
+These format characters are not used in Django outside of templates. They were designed to be compatible with PHP to ease transitioning for designers.
+Available format strings:
+
+Format character	Description	Example output
+a	'a.m.' or 'p.m.' (Note that this is slightly different than PHP’s output, because this includes periods to match Associated Press style.)	'a.m.'
+A	'AM' or 'PM'.	'AM'
+b	Month, textual, 3 letters, lowercase.	'jan'
+B	Not implemented.	 
+c	ISO 8601 format. (Note: unlike others formatters, such as “Z”, “O” or “r”, the “c” formatter will not add timezone offset if value is a naive datetime (see datetime.tzinfo).	2008-01-02T10:30:00.000123+02:00, or 2008-01-02T10:30:00.000123 if the datetime is naive
+d	Day of the month, 2 digits with leading zeros.	'01' to '31'
+D	Day of the week, textual, 3 letters.	'Fri'
+e	Timezone name. Could be in any format, or might return an empty string, depending on the datetime.	'', 'GMT', '-500', 'US/Eastern', etc.
+E	Month, locale specific alternative representation usually used for long date representation.	'listopada' (for Polish locale, as opposed to 'Listopad')
+f	Time, in 12-hour hours and minutes, with minutes left off if they’re zero. Proprietary extension.	'1', '1:30'
+F	Month, textual, long.	'January'
+g	Hour, 12-hour format without leading zeros.	'1' to '12'
+G	Hour, 24-hour format without leading zeros.	'0' to '23'
+h	Hour, 12-hour format.	'01' to '12'
+H	Hour, 24-hour format.	'00' to '23'
+i	Minutes.	'00' to '59'
+I	Daylight Savings Time, whether it’s in effect or not.	'1' or '0'
+j	Day of the month without leading zeros.	'1' to '31'
+l	Day of the week, textual, long.	'Friday'
+L	Boolean for whether it’s a leap year.	True or False
+m	Month, 2 digits with leading zeros.	'01' to '12'
+M	Month, textual, 3 letters.	'Jan'
+n	Month without leading zeros.	'1' to '12'
+N	Month abbreviation in Associated Press style. Proprietary extension.	'Jan.', 'Feb.', 'March', 'May'
+o	ISO-8601 week-numbering year, corresponding to the ISO-8601 week number (W)	'1999'
+O	Difference to Greenwich time in hours.	'+0200'
+P	Time, in 12-hour hours, minutes and ‘a.m.’/’p.m.’, with minutes left off if they’re zero and the special-case strings ‘midnight’ and ‘noon’ if appropriate. Proprietary extension.	'1 a.m.', '1:30 p.m.', 'midnight', 'noon', '12:30 p.m.'
+r	RFC 2822 formatted date.	'Thu, 21 Dec 2000 16:01:07 +0200'
+s	Seconds, 2 digits with leading zeros.	'00' to '59'
+S	English ordinal suffix for day of the month, 2 characters.	'st', 'nd', 'rd' or 'th'
+t	Number of days in the given month.	28 to 31
+T	Time zone of this machine.	'EST', 'MDT'
+u	Microseconds.	000000 to 999999
+U	Seconds since the Unix Epoch (January 1 1970 00:00:00 UTC).	 
+w	Day of the week, digits without leading zeros.	'0' (Sunday) to '6' (Saturday)
+W	ISO-8601 week number of year, with weeks starting on Monday.	1, 53
+y	Year, 2 digits.	'99'
+Y	Year, 4 digits.	'1999'
+z	Day of the year.	0 to 365
+Z	Time zone offset in seconds. The offset for timezones west of UTC is always negative, and for those east of UTC is always positive.	-43200 to 43200
+For example:
+
+{{ value|date:"D d M Y" }}
+If value is a datetime object (e.g., the result of datetime.datetime.now()), the output will be the string 'Wed 09 Jan 2008'.
+
+The format passed can be one of the predefined ones DATE_FORMAT, DATETIME_FORMAT, SHORT_DATE_FORMAT or SHORT_DATETIME_FORMAT, or a custom format that uses the format specifiers shown in the table above. Note that predefined formats may vary depending on the current locale.
+
+Assuming that USE_L10N is True and LANGUAGE_CODE is, for example, "es", then for:
+
+{{ value|date:"SHORT_DATE_FORMAT" }}
+the output would be the string "09/01/2008" (the "SHORT_DATE_FORMAT" format specifier for the es locale as shipped with Django is "d/m/Y").
+
+When used without a format string:
+
+{{ value|date }}
+...the formatting string defined in the DATE_FORMAT setting will be used, without applying any localization.
+
+You can combine date with the time filter to render a full representation of a datetime value. E.g.:
+
+{{ value|date:"D d M Y" }} {{ value|time:"H:i" }}:
+
+
+
+Other
+=====
+http://www.vim.org/ugrankar.pdf Pritesh Ugrankar
+
+download from www.vim.org
+mkdir Vim
+instal Vim in folder Vim
+rm Vim\vimfiles\*.*
+mv Vim\vim74 Vim\vimfiles
+mkdir Vim\vimfiles\bundle
+reopen gvim to chk thast it is there
+http://git-scm.com/downloads and get windows verions of Git and Pathogen
+ chk that cheetah is installed and that command line is selected
+git --version
+cd vimfiles\autoload
+>curl -Sso pathogen.vim
+https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+backup _vimrc 
+edit _vimrc, add to end
+ "Personal Settings.
+ "More to be added soon.
+ execute pathogen#infect()
+ filetype plugin indent on
+ syntax on
+cd \Users\Admin\Vim\vimfiles\bundle>
+git clone https://github.com/zeis/vim-kolor
+C:\Users\Admin\Vim\vimfiles\bundle>git clone https://github.
+com/zeis/vim-kolor
+Cloning into 'vim-kolor'...
+remote: Counting objects: 67, done.
+remote: Compressing objects: 100% (34/34), done.
+Uremote: Total 67 (delta 21), reused 66 (delta 21)
+Unpacking objects: 100% (67/67), done.
+Checking connectivity... done
+within vim :colorscheme kolor,eclipse,molokai
+"Personal Settings.
+"More to be added soon.
+execute pathogen#infect()
+filetype plugin indent on
+syntax on
+"Set the status line options. Make it show more information.
+set laststatus=2
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\
+[POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+"Set Color Scheme and Font Options
+colorscheme kolor
+set guifont=Consolas:h12
+"set line no, buffer, search, highlight, autoindent and more.
+set nu
+set hidden
+set ignorecase
+set incsearch
+set smartcase
+set showmatch
+set autoindent
+set ruler
+set vb
+set viminfo+=n$VIM/_viminfo
+set noerrorbells
+set showcmd
+set mouse=a
+set history=1000
+set undolevels=1000
+Save the _vimrc. Reopen gVim and type* ‘:e $VIM/_
+vimrc’* in command mode. 
+
+http://sphinx-doc.org/
+http://docutils.sourceforge.net/rst.html

@@ -1,0 +1,4926 @@
+<!Doctype>
+<html>
+<head>
+<style>
+  body{ color:GreenYellow;background-color:Black;font-family:arial}
+  h3   {color:Yellow}
+</style>
+</head>
+<body>
+<strong>
+
+<h3>
+414 Chapter 30 How to Write a Syntax File 
+</h3>
+<br>
+<br>The most basic syntax elements are keywords.To define a keyword, use the following 
+<br>form: 
+<br>
+<br>:syntax keyword group keyword ....... 
+<br>
+<br>
+<br>The group name is the name of a highlight group, which is used by the :highlight 
+<br>command for assigning colors.The keyword parameter is an actual keyword. Here are a 
+<br>few examples: 
+<br>
+<br>:syntax keyword xType int long char 
+<br>:syntax keyword xStatement if then else endif 
+<br>
+<br>
+<br>This example uses the group names xType and xStatement. By convention, each group 
+<br>defines syntax for the x language (eXample language without an interesting name). 
+<br>
+<br>These statements cause the words int, long, and char to be highlighted one way 
+<br>and the words if and endif to be highlighted another way. 
+<br>Now you need to connect the x group names to standard Vim names.You do this 
+<br>with the following commands: 
+<br>
+<br>:highlight link xType Type 
+<br>:highlight link xStatement Statement 
+<br>
+<br>
+<br>This tells Vim to treat xType like Type and xStatement like Statement. 
+<br>The x command allows for abbreviations. For example, n and next are both valid 
+<br>keywords.You can define them by using this command: 
+<br>
+<br>:syntax keyword xStatement n[ext] 
+<br>
+<br>Defining Matches 
+<br>
+<br>Consider defining something a bit more complex.You want to match ordinary identifiers.
+<br>To do this, you define a match syntax group.This one matches any word consisting 
+<br>of only lowercase letters: 
+<br>
+<br>:syntax match xIdentifier /[a-z]\+/ 
+<br>
+<br>Now define a match for a comment. It is anything from # to the end of a line: 
+<br>
+<br>:syntax match xComment /#.*$/ 
+<br>
+<br>Note 
+<br>
+<br>The match automatically ends at the end of a line by default, so the actual command is as follows: 
+<br>
+<br>:syntax match xComment /#.*/ 
+<br>
+<br>
+<br>Nested Regions 415 
+<br>
+<br>Defining Regions 
+<br>
+<br>In the example x language, you enclose strings in double quotation marks (“).You 
+<br>
+<br>want to highlight strings differently, so you tell Vim by defining a region. For that, you 
+<br>as follows: 
+<br>
+<br>:syntax region xString start=/”/ end=/”/ 
+<br>
+<br>The start and end directives define the patterns used to define the start and end of 
+<br>the region. But what about strings that look like this? 
+<br>“A string with a double quote (\”) in it” 
+<br>
+<br>This creates a problem:The double quotation marks in the middle of the string will 
+<br>end the string.You need to tell Vim to skip over any escaped double quotes in the 
+<br>string.You do this with the skip keyword: 
+<br>
+<br>:syntax region xString start=/”/ skip=/\\”/ end=/”/ 
+<br>
+<br>Note 
+<br>
+<br>The double backslash is needed because the string you are looking for is \”, so the backslash must be 
+<br>
+<br>escaped (giving us \\”). 
+<br>
+<br>Nested Regions 
+<br>
+<br>Take a look at this comment: 
+<br># Do it TODO: Make it real 
+<br>
+<br>You want to highlight TODO in big red letters even though it is in a comment.To let 
+<br>
+<br>Vim know about this, you define the following syntax groups: 
+<br>:syntax keyword xTodo contained 
+<br>:syntax match xComment /#.*$/ contains=xTodo 
+<br>
+<br>In the first line, the 'contained' option tells Vim that this keyword can exist only 
+<br>inside another syntax element.The next line has a contains=xTodo option.This indicates 
+<br>that the xTodo syntax element is inside it. 
+<br>
+<br>The results (xTodo=underline, xComment=italic) are as follows: 
+<br># Do it TODO: Make it real 
+<br>
+<br>
+<br>Consider the following two syntax elements: 
+<br>:syntax region xComment start=/%.*/ end=/$/ 
+<br>\ contained 
+<br>:syntax region xPreProc start=/#.*/ end=/$/ 
+<br>\ contains=xComment 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+416 Chapter 30 How to Write a Syntax File 
+</h3>
+<br>
+<br>You define a comment as anything from % to the end of the line. A preprocess directive 
+<br>is anything from # to the end of the line. Because you can have a comment on a 
+<br>preprocessor line, the preprocessor definition includes a 'contains=xComment' option. 
+<br>
+<br>The result (xComment=italic, xPreProc=underline) is as follows: 
+<br>#define X = Y % Comment 
+<br>int foo = 1; 
+<br>
+<br>
+<br>But there is a problem with this.The preprocessor directive should end at the end of 
+<br>the line.That is why you put the end=/$/ directive on the line. So what is going 
+<br>wrong? 
+<br>
+<br>The problem is the contained comment.The comment start starts with % and 
+<br>ends at the end of the line. After the comment is processed, the processing of the preprocessor 
+<br>syntax contains.This is after the end of the line has been seen, so the next 
+<br>line is processed as well.To avoid this problem and to force contained syntax from 
+<br>eating a needed end of line, use the 'keepend' option.This takes care of the double 
+<br>end-of-line matching: 
+<br>
+<br>:syntax region xComment start=/%.*/ end=/$/ 
+<br>
+<br>\ contained 
+<br>
+<br>:syntax region xPreProc start=/#.*/ end=/$/ 
+<br>
+<br>\ contains=xComment keepend 
+<br>
+<br>You can use the contains option to specify that everything can be contained. For 
+<br>example: 
+<br>
+<br>:syntax region xList start=”\[“ end=”\]” contains=ALL 
+<br>
+<br>You can also use it to include a group of elements except for the ones listed: 
+<br>:syntax region xList start=”\[“ end=”\]” 
+<br>\ contains=ALLBUT,xString 
+<br>
+<br>Multiple Group Options 
+<br>
+<br>Some syntax is context-dependent.You expect if to be followed by then, for example. 
+<br>Therefore, a then/if statement would be an error.The Vim syntax parser has options 
+<br>that let it know about your syntax order. 
+<br>
+<br>For example, you define a syntax element consisting of > at the beginning of a line. 
+<br>You also define a element for the KEY string. In this case, the KEY is important only if it 
+<br>is part of a > line.The definition for this is as follows: 
+<br>
+<br>:syntax match xSpecial “^>” nextgroup=xKey 
+<br>
+<br>:syntax match xKey “KEY” contained 
+<br>
+<br>The 'nextgroup' option tells Vim to highlight KEY, but only if it follows xSpecial. 
+<br>The result (xKey=italic, xSpecial=underline) is as follows: 
+<br>
+<br>KEY (Normal key, nothing special, no >) 
+<br>
+<br>>KEY Key follows the > so highlighted 
+<br>
+<br>
+<br>Multiple Group Options 417 
+<br>
+<br>However, the KEY must immediately follow the >. If there is a space present, the KEY 
+<br>will not be highlighted: 
+<br>
+<br>> KEY 
+<br>
+<br>If you want to allow whitespace between the two groups, you can use the 'skipwhite' 
+<br>option: 
+<br>
+<br>:syntax match xSpecial “^>” skipwhite nextgroup=xKey 
+<br>
+<br>:syntax match xKey “KEY” contained 
+<br>
+<br>This gives you the following: 
+<br>> KEY 
+<br>
+<br>The skipwhite directive tells Vim to skip whitespace between the groups.There are 
+<br>two other related options.The 'skipnl' option skips newline in the pattern. If it were 
+<br>present, you would get the following: 
+<br>
+<br>> 
+<br>
+<br>KEY 
+<br>
+<br>The 'skipempty' option causes empty lines to be skipped as well: 
+<br>> 
+<br>
+<br>KEY 
+<br>
+<br>Transparent Matches 
+<br>
+<br>The 'transparent' option causes the syntax element to become transparent, so the 
+<br>highlighting of the containing syntax element will show through. For example, the 
+<br>following defines a string with all the numbers inside highlighted: 
+<br>
+<br>:syntax region xString start=/”/ skip=/\\”/ end=/”/ 
+<br>
+<br>\ contains=xNumbers,xSpecial 
+<br>
+<br>:syntax match xNumbers /[0-9]\+/ contained 
+<br>
+<br>Now add a special group that does not take on any special highlighting: 
+<br>:syntax match xSpecial /12345/ transparent contained contains=xNothing 
+<br>
+<br>This also has a contains argument to spcify that xNothing can be contained. 
+<br>Otherwise, the contains argument xString would be used, and xNumbers would 
+<br>be included in xSpecial. 
+<br>
+<br>The results (xString=italic, xNumbers=underline, xSpecial=N.A.) look like this: 
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>“String 12 with number 45 in it 12345 “ 
+<br>
+<br>Other Matches 
+<br>
+<br>The 'oneline' option indicates that the region does not cross a line boundary. For 
+<br>example: 
+<br>
+<br>:syntax region xPrePoc start=/^#/ end=/$/ oneline 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+418 Chapter 30 How to Write a Syntax File 
+</h3>
+<br>
+<br>Things now become a little more complex. Let’s allow continuation lines. In other 
+<br>words, any line that ends with \ is a continuation line.The way you handle this is to 
+<br>allow the xPreProc syntax element to contain a continuation pattern: 
+<br>
+<br>:syntax region xPreProc start=/^#/ end=/$/ oneline 
+<br>
+<br>\ contains=xLineContinue 
+<br>
+<br>:syntax match xLineContinue ““\\$”” contained 
+<br>
+<br>In this case, although xPreProc is on a single line, the groups contained in it (namely 
+<br>xLineContinue) let it go on for more than one line. 
+<br>
+<br>In this case, this is what you want. If it is not what you want, you can call for the 
+<br>region to be on a single line by adding excludenl to the contained pattern. For example, 
+<br>you want to highlight “end” in xPreProc, but only at the end of the line.To avoid 
+<br>making the xPreProc continue on the next line, use excludenl like this: 
+<br>
+<br>:syntax region xPreProc start=/^#/ end=/$/ 
+<br>
+<br>\ contains=xLineContinue,xPreProcEnd 
+<br>
+<br>:syntax match xPreProcEnd excludenl /end$/ contained 
+<br>
+<br>Note that excludenl is placed before the pattern. Now you can still use 
+<br>xLineContinue as previously. Because it doesn’t have excludenl, a match with it will 
+<br>extend xPreProc to the next line. 
+<br>
+<br>Match Groups 
+<br>
+<br>When you define a region, the entire region is highlighted according to the group 
+<br>group xInside, for example, use the following command: 
+<br>
+<br>:syntax region xInside start=/(/ end=/)/ 
+<br>
+<br>Suppose, however, that you want to highlight the parentheses separately.You can do 
+<br>this with a lot of convoluted region statements, or you can use the 'matchgroup' 
+<br>option.This option tells Vim to highlight the start and end of a region with a different 
+<br>highlight group (in this case, the Xparen group). 
+<br>
+<br>:syntax region xInside matchgroup=Xparen start=/(/ end=/)/ 
+<br>
+<br>Match Offsets 
+<br>
+<br>Several options enable you to adjust the start and end of a pattern used in matching 
+<br>for the :syntax match and :syntax region directives. 
+<br>
+<br>For example, the offset 'ms=s+2' indicates that the match starts two characters from 
+<br>the start of the match. For example: 
+<br>
+<br>:syntax match xHex /0x[a-fA-F0-9]*/ms=s+2 
+<br>
+<br>The general form of a match offset is as follows: 
+<br>
+<br>location=offset 
+<br>
+<br>
+<br>Clusters 419 
+<br>
+<br>Location is one of the following: 
+<br>
+<br>ms 
+<br>
+<br>Start of the element 
+<br>
+<br>me 
+<br>
+<br>End of the element 
+<br>
+<br>hs Start highlighting here 
+<br>
+<br>he End highlighting here 
+<br>
+<br>rs 
+<br>
+<br>Marks the start of a region 
+<br>
+<br>re 
+<br>
+<br>Marks the end of region 
+<br>
+<br>lc Leading context 
+<br>
+<br>The offset can be as follows: 
+<br>
+<br>s 
+<br>
+<br>Start of match 
+<br>
+<br>e 
+<br>
+<br>End of the match 
+<br>
+<br>Clusters 
+<br>
+<br>One of the things you will notice as you start to write a syntax file is that you wind 
+<br>up generating a lot of syntax groups.The Vim editor enables you to define a collection 
+<br>of syntax groups called a cluster. 
+<br>
+<br>Suppose you have a language that contains for loops, if statements, while loops, and 
+<br>functions. Each of them contains the same syntax elements: numbers and identifiers. 
+<br>You define them like this: 
+<br>
+<br>:syntax match xFor /^for.*/ contains+xNumber,xIdent 
+<br>:syntax match xIf /^if.*/ contains=xNumber,xIdent 
+<br>:syntax match xWhile /^while.*/ contains=xNumber,xIdent 
+<br>
+<br>
+<br>You have to repeat the same contains= every time. If you want to add another contained 
+<br>item, you have to add it three times. Syntax clusters simplify these definitions by 
+<br>enabling you to group elements.To define a cluster for the two items that the three 
+<br>groups contain, use the following command:
+<br>
+<br>:syntax cluster xState contains=xNumber,xIdent 
+<br>
+<br>Clusters are used inside other :syntax elements just like any syntax group.Their 
+<br>
+<br>:syntax match xFor /^for.*/ contains=@xState 
+<br>
+<br>:syntax match xIf /^if.*/ contains=@xState 
+<br>
+<br>:syntax match xWhile /^while.*/ contains=@xState 
+<br>
+<br>You can add new elements to this cluster with the add argument: 
+<br>:syntax cluster xState add=xString 
+<br>
+<br>You can remove syntax groups from this list as well: 
+<br>:syntax cluster xState remove=xNumber 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+420 Chapter 30 How to Write a Syntax File 
+</h3>
+<br>
+<br>Including Other Syntax Files 
+<br>
+<br>The C++ language syntax is a superset of the C language. Because you do not want 
+<br>to write two syntax files, you can have the C++ syntax file read in the one for C by 
+<br>using the following command: 
+<br>
+<br>:source <sfile>:p:h/c.vim 
+<br>
+<br>The word <sfile> is the name of the syntax file that is currently being processed.The 
+<br>:p:h modifiers remove the name of the file from the <sfile> word.Therefore, 
+<br><sfile>:p:h/c.vim is used to specify the file c.vim in the same directory as the current 
+<br>syntax file. 
+<br>
+<br>Now consider the Perl language.The Perl language consists of two distinct parts: a 
+<br>documentation section in POD format, and a program written in Perl itself.The POD 
+<br>section starts with “=head” and the end starts with “=cut”. 
+<br>
+<br>You want to construct the Perl syntax file to reflect this.The :syntax include 
+<br>reads in a syntax file and stores the elements it defined in a syntax cluster. For Perl, the 
+<br>statements are as follows: 
+<br>
+<br>:syntax include @Pod <sfile>:p:h/pod.vim 
+<br>
+<br>:syntax region perlPOD start=”^=head” end=”^=cut” 
+<br>
+<br>\ contains=@POD 
+<br>
+<br>In this example, the top-level language is Perl. All the syntax elements of the POD 
+<br>language are contained in the Perl syntax cluster @Pod. 
+<br>
+<br>Listing Syntax Groups 
+<br>
+<br>The following command lists all the syntax items: 
+<br>
+<br>:syntax 
+<br>
+<br>To list a specific group, use this command: 
+<br>
+<br>:syntax list group-name 
+<br>
+<br>This also works for clusters as well: 
+<br>
+<br>:syntax list @cluster-name 
+<br>
+<br>Synchronization 
+<br>
+<br>Compilers have it easy.They start at the beginning of a file and parse it straight 
+<br>through.The Vim editor does not have it so easy. It must start at the middle, where the 
+<br>editing is being done. So how does it tell where it is? 
+<br>
+<br>The secret is the :syntax sync command.This tells Vim how to figure out where 
+<br>it is. For example, the following command tells Vim to scan backward for the beginning 
+<br>or end of a C-style comment and begin syntax coloring from there: 
+<br>
+<br>:syntax sync ccomment 
+<br>
+<br>
+<br>Synchronization 421 
+<br>
+<br>You can tune this processing with some options.The 'minlines' option tells Vim the 
+<br>minimum number of lines to look backward, and 'maxlines' tells the editor the maximum 
+<br>
+<br>For example, the following command tells Vim to look at 10 lines before the top of 
+<br>the screen: 
+<br>
+<br>:syntax sync ccomment minlines=10 maxlines=500 
+<br>
+<br>If it cannot figure out where it is in that space, it starts looking farther and farther 
+<br>back until it figures out what to do. But it looks no farther back than 500 lines. (A 
+<br>large 'maxlines' slows down processing. A small one might cause synchronization to 
+<br>fail.) 
+<br>
+<br>By default, the comment to be found will be colored as part of the Comment 
+<br>syntax group. If you want to color things another way, you can specify a different syntax 
+<br>group: 
+<br>
+<br>:syntax sync ccomment xAltComment 
+<br>
+<br>If your programming language does not have C-style comments in it, you can try 
+<br>another method of synchronization.The simplest way is to tell Vim to space back a 
+<br>Vim to go back 150 lines and start parsing from there: 
+<br>
+<br>:syntax sync minline=150 
+<br>
+<br>A large 'minlines' option can make Vim slower. 
+<br>Finally, you can specify a syntax group to look for by using this command: 
+<br>
+<br>:syntax sync match 
+<br>sync-group-name 
+<br>\ grouphere group-name pattern 
+<br>
+<br>
+<br>This tells Vim that when it sees pattern the syntax group named group-name begins just 
+<br>after the pattern given.The sync-group-name is used to give a name to this synchronization 
+<br>specification. For example, the sh scripting language begins an if statement with 
+<br>if and ends it with fi: 
+<br>
+<br>if [ -f file.txt ] ; then 
+<br>
+<br>echo “File exists” 
+<br>
+<br>fi 
+<br>
+<br>To define a 'grouphere' directive for this syntax, you use the following command: 
+<br>:syntax sync match shIfSync grouphere shIf “\<if\>” 
+<br>
+<br>The 'groupthere' option tells Vim that the pattern ends a group. For example, the 
+<br>end of the if/fi group is as follows: 
+<br>
+<br>:syntax sync match shIfSync groupthere NONE “\<fi\>” 
+<br>
+<br>In this example, the NONE tells Vim that you are not in any special syntax region. In 
+<br>particular, you are not inside an if block. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+422 Chapter 30 How to Write a Syntax File 
+</h3>
+<br>
+<br>You also can define matches and regions that are with no 'grouphere' or 
+<br>
+<br>'groupthere' options.These groups are for syntax groups skipped during synchronization. 
+<br>For example, the following skips over anything inside {}, even if would normally 
+<br>match another synchronization method: 
+<br>
+<br>:syntax sync match xSpecial /{.*}/ 
+<br>
+<br>To clear out the synchronization commands, use the following command: 
+<br>:syntax sync clear 
+<br>
+<br>To remove just the named groups, use this command: 
+<br>:syntax sync clear sync-group-name sync-group-name ... 
+<br>
+<br>
+<br>Adding Your Syntax File to the System 
+<br>
+<br>Suppose that you have defined your own language and want to add it to the system. If 
+<br>you want it to be a part of Vim, you need to perform the following steps: 
+<br>
+<br>1. Create your syntax file and put it in the $VIMRUNTIME/syntax/{language}.vim file. 
+<br>2. Edit the file $VIMRUNTIME/syntax/synload.vim and add a line to this file for 
+<br>your language.The line should look like this: 
+<br>SynAu language 
+<br>
+<br>
+<br>3. 
+<br>Edit the file $VIMRUNTIME/filetype.vim and insert an :autocmd that recognizes 
+<br>your files and sets the ft to your language. For example, for the foo language, 
+<br>execute the following command: 
+<br>:autocmd BufRead,BufNewFile *.foo set ft=foo 
+<br>
+<br>Now Vim should automatically recognize your new language. 
+<br>If the file works well, you might want to send your changes to the Vim people so 
+<br>
+<br>that they can put it in the next version of Vim. 
+<br>
+<br>Option Summary 
+<br>
+<br>contained 
+<br>Syntax group is contained in another group. Items that are contained 
+<br>cannot appear at the top level, but must be contained in 
+<br>another group. 
+<br>
+<br>contains=group-list 
+<br>Define a list of syntax groups that can be included inside this one. 
+<br>The group name can be ALL for all groups or ALLBUT,group-name 
+<br>for all groups except the names specified. 
+<br>
+<br>skipwhite Skip whitespace between this group and the next one specified by 
+<br>skipnl Skip over the end of a line between this group and the next one 
+<br>specified by nextgroup. 
+<br>
+<br>
+<br>Option Summary 423 
+<br>
+<br>skipempty 
+<br>Skip over empty lines between this group and the next one specified 
+<br>by nextgroup. 
+<br>
+<br>transparent 
+<br>This group takes on the attributes of the one in which it is 
+<br>contained. 
+<br>
+<br>oneline 
+<br>
+<br>Do not extend the match over more than one line. 
+<br>
+<br>keepend 
+<br>Do not let a pattern with an end-of-line ($) match in it extend 
+<br>past the end of a line.This avoids the inner pattern inside a nested 
+<br>pattern eating an end of line. If this is a contained match, the 
+<br>match will not match the end-of-line character. 
+<br>
+<br>excludenl 
+<br>Do not let a contained pattern extend the item in which it is 
+<br>contained past the end of a line. 
+<br>
+<br>
+<br>Appendixes 
+<br>
+<br>
+<br>A Installing Vim 
+<br>B The <> Key Names 
+<br>C Normal-Mode Commands 
+<br>D Command-Mode Commands 
+<br>E Visual-Mode Commands 
+<br>F Insert-Mode Commands 
+<br>G Option List 
+<br>H Vim License Agreement 
+<br>I Quick Reference 
+<br>
+<br>
+<br>Installing Vim 
+<br>
+<br>YOU CAN OBTAIN VIM FROM THEWEB site at www.vim.org.This site contains the 
+<br>
+<br>source to Vim as well as precompiled binaries for many different systems. 
+<br>
+<br>UNIX 
+<br>
+<br>You can get precompiled binaries for many different UNIX systems from 
+<br>www.vim.org. Go to www.vim.org, click the “Download Vim” link, and then follow the 
+<br>“Binaries Page” link. 
+<br>
+<br>This takes you to the “Binaries” page, which lists the various precompiled binaries 
+<br>for many different systems along with the links to download them. 
+<br>
+<br>Volunteers maintain the binaries, so they are frequently out of date. It is a good 
+<br>idea to compile your own UNIX version from the source. Also, creating the editor 
+<br>from the source allows you to control which features are compiled. 
+<br>
+<br>To compile and install the program, you’ll need the following: 
+<br>
+<br>
+<br>A C compiler (GCC preferred) 
+<br>
+<br>
+<br>The GNU GZIP program (you can get it from www.gnu.org) 
+<br>
+<br>
+<br>428 Appendix A Installing Vim 
+<br>
+<br>To obtain Vim, go to www.vim.org and click the “Download Vim” link.This page displays 
+<br>a list of sites that contain the software. Click a link to one that’s near you.This 
+<br>takes you to a directory listing. Go into the “UNIX” directory and you’ll find the 
+<br>sources for Vim.You’ll need to download two files: 
+<br>
+<br>
+<br>vim-5.7-src.tar.gz 
+<br>
+<br>
+<br>vim-5.7-rt.tar.gz 
+<br>
+<br>Now unpack the sources using these commands: 
+<br>$ gzip –u –d vim-5.7-src.tar.gz | tar xvf – 
+<br>
+<br>$ gzip –u –d vim-5.7-rt.tar.gz | tar xvf – 
+<br>
+<br>Build the Program 
+<br>
+<br>Go to the newly created Vim source directory: 
+<br>$ cd vim-5.7/src 
+<br>
+<br>Now is a good time to read the files README.TXT and README_SRC.TXT.The instructions 
+<br>for compiling are in the file INSTALL. Configure the system with the following 
+<br>command: 
+<br>
+<br>$ ./configure 
+<br>
+<br>This configuration command assumes that you are going to install the system with a 
+<br>default set of features in the directory /usr/local. If you want to install in another 
+<br>directory, you need to use the --prefix=directory, where directory is the directory in 
+<br>which you want to install the editor.To install it in /apps/vim, for example, use this 
+<br>command: 
+<br>
+<br>$ ./configure --prefix=/apps/vim 
+<br>
+<br>The Vim editor has a lot of features that you can turn on and off at compile time. If 
+<br>this is the first time you are compiling Vim, you probably want to use the default set 
+<br>of features. After you have become familiar with the editor, you can enable the more 
+<br>exotic ones. 
+<br>
+<br>To get more information on configure, execute the following command: 
+<br>
+<br>$ ./configure --help 
+<br>
+<br>To find out about which features are available, see the file runtime/doc/ 
+<br>
+<br>various.txt or src/features.h. 
+<br>
+<br>Next compile the program with this command: 
+<br>
+<br>$ make 
+<br>
+<br>Finally, if all goes well, you can install it with the following command: 
+<br>$ make install 
+<br>
+<br>
+<br>Installing on Microsoft Windows 
+<br>
+<br>Installation for Each UNIX User 
+<br>
+<br>Each UNIX user should make sure that Vim is in his path. If you have an EXRC file, 
+<br>copy it to VIMRC: 
+<br>$ cp ~/.exrc ~/.vimrc 
+<br>
+<br>If you do not have an EXRC file, create an empty VIMRC file by executing the following 
+<br>command: 
+<br>
+<br>$ touch ~/.vimrc 
+<br>
+<br>Note 
+<br>
+<br>The presence of the VIMRC file turns on all the fancy features of Vim. If this file is not present, Vim tries 
+<br>very hard to look like Vi, even disabling some of its features to do so. 
+<br>
+<br>
+<br>Installing on Microsoft Windows 
+<br>
+<br>To install the Vim program for Microsoft Windows, you’ll need: 
+<br>
+<br>
+<br>The Windows binaries for Vim (gvim57.zip) 
+<br>
+<br>
+<br>The Vim runtime package (vim57rt.zip) 
+<br>
+<br>
+<br>A program to unpack the zip files 
+<br>
+<br>To download the Vim binaries, go to the Vim Web site, www.vim.org. Click “Download 
+<br>Vim.” Do not click the “Binaries Page” link. Instead, select a mirror site and click 
+<br>the link provided.This takes you to a directory listing. Click the “pc” directory and 
+<br>download these files: 
+<br>
+<br>
+<br>gvim57.zip 
+<br>
+<br>
+<br>vim57rt.zip 
+<br>
+<br>If you already have a zip program, such as WinZip, installed, you can use it to unpack 
+<br>the sources. If not, go to the Vim home page (www.vim.org), scroll to the bottom of 
+<br>the page, and click the “Utilities” link. Click the “zip” link, which takes you to a link 
+<br>on an FTP site (ftp://ftp.uu.net/pub/archiving/zip). Follow this link to a directory 
+<br>listing. Select “WIN32” and then download the unz540xN.exe file. 
+<br>
+<br>Run this program to install the program InfoZip. 
+<br>To install Vim itself, create a directory to be the root of your installation (for example: 
+<br>C:\VIM). Unzip the following archives into this directory: 
+<br>
+<br>vim\pc\gvim57.zip 
+<br>vim\pc\vim57rt.zip 
+<br>
+<br>
+<br>Open a MS-DOS command window, go the directory in which you installed Vim and 
+<br>execute the following command: 
+<br>
+<br>C:> install 
+<br>
+<br>
+<br>430 Appendix A Installing Vim 
+<br>
+<br>The installer starts: 
+<br>
+<br>This program sets up the installation of Vim 5.7 
+<br>It prepares the _VIMRC file, $VIM and the EXECUTAB.S 
+<br>Do you want to continue? (Y/N) 
+<br>
+<br>
+<br>Answer Y to continue. Installation continues: 
+<br>
+<br>Choose the default way to run Vim: 
+<br>
+<br>[1] Conventional Vim setup 
+<br>[2] With syntax highlighting and other features switched on 
+<br>[3] Vi compatible 
+<br>Choice: 
+<br>Because we want all the goodies, choose 2. (If you want to, choose 1. Do not choose 3, 
+<br>however; otherwise you turn off all the distinct features of this editor.) 
+<br>
+<br>Choose the way text is selected: 
+<br>
+<br>[1] With Visual mode (the UNIX way) 
+<br>[2] With Select mode (the Windows way) 
+<br>[3] Mouse with Select mode, keys with Visual mode 
+<br>Choice: 
+<br>To be compatible with the examples in this book, choose 1. (You can later change it if 
+<br>you want to customize your editor.) 
+<br>
+<br>You have chosen: 
+<br>
+<br>[2] With syntax highlighting and other features switched on 
+<br>[1] With Visual mode (the UNIX way) 
+<br>(You can adjust your _VIMRC file afterwards) 
+<br>Do you want to write the file C:\VIM\VIM\_VIMRC? (Y/N) 
+<br>
+<br>Answer Y to continue.The editor creates the file and then asks the following: 
+<br>
+<br>I can append a command to C:\AUTOEXEC.BAT to set $VIM. 
+<br>(This will not work if C:\AUTOEXEC.BAT contains sections) 
+<br>Do you want me to append to your C:\AUTOEXEC.BAT (Y/N) 
+<br>
+<br>
+<br>Answer Y if you want to be able to run Vim from within an MS-DOS window. 
+<br>
+<br>I can install an entry in the popup menu for the right 
+<br>mouse button, so that you can edit any file with Vim. 
+<br>Do you want me to do this? (Y/N) 
+<br>
+<br>
+<br>Note 
+<br>
+<br>These installation instructions install only the GUI version of Vim named gvim. If you are doing a lot of 
+<br>
+<br>editing inside the MS-DOS command-prompt windows, you might want to install the package: 
+<br>
+<br>vim.org\pc\vim56w32.zip 
+<br>
+<br>The console-mode Vim (for example, the non-BUI version on Windows) is not as good as the GUI version 
+<br>
+<br>on Windows, for the simple reason that Windows does not support console mode very well or consis
+<br>
+<br>
+<br>tently among Windows versions. 
+<br>
+<br>
+<br>Installing on Microsoft Windows 
+<br>
+<br>This one is up to you.You can always choose N and reinstall later if you want this 
+<br>feature. 
+<br>
+<br>That finishes the installation. Happy Vimming! 
+<br>
+<br>Common Installation Problems and Questions 
+<br>
+<br>This section describes some of the common problems that occur when installing Vim 
+<br>and suggests some solutions. It also contains answers to many installation questions. 
+<br>
+<br>I Do Not Have Root Privileges. How Do I Install Vim? (UNIX) 
+<br>
+<br>Use the following configuration command to install Vim in a directory called 
+<br>$HOME/vim: 
+<br>
+<br>$ configure --prefix=$HOME/vim 
+<br>
+<br>This gives you a personal copy of Vim.You need to put $HOME/vim/bin in your path to 
+<br>access the editor. 
+<br>
+<br>The Colors Are Not Right on My Screen. (UNIX) 
+<br>
+<br>Check your terminal settings by using the following command: 
+<br>$ echo $TERM 
+<br>
+<br>If the terminal type listed is not correct, fix it. UNIX has a database called termcap, 
+<br>
+<br>which describes the capabilities of your terminal. Almost all xterm programs support 
+<br>color. Frequently, however, the termcap entry for xterm defines a terminal without 
+<br>color.To get color to work, you might have to tell the system that you have an xtermc 
+<br>or cxterm terminal. (Another solution is to always use the GUI version of Vim called 
+<br>
+<br>gvim.) 
+<br>
+<br>I Am Using RedHat Linux. Can I Use the Vim That Comes with the 
+<br>System? 
+<br>
+<br>By default RedHat installs a minimal version of Vim. Check your RPM packages for 
+<br>something named Vim-enchanced-version.rpm and install that. 
+<br>
+<br>How Do I Turn Syntax Coloring On? (All) 
+<br>
+<br>Use the following command: 
+<br>:syntax on 
+<br>
+<br>What Is a Good vimrc File to Use? (All) 
+<br>
+<br>See the www.vim.org Web site for several good examples. 
+<br>
+<br>
+<br>432 Appendix A Installing Vim 
+<br>
+<br>UNIX Source Checklist 
+<br>
+<br>1. 
+<br>Start at www.vim.org. 
+<br>2. 
+<br>Click “Download Vim”. 
+<br>3. 
+<br>Select the mirror site closest to you. 
+<br>4. 
+<br>Click “UNIX”. 
+<br>5. 
+<br>Click “vim-5.7-src.tar.gz” to download this file. 
+<br>6. 
+<br>Click “vim-5.7-rt.tar.gz” to download this file. 
+<br>7. 
+<br>On your local system, execute these commands: 
+<br>$ gzip –u –d vim-5.7-src.tar.gz | tar xvf – 
+<br>
+<br>$ gzip –u –d vim-5.7-rt.tar.gz | tar xvf – 
+<br>
+<br>8. 
+<br>Configure and build the program with these commands: 
+<br>$ cd vim-5.7/src 
+<br>$ ./configure –prefix=<directory> 
+<br>$ make 
+<br>$ make install 
+<br>
+<br>
+<br><directory> is the directory where Vim is to be installed. 
+<br>
+<br>Microsoft Windows Checklist 
+<br>
+<br>1. 
+<br>Start at www.vim.org. 
+<br>2. 
+<br>Click “Download Vim”. 
+<br>3. 
+<br>Select the mirror nearest you and click it. 
+<br>4. 
+<br>Click “pc”. 
+<br>5. 
+<br>Click “gvim56.zip” to download this file. 
+<br>6. 
+<br>Click “vim57rt.zip: to download this file. 
+<br>7. 
+<br>Unzip these files into the installation directory on your machine. (If you do not 
+<br>have an UNZIP program, see the instructions in the following section.) 
+<br>8. 
+<br>Execute the installation script with this command:
+<br>C:> install 
+<br>
+<br>Installing the InfoZip Program 
+<br>
+<br>1. 
+<br>Start at the Web site www.vim.org. 
+<br>2. 
+<br>Near the end of the page, you’ll find the “Utilities” link. Click it. 
+<br>3. 
+<br>Click “zip”. 
+<br>4. 
+<br>Click ftp://ftp.uu.net/pub/archiving/zip. 
+<br>5. 
+<br>Click “WIN32”. 
+<br>6. 
+<br>Click “unz540xN.exe” to download this file. 
+<br>7. 
+<br>Run the program “unz540xN.exe” to install InfoZip. 
+<br>
+<br>The <> Key Names 
+<br>
+<br>THIS APPENDIX PROVIDES A QUICK reference for the <> key names in Vim. 
+<br>
+<br>The Function Keys 
+<br>
+<br><F1> <F2> <F3> <F4> <F5> <F6> 
+<br><F7> <F8> <F9> <F10> <F11> <F12> 
+<br><F13> <F14> <F15> <F16> <F17> <F18> 
+<br><F19> <F20> <F21> <F22> <F23> <F24> 
+<br><F25> <F26> <F27> <F28> <F29> <F30> 
+<br><F31> <F32> <F33> <F34> <F35> 
+<br>
+<br>
+<br>Line Endings 
+<br>
+<br><CR> <Return> <Enter> 
+<br><LF> <LineFeed> 
+<br><NL> <NewLine> 
+<br>
+<br>
+<br>
+<br>434 Appendix B The <> Key Names 
+<br>
+<br>Other Special Characters 
+<br>
+<br><BS> <BackSpace> 
+<br><Ins> <Insert> 
+<br><Del> <Delete> 
+<br>
+<br>
+<br>Editing Keys 
+<br>
+<br><End> <Home> <PageDown> <PageUp> 
+<br>
+<br>Arrow Keys 
+<br>
+<br><Left> <Right> <Up> <Down> 
+<br>
+<br>Keypad Keys 
+<br>
+<br><kDivide> <kEnd> <kEnter> <kHome> <kMinus> <kMultiply> 
+<br><kPlus> <kPageDown> <kPageUp> 
+<br>
+<br>VT100 Special Keys 
+<br>
+<br>The VT100 terminal has an extra set of function keys, as follows: 
+<br><xF1> <xF2> <xF3> <xF4> <xEnd> <xHome> 
+<br>
+<br>Printable Characters 
+<br>
+<br><Bar> | 
+<br><Bslash> \ 
+<br><Space> 
+<br><Tab> 
+<br><Lt> < 
+<br>
+<br>
+<br>Other Keys 
+<br>
+<br><Esc> <Help> <Nul> <Undo> 
+<br>
+<br>
+<br>Modifiers 435 
+<br>
+<br>Termcap Entries 
+<br>
+<br>On UNIX systems, the Termcap or Terminfo database contains a description of the 
+<br>terminal, including function keys.The special key <t_XX> represents the key defined 
+<br>by XX Termcap entry. 
+<br>
+<br>See your UNIX documentation for a complete list of keys. One way to get a list 
+<br>(for most systems) is to execute the following command: 
+<br>
+<br>$ man terminfo 
+<br>
+<br>Mouse Actions 
+<br>
+<br><LeftDrag> <Mouse> 
+<br><LeftMouse> <MouseDown> 
+<br><LeftRelease> <MouseUp> 
+<br><MiddleDrag> <RightDrag> 
+<br><MiddleMouse> <RightMouse> 
+<br><MiddleRelease> <RightRelease> 
+<br>
+<br>
+<br>Modifiers 
+<br>
+<br>M Meta (Alt) 
+<br>C Control 
+<br>S Shift 
+<br>D Macintosh command key 
+<br>
+<br>
+<br>Mouse Modifiers 
+<br>
+<br><Blank> Mouse button one 
+<br>2 Mouse button two 
+<br>3 Mouse button three 
+<br>4 Mouse button four 
+<br>
+<br>
+<br>Note 
+<br>
+<br>If you want to find the name of a key on the keyboard, you can go into Insert mode and press CTRL-K 
+<br>key. The <> name of the key will be inserted. This works for the function keys and many other keys. 
+<br>
+<br>
+<br>
+<br>Normal-Mode Commands 
+<br>
+<br>[count] <BS> Move count characters to the left. See the ‘backspace’ option to 
+<br>
+<br>change this to delete rather than backspace. (Same as: <Left>, CTRL-H, CTRL-K, h. 
+<br>
+<br>See page 6.) 
+<br>
+<br>[count] <C-End> Move to the end of line count. If no count is specified, go to the 
+<br>end of the file. (Same as: G. See pages 18, 40, 161, and 188.) 
+<br>
+<br>[count] <C-Home> Move to the start (first non-blank character) of line count. Default 
+<br>is the beginning of the file. (Same as: gg. See page 156.) 
+<br>
+<br>[count] <C-Left> Move count WORDS backward. (Same as: B. See page 186.) 
+<br>
+<br><C-LeftMouse> Jump to the location of the tag whose name is under the cursor. 
+<br>(Same as: CTRL-], g<LeftMouse>. See pages 12, 79, and109.) 
+<br>
+<br><C-Right> Move count WORDS forward. (Same as: W. See page 86.) 
+<br>
+<br>[count] count<C-RightMouse> Jump to a previous entry in the tag stack. (Same as: 
+<br>CTRL-T, g<RightMouse>. See pages 12, 80-81, and 109.) 
+<br>
+<br>[count] <CR> Move down count lines. Cursor is positioned on the first nonblank 
+<br>character on the line. (Same as: <ENTER>, CTRL-M, and +. See page 187.) 
+<br>
+<br>[“{register}] [count] <Del> Delete characters. If a “{register } is present, the 
+<br>deleted text is stored in it. (Same as: x. See pages 7, 13, 36-37, 160, and 196-197.) 
+<br>
+<br>
+<br>438 Appendix C Normal-Mode Commands 
+<br>
+<br>[count] <Down> 
+<br>
+<br>Move count lines down. (Same as: <NL>, CTRL-J, CTRL-N, j. See pages 
+<br>6 and 235.) 
+<br>
+<br>[count] <End> 
+<br>
+<br>Move the cursor to the end of the line. If a count is present, move to 
+<br>the end of the count line down from the current one. (Same as: <kEnd>, $. See pages 
+<br>16 and 234.) 
+<br>
+<br>[count] <Enter> 
+<br>
+<br>Move down count lines. (Default = 1.) Cursor is positioned on the 
+<br>first nonblank character on the line. (Same as: <CR>, CTRL-M, +. See pages 7 and 
+<br>187.) 
+<br>
+<br><F1> Go to the initial help screen. (Same as: <Help>, :h, :help. See pages 11, 13, and 
+<br>157.) 
+<br>
+<br><F8> Toggle between left-to-right and right-to-left modes. (See page 174.) 
+<br>
+<br><F9> Toggles the encoding between ISIR-3342 standard and Vim extended ISIR3342 
+<br>(supported only in right-to-left mode when ‘fkmap’ [Farsi] is enabled). (See 
+<br>page 176.) 
+<br>
+<br><Help> 
+<br>
+<br>Go to the initial help screen. (Same as: <F1>, :h, :help. See pages 11 and 
+<br>157.) 
+<br>
+<br><Home> 
+<br>
+<br>Move to the first character of the line. (Same as: <kHome>. See page 16.) 
+<br>
+<br>[count] <Insert>text<Esc> Insert text. If count is present, the text will be inserted 
+<br>count times. (Same as: i. See pages 5 and 9.) 
+<br>
+<br>[count] <kEnd> Move the cursor to the end of the line. If a count is present, move to 
+<br>the end of the count line down from the current one. (Same as: <End>, $. See page 
+<br>16.) 
+<br>
+<br><kHome> 
+<br>
+<br>Move to the first character of the line. (Same as: <Home>. See page 16.) 
+<br>
+<br>[count] <Left> Move left count characters. (Same as: <BS>, CTRL-H, CTRL-K, h. See 
+<br>page 6.) 
+<br>
+<br><LeftMouse> 
+<br>
+<br>Move the text cursor to the location of the mouse cursor. (See pages 
+<br>109 and 332.) 
+<br>
+<br>[“register] <MiddleMouse> Insert the text in register at the location of the mouse 
+<br>cursor. (Same as: P. See pages 109 and 332.) 
+<br>
+<br><MouseDown> 
+<br>
+<br>Scroll three lines down. (See page 332.) 
+<br>
+<br><MouseUp> 
+<br>
+<br>Scroll three lines up. (See page 332.) 
+<br>
+<br>[count] <M> Move count lines down. (See page 192.) 
+<br>
+<br>[count] <PageDown> Scroll count pages forward. (Same as: <S-Down>, CTRL-F. See page 
+<br>192.) 
+<br>
+<br>
+<br>Normal-Mode Commands 439 
+<br>
+<br>[count] <PageUp> Scroll the window count pages backward. (Same as: <S-Up>, CTRL-B. 
+<br>See page 192.) 
+<br>
+<br>£ Same as £. (See page 206.) 
+<br>
+<br>[count] <Right> Move right count characters. (Same as: <Space>, l. See page 6.) 
+<br>
+<br><RightMouse> 
+<br>
+<br>Start select mode with the text from the text cursor to the mouse 
+<br>cursor highlighted. (See pages 109 and 332.) 
+<br>
+<br>
+<br>[count] <S-Down> Scroll count pages forward. If you are running Windows GUI 
+<br>version, <S-Down> enters visual mode and selects down. (Same as: <PageDown>, 
+<br>CTRL-F. See page 192.) 
+<br>
+<br>[count] <S-Left> Move left count words. (Same as: b. See page 16.) 
+<br>
+<br>[count] <S-LeftMouse> Find the next occurrence of the word under the cursor. (See 
+<br>page 109.) 
+<br>
+<br><S-MouseDown> Scroll a full page upthree lines down. (See page 332.) 
+<br>
+<br><S-MouseUp> Scroll a full page down three lines up. (See page 332.) 
+<br>
+<br>[count] <S-Right> Move count words forward. (Same as: w. See pages 16, 20, and 
+<br>184.) 
+<br>
+<br>[count] <S-RightMouse> Search backward for the word under the cursor. (See page 
+<br>109.) 
+<br>
+<br>[count] <S-Up> Scroll count pages up. (Same as: <PageUp>, CTRL-B. See page 192.) 
+<br>
+<br>[count] <Space> Move count spaces to the right. (Same as: <Right>, l. See page 6.) 
+<br>
+<br>[count] <Tab> Go to the count position in the jump list. (Same as: CTRL-I. See page 
+<br>189.) 
+<br>
+<br>[count] <Undo> Undo the last count changes. (Same as: u. See page 8.) 
+<br>
+<br>[count] <Up> Move count lines up. (Same as: CTRL-P, k. See pages 6 and 13.) 
+<br>
+<br>CTRL-\ CTRL-N Enter normal mode from any other mode. (See page 58.) 
+<br>
+<br>CTRL-] Jump to the function whose name is under the cursor. (In the help system, 
+<br>jump to the subject indicated by a hyperlink.) (Same as: <C-LeftMouse>, 
+<br>g<LeftMouse>. See pages 12 and 79.) 
+<br>
+<br>[count] CTRL-^ If a count is specified, edit the count file on the command line. If no 
+<br>count is present, edit the previously edited file.Thus repeated CTRL-^ can be used to 
+<br>toggle rapidly between two files. (See pages 43 and 244.) 
+<br>
+<br>CTRL-_ Switch between English and a foreign language keyboard. (See pages 176177.) 
+<br>
+<br>
+<br>
+<br>440 Appendix C Normal-Mode Commands 
+<br>
+<br>[count] CTRL-A Add count to the number under the cursor. If no count is specified, 
+<br>increment the number. (See pages 43 and 244.) 
+<br>
+<br>[count] CTRL-B Move back count screens. (Default = 1.) (Same as: <PageUp>, <S-Up>. 
+<br>See pages 191-192.) 
+<br>
+<br>CTRL-BREAK Interrupt search (same as CTRL-C). (See page 206.) 
+<br>
+<br>CTRL-C Interrupt search. (same as CTRL-BREAK). (See page 206.) 
+<br>
+<br>[count] CTRL-D Move down the number of lines specified by the ‘scroll’ option. If a 
+<br>count is specified, set the ‘scroll’ option to count and then move down. (See pages 20 
+<br>and 190-192.) 
+<br>
+<br>[count] CTRL-E Move down count lines. (See page 192.) 
+<br>
+<br>[count] CTRL-F Scroll the window count pages forward. (Same as: <PageDown>, <S-
+<br>Down>. See page 192.) 
+<br>
+<br>CTRL-G Display the current file and location of the cursor within that file. (Same as: 
+<br>:file. See pages 19-20 and 190.) 
+<br>
+<br>1 CTRL-G Same as CTRL-G, but include the full path in the filename. (See pages 19-20 
+<br>and 190.) 
+<br>
+<br>2 CTRL-G Same as 1 CTRL-G, but adds a buffer number. (See pages 19-20 and 190.) 
+<br>
+<br>[count] CTRL-H Move count characters to the left. See the ‘backspace’ option to 
+<br>change this to delete rather than backspace. (Same as: <BS>, <Left>, CTRL-K, h. See 
+<br>page 6.) 
+<br>
+<br>[count] CTRL-I Jump to the count next item in the jump list. (Same as: <Tab>. See 
+<br>page 189.) 
+<br>
+<br>[count] CTRL-J Move down count lines. (Same as: <Down>, <NL>, CTRL-J, j. See pages 
+<br>6 and 235.) 
+<br>
+<br>[count] CTRL-K Move count characters to the left. (Same as: <BS>, <Left>, CTRL-H, h. 
+<br>See page 25.) 
+<br>
+<br>CTRL-L Redraw screen. (See page 156.) 
+<br>
+<br>CTRL-L Leave insert mode if insertmode is set. (See page 179.) 
+<br>
+<br>CTRL-M Copy <CR> entry. (Same as <CR>, +. See page 187.) 
+<br>
+<br>[count] CTRL-N Move count lines down. (Same as: <Down>, <NL>, CTRL-J, j. See pages 
+<br>6 and 235.) 
+<br>
+<br>[count] CTRL-O Jump to the count previous item in the jump list. (See page 189.) 
+<br>
+<br>[count] CTRL-P Move count lines upward. (Same as: <Up>, k. See pages 6 and 13.) 
+<br>
+<br>
+<br>Normal-Mode Commands 441 
+<br>
+<br>CTRL-Q 
+<br>
+<br>Used by some terminals to start output after it was stopped by CTRL-S. (See 
+<br>page 156.) 
+<br>
+<br>CTRL-R 
+<br>
+<br>Redo the last change that was undone. (See page 8.) 
+<br>
+<br>CTRL-S 
+<br>
+<br>Used by some terminals to stop output. (See page 156.) 
+<br>
+<br>[count] CTRL-T Go back count tags. If the current buffer has been modified, this 
+<br>command fails unless the force (!) option is present.When using the help system, 
+<br>this command returns to the location you were at before making the last hyperlink 
+<br>jump. (Same as: <C-RightMouse>, g<RightMouse>. See pages 12 and 80-81.) 
+<br>
+<br>[count] CTRL-U Move up the number of lines specified by the ‘scroll’ option. If a 
+<br>count is specified, set the ‘scroll’ option to count and then scroll up. (See pages 20 
+<br>and 190-192.) 
+<br>
+<br>CTRL-V 
+<br>
+<br>Start visual block mode. (See pages 57 and 60.) 
+<br>
+<br>[count] CTRL-W<Down> Move down a window. If a count is specified, move to 
+<br>window number count. (Same as: CTRL-W CTRL-J, CTRL-Wj. See page 46.) 
+<br>
+<br>[count] CTRL-W<Up> Move up a window. If a count is specified, move to window 
+<br>
+<br>[count] CTRL-W CTRL-] Split the current window and jump to the function whose 
+<br>(Same as: CTRL-W]. See page 82.) 
+<br>
+<br>CTRL-W CTRL-^ 
+<br>
+<br>Split the window and edit the alternate file. If a count is specified, 
+<br>split the window and edit the count file on the command line. (Same as: CTRL-W^. 
+<br>See page 244.) 
+<br>
+<br>[count] CTRL-W CTRL-_ Set the height of the current window to count. (Same as: 
+<br>CTRL-W+, CTRL-W-, CTRL-W_, :resize. See page 49.) 
+<br>
+<br>CTRL-W CTRL-B Move to the bottom window. (Same as: CTRL-Wb. See page 240.) 
+<br>CTRL-W CTRL-C Cancel any pending window command. (See page 46.) 
+<br>CTRL-W CTRL-D Split the window and find the definition of the word under the 
+<br>
+<br>cursor. If the definition cannot be found, do not split the window. (Same as: CTRL-
+<br>Wd. See page 245.) 
+<br>
+<br>CTRL-W CTRL-F 
+<br>
+<br>Split the window and edit the file whose name is under the cursor. 
+<br>Looks for the file in the current directory, and then all the directories specified by 
+<br>the ‘path’ option. (Same as: CTRL-Wf. See page 245.) 
+<br>
+<br>[count] CTRL-W CTRL-G CTRL-] :split followed a CTRL-]. If a count is specified, 
+<br>make the new window count lines high. (Same as: CTRL-Wg CTRL-], CTRL-Wg. See 
+<br>page 245.) 
+<br>
+<br>
+<br>442 Appendix C Normal-Mode Commands 
+<br>
+<br>[count] CTRL-W CTRL-G } Do a :ptjump on the word under the cursor. If a count is 
+<br>specified, make the new window count lines high. (Same as: CTRL-W CTRL-G}. See 
+<br>page 277.) 
+<br>
+<br>[count] CTRL-W CTRL-I Split the window and search for the count occurrence of 
+<br>the word under the cursor. Start the search at the beginning of the file. (Same as: 
+<br>CTRL-Wi. See page 244.) 
+<br>
+<br>[count] CTRL-W CTRL-J Move down a window. If a count is specified, move to 
+<br>window number count. (Same as: CTRL-W<Down>, CTRL-Wj. See page 46.) 
+<br>
+<br>[count] CTRL-W CTRL-K Move count windows up. (Same as: CTRL-W<Up>, CTRL-Wk. See 
+<br>page 46.) 
+<br>
+<br>CTRL-W CTRL-N Split the window like :split.The only difference is that if no 
+<br>filename is specified, a new window is started on a blank file. (Same as: CTRL-Wn, 
+<br>:new. See page 48.) 
+<br>
+<br>CTRL-W CTRL-O Make the current window the only one. (Same as: CTRL-Wo, :on, 
+<br>:only. See page 243.) 
+<br>
+<br>CTRL-W CTRL-P Move to the previous window. (Same as: CTRL-Wp. See pages 162-163 
+<br>and 240.) 
+<br>CTRL-W CTRL-Q Close a window. If this is the last window, exit Vim.The command 
+<br>
+<br>fails if this is the last window for a modified file, unless the force (!) option is present. 
+<br>(Same as: CTRL-W q, :q, :quit. See pages 9, 46, 144, 202, and 242-243.) 
+<br>
+<br>[count] CTRL-W CTRL-R Rotate windows downward. (Same as: CTRL-Wr. See page 
+<br>241.) 
+<br>
+<br>[count] CTRL-W CTRL-S Split the current window. (Make the new window count 
+<br>lines high.) (Same as: CTRL-Ws, CTRL-WS, :sp, :split. See pages 45, 47-48, 162, and 
+<br>247.) 
+<br>
+<br>CTRL-W CTRL-T Move the top window. (Same as: CTRL-Wt. See page 240.) 
+<br>
+<br>CTRL-W CTRL-W Move to the next window. If there is no next window, move to the 
+<br>first one. If a count is specified, move to window number count. (Same as: CTRL-Ww. 
+<br>See pages 46 and 240.) 
+<br>
+<br>[count] CTRL-W CTRL-X Exchange the current window with the next one. If there is 
+<br>exchange the current window with window number count. (Same as: CTRL-Wx. See 
+<br>page 242.) 
+<br>
+<br>CTRL-W CTRL-Z Close the preview window. Discard any changes if the force (!) 
+<br>option is present. (Same as: CTRL-Wz, :pc, :pclose. See page 276.) 
+<br>
+<br>
+<br>Normal-Mode Commands 443 
+<br>
+<br>[count] CTRL-W + Increase the size of the current window by count. (Default = 1.) 
+<br>(Same as: :res +, :resize +. See page 48.) 
+<br>
+<br>[count] CTRL-W -(CTRL-W <dash>) Decrease the size of the current window by 
+<br>count. (Default = 1.) (Same as: res -, :resize -. See page 48.) 
+<br>
+<br>CTRL-W= 
+<br>
+<br>Make all windows the same size (or as close as possible). (See page 48.) 
+<br>
+<br>[count] CTRL-W ] Split the current window and jump to the function whose name 
+<br>is under the cursor. If a count is specified, it is the height of the new window. (Same 
+<br>as: CTRL-W CTRL-]. See page 82.) 
+<br>
+<br>CTRL-W ^ 
+<br>
+<br>Split the window and edit the alternate file. If a count is specified, split the 
+<br>window and edit the count file on the command line. (Same as: CTRL-W CTRL-^. See 
+<br>page 244.) 
+<br>
+<br>[count] CTRL-W _ Set the current window to be count lines high. If no count is specified, 
+<br>make the window as big as possible. (Same as: CTRL-W CTRL-_, :res, :resize. 
+<br>See page 49.) 
+<br>
+<br>CTRL-W } 
+<br>
+<br>Do a :ptag on the word under the cursor. (See page 277.) 
+<br>
+<br>CTRL-W b 
+<br>
+<br>Move to the bottom window. (Same as: CTRL-W CTRL-B. See page 240.) 
+<br>
+<br>CTRL-W c Close the current window. (Same as: :clo, :close. See page 46.) 
+<br>
+<br>CTRL-W d 
+<br>
+<br>Split the window and find the definition of the word under the cursor. If 
+<br>the definition cannot be found, do not split the window. (Same as: CTRL-W CTRL-D. 
+<br>See page 245.) 
+<br>
+<br>CTRL-W f 
+<br>
+<br>Split the window and edit the file whose name is under the cursor. Looks 
+<br>for the file in the current directory, then all the directories specified by the path 
+<br>option. (Same as: CTRL-W CTRL-F. See page 245.) 
+<br>
+<br>CTRL-W g CTRL-] 
+<br>
+<br>:split followed a CTRL-]. (Same as: CTRL-W CTRL-G], CTRL-Wg]. 
+<br>See page 245. 
+<br>
+<br>
+<br>CTRL-W g ] 
+<br>
+<br>:split followed a CTRL-]. (Same as: CTRL-Wg CTRL], CTRL-W CTRL-G]. See 
+<br>page 245.) 
+<br>
+<br>CTRL-W g } 
+<br>
+<br>Do a :ptjump on the word under the cursor. (Same as: CTRL-W CTRL-G}. 
+<br>See page 277.) 
+<br>
+<br>[count] CTRL-W i Split the window and search for the count occurrence of the word 
+<br>under the cursor. Start the search at the beginning of the file. (Same as: CTRL-W 
+<br>CTRL-I. See page 244.) 
+<br>
+<br>[count] CTRL-W j Move down a window. If a count is specified, move to window 
+<br>
+<br>
+<br>444 Appendix C Normal-Mode Commands 
+<br>
+<br>[count] CTRL-W k 
+<br>
+<br>Go up count windows. (Same as: CTRL-W CTRL-K, CTRL-W<Up>. See 
+<br>page 46.) 
+<br>
+<br>CTRL-W n Split the window like :split.The only difference is that if no filename is 
+<br>specified, a new window is started on a blank file. (Same as: CTRL-W CTRL-N, :new. 
+<br>See page 48.) 
+<br>
+<br>CTRL-W o Make the current window the only one. If ! is specified, modified files 
+<br>whose windows are closed will have their contents discarded. (Same as: CTRL-W 
+<br>CTRL-O, :on, :only. See page 243.) 
+<br>
+<br>CTRL-W p Move to the previous window. (Same as: CTRL-W CTRL-P. See pages 162163 
+<br>and 240.) 
+<br>
+<br>CTRL-W q Close a window. If this is the last window, exit Vim.The command fails if 
+<br>this is the last window for a modified file, unless the force (!) option is present. 
+<br>(Same as: CTRL-W CTRL-Q, :q, :quit. See pages 9, 46, 144, 202 and 242-243.) 
+<br>
+<br>[count] CTRL-W r Rotate windows downward. (Same as: CTRL-W CTRL-R, CTRL-WR. 
+<br>See page 241.) 
+<br>
+<br>[count] CTRL-W R Rotate windows upward. (Same as: CTRL-W CTRL-R, CTRL-Wr. See 
+<br>page 241.) 
+<br>
+<br>[count] CTRL-W s Split the current window. Make the new window count lines high 
+<br>(same as [count] CTRL-W S). (Same as: CTRL-W CTRL-S, CTRL-WS, :sp, :split. See 
+<br>pages 45-48, 162, 247.) 
+<br>
+<br>[count] CTRL-W S Split the current window. Make the new window count lines high 
+<br>(same as [count] CTRL-W s). (Same as: CTRL-W CTRL-S, CTRL-Ws, :sp, :split. See 
+<br>page 162.) 
+<br>
+<br>CTRL-W t Move the top window. (Same as: CTRL-W CTRL-T. See page 240.) 
+<br>
+<br>[count] CTRL-W w Move to the next window. If there is no next window, move to 
+<br>the first one. If a count is specified, move to window number count. (Same as: CTRL-W 
+<br>CTRL-W. See pages 46 and 240.) 
+<br>
+<br>[count] CTRL-W W Move to the previous window. If at the top window, go to the 
+<br>bottom one. If a count is specified, move to window number count. (See page 240.) 
+<br>
+<br>[count] CTRL-W x Exchange the current window with the next one. If there is no 
+<br>the current window with window number count. (Same as: CTRL-W CTRL-X. See page 
+<br>242.) 
+<br>
+<br>CTRL-W z Close the preview window. (Same as: CTRL-W CTRL-Z, :pc, :pclose. See 
+<br>page 276.) 
+<br>
+<br>
+<br>Normal-Mode Commands 445 
+<br>
+<br>[count] CTRL-X Subtract count to the number under the cursor. If no count is specified, 
+<br>decrement the number. (See pages 197-198 and 395.) 
+<br>
+<br>[count] CTRL-Y Move up count lines. (See pages 191-192.) 
+<br>
+<br>CTRL-Z Suspend the editor (Unix only). (See page 156.) 
+<br>
+<br>!{motion}{command} Filter the block of text represented by {motion} through the an 
+<br>external {command}command. (See pages 40, 85, 120, 164, and 166-167.) 
+<br>
+<br>[count] !!{command} Filter the current line (or count lines} through the an external 
+<br>command. (See page 40.) 
+<br>
+<br>[count] £ Search for the word under the cursor, backward. (Same as: 
+<br>£. See page 206.) 
+<br>
+<br>[count] $ Move the cursor to the end of the line. If a count is present, move to the 
+<br>end of the count line down from the current one. (Same as: <End>, <kEnd>. See pages 
+<br>16 and 234.) 
+<br>
+<br>[count] % Jump to the line whose count percent of the way through the file. (See 
+<br>pages 73, 76-77, and 278.) 
+<br>
+<br>& Synonym for “:s//~/” – repeat last substitution. (See page 311.) 
+<br>
+<br>‘{letter} Go to the line containing mark named {letter}. (See pages 37, 85, 161162, 
+<br>164, and 228.) 
+<br>
+<br>[count] ( Move backward count sentences. (See page 121.) 
+<br>
+<br>[count] ) Move forward count sentences. (See page 121.) 
+<br>
+<br>[count] * Search for the word under the cursor, forward. (See page 206.) 
+<br>
+<br>[count] + Move down count lines. (Default = 1.)Cursor is positioned on the first 
+<br>
+<br>[count] , Reverse the direction of the last single character and perform the search 
+<br>count times. (See page 187.) 
+<br>
+<br>[count] -Move up count lines. (Default = 1.) Cursor is positioned on the first non-
+<br>blank character on the line. (See page 187.) 
+<br>
+<br>[count] / Repeat last search in the forward direction. (See pages 27-30, 32, 161, 
+<br>203, and 227.) 
+<br>
+<br>[count] /{pattern} Search forward. (See pages 27-30, 32, 161, 203, and 227.) 
+<br>
+<br>[count] /{pattern}/{offset} Search forward, position the cursor at {offset} from 
+<br>the search pattern. (See page 208.) 
+<br>
+<br>[count] //{offset} Repeat last search in the forward direction with a new offset. 
+<br>(See page 208.) 
+<br>
+<br>
+<br>446 Appendix C Normal-Mode Commands 
+<br>
+<br>[count] ; Repeat the last single character search count times. (Default = 1.) (See 
+<br>page 187.) 
+<br>[count] << Shift count lines to the left. (See pages 69-70.) 
+<br><{motion} Shift lines from cursor to {motion} to the left. (See pages 69-70.) 
+<br>[count] >> Shift count lines to the right. (See page 67.) 
+<br>>{motion} Shift lines from cursor to {motion} to the right. (See pages 69-70.) 
+<br>={motion} Filter {motion} lines through the external program given with the 
+<br>‘equalprg’ option. (See page 73.) 
+<br>[count] ? Repeat last search in the backward direction. (See pages 31-32.) 
+<br>[count] ?{pattern} Search backward. (See page 29.) 
+<br>[count] ?{pattern}?{offset} Search backward, position the cursor at {offset} 
+<br>from the search pattern. (See page 208.) 
+<br>[count] ??{offset} Repeat last search in the backward direction with a new 
+<br>{offset}. (See page 208.) 
+<br>[count] @{character} Execute the macro in register {character}. (See page 24.) 
+<br>
+<br>[“{register}] [<MiddleMouse> Put the {register} in the buffer like the p command, 
+<br>but adjust the text to fit the indent of the current line. (Same as: [p, [P, ]P. 
+<br>See page 265.) 
+<br>
+<br>[count] [CTRL-D Find definition of the macro currently sitting under the cursor. 
+<br>Start the search from the beginning of the file. (See page 75.) 
+<br>[count] [CTRL-I Search for the word under the cursor starting at the beginning of 
+<br>the file. (See pages 73-74 and 284.) 
+<br>[count] [“{register}<MiddleMouse> Put the {register} in the buffer like the p command, 
+<br>but adjust the text to fit the indent of the current line. (See page 265.) 
+<br>[£ Finds the previous unmatched £if/£else/£endif. (See page 279.) 
+<br>[count] [* Move backward to the beginning of the count comment from the 
+<br>cursor. (Same as: [/. See page 280.) 
+<br>[count] [/ Same as: [*. (See page 280.) 
+<br>[count] [( Move backward to the count previous unmatched ‘(‘ in 
+<br>column 1. (See page 279.) 
+<br>[count] [) Move backward to the count previous unmatched ‘)’. (See page 279.) 
+<br>[count] [[ Move backward count sections or to the previous { in column 1. (See 
+<br>pages 122 and 279.) 
+<br>
+<br>
+<br>Normal-Mode Commands 447 
+<br>
+<br>[count] [] Move count sections backwards or to the previous } in column 1. 
+<br>(See pages 122 amd 279.) 
+<br>
+<br>[count] [} Finds the count previous unmatched }. (See page 278.) 
+<br>
+<br>[count] [d List the definition of the macro. Start search at the current cursor locationbeginning 
+<br>of the file. (See pages 73, 75, and 284.) 
+<br>
+<br>[count] [D List all definitions of the macro whose name is under the cursor. Start 
+<br>the list with the next first definition in the file. (See pages 73 and 76.) 
+<br>
+<br>[f Deprecated. Use gf instead. (Same as: gf, ]f. See page 281.) 
+<br>
+<br>[count] [i Display the count line that contains the keyword under the cursor.The 
+<br>search starts from the beginning of the file. (See page 284.) 
+<br>
+<br>[I List all lines in the current and included files that contain the word under the 
+<br>cursor. (See page 284.) 
+<br>
+<br>[m Search backward for the start of a method. (See page 279.) 
+<br>
+<br>[M Search backward for the end of a method. (See page 279.) 
+<br>
+<br>[“{register}] [p Put the {register} in the buffer like the P command, but adjust the 
+<br>text to fit the indent of the current line. (Same as: [<MiddleMouse>, [P, ]P. See page 
+<br>265.) 
+<br>
+<br>[“{register}] [P Put the {register} in the buffer like the P command, but adjust 
+<br>the text to fit the indent of the current line. (Same as: [<MiddleMouse>, [p, [P. See 
+<br>page 265.) 
+<br>
+<br>[“{register}] ]<MiddleMouse> Put the {register} in the buffer like the p command, 
+<br>but adjust the text to fit the indent of the current line. (Same as: ]p. See page 265.) 
+<br>
+<br>[count] ]CTRL-D Find definition of the macro currently sitting under the cursor. 
+<br>Start the search from the beginning current location.of the file. (See page 73.) 
+<br>
+<br>[count] ]CTRL-I Search for the word under the cursor starting at the beginning of 
+<br>the filecurrent cursor location. (See pages 73-74 and 284.) 
+<br>
+<br>[count] ]# Finds the next unmatched #if/#else/#endif. (See page 279.) 
+<br>
+<br>[count] ]) Move forward to the count next unmatched ). (See page 280.) 
+<br>
+<br>[count] ]/ -or
+<br>
+<br>
+<br>[count] ]* Move forward to the end of the count comment from the cursor. 
+<br>(See page 280.) 
+<br>
+<br>[count] ]( Move forward to the count next unmatched (. (See page 279.) 
+<br>
+<br>[count] ][ Move count sections forward or to the next } in 
+<br>column 1. (See pages 122 and 279.) 
+<br>
+<br>
+<br>448 Appendix C Normal-Mode Commands 
+<br>
+<br>[count] ]] Move count sections forward or to the next { in column 1. (See pages 
+<br>122 and 279.) 
+<br>
+<br>[count] ]{ Finds the count previous unmatched {.(See page 278.) 
+<br>
+<br>[count] ]} Finds the count previous unmatched }. (See page 278.) 
+<br>
+<br>[count] ]d List the definition of the macro. Start search at the beginning of the 
+<br>current cursor position. (See pages 73, 75, and 284.) 
+<br>
+<br>[count] ]D 
+<br>
+<br>List all definitions of the macro whose name is under the cursor. Start 
+<br>the list with the first next definition. (See pages 73 and 76.) 
+<br>
+<br>]f Deprecated. Use gf instead. (Same as: gf, [f. See page 281.) 
+<br>
+<br>[count] ]i Display the count line that contains the keyword under the cursor.The 
+<br>search starts from the beginning of the filecurrent cursor position. (See page 284.) 
+<br>
+<br>]I 
+<br>
+<br>List all lines in the current and included files that contain the word under the 
+<br>cursor starting at the current location. (See page 284.) 
+<br>]m Search forward for the start of a method. (See page 279.) 
+<br>]M Search forward for the end of a method. (See page 279.) 
+<br>[“{register}] ]p Put the {register} in the buffer like the P command, but adjust the 
+<br>text to fit the indent of the current line. (Same as: ]<MiddleMouse>. See page 265.) 
+<br>
+<br>[“{register}] ]P Put the {register} in the buffer like the P command, but adjust the 
+<br>text to fit the indent of the current line. (Same as ]<MiddleMouse>, [p, [P. See page 
+<br>265.) 
+<br>
+<br>^ 
+<br>
+<br>Move to the first nonblank character of the line. (See pages 16, 187, and 234.) 
+<br>
+<br>[count] _ Move to the first printing character of the count-1 line below the cursor. 
+<br>(See page 188.) 
+<br>
+<br>`{mark} Go to the mark named mark. Cursor is positioned exactly on the mark. 
+<br>(See page 37.) 
+<br>
+<br>‘{mark} Go to the line containing mark. Position the cursor at the first non-blank 
+<br>
+<br>character on the line. (See page 37.) 
+<br>
+<br>[count] { Move backward count paragraphs. (See page 121.) 
+<br>
+<br>[count] | Move to the column count on the current line. (See page 235.) 
+<br>
+<br>[count] } Move forward count paragraphs. (See page 121.) 
+<br>
+<br>~{motion} Change the case of the indicated characters. (This version of the command 
+<br>depends on the ‘tildeop’ option being on. (The default is off.) To turn on 
+<br>the option, use the :set tildeop command. (See pages 24, 200-201, and 401.) 
+<br>
+<br>
+<br>Normal-Mode Commands 449 
+<br>
+<br>[count] ~ Change the case of count characters. (This version of the command 
+<br>depends on the ‘tildeop’ option being off (the default).To turn off the option, use 
+<br>the :set notildeop command. (See pages 24, 200-201, and 401.) 
+<br>
+<br>[count] £ Search for the word under the cursor, backward. (See page 202.) 
+<br>
+<br>0 (Zero) 
+<br>
+<br>Move to the first character on the line. (See pages 16, 187, and 234.) 
+<br>
+<br>[count] a{text}<Esc> Insert text starting after the character under the cursor. If a 
+<br>count is specified, the text is inserted count times. (See page 9.) 
+<br>
+<br>[count] A{text}<Esc> Append the text on to the end of the line. (See page 197.) 
+<br>
+<br>[count] b Move backward count words. (Same as: <S-Left>. See page 16.) 
+<br>
+<br>[count] B Move count WORDS backward. (Same as: <C-Left>. See page 186.) 
+<br>
+<br>c{motion} Delete from the cursor to the location specified by the {motion} to enter 
+<br>insert mode. (See pages 21 and 161.) 
+<br>
+<br>[count] C 
+<br>
+<br>Delete from the cursor to the end of the current line and count-1 more 
+<br>lines, and then enter insert mode. (See page 195.) 
+<br>
+<br>[count] cc Delete count entire lines (default = 1) and enter insert mode. 
+<br>(See page 22.) 
+<br>
+<br>[“{register}] d{motion} Delete from the cursor location to where {motion} goes. 
+<br>(See pages 36, 161, and 195.) 
+<br>
+<br>[count] D Delete from the cursor to the end of the line. If a count is specified, delete 
+<br>an additional count-1 lines. (See pages 21 and 195.) 
+<br>
+<br>[“{register}]count[count] dd Delete count lines. (See pages 10, 20, 36, and 224.) 
+<br>
+<br>[count] e Move count words forward, stop at the end of the word. (See page 184.) 
+<br>
+<br>[count] E Move count WORDS forward to the end of the WORD. (See page 186.) 
+<br>
+<br>[count] f{char} Search forward for character {char} on the current line. Stop on 
+<br>the character. (See pages 17 and 187.) 
+<br>
+<br>[count] F{char} Search backward for character {char} on the current line. Stop on 
+<br>the character. (See page 17.) 
+<br>
+<br>[count] G 
+<br>
+<br>Go to the line count. If no line is specified, go to the last line in the file. 
+<br>(Same as: <C-End>. See pages 18, 40, 161, and 188.) 
+<br>
+<br>[count] g<Down> Move down one line on the screen. (Same as: gj. See page 235.) 
+<br>
+<br>g<End> Move to the rightmost character on the screen. (Same as: g$. See page 234.) 
+<br>
+<br>g<Home> Move to the leftmost character on the screen. (In other words, move to 
+<br>column 1.) (Same as: g0. See page 234.) 
+<br>
+<br>
+<br>450 Appendix C Normal-Mode Commands 
+<br>
+<br>g<LeftMouse> 
+<br>
+<br>Jump to the location of the tag whose name is under the cursor. 
+<br>(Same as: <C-LeftMouse>, CTRL-]. See page 12.) 
+<br>
+<br>[count] g <RightMouse> Jump to a previous entry in the tag stack. (Same as: 
+<br><C-RightMouse>, CTRL-T. See page 12.) 
+<br>
+<br>[count] ]g<Up> Move up lines in one the screen space. (Same as: gk. See page 235.) 
+<br>
+<br>g CTRL-] Do a :tjump on the word under the cursor. (See page 83.) 
+<br>g CTRL-G Display detailed information about where you are in the file. (See page 
+<br>156.) 
+<br>g CTRL-H Start select block mode. (See page 258.) 
+<br>[count] g£ Search for the word under the cursor, backward. Unlike £, this finds par
+<br>
+<br>
+<br>tial words. (Same as: g£. See page 206.) 
+<br>
+<br>g$ 
+<br>
+<br>Move to the rightmost character on the screen. (Same as: g<End>. See page 234.) 
+<br>
+<br>[count] g* Search for the word under the cursor, forward. Unlike *, this finds partial 
+<br>words. (See page 206.) 
+<br>
+<br>[count] g?? Encrypt the lines using the rot13 encryption. (Same as: g?g?. See page 
+<br>123.) 
+<br>
+<br>[count] g?g? Encrypt the lines using the rot13 encryption. (Same as: g??. See page 
+<br>123.) 
+<br>
+<br>g£ 
+<br>
+<br>Search for the word under the cursor, backwards. Unlike £, this finds partial 
+<br>words. (Same as: g£. See page 206.) 
+<br>
+<br>g?{motion} Encrypt the text from the current cursor location to where {motion} 
+<br>takes you using rot13 encryption. (See page 123.) 
+<br>
+<br>g] 
+<br>
+<br>Do a :tselect on the word under the cursor. (See page 83.) 
+<br>
+<br>g^ 
+<br>
+<br>Move to the leftmost printing character visible on the current line. (See page 
+<br>234.) 
+<br>
+<br>g~{motion} Reverse the case of the text from the cursor to {motion}(same as 
+<br>[count]g~g~). (See pages 201 and 401.) 
+<br>
+<br>[count] g~g~ 
+<br>
+<br>-or
+<br>
+<br>
+<br>[count] g~~ Reverse the case of the entire line. If a count is specified, change the case 
+<br>of count lines. (Same as: g~g~. See page 201.) 
+<br>
+<br>g0 (zero) Move to the leftmost character on the screen. (In other words, move to 
+<br>column 1.) (Same as: g<Home>. See page 234.) 
+<br>
+<br>
+<br>Normal-Mode Commands 451 
+<br>
+<br>ga Print the ASCII value of the character under the cursor. (Same as: gs, :as, :ascii, 
+<br>:sleep. See page 155.) 
+<br>
+<br>gd Find the local definition of the variable under the cursor. (See pages 73-74.) 
+<br>gD Find the global definition of the variable under the cursor. (See pages 73-74.) 
+<br>[count] ge Move count words backward stopping on the end of the word. 
+<br>
+<br>(See page 184.) 
+<br>[count] gE 
+<br>
+<br>Move count WORDS backward to the end of the WORD. 
+<br>(See page 186.) 
+<br>
+<br>gf 
+<br>
+<br>Edit the file whose name is under the cursor. If the file is not in the current 
+<br>directory, search the directory list specified by the ‘path’ option. (Same as: [f, ]f. 
+<br>See page 281.) 
+<br>
+<br>[count] gg Move to line count. Default is the first line. (Same as: <C-Home>. See 
+<br>page 156.) 
+<br>gh Start select mode characterwise. (See page 258.) 
+<br>gH Start select mode linewise. (See page 258.) 
+<br>[count] gI{text}<Esc> Insert text in column 1, count times. (See page 197.) 
+<br>
+<br>[count] gj Move down one line on the screen. (Same as: g<Down>. See page 231.) 
+<br>
+<br>[count] gJ Join lines. No spaces are put between the assembled parts. If a count is 
+<br>specified, count lines are joined (minimum of two lines). (See page 198.) 
+<br>[count] ] gk Move up lines in inone the screen space. (Same as: g<Up>. See page 
+<br>235.) 
+<br>gm Move to the middle of the screen. (See page 234.) 
+<br>[count] go Go to count byte of the file. (Same as: :go, :goto. See page 156.) 
+<br>
+<br>[““{register}] gp Paste the text before the cursor, but do not move the cursor. (See 
+<br>page 220.) 
+<br>[““{register}] gP Paste the text after the cursor, but do not move the cursor. (See 
+<br>
+<br>page 220.) 
+<br>gq{motion} 
+<br>
+<br>Format the text from the line the cursor is on to the line where 
+<br>{motion} takes you. (See pages 115, 117, 119, 269, and 271.) 
+<br>gqq Format the current line. (Same as: gqgq. See page 115.) 
+<br>gqgq Format the current line. (Same as: gqq. See page 115.) 
+<br>[count] gr{character} Replace the virtual character under the cursor with 
+<br>{character}. (See pages 199-200.) 
+<br>
+<br>
+<br>452 Appendix C Normal-Mode Commands 
+<br>
+<br>[count] gR{string}<Esc> Enter virtual replace mode until <Esc> is pressed. (See 
+<br>
+<br>page 200.) 
+<br>seconds gs Sleep for the specified number of seconds. (Same as: :sl, :sleep. See 
+<br>page 156.) 
+<br>gu{motion} Uppercase of the text from the cursor to {motion}. (See page 201.) 
+<br>gU{motion} Uppercase of the text from the cursor to {motion}. (See page 201.) 
+<br>[count] gugu -or[
+<br>count] guu Uppercase of the entire line. If a count is specified change the case of 
+<br>
+<br>count lines. (See page 201.) 
+<br>
+<br>[count] gUgU 
+<br>
+<br>-or
+<br>
+<br>
+<br>[count] gUU Uppercase of the entire line. If a count is specified change the case of 
+<br>count lines. (See page 201.) 
+<br>
+<br>gv Repeat the last visual-mode selection. (See pages 252-253.) 
+<br>
+<br>gV 
+<br>
+<br>Do not automatically reselect the selected text. (See page 260.) 
+<br>
+<br>[count] h Left. (Same as: <BS>, <Left>, CTRL-H, CTRL-K. See page 6.) 
+<br>
+<br>[count] H Move to the cursor to the top of the screen. If a count is specified, move to 
+<br>the count line from the top. (See page 188.) 
+<br>
+<br>[count] i{text}<Esc> Insert text starting before the character under the 
+<br>cursor. If a count is specified, the text is inserted count times. (Same as: <Insert>. See 
+<br>pages 5, 7, and 9.) 
+<br>
+<br>[count] I{text}<Esc> Insert the text at the beginning of the line. (See page 197.) 
+<br>
+<br>[count] j Down. (Same as: <Down>, <NL>, CTRL-J, CTRL-N. See pages 6 and 235.) 
+<br>
+<br>[count] J Join lines. Spaces are put between the assembled parts. If a count is specified, 
+<br>count lines are joined (minimum of 2 lines). (See pages 23, 116, and 198.) 
+<br>
+<br>[count] k Up. (Same as: <Up>, CTRL-P. See pages 6 and 13.) 
+<br>
+<br>[count] K 
+<br>
+<br>Run the “man” command on the word under the cursor. If a count is 
+<br>specified, use count as the section number. On Microsoft Windows, by default, this 
+<br>command performs a :help on the word under the cursor. (See page 78.) 
+<br>
+<br>[count] l Right. (Same as: <Right>, <Space>. See page 6.) 
+<br>
+<br>[count] L Move the cursor to the bottom of the screen. If a count is specified, move 
+<br>to the count line from the bottom. (See page 188.) 
+<br>
+<br>
+<br>Normal-Mode Commands 453 
+<br>
+<br>m{letter} 
+<br>
+<br>Mark the current text with the name {letter}. If {letter} is lowercase, 
+<br>the mark is local to the buffer being edited. In other words, just the location in the 
+<br>file is marked, and you have a different set of marks for each file. If an uppercase 
+<br>
+<br>letter is specified, the mark is global. Both the file and the location within are 
+<br>marked. If you execute a “go to mark(‘)” command to jump to a global mark, 
+<br>you may switch files. (See pages 85, 161-162, 164, and 227.) 
+<br>
+<br>M Move to the cursor to the middle of the screen. (See page 188.) 
+<br>
+<br>[count] n 
+<br>
+<br>Repeat last search. Search in the same direction. (See pages 31-32 and 
+<br>161.) 
+<br>
+<br>[count] N 
+<br>
+<br>Repeat last search. Search in the reverse direction. (See pages 31-32.) 
+<br>
+<br>[count] o Open a new line below the cursor and put the editor into insert mode. 
+<br>(See page 10.) 
+<br>
+<br>[count] O Open a new line above the cursor and put the editor into insert mode. 
+<br>(See page 11.) 
+<br>
+<br>[“{register}] p Paste the test in the unnamed register (“) after the cursor. (If the 
+<br>register contains complete lines, the text will be placed after the current line.) (See 
+<br>pages 36-37, 39, 160-161, 220, and 224.) 
+<br>
+<br>[““{register}] P 
+<br>
+<br>Paste the text in the {register} before the cursor. If no {register} 
+<br>is specified, the unnamed register is used. (Same as: <MiddleMouse>. See pages 
+<br>37, 162-163, and 220.) 
+<br>
+<br>q{character} 
+<br>
+<br>Begin recording keys in register {character} (character is a–z). Stop 
+<br>recording with a q command. (See page 24.) 
+<br>
+<br>Q Enter ex mode. (See page 100.) 
+<br>
+<br>[count] r{char} 
+<br>
+<br>Replace count characters with the given character. 
+<br>(See pages 23 and 199.) 
+<br>
+<br>
+<br>[count] R{text}<Esc> 
+<br>
+<br>Enter replace mode and replace each character in the file 
+<br>with a character from {text}. If a count is specified, repeat the command count times. 
+<br>(See page 199.) 
+<br>
+<br>[count] s 
+<br>
+<br>Delete count characters and enter insert mode. (See page 196.) 
+<br>
+<br>[count] S 
+<br>
+<br>Delete count lines and enter insert mode. (See page 196.) 
+<br>
+<br>[count] t{char} Search forward for character {char} on the current line. Stop one 
+<br>before the character. (See page 17.) 
+<br>
+<br>[count] T{char} Search backward for character {char} on the current line. Stop one 
+<br>after the character. (See page 17.) 
+<br>
+<br>
+<br>454 Appendix C Normal-Mode Commands 
+<br>
+<br>u 
+<br>
+<br>Undo the last change. (Same as: <Undo>. See page 8.) 
+<br>
+<br>U Undo all the changes on the last line edited. (A second U redoes the edits.) 
+<br>(See page 8.) 
+<br>
+<br>Start visual character mode. (See pages 56 and 164.) 
+<br>
+<br>V Start visual line mode. (See pages 56, 86, 162, and 163.) 
+<br>
+<br>[count] w Move count words forward. (Same as: <S-Right>. See pages 16, 20, and 
+<br>184.) 
+<br>
+<br>[count] W Move count WORDS forward. (Same as: <C-Right>. See page 186.) 
+<br>
+<br>[“[register}] count[count] x Delete count characters. (Default = 1.) Deleted text 
+<br>goes into {register} or the unnamed register if no register specification is present. 
+<br>(Same as: <Del>. See pages 7, 13, 36-37, 160, and 196-197.) 
+<br>
+<br>[“{register}]count[count] X Delete the characters before the cursor. (See pages 
+<br>196-197.) 
+<br>
+<br>xp Exchange the character under the cursor with the next one. Useful for turning 
+<br>“teh” into “the”. (See pages 37 and 160.) 
+<br>
+<br>[“{register}] y{motion} Yank the text from the current location to {motion} into 
+<br>the register named {register}. Lowercase register specifications cause the register 
+<br>to be overwritten by the yanked text. Uppercase register specifications append to 
+<br>the contents of the register. (See pages 39 and 162.) 
+<br>
+<br>[“{register}]count[count] Y -or
+<br>
+<br>
+<br>[“{register}] count[count] yy 
+<br>
+<br>-or
+<br>
+<br>
+<br>[count] [“{register}] yy Yank count lines into the register named {register}. 
+<br>Lowercase register specifications cause the register to be overwritten by the yanked 
+<br>text. Uppercase register specifications append to the contents of the register. (See 
+<br>pages 39 and 221-222.) 
+<br>
+<br>[count] z<CR> (Same as: z<Enter>. See page 193.) 
+<br>
+<br>[count] z<Enter> Position the line count at the top of the screen. If no count is specified, 
+<br>the current line is used. Cursor is positioned on the first nonblank character 
+<br>after this command. (Same as: z:<CR>. See page 193.) 
+<br>
+<br>[count] z<Left> Scroll the screen count characters to the right. (Same as: zh. See 
+<br>page 235.) 
+<br>
+<br>[count] z<Right> Scroll the screen count characters to the left. (Same as: zl. See 
+<br>page 235.) 
+<br>
+<br>[count] z-Position the line count at the bottom of the screen. If no count is specified, 
+<br>the current line is used. Cursor is positioned on the first nonblank character 
+<br>after this command. (See page 194.) 
+<br>
+<br>
+<br>Normal-Mode Commands 455 
+<br>
+<br>[count] z. Position the line count at the middle of the screen. If no count is specified, 
+<br>the current line is used. Cursor is positioned on the first nonblank character after 
+<br>this command. (See pages 194-195.) 
+<br>
+<br>[count] zb Position the line count at the bottom of the screen. If no count is specified, 
+<br>the current line is used. Cursor is positioned on the same column after this 
+<br>command. (See page 194.) 
+<br>
+<br>[count] zh Scroll the screen count character to the right. (Same as z<Left>. See 
+<br>page 235.) 
+<br>
+<br>[count] zl Scroll the screen count character to the left. (Same as z<Right>. See 
+<br>page 235.) 
+<br>
+<br>ZQ Do a :quit! command. (See page 202.) 
+<br>
+<br>[count] zt Position the line count at the top of the screen. If no count is specified, the 
+<br>current line is used. Cursor is positioned on the same column after this command. 
+<br>(See pages 193-194.) 
+<br>
+<br>[count] zz Position the line count at the middle of the screen. If no count is specified, 
+<br>the current line is used. Cursor is positioned on the same column after this 
+<br>command. (See pages 194-195.) 
+<br>
+<br>ZZ Write file and exit. (See pages 151 and 168.) 
+<br>
+<br>Motion Commands 
+<br>
+<br>[count] a( From with text enclosed in (), select the text up to and including the (). 
+<br>[count] a) From with text enclosed in (), select the text up to and including the (). 
+<br>[count] ab From with text enclosed in (), select the text up to and including the (). 
+<br>[count] a< Select matching <> pair, include the “<>”. 
+<br>[count] a> Select matching <> pair, include the “<>”. 
+<br>[count] a Select matching pair, including the “”. 
+<br>[count] a{ Select matching {} pair, including the “{}”. 
+<br>[count] a} Select matching {} pair, including the “{}”. 
+<br>[count] aB Select matching {} pair, including the “{}”. 
+<br>[count] ap Select a paragraph and the following space. 
+<br>[count] as Select a sentence (and spaces after it). 
+<br>[count] aw Select a word and the space after it. (Word is defined by the ‘iskeyword’ 
+<br>option.) 
+<br>
+<br>
+<br>456 Appendix C Normal-Mode Commands 
+<br>
+<br>[count] aW Select a word and the space after it. (Word is defined to be any series of 
+<br>printable characters.) 
+<br>
+<br>[count] i( Like ab, but the () characters are not selected. 
+<br>
+<br>[count] i) Like ab, but the () characters are not selected. 
+<br>
+<br>[count] ib 
+<br>
+<br>Like ab, but the () characters are not selected. 
+<br>
+<br>[count] i< Select matching <> pair, excluding the “<>”. 
+<br>
+<br>[count] a> Select matching <> pair, excluding the “<>”. 
+<br>
+<br>[count] i Select matching pair, excluding the “”. 
+<br>
+<br>[count] i{ Select matching {} pair, excluding the “{}”. 
+<br>
+<br>[count] iB 
+<br>
+<br>Select matching {} pair, excluding the “{}”. 
+<br>
+<br>[count] ip Select a paragraph only. 
+<br>
+<br>[count] is Select the sentence only. Do no select whitespace after a sentence. 
+<br>
+<br>[count] iw Select inner word (the word only). (Word is defined by the ‘iskeyword’ 
+<br>
+<br>option.) 
+<br>
+<br>[count] iW Select inner word (the word only). (Word is defined to be any series of 
+<br>printable characters.) 
+<br>
+<br>
+<br>Command-Mode Commands 
+<br>
+<br>:!{cmd} Execute shell command. (See page 319.) 
+<br>:!! Repeat last :!{cmd}. (See page 319.) 
+<br>:[range] £ Print the lines with line numbers. (See pages 293 and 308.) 
+<br>:[count] & Repeat the last :substitute command on the next count lines. (Default 
+<br>
+<br>
+<br>= 1.) (See page 311.) 
+<br>
+<br>:[range] & flags count Repeat the last substitution with a different range and flags. 
+<br>(See page 304.) 
+<br>
+<br>:[line] *{register} Execute the contents of the register as an ex-mode command. 
+<br>(Same as: :@. See page 317.) 
+<br>
+<br>:[line] < {count} Shift lines left. (See page 317.) 
+<br>
+<br>:= 
+<br>
+<br>Print line number. (See page 316.) 
+<br>
+<br>:[line] > {count} Shift lines right. (See page 317.) 
+<br>
+<br>:[line] @{register} Go to line and execute {register} as a command. (Same as: 
+<br>
+<br>:*. See page 317.) 
+<br>
+<br>:[line] @: Repeat the last command-mode command. (See page 317.) 
+<br>
+<br>:[line] @@ Repeat the last :@{register} command. (See page 317.) 
+<br>
+<br>
+<br>458 Appendix D Command-Mode Commands 
+<br>
+<br>: [range]~ flags count Repeat the last substitution, but the last search string as the 
+<br>{from} pattern instead of the {from} from the last substitution. (See page 311.) 
+<br>
+<br>:[line] a Insert text after the specified line. (Default = current.) (Same as: :append. 
+<br>See page 307.) 
+<br>
+<br>:ab List all abbreviations. (Same as: :abbreviate. See pages 91-92, 95, 97, 166 and 
+<br>296.) 
+<br>
+<br>:ab {lhs} {rhs} Define an abbreviation.When {lhs} is entered, put {rhs} in 
+<br>the text. 
+<br>
+<br>:abbreviate List all abbreviations. (Same as: :ab. See pages 91-92, 95, 97, 166, and 
+<br>296.) 
+<br>
+<br>:abbreviate {lhs} {rhs} Define an abbreviation.When {lhs} is entered, put {rhs} in 
+<br>the text. 
+<br>
+<br>:abc 
+<br>
+<br>-or
+<br>
+<br>
+<br>:abclear Remove all abbreviations. (See page 296.) 
+<br>
+<br>:[count] al 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] all Open a window for all the files being edited.When a [count] is specified, 
+<br>open up to [count] windows. (Note that the count can be specified after the 
+<br>command, such as “:all [count].) (Same as: :al, :sal, :sall. See page 243.) 
+<br>
+<br>:{[priority} ame {menu-item} {command-string} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:{[priority} amenu {menu-item} {command-string} 
+<br>
+<br>Define a menu item that’s that 
+<br>is valid for all modes . (Same as: :am, :ame. See page 334.) The following characters 
+<br>are automatically inserted for some modes: 
+<br>
+<br>Mode Prefix Character Inserted Meaning 
+<br>
+<br>Normal (Nothing) —N/A
+<br>
+<br>
+<br><Esc> 
+<br>
+<br>Visual Exit visual mode 
+<br>
+<br>CTRL-O 
+<br>
+<br>Insert Execute one normal command. 
+<br>
+<br>CTRL-C 
+<br>
+<br>Command Line Exit command-line mode 
+<br>Operator <ESC> End operator-Pending 
+<br>pending mode 
+<br>
+<br>:{priority} an {menu-item} {command-string} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:{priority} anoremenu {menu-item} {command-string} Perform a :amenu command 
+<br>in which the {command-string} is not remapped. (Same as: :an. See page 338.) 
+<br>
+<br>:[line] append Insert text after the specified line. (Default = current). 
+<br>(Same as: :a. See page 307.) 
+<br>
+<br>
+<br>Command-Mode Commands 459 
+<br>
+<br>:ar 
+<br>
+<br>List the files being edited.The name of the current file is enclosed in square 
+<br>brackets ([]). (See page 222.) 
+<br>
+<br>:ar {file-list} Change the list of files to {file-list} and start editing the first one. 
+<br>(Same as: :args, :n, :next. See pages 43, 170, and 226.) 
+<br>
+<br>:args List the files being edited.The name of the current file is enclosed in square 
+<br>brackets ([]). (Same as: :ar, :n, :next. See pages 43, 170, and 226.) 
+<br>
+<br>:args {file-list} 
+<br>(See page 226.) 
+<br>Change the list of files to {file-list} and start editing the first one. 
+<br>:argu {number} -or:
+<br>argument {number} 
+<br>225 and 243.) 
+<br>Edit the {number} file in the file list. (Same as: :argu. See pages 
+<br>:as -or
+<br>
+<br>
+<br>:ascii Print the number of the character under the cursor. (Same as: ga, :as. See 
+<br>page 155.) 
+<br>
+<br>:au 
+<br>
+<br>List all the autocommands. (Same as: :autocmd. See pages 71, 97, 134, 135, 293, 
+<br>and 422.) 
+<br>
+<br>:au {group} {event} {pattern} Lists the autocommands that match the given specification. 
+<br>If “*” is used for the event, all events will match. (See pages 134-135.) 
+<br>
+<br>:au {group} {events} {file_pattern} nested {command} 
+<br>
+<br>Define an autocommand to 
+<br>be executed when one of the {events} happens on any files that match {pattern}.The 
+<br>group parameters enables you to put this command in a named group for easier 
+<br>management.The nested flag allows for nested events. (See page 134-135.) 
+<br>
+<br>:au! {group} {event} {pattern} nested {command} Remove any matching autocommands 
+<br>and replace them with a new version. (See page 135.) 
+<br>
+<br>:aug {name} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:augroup {name} Start an autocommand group.The group ends with a :augroup 
+<br>END statement. (Same as: :aug. See page 134.) 
+<br>
+<br>:aun {menu-item} -or
+<br>
+<br>
+<br>:aunmenu {menu-item} Remove the menu item named {menu-item} that was defined 
+<br>with an :amenu command.The wildcard “*” will match all menu items. (Same as: 
+<br>:aun. See page 339.) 
+<br>
+<br>:autocmd List all the autocommands. (Same as: :au. See pages 71, 97, 134, 135, 293, 
+<br>and 422.) 
+<br>
+<br>
+<br>460 Appendix D Command-Mode Commands 
+<br>
+<br>:autocmd {group} {event} {pattern} Lists the autocommands that match the given 
+<br>specification. If “*” is used for the event, all events will match. (See pages 134135.) 
+<br>
+<br>
+<br>:autocmd {group} {events} {file_pattern} [nested] {command} 
+<br>
+<br>Define an autocommand 
+<br>to be executed when one of the {events} happens on any files that match 
+<br>{pattern}.The group parameters enables you to put this command in a named 
+<br>group for easier management.The nested flag allows for nested events. (See pages 
+<br>134-135.) 
+<br>
+<br>:autocmd! Delete all the autocommands. (See page 136.) 
+<br>
+<br>:autocmd! {group} {event} {pattern} 
+<br>
+<br>Remove the specified autocommands. (See 
+<br>page 136.) 
+<br>
+<br>:autocmd! {group} {event} {pattern} [nested] {command} 
+<br>
+<br>Remove any matching 
+<br>autocommands and replace them with a new version. (See page 136.) 
+<br>
+<br>:[count] b[!] 
+<br>
+<br>Switch the current window to buffer number count. (If a count is 
+<br>file, any changes might be discarded. (An alternative version of this command has 
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>count at the end—for example, :buffer 5.) (Same as: :buffer. See page 50.) 
+<br>
+<br>:b[!] {file-name} Switch the current window to the buffer containing {file-name}. 
+<br>If ! is specified, if the switch abandons a file, any changes might be discarded. (See 
+<br>page 50.) 
+<br>
+<br>:[count] ba 
+<br>
+<br>Open a window for each buffer. If a count is specified, open at most 
+<br>count windows. (Same as: :ball, :sba, :sball. See page 246.) 
+<br>
+<br>:bad [+line] {file} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:badd [+line] {file} Add the file to the buffer list. If a +line is specified, the cursor 
+<br>will be positioned on that line when editing starts. (Same as: :bad. See page 246.) 
+<br>
+<br>:[count] ball Open a window for each buffer. If a count is specified, open at most 
+<br>count windows. (Same as: :ba, :sba, :sball. See page 246.) 
+<br>
+<br>:bd[[!]] {file} -or:
+<br>bdelete[[!]] {file} -or:[[
+<br>bd[[!]] [n] -or
+<br>
+<br>
+<br>
+<br>Command-Mode Commands 461 
+<br>
+<br>:bdelete[!] n Delete the specified buffer, but leave it on the buffer list. (Reclaims all 
+<br>the memory allocated to the buffer and closes all windows associated with.) If the 
+<br>override option (!) is specified, any changes made are discarded. If {file} is specified, 
+<br>the buffer for that file is deleted. A buffer number [n] or a range of buffer 
+<br>
+<br>:be {mode} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:behave {mode} Sets the behavior of the mouse.The {mode} is either “xterm” for X 
+<br>Windows System–style mouse usage or “mswin” for Microsoft Windows–style 
+<br>usage. (Same as: :be. See page 108.) 
+<br>
+<br>:bl[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:blast[!] Go to the last buffer in the list. (Same as: :bl. See page 52.) 
+<br>
+<br>:bm [count] -or:
+<br>bmodified [count] Go to count-modified buffer. (Same as: :bm. See page 52.) 
+<br>:[count] bn[!] -or:[
+<br>count] bnext[!] -or:[
+<br>count] bNext Go to the next buffer. If ! is specified, if the switch abandons a file, 
+<br>
+<br>any changes might be discarded. If a count is specified, go to the count next buffer. 
+<br>(Same as: :bN, :bp, :bprevious. See page 51.) 
+<br>
+<br>:[count] bp 
+<br>
+<br>-or:[
+<br>count] bprevious Go to previous buffer. If a count is specified, go to the count 
+<br>previous buffer. (Same as: :bN, :bNext, :bp. See page 51.) 
+<br>:br[!] Go to the first buffer in the list. (Same as: :brewind. See page 52.) 
+<br>:brea 
+<br>
+<br>-or:
+<br>break Break out of a loop. (Same as: :brea. See page 356.) 
+<br>
+<br>:brewind[!] Go to the first buffer in the list. (Same as: :br. See page 52.) 
+<br>
+<br>:bro {command} Open a file browser window and then run {command} on the chosen 
+<br>file. (Same as: :browse. See page 339.) 
+<br>
+<br>:bro set Enter an option browsing window that enables you to view and set all the 
+<br>options. (Same as: :browse set, :options. See page 342.) 
+<br>
+<br>:browse {command} Open a file browser window and then run {command} on the 
+<br>chosen file. (Same as: :bro. See page 339.) 
+<br>
+<br>:browse set Enter an option browsing window that enables you to view and set all 
+<br>the options. (Same as: :bro set, :options. See page 342.) 
+<br>
+<br>
+<br>462 Appendix D Command-Mode Commands 
+<br>
+<br>:[count] buffer[!] Switch the current window to buffer number count. (If a count 
+<br>is not specified, the current buffer is used.) If ! is specified, if the switch abandons a 
+<br>file, any changes might be discarded. (An alternative version of this command has 
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>count at the end—for example, :buffer 5.) (Same as: :b. See page 50.) 
+<br>
+<br>:buffer[!] {file-name} Switch the current window to the buffer containing {filename}. 
+<br>If ! is specified, if the switch abandons a file, any changes might be discarded. 
+<br>(See page 50.) 
+<br>
+<br>:buffers List all the specified buffers. (Same as: :bu, :files, :ls. See pages 49-50.) 
+<br>
+<br>:bun[[!]] {file} -or:
+<br>bunload[[!]] {file} -or:[
+<br>:[n,m]bunload[[!]] -or:
+<br>bun[[!]] [n] -or:
+<br>bunload[!] n Unload the specified buffer. If the override option is specified, if there 
+<br>
+<br>are any changes, discard them. (Same as: :bun. See page 246.) 
+<br>
+<br>:[range] c Delete the specified lines, and then do a :insert. (Same as: :change. See 
+<br>page 317.) 
+<br>
+<br>:ca {lhs} {rhs} 
+<br>
+<br>-or:
+<br>cabbrrev {lhs} {rhs} Define an abbreviation for command-mode only. (Same as: 
+<br>:ca. See page 296.) 
+<br>:cabc 
+<br>
+<br>-or
+<br>
+<br>
+<br>:cabclear Remove all for command mode. (Same as: :cabc. See page 296.) 
+<br>
+<br>:[range] cal {name}(argument list) 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[range] call {name}(argument list) Call a function. (Same as: :cal. See page 134, 
+<br>358, and 361.) 
+<br>
+<br>:cc[!] number Display error number. If the number is omitted, display the current 
+<br>error. Position the cursor on the line that caused it. (See page 88.) 
+<br>
+<br>:cd {path} Change the directory to the specified path. If path is “-”, change the 
+<br>previous path. If no path is specified, on UNIX go to the home directory. On 
+<br>Microsoft Windows, print the current directory. (See page 314.) 
+<br>
+<br>
+<br>Command-Mode Commands 463 
+<br>
+<br>:[range] ce [width] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[range] center [width] Center the specified lines. If the width of a line 
+<br>is not specified, use the value of the ‘textwidth’. (If ‘textwidth’ is 0, 80 is used.) 
+<br>(Same as: :ce. See page 115.) 
+<br>
+<br>:cf[!] [errorfile] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:cfile[!] [errorfile] Read an error list from file. (Default = the file specified by the 
+<br>errorfile option.) Go to the first error. If the override option is specified and a file 
+<br>switch is made, any unsaved changes might be lost. (Same as: :cf. See page 89.) 
+<br>
+<br>:[range] ch (Same as: :chdir. See page 314.) 
+<br>
+<br>:[range] change Delete the specified lines, and then do an :insert. 
+<br>(Same as: :c. See page 317.) 
+<br>
+<br>:chd [path] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:chdir [path] Change the directory to the specified path. If path is “-”, change the 
+<br>previous path. If no path specified, on UNIX go to the home directory. On 
+<br>Microsoft Windows, print the current directory. (Same as: :chd, :chdir. See page 
+<br>314.) 
+<br>
+<br>:che[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:checkpath[!] 
+<br>
+<br>Check all the £include directives and make sure that all the files 
+<br>listed can be found. If the override option (!) is present, list all the files. If this 
+<br>option is not present, only the missing files are listed. (Same as: :che. See page 282.) 
+<br>
+<br>:cl[!] [from], [to] List out the specified error messages. If the override option is 
+<br>present, list out all the errors. (Same as: :clist. See page 88.) 
+<br>
+<br>:cla [number] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:clast [number] Go the last error in the list. If a number is specified, display that 
+<br>error. (Same as: :cla. See page 88.) 
+<br>
+<br>:clist[!] [from], [to] List out the specified error messages. If the override option 
+<br>is present, list out all the errors. (Same as: :cl. See page 88.) 
+<br>
+<br>:clo[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:close[!] 
+<br>
+<br>Close a window. If this is the last window, exit Vim.The command fails if 
+<br>this is the last window for a modified file, unless the force (!) option is present. 
+<br>(Same as: CTRL-Wc, :clo. See page 46.) 
+<br>
+<br>:cm 
+<br>
+<br>Listing all the mappings for command-line mode maps. (Same as: :cmap. See 
+<br>page 298.) 
+<br>
+<br>:cm {lhs} List the command-line mapping of {lhs}. (See page 298.) 
+<br>
+<br>
+<br>464 Appendix D Command-Mode Commands 
+<br>
+<br>:cm {lhs} {rhs} Define a keyboard mapping for command-line mode. (See page 
+<br>298.) 
+<br>
+<br>:cmap Listing all the command-line mode mappings. (Same as: :cm. See page 298.) 
+<br>
+<br>:cmap {lhs} List the command-line mode mapping of {lsh}. (See page 298.) 
+<br>:cmap {lhs} {rhs} 
+<br>page 298.) 
+<br>Define a keyboard mapping for command-line mode. (See 
+<br>:cmapc -or
+<br>
+<br>
+<br>:cmapclear Clear all the command-mode mappings. (Same as: :cmapc. See page 
+<br>301.) 
+<br>
+<br>:[priority] cme {menu-item} {command-string} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[priority] cmenu {menu-item} {command-string} 
+<br>
+<br>Define a menu item that is available 
+<br>for command-line mode only.The priority determines its placement in a 
+<br>menu. Higher numbers come first.The name of the menu item is {menu-item}, and 
+<br>when the command is selected, the command {command-string} is executed. (Same 
+<br>as: :cme. See page 334.) 
+<br>
+<br>:[count] cn[!] Go to the count next error. (Same as: :cnext. See pages 87-88 and 
+<br>170.) 
+<br>
+<br>:[count] cN[!] Go the previous error in the error list. (Same as: :cN. See page 88.) 
+<br>
+<br>:cnew [count] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:cnewer [count] Go to the count newer error list. (Same as: :cnew. See page 285.) 
+<br>
+<br>:[count] cnext[!] Go to the count next error. (Same as: :cn. See pages 87-88 and 
+<br>170.) 
+<br>
+<br>:[count] cNext[!] Go the previous error in the error list. (Same as: :cN. See page 
+<br>88.) 
+<br>
+<br>:[count] cnf[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] cnfile[!] Go the first error in the next file. If the override option (!) is 
+<br>present, if there are any unsaved changes, they will be lost. (Same as: :cnf. See pages 
+<br>88 and 90.) 
+<br>
+<br>:cno {lhs} {rhs} Same as :cmap, but does not allow remapping of the {rhs}. (Same 
+<br>as: :cnoremap. See page 301.) 
+<br>
+<br>:cnorea {lhs} {rhs} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:cnoreabbr {lhs} {rhs} Do a :noreabbrev that works in command-mode only. 
+<br>(Same as: :cnorea. See page 301.) 
+<br>
+<br>
+<br>Command-Mode Commands 465 
+<br>
+<br>:[priority] cnorem {menu-item} {command-string} Like :cmenu, except the {command-
+<br>string} is not remapped. (Same as: :cnoremenu. See page 338.) 
+<br>
+<br>:cnoremap {lhs} {rhs} Same as :cmap, but does not allow remapping of the {rhs}. 
+<br>(Same as: :cno. See page 301.) 
+<br>:[priority] cnoremenu {menu-item} {command-string} Like :cmenu, except the 
+<br>{command-string} is not remapped. (Same as: :cnorem. See page 338.) 
+<br>
+<br>:[range] co {address} Copy the range of lines below {address}. (Same as: :copy, :t. 
+<br>See page 306.) 
+<br>
+<br>:col [count] 
+<br>
+<br>-or:
+<br>colder [count] Go to the count older error list. (Same as: :col. See page 284.) 
+<br>:com 
+<br>
+<br>List the user-defined commands. (Same as: :command. See pages 360-361.) 
+<br>:com {definition} Define a user-defined command. (See pages 360-361.) 
+<br>:comc 
+<br>
+<br>-or:
+<br>comclear Clear all user-defined commands. (Same as: :comc. See page 360.) 
+<br>:command List the user-defined commands. (See page 354.) 
+<br>
+<br>:command {definition} Define a user-defined command. (Same as: :com. See pages 
+<br>360-361.) 
+<br>
+<br>:con {command} (Same as: :continue. See page 356.) 
+<br>
+<br>:conf {command} Execute the {command}. If this command would result in the loss of 
+<br>data, display a dialog box to confirm the command. (Same as: :confirm. See page 
+<br>341.) 
+<br>
+<br>:confirm {command} Execute the {command}. If this command would result in the loss 
+<br>of data, display a dialog box to confirm the command. (Same as: :conf. See page 
+<br>341.) 
+<br>
+<br>:con -or
+<br>
+<br>
+<br>:continue Start a loop over. (Same as: :con. See page 356.) 
+<br>
+<br>:[range] copy {address} Copy the range of lines below {address}. 
+<br>(Same as: :co, :t. See page 306.) 
+<br>:[count] cp[!] -or
+<br>
+<br>
+<br>:[count] cprevious[!] Go to the count previous error. (Same as: :cp, :cN, :cNext. 
+<br>See pages 88 and 170.) 
+<br>
+<br>
+<br>466 Appendix D Command-Mode Commands 
+<br>
+<br>:cq 
+<br>
+<br>-or
+<br>
+<br>
+<br>:cquit 
+<br>
+<br>Exit Vim with an error code. (This is useful in integrating Vim into an IDE.) 
+<br>(Same as: :cq. See page 89.) 
+<br>:cr[!] number -or:
+<br>crewind[!] number Go the first error in the list. If a number is specified, display that 
+<br>error. (Same as: :cr. See page 88.) 
+<br>:cs {arguments} 
+<br>
+<br>-or:
+<br>cscope {argument} Handle various activities associated with the CScope program. 
+<br>(Same as: :cs. See page 172.) 
+<br>:cst {procedure} 
+<br>
+<br>-or:
+<br>cstag {procedure} Go to the tag in the CScope database named {procedure}. (Same 
+<br>as: :cst. See page 172.) 
+<br>:cu {lhs} (Same as: :cunmap. See page 301.) 
+<br>:cuna {lhs} 
+<br>
+<br>-or:
+<br>cunabbreviate {lhs} Remove the command-line mode abbreviation. 
+<br>(Same as: :cuna. See page 296.) 
+<br>:cunm 
+<br>
+<br>Same as: :cunmenu. (See page 339.) 
+<br>
+<br>:cunmap {lhs} Remove a command-mode mapping. (Same as: :cu. See page 301.) 
+<br>
+<br>:cunmenu {menu-item} Remove the command-mode menu item named {menu-
+<br>
+<br>item}.The wildcard “*” will match all menu items. (Same as: :cunm. See page 339.) 
+<br>
+<br>:[range] d register [count] Delete text. (Same as: :delete. See page 303.) 
+<br>
+<br>:delc {command} 
+<br>
+<br>-or:
+<br>delcommand {command} Delete a user-defined command. (Same as: :delc. See page 
+<br>360.) 
+<br>:[range] delete register [count] Delete text. (Same as: :d. See page 303.) 
+<br>:delf {name} -or
+<br>
+<br>
+<br>:delfunction {name} Delete the function named {name}. (Same as: :delf. See page 
+<br>360.) 
+<br>
+<br>:di list 
+<br>
+<br>Edit the last file in the list. (Same as: :display. See page 222.) 
+<br>:dig 
+<br>
+<br>List all the digraph definitions. (Same as: :digraphs. See page 25.) 
+<br>:dig {character1}{character2} {number} Define a digraph.When 
+<br>CTRL-K{character1}{character2} is pressed, inset character whose number 
+<br>is {number}. (See page 200.) 
+<br>
+<br>
+<br>Command-Mode Commands 467 
+<br>
+<br>:digraphs List all the digraph definitions. (Same as: :dig. See page 25.) 
+<br>
+<br>:digraphs {character1}{character2} {number} Define a digraph.When 
+<br>CTRL-K{character1}{character2} is pressed, insert character whose number 
+<br>is {number}. (See page 200.) 
+<br>
+<br>:display [arg] Same as :registers, :di. (See page 222.) 
+<br>
+<br>:[range] dj count[count] /{pattern}/ 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[range] djump count[count] /{pattern}/ Search the range (default = whole file) 
+<br>for the definition of the macro named {pattern} and jump to it. If a count is specified, 
+<br>jump to the count definition. If the pattern is enclosed in slashes (/), it is a 
+<br>regular expression; otherwise, it is the full name of the macro. (Same as: :dj. See 
+<br>page 314.) 
+<br>
+<br>:[range] dl /{pattern}/ 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[range] dlist /{pattern}/ 
+<br>
+<br>List the all the definitions of the macro 
+<br>in slashes (/),it is a regular expression; otherwise, it is the full name of the macro. 
+<br>(Same as: :dl. See page 314.) 
+<br>
+<br>:do {group} {event} [file_name] Execute a set of autocommands pretending that 
+<br>{event} has just happened. If a group is specified, execute only the commands for 
+<br>that group. If a filename is given, pretend that the filename is file_name rather than 
+<br>the current file during the execution of this command. (Same as: :doautocmd. See 
+<br>
+<br>pages 135 and 137.) 
+<br>:doautoa {group} {event} [file_name] -or:
+<br>doautoall {group} {event} [file_name] Like :doautocmd, but repeated for every 
+<br>buffer. (Same as: :doautoa. See page 135.) 
+<br>:doautocmd {group} {event} [file_name] Execute a set of autocommands, pretend
+<br>
+<br>
+<br>ing that {event} has just happened. If a group is specified, execute only the commands 
+<br>for that group. If a filename is given, pretend that the filename is file_name 
+<br>rather than the current file during the execution of this command. (Same as: :do. 
+<br>See pages 135 and 137.) 
+<br>
+<br>:[range] ds /{pattern}/ -or
+<br>
+<br>
+<br>:[range] dsearch /{pattern}/ 
+<br>
+<br>List the first definition of the macro named 
+<br>{pattern} in the range. (Default = the whole file.) If the pattern is enclosed in slashes 
+<br>(/), it is a regular expression; otherwise, it is the full name of the macro. 
+<br>(Same as: :ds. See page 314.) 
+<br>
+<br>
+<br>468 Appendix D Command-Mode Commands 
+<br>
+<br>:[range] dsp count[count] /{pattern}/ -or
+<br>
+<br>
+<br>:[range] dsplit count[count] /{pattern}/ Do a :split and a :djump. 
+<br>(Same as: :dsp. See page 314.) 
+<br>
+<br>:e [+cmd] [file] Close the current file and start editing the named file. If no file is 
+<br>specified, re-edit the current file. If +cmd is specified, execute it as the first editing 
+<br>command. (Same as: :edit. See page 41.) 
+<br>
+<br>:ec {arguments} 
+<br>
+<br>-or:
+<br>echo {arguments} Print the arguments. (Same as: :ec. See pages 354-355.) 
+<br>
+<br>:echoh {name} -or
+<br>
+<br>
+<br>:echohl {name} Change the color of future echoes to be in the color of highlight 
+<br>group {name}. (Same as: :echoh. See page 355.) 
+<br>
+<br>:echon {arguments} Echo the arguments without a newline. (See page 355.) 
+<br>
+<br>:edit [+cmd] [file] Close the current file and start editing the named file. If no file 
+<br>is specified, re-edit the current file. If +cmd is specified, execute it as the first editing 
+<br>command. (Same as: :e. See page 41.) 
+<br>
+<br>:el -or
+<br>
+<br>
+<br>:else Reverse the condition of an :if. (Same as: :el. See page 356.) 
+<br>:elsei 
+<br>
+<br>-or:
+<br>elseif A combination of :else and :if. (Same as: :elsei. See page 356.) 
+<br>
+<br>:em (Same as: :emenu. See page 338.) 
+<br>
+<br>:emenu {menu-item} Execute the given {menu-item} as if the user had selected it. 
+<br>(Same as: :em. See page 338.) 
+<br>
+<br>:en End an :if statement. (Same as: :endif. See page 356.) 
+<br>
+<br>:endf End a function. (Same as: :endfunction. See pages 134 and 357.) 
+<br>
+<br>:endfunction End a function. (Same as: :endf. See pages 134 and 357.) 
+<br>
+<br>:endif End an :if statement. (Same as: :en. See page 356.) 
+<br>
+<br>:endw -or
+<br>
+<br>
+<br>:endwhile End a loop. (Same as: :endw. See page 356.) 
+<br>
+<br>:ex[!] +command filename Enter ex mode. If a filename is specified, edit that file; 
+<br>otherwise, use the current file.The +command argument is a single command that 
+<br>will be executed before any editing begins. If the override option (!) is specified, 
+<br>switching files will discard any changes that have been made. (See page 100.) 
+<br>
+<br>
+<br>Command-Mode Commands 469 
+<br>
+<br>:[range] ex[!] file If the buffer has been modified, write the file and exit. If a range 
+<br>is specified, write only the specified lines. If a file is specified, write the data to that 
+<br>file.When the override option (!) is present, attempt to overwrite existing files or 
+<br>read-only files. (See page 322.) 
+<br>
+<br>:exe {string} -or:
+<br>execute {string} Execute a string as a command. (Same as: :exe. See page 357.) 
+<br>:exi -or:
+<br>exit -or:[
+<br>range] exit[!] [file] If the buffer has been modified, write the file and exit. If a 
+<br>
+<br>range is specified, write only the specified lines. If a file is specified, write the data 
+<br>to that file.When the override option (!) is present, attempt to overwrite existing 
+<br>files or read-only files. (Same as: :exi. See page 322.) 
+<br>
+<br>:f Print the current filename. If a file is specified, set the name of the current file to 
+<br>file. (Same as: :file, CTRL-G. See pages 135 and 315.) 
+<br>
+<br>:file [file] Print the current filename. If a file is specified, set the name of the 
+<br>current file to file. (Same as: :f, CTRL-G. See pages 135 and 315.) 
+<br>
+<br>:files List all the specified buffers. (Same as: :buffers, :ls. See pages 49-50.) 
+<br>
+<br>:filet {on|off} 
+<br>
+<br>-or:
+<br>filetype {on|off} 
+<br>
+<br>Tell Vim to turn on or off the file type detection logic. (Same as: 
+<br>:filet. See page 71.) 
+<br>
+<br>:fin[!] {+command} {file} 
+<br>
+<br>-or:
+<br>find[!] {+command} {file} Like :vi, but searches for the file in the directories 
+<br>specified by the path option. (Same as: :fin. See page 281.) 
+<br>:fix 
+<br>
+<br>-or:
+<br>fixdel Make the Delete key do the right thing on UNIX systems. (Same as: :fix. 
+<br>See page 94.) 
+<br>:fu List all functions. (Same as: :function. See pages 134, 357, and 359.) 
+<br>
+<br>:fu {name} List the contents of function {name}. (See page 359.) 
+<br>
+<br>:fu {function definition} Start a function definition. (See page 359.) 
+<br>:function List all functions. (Same as: :fu. See pages 134, 357, and 359.) 
+<br>:function {name} List the contents of function {name}. (See page 359.) 
+<br>
+<br>:function {function definition} Start a function definition. (See page 359.) 
+<br>
+<br>
+<br>470 Appendix D Command-Mode Commands 
+<br>
+<br>: [range] g /{pattern}/ {command} 
+<br>
+<br>Perform {command} on all lines that have 
+<br>{pattern} in them in the given range. (Same as: :global. See page 311.) 
+<br>
+<br>: [range] g! /{pattern}/ {command} 
+<br>
+<br>Perform {command} on all lines that do not 
+<br>have {pattern} in them in the given range. (See page 311.) 
+<br>
+<br>: [range] global /{pattern}/ {command} 
+<br>
+<br>Perform {command} on all lines that have 
+<br>{pattern} in them in the given range. (Same as: :g. See page 311.) 
+<br>
+<br>: [range] global! /{pattern}/ {command} 
+<br>
+<br>Perform {command} on all lines that do 
+<br>
+<br>:go {[count] } -or:
+<br>goto {[count] } Go to count byte of the file. (Same as: :go, go. See page 156.) 
+<br>:gr {arguments} -or:
+<br>grep {arguments} Run the gGrep program with the given {arguments} and capture 
+<br>
+<br>the output so that the :cc, :cnext, and other commands will work on it. (Like 
+<br>:make, but with gGrep rather than mMake.) (Same as: :gr. See pages 89, 170, 225, 
+<br>284, and 289.) 
+<br>
+<br>:gu [+command] [-f|-b] [files...] -or
+<br>
+<br>
+<br>:gui [+command] [-f|-b] [files...] (Same as: :gu. See page 323.) 
+<br>
+<br>:gv [+command] [-f|-b] [files...] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:gvim [+command] [-f|-b] [files...] Start GUI mode. If a +command is specified, 
+<br>execute that after loading the files. If the -b flag is specified, execute the command 
+<br>in the background (the default).The -f flag tells Vim to run in the foreground. If a 
+<br>list of files is specified, they will be edited; otherwise, the current file is edited. 
+<br>(Same as: :gv. See page 323.) 
+<br>
+<br>:h [topic] -or
+<br>
+<br>
+<br>:help [topic] Display help on the given topic. If no topic is specified, display 
+<br>general help. (Same as: <F1>, <Help>, :h. See pages 11, 13, 50, 157, and 401.) 
+<br>
+<br>:helpf 
+<br>
+<br>–or
+<br>
+<br>
+<br>:helpfind Open a dialog box that enables you to type in a help subject. (Same as: 
+<br>:helpf. See page 341.) 
+<br>
+<br>:hi List all highlight groups. (Same as: :highlight. See pages 290 and 355.) 
+<br>
+<br>:hi {options} Customize the syntax coloration. (See page 290.) 
+<br>
+<br>:hi link {new-group} {old-group} Highlight the {new-group} the same as 
+<br>{old-group}. (See page 414.) 
+<br>
+<br>
+<br>Command-Mode Commands 471 
+<br>
+<br>:hid 
+<br>
+<br>-or
+<br>
+<br>
+<br>:hide Hide the current buffer. (Same as: :hid. See page 49.) 
+<br>
+<br>:highlight List all highlight groups. 
+<br>
+<br>:highlight link {new-group} {old-group} Highlight the {new-group} the same as 
+<br>
+<br>{old-group}. (See page 408.) 
+<br>:highlight {options} Customize the syntax coloration. (Same as: :hi. See pages 290 
+<br>
+<br>and 355.) 
+<br>
+<br>:his {code} [first] ,[last] -or
+<br>
+<br>
+<br>:history {code} [first] ,[last] Print the last few commands or search strings 
+<br>(depending on the code).The code parameter defaults to “cmd” for command-
+<br>mode command history.The first parameter defaults to the first entry in the list and 
+<br>last defaults to the last. (Same as: :his. See page 320.) 
+<br>
+<br>:[line] i Start inserting text before line. Insert ends with a line consisting of just 
+<br>“.”. (Same as: :insert. See page 308.) 
+<br>
+<br>:ia {lhs} {rhs} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:iabbrev {lhs} {rhs} Define an abbreviation for insert mode only. (Same as: :ia. 
+<br>See page 296.) 
+<br>
+<br>:iabc 
+<br>
+<br>-or
+<br>
+<br>
+<br>:iabclear Remove all for insert mode. (Same as: :iabc. See page 296.) 
+<br>
+<br>:if {expression} Start a conditional statement. (See page 356.) 
+<br>
+<br>:[range] ij [count] /{pattern}/ 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[range] ijump [count] /{pattern}/ Search the range (default = whole file) for the 
+<br>{pattern} and jump to it. If a count is specified, jump to the count occurrence. If the 
+<br>pattern is enclosed in slashes (/), it is a regular expression; otherwise, it is just a 
+<br>string. (Same as: :ij. See page 312.) 
+<br>
+<br>:[range] il /{pattern}/ 
+<br>
+<br>-or:[
+<br>range] ilist /{pattern}/ List all the occurrences {pattern} in the range. (Default 
+<br>= the whole file.) If the pattern is enclosed in slashes (/), it is a regular expression; 
+<br>
+<br>otherwise, it is a string. (Same as: :il. See page 312.) 
+<br>
+<br>:im List all the insert-mode mappings. (Same as: :imap. See page 298.) 
+<br>
+<br>:im {lhs} List the insert-mode mapping of {lhs}. (See page 298.) 
+<br>
+<br>:im {lhs} {rhs} Define a keyboard mapping for insert mode. (See page 298.) 
+<br>
+<br>:imap List all the insert-mode mappings. (Same as: :im. See page 298.) 
+<br>
+<br>:imap {lhs} List the insert-mode mapping of {lhs}. (See page 298.) 
+<br>
+<br>
+<br>472 Appendix D Command-Mode Commands 
+<br>
+<br>:imap {lhs} {rhs} Define a keyboard mapping for insert mode. (See page 298.) 
+<br>:imapc -or
+<br>
+<br>
+<br>:imapclear Clear all the insert-mode mappings. (Same as: :imapc. See page 301.) 
+<br>:[priority] ime {menu-item} {command-string} 
+<br>
+<br>-or:[
+<br>priority] imenu {menu-item} {command-string} 
+<br>
+<br>Define a menu item that is available 
+<br>for insert mode only.The priority determines its placement in a menu. Higher 
+<br>command is selected, the command {command-string} is executed. (Same as: :ime. 
+<br>See page 334.) 
+<br>
+<br>:[line] in Start inserting text before line. Insert ends with a line consisting of just 
+<br>“.”. (Same as: :inoremap. See page 301.) 
+<br>
+<br>:inorea {lhs} {rhs} -or
+<br>
+<br>
+<br>:inoreabbrev {lhs} {rhs} Do a :noreabbrev that works in insert mode only. (Same 
+<br>as: :inorea. See page 296.) 
+<br>
+<br>:inorem {lhs} {rhs} Same as: :inoremenu. (See page 338.) 
+<br>
+<br>:inoremap {lhs} {rhs} Same as :imap, but does not allow remapping of the {rhs}. 
+<br>(Same as: :in. See page 301.) 
+<br>:[priority] inoremenu {menu-item} {command-string} Like :imenu, except the 
+<br>{command-string} is not remapped. (Same as: :inorem. See page 338.) 
+<br>
+<br>:[line] insert Start inserting text before line. Insert ends with a line consisting of 
+<br>just “.”. (Same as: :i. See page 308.) 
+<br>
+<br>:int 
+<br>
+<br>-or:
+<br>intro Display the introductory screen. (Same as: :int. See page 157.) 
+<br>:range[range] is /{pattern}/ 
+<br>
+<br>-or
+<br>
+<br>
+<br>:range[range] isearch /{pattern}/ List the first occurrence {pattern} in the range. 
+<br>(Default = the whole file.) If the pattern is enclosed in slashes (/), it is a regular 
+<br>expression; otherwise, it is a string. (Same as: :is. See page 313.) 
+<br>
+<br>:[range] isp count[count] /{pattern}/ 
+<br>
+<br>-or:[
+<br>range] isplit count[count] /{pattern}/ Remove an insert-mode mapping. 
+<br>
+<br>(Same as: :isp. See page 313.) 
+<br>:iu {lhs} Remove an insert-mode mapping. (Same as: :iunmap. See page 301.) 
+<br>:iuna {lhs} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:iunabbreviate {lhs} Remove the insert line-mode abbreviation. (Same as: :iuna. 
+<br>See page 296.) 
+<br>
+<br>
+<br>Command-Mode Commands 473 
+<br>
+<br>:iunm {lhs} 
+<br>
+<br>-or:
+<br>iunmap {lhs} Remove an insert-mode mapping. (Same as: :iunm. See page 301.) 
+<br>:iunm {menu-item} 
+<br>
+<br>-or:
+<br>iunmenu {menu-item} Remove the insert-mode menu item named {menu-item}.The 
+<br>wildcard “*” will match all menu items. (Same as: :iunm. See page 339.) 
+<br>:[range] j[!] -or
+<br>
+<br>
+<br>:[range] join[!] Join the lines in range into one line. Spaces are used to 
+<br>separate the parts unless the ! is specified. (Same as: :j. See page 318.) 
+<br>
+<br>:ju 
+<br>
+<br>-or:
+<br>jumps List out the jump list. (Same as: :ju. See page 188.) 
+<br>
+<br>:[line] k{letter} Place mark {letter} on the indicated line. (Same as: :mar, :mark. 
+<br>See page 318.) 
+<br>:[range] l [count] Like :print, but assumes that the ‘list’ option is on. (Same 
+<br>
+<br>as: :l. See page 308.) 
+<br>
+<br>:la [+command] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:last [+command] Edit the last file in the list. (Same as: :la. See page 44.) 
+<br>
+<br>:[range] le [margin] -or
+<br>
+<br>
+<br>:[range] left [margin] Left justify the text putting each line margin 
+<br>characters from the left margin. (Default = 0.) (Same as: :le. See page 116.) 
+<br>
+<br>:let {variable} = {expression} Assign a {variable} a value. (See page 349.) 
+<br>
+<br>:[range] list [count] Like :print, but assumes that the ‘list’ option is on. 
+<br>(Same as: :l. See page 308.) 
+<br>
+<br>:ls List all the buffers. (Same as: :buffers, :files. See pages 49-50.) 
+<br>
+<br>:[range] m {address} Move the range of lines from their current location to below 
+<br>{address}. (Same as: :move. See pages 161 and 306.) 
+<br>
+<br>:[line] ma{letter} Mark the current line with mark {letter}. (Same as: :k, :mar, 
+<br>:mark. See page 318.) 
+<br>
+<br>:mak {arguments} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:make {arguments} Run the external Mmake program, giving it the arguments 
+<br>indicated. Capture the output in a file so that error-finding commands such as :cc 
+<br>and :cnext can be used. (Same as: :mak. See pages 87, 284, and 288.) 
+<br>
+<br>
+<br>474 Appendix D Command-Mode Commands 
+<br>
+<br>:map List all the mappings. Note: Only :map and :map! list the mappings for all 
+<br>modes.The other mode-dependent versions of these commands list the mapping 
+<br>for their modes only. (See pages 93, 95, 134, 156, 293, 297, and 394.) 
+<br>
+<br>:map {lhs} 
+<br>
+<br>List the mapping of {lhs}. (See page 297.) 
+<br>:map {lhs} {rhs} 
+<br>
+<br>
+<br>Define a keyboard mapping.When the {lhs} is typed in normal 
+<br>mode, pretend that {rhs} was typed. (See page 297.) 
+<br>:map[!] List all mappings for insert and command line notes. (See page 298.) 
+<br>:{mode}mapc Clear all the mappings. (Same as: :mapclear. See page 299.) 
+<br>
+<br>:{mode}mapclear Clear all the mappings. (Same as: :mapc. See page 299.) 
+<br>
+<br>:mapclear[!] See page 301. 
+<br>
+<br>:mar 
+<br>
+<br>-or:[
+<br>line] mark{letter} 
+<br>
+<br>
+<br>Mark the given line with mark {letter}. (Same as: :k, :mar. See 
+<br>page 38.) 
+<br>:marks List all the marks. (See page 38.) 
+<br>:marks {chars} List the marks specified by the character list: {chars}. (See page 36.) 
+<br>:[priority][mode] me {menu-item} {command-string} 
+<br>
+<br>-or:[
+<br>priority][mode] menu {menu-item} {command-string} 
+<br>
+<br>Define a menu item.The 
+<br>priority determines its placement in a menu. Higher numbers come first.The mode 
+<br>parameter defines which Vim mode the item works in.The name of the menu item 
+<br>is {menu-item}, and when the command is selected, the command {command-string} 
+<br>is executed. (Same as: :me. See pages 333 and 338.) 
+<br>
+<br>:mes 
+<br>
+<br>-or
+<br>
+<br>
+<br>:messages View previous messages. (Same as: :mes. See page 321.) 
+<br>
+<br>:mk[!] {[file]} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:mkexrc[!] {[file]} Like :mkvimrc, except the file defaults to .exrc.This command 
+<br>has been superseded by the :mkvimrc command. (Same as: :mk. See page 96.) 
+<br>
+<br>:mks[!] [file]} 
+<br>
+<br>-or:
+<br>mksession[!] [file] } Create a session file and save the current settings. If ! is 
+<br>specified, overwrite any existing session file. (Same as: :mks. See page 350.) 
+<br>:mkv[!] {file} 
+<br>
+<br>-or:
+<br>mkvimrc[!] {file} Write out setting to {file} in a manner suitable for including in a 
+<br>vimrc file. In fact, if you do not specify {file}, it defaults to vimrc. If the file exists, it 
+<br>will be overwritten if the override option (!) is used. (Same as: :mkv. See page 95.) 
+<br>
+<br>
+<br>Command-Mode Commands 475 
+<br>
+<br>:[range] mo {address} Move the range of lines from their current location to below 
+<br>{address}. (See page 307.) 
+<br>
+<br>:mod {mode} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:mode {mode} Set the screen mode for an MS-DOS editing session. (Same as: :mod. 
+<br>See page 347.) 
+<br>
+<br>:[range] move {address} Move the range of lines from their current location to 
+<br>below {address}. (Same as: :m. See pages 161 and 306.) 
+<br>
+<br>:[count] n {+cmd} {file-list} When editing multiple files, go to the next one. If 
+<br>count is specified, go to the count next file. (Same as: :args, :next. See pages 42, 
+<br>170, 226-228.) 
+<br>
+<br>:[count] N {+cmd} {file-list} When editing multiple files, go to the previous one. 
+<br>If a count is specified, go to the count previous file. (Same as: :Next. See page 43.) 
+<br>
+<br>:new[!] [+command] [file-name] Split the window like :split.The only difference 
+<br>is that if no filename is specified, a new window is started on a blank file. (Same as: 
+<br>CTRL-W CTRL-N, CTRL-Wn. See page 48.) 
+<br>
+<br>:[count] next {[+cmd]} [{file-list]} When editing multiple files, go to the next 
+<br>one. If count is specified, go to the count next file. (Same as: :args, :n. See pages 
+<br>42, 170, and 226-228.) 
+<br>
+<br>:[count] Next [{+cmd]} {[file-list]} When editing multiple files, go to the previous 
+<br>one. If count is specified, go to the count previous file. (Same as: :N. See page 
+<br>43.) 
+<br>
+<br>:nm 
+<br>
+<br>Listing all the mappings for normal-mode maps. (Same as: :nmap. See page 298.) 
+<br>
+<br>:nm {lhs} List the normal mapping of {lhs}. 
+<br>
+<br>:nm {lhs} {rhs} Define a keyboard mapping for normal mode. 
+<br>
+<br>:nmap Listing all the normal-mode mappings. (Same as: :nm. See page 298.) 
+<br>
+<br>:nmap {lhs} List the normal-mode mapping of {lhs}. (See page 298.) 
+<br>
+<br>:nmap {lhs} {rhs} Define a keyboard mapping for normal mode. (See page 298.) 
+<br>
+<br>:nmapc -or
+<br>
+<br>
+<br>:nmapclear Clear all the normal mappings. (Same as: :nmapc. See page 301.) 
+<br>
+<br>:[priority]nme {menu-item} {command-string} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[priority]nmenu {menu-item} {command-string} 
+<br>
+<br>Define a menu item that is 
+<br>available for normal mode only.The priority determines its placement in a menu. 
+<br>Higher numbers come first.The name of the menu item is {menu-item}, and when 
+<br>the command is selected, the command {command-string} is executed. (Same as: 
+<br>:nme. See page 334.) 
+<br>
+<br>
+<br>476 Appendix D Command-Mode Commands 
+<br>
+<br>:nn {lhs} {rhs} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:nnoremap {lhs} {rhs} Same as :nmap, but does not allow remapping of the {rhs}. 
+<br>(Same as: :nn. See page 301.) 
+<br>
+<br>:[priority] nnoreme {menu-item} {command-string} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[priority] nnoremenu {menu-item} {command-string} 
+<br>
+<br>Like :nmenu, but the 
+<br>{command-string} is not remapped. (Same as: :nnorem. See page 301.) 
+<br>
+<br>:no {lhs} {rhs} 
+<br>
+<br>Same as :map, but does not allow remapping of the {rhs}. (Same as: 
+<br>:noremap. See pages 298 and 301.) 
+<br>
+<br>:noh 
+<br>
+<br>-or
+<br>
+<br>
+<br>:nohlsearch 
+<br>
+<br>Turn off the search highlighting. (It will be turned on by the next 
+<br>search.To turn it off permanently, use the :set nohisearch command.) (Same as: 
+<br>:noh. See page 29.) 
+<br>
+<br>:nor {lhs} {rhs} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:noreabbrev {lhs} {rhs} 
+<br>
+<br>Define an abbreviation, but do not allow remapping of the 
+<br>right side. (Same as: :nor. See page 301.) 
+<br>
+<br>:norem {lhs} {rhs} 
+<br>
+<br>Same as: :noremenu. (See page 338.) 
+<br>
+<br>:noremap {lhs} {rhs} 
+<br>
+<br>Same as :map, but does not allow remapping of the {rhs}. 
+<br>(Same as: no. See pages 298 and 301.) 
+<br>
+<br>:nremap[!] See page 301. 
+<br>
+<br>:[priority][mode] norem {menu-item} {command-string} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[priority][mode] noremenu {menu-item} {command-string} 
+<br>
+<br>Define a menu item 
+<br>like defined with :menu, but do not allow remapping of the {command-string}. (Same 
+<br>as: :norem. See page 338.) 
+<br>
+<br>:norm[!] {commands} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:normal[!] {commands} Execute the commands in normal mode. (Same as: :norm. 
+<br>See page 322.) 
+<br>
+<br>:[range] nu 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[range] number 
+<br>
+<br>Print the lines with line numbers. (Same as: :nu. See pages 
+<br>293-294.) 
+<br>
+<br>:nun {lhs} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:nunmap {lhs} 
+<br>
+<br>Remove a normal mapping. (Same as: :nun. See page 301.) 
+<br>
+<br>:nunme {menu-item} 
+<br>
+<br>-or
+<br>
+<br>
+<br>
+<br>Command-Mode Commands 477 
+<br>
+<br>:nunmenu {menu-item} 
+<br>
+<br>Remove the normal menu item named {menu-item}.The 
+<br>wildcard “*” will match all menu items. (Same as: :nunme. See page 339.) 
+<br>
+<br>:o 
+<br>
+<br>The one command that Vi has that Vim does not. (In Vi, this command puts the 
+<br>editor into “open” mode, a mode that no sane persons ever use if they can avoid it.) 
+<br>(Same as: :open. See page 157.) 
+<br>
+<br>:om 
+<br>
+<br>List all the mappings for operator-pending-mode maps. (Same as: :omap. See 
+<br>page 298.) 
+<br>
+<br>:om {lhs} List the operator-pending mapping of {lhs}. (See page 298.) 
+<br>
+<br>:om {lhs} {rhs} Define a keyboard mapping for operator-pending mode. (See 
+<br>page 298.) 
+<br>
+<br>:omap List all the operator-pending-mode mappings. (Same as: :om. See page 298.) 
+<br>
+<br>:omap {lhs} List the operator-pending-mode mapping of {lhs}. (See page 292.) 
+<br>
+<br>:omap {lhs} {rhs} Define a keyboard mapping for operator-pending mode. 
+<br>(See page 298.) 
+<br>
+<br>:omapc 
+<br>
+<br>-or
+<br>
+<br>
+<br>:omapclear Clear all the operator-pending-mode mappings. (Same as: :omapclear. 
+<br>See page 301.) 
+<br>
+<br>:[priority] ome {menu-item} {command-string} -or
+<br>
+<br>
+<br>:[priority] omenu {menu-item} {command-string} 
+<br>
+<br>Define a menu item that is 
+<br>available for operator-pending mode only.The priority determines its placement 
+<br>in a menu. Higher numbers come first.The name of the menu item is {menu-item}, 
+<br>and when the command is selected, the command {command-string} is executed. 
+<br>(Same as: :ome. See page 334.) 
+<br>
+<br>:on[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:only[!] Make the current window the only one. If ! is specified, modified files 
+<br>whose windows are closed will have their contents discarded. (Same as: 
+<br>:CTRL-W CTRL-O, CTRL-Wo, :on. See page 243.) 
+<br>
+<br>:ono {lhs} {rhs} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:onoremap {lhs} {rhs} Same as :omap, but does not allow remapping of the {rhs}. 
+<br>(Same as: :ono. See page 301.) 
+<br>
+<br>:[priority] onoreme {menu-item} {command-string} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:priorityonoremenu {menu-item} {command-string} Like :omenu, but the the 
+<br>{command-string} is not remapped. (Same as: :onoreme. See page 338.) 
+<br>
+<br>:op Enter an option-browsing window that enables you to view and set all the 
+<br>options. (Same as: :bro set, :browse set, :options. See page 342.) 
+<br>
+<br>
+<br>478 Appendix D Command-Mode Commands 
+<br>
+<br>:open 
+<br>
+<br>The one command that Vi has that Vim does not. (In Vi, this command 
+<br>puts the editor into “open” mode, a mode that no sane persons ever use if they can 
+<br>avoid it.) (Same as: :o. See page 157.) 
+<br>
+<br>:options Enter an option-browsing window that enables you to view and set all the 
+<br>options. (Same as: :bro set, :browse set, :op. See page 342.) 
+<br>
+<br>:ou {lhs} 
+<br>
+<br>-or:
+<br>ounmap {lhs} Remove an operator-pending-mode mapping. (Same as: :ounmap. See 
+<br>page 301.) 
+<br>:ounme {menu-item} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:ounmenu {menu-item} Remove the command-mode menu item named 
+<br>{menu-item}.The wildcard “*” will match all menu items. (Same as: :ounme. See 
+<br>
+<br>page 339.) 
+<br>:range[range] p -or:
+<br>range[range] P Print the specified lines. (Same as: :Print. See pages 100 and 308.) 
+<br>:pc[!] -or:
+<br>pclose[!] Close the preview window. Discard any changes if the force (!) option 
+<br>
+<br>is present. (Same as: CTRL-W CTRL-Z, CTRL-Wz, :pc. See page 276.) 
+<br>:pe {command} 
+<br>
+<br>-or:
+<br>perl {command} 
+<br>
+<br>Execute a single Perl command. Requires Vim be compiled with 
+<br>Perl support (not on by default). (Same as: :pe. See page 173.) 
+<br>
+<br>:[range] perld {command} 
+<br>
+<br>-or:[
+<br>range] perldo {command} Execute a Perl command on a range of lines.The Perl 
+<br>variable $_ is set to each line in range. (Same as: :perld. See page 173.) 
+<br>:[count]po[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count]pop[!] Go back count tags. If the current buffer has been modified, this 
+<br>command will fail unless the force (!) option is present. (Same as: :po. See page 
+<br>81.) 
+<br>
+<br>:[count]pp[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] ppop[!] Do a :pop command in the preview window. If the force option 
+<br>(!) is specified, discard any changes made on the file in the preview window. If a 
+<br>count is specified, pop that many tags. (Same as: :pp. See page 276.) 
+<br>
+<br>:pr 
+<br>
+<br>-or
+<br>
+<br>
+<br>:preserve Write out entire file to the swap file.This means that you can recover the 
+<br>edit session from just the swap file alone. (Same as: :pr. See pages 151 and 319.) 
+<br>
+<br>
+<br>Command-Mode Commands 479 
+<br>
+<br>:[count] prev {[+cmd]} {[file—list]} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] previous {[+cmd]} [{file—list]} Edit the previous file in the file list. 
+<br>(Same as: :prev. See page 43.) 
+<br>
+<br>:[range]print 
+<br>
+<br>-or:[
+<br>range]Print Print the specified lines. (Same as: :P. See pages 100 and 308.) 
+<br>:pro -or
+<br>
+<br>
+<br>:promptfind Open a Find dialog box. (Same as: :pro. See page 340.) 
+<br>:promptr 
+<br>
+<br>-or:
+<br>promptrepl Open a Replace dialog box. (Same as: :promptr. See page 340.) 
+<br>:pt[!] {identifier} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:ptag[!] {identifier} Open a preview window and do a :tag. Discard any changes 
+<br>in the preview window if the override (!) option is present. (Same as: :pt. See 
+<br>page 276.) 
+<br>
+<br>:ptj[!] {identifier} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:ptjump[!] {identifier} Open a preview window and do a :tjump. Discard any 
+<br>changes in the preview window if the override (!) option is present. (Same as: 
+<br>:ptj. See page 276.) 
+<br>
+<br>:ptl[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:ptlast[!] Do a :tlast in the preview window. Discard any changes in the preview 
+<br>window if the override (!) option is present. (Same as: :ptlast. See page 277.) 
+<br>
+<br>:[count] ptn[!] Open a preview window and do a :[count] tnext. Discard any 
+<br>changes in the preview window if the override (!) option is present. (Same as: 
+<br>:ptn. See page 276.) 
+<br>
+<br>:[count] ptN[!] 
+<br>
+<br>Same as :[count] ptnext!. (Same as: :ptNext, :ptprevious. See 
+<br>page 277.) 
+<br>
+<br>
+<br>:[count] ptnext[!] Open a preview window and do a :[count] tnext. Discard 
+<br>any changes in the preview window if the override (!) option is present. (Same as: 
+<br>:ptn. See page 276.) 
+<br>
+<br>:[count] ptNext[!] Same as :[count] ptnext!. (Same as: :ptNext, :ptprevious. See 
+<br>page 277.) 
+<br>
+<br>:[count] ptp[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] ptprevious[!] Do a :tprevious in the preview window. Discard any 
+<br>changes in the preview window if the override (!) option is present. (Same as: 
+<br>:ptN, :ptNext, :ptp. See page 277.) 
+<br>
+<br>
+<br>480 Appendix D Command-Mode Commands 
+<br>
+<br>:[count] ptr[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] ptrewind[!] Do a :trewind in the preview window. Discard any changes 
+<br>in the preview window if the override (!) option is present. (Same as: :ptr. See 
+<br>page 277.) 
+<br>
+<br>:pts[!] {identifier} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:ptselect[!] {identifier} Open a preview window and do a :tselect. Discard any 
+<br>changes in the preview window if the override (!) option is present. (Same as: 
+<br>:pts. See page 276.) 
+<br>
+<br>:[line] pu[!]! register 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[line] put[!]! register Put the text in the register after (before ! is specified) the 
+<br>specified line. If a register is not specified, it defaults to the unnamed register. (Same 
+<br>as: :pu. See page 318.) 
+<br>
+<br>:pw 
+<br>
+<br>-or
+<br>
+<br>
+<br>:pwd Print current working directory. (Same as: :pw. See page 314.) 
+<br>
+<br>:[range] py {statement} 
+<br>
+<br>Execute a single Python {statement}. (Same as: :python. See 
+<br>page 173.) 
+<br>
+<br>:[range] pyf {file} 
+<br>
+<br>Executes the Python program contained in {file}. (Same as: 
+<br>:pyfile. See page 173.) 
+<br>
+<br>:[range] pyfile {file} 
+<br>
+<br>Executes the Python program contained in {file}. (Same as: 
+<br>:pyf. See page 173.) 
+<br>
+<br>:[range] python {statement} 
+<br>
+<br>Execute a single Python {statement}.This works only if 
+<br>Python support was compiled into Vim; it is does not work by default. (Same as: 
+<br>:py. See page 173.) 
+<br>
+<br>:q[!] Close a window. If this is the last window, exit Vim.The command fails if this 
+<br>is the last window for a modified file, unless the force (!) option is present. (Same 
+<br>as: :CTRL-W CTRL-Q, CTRL-Wq, :quit. See pages 9, 46, 144, 202, and 242-243.) 
+<br>
+<br>:qa[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:qall[!] Close all windows. If the force option is present, any modifications that 
+<br>have not been saved will be discarded. (Same as: :qa. See page 242.) 
+<br>
+<br>:quit[!] Close a window. If this is the last window, exit Vim.The command fails if 
+<br>this is the last window for a modified file, unless the force (!) option is present. 
+<br>(Same as: CTRL-W CTRL-Q, CTRL-Wq, :q. See pages 9, 46, 144, 202, and 242-243.) 
+<br>
+<br>:r {filename} Read in the specified file and insert it after the current line. (Same as: 
+<br>:read. See pages 104, 135, 317, and 396.) 
+<br>
+<br>
+<br>Command-Mode Commands 481 
+<br>
+<br>:[line] r {file} Read the specified file (default = current file) and insert it after 
+<br>the given line (default = current line). (See page 317.) 
+<br>
+<br>:[line] r !{command} Run the given command, capture the output, and insert it 
+<br>after the given line (default = current line). (See page 317.) 
+<br>
+<br>:read {filename} Read in the specified file and insert it after the current line. (Same 
+<br>as: :r. See pages 104, 135, 317, and 396.) 
+<br>
+<br>:[line] read file Read the specified file (default = current file) and insert it after 
+<br>the given line (default = current line). (See page 317.) 
+<br>
+<br>:[line] read !{command} Run the given command, capture the output, and insert it 
+<br>after the given line. (Default = current line.) (See page 104.) 
+<br>
+<br>:rec[!] {file} -or
+<br>
+<br>
+<br>:recover[!] {file} Recover the editing session from the specified file. If no file is 
+<br>specified, the current file is used. If changes have been made to the file, this command 
+<br>will result in an error. If the force (!) option is present, attempting to 
+<br>recover a file changed in the current session will discard the changes and start 
+<br>recovery. (Same as: :rec. See page 152.) 
+<br>
+<br>:red Redo the last edit. (Same as: :redo. See page 318.) 
+<br>
+<br>:redi[!] {>|>>} {file} -or
+<br>
+<br>
+<br>:redir[!] {>|>>} {file} Copy messages to the file as they appear on the screen. If 
+<br>the override option (!) is present, the command will overwrite an existing file.The 
+<br>flag “>” tells the command to write the file; the “>>” indicates append mode.To 
+<br>close the output file, use the command :redir END. (Same as: :redi. See page 321.) 
+<br>
+<br>:redo Redo the last edit. (Same as: :red. See page 318.) 
+<br>
+<br>:reg {list} -or
+<br>
+<br>
+<br>:registers {list} Show the registers in list. If no list is specified, list all registers. 
+<br>(Same as: :reg. See page 222.) 
+<br>
+<br>:res count 
+<br>
+<br>Change the size of the current window to count. If no count is 
+<br>specified, make the window as large as possible. (Same as: CTRL-W CTRL-_, CTRL-W+, 
+<br>CTRL-W-, CTRL-W_, :resize. See page 49.) 
+<br>
+<br>:res +count 
+<br>
+<br>Increase the size of the current window by count. (Default = 1.) 
+<br>(Same as: CTRL-W CTRL-_, CTRL-W+, CTRL-W-, CTRL-W_, :resize-. See page 48.) 
+<br>
+<br>
+<br>:res -count 
+<br>
+<br>Decrease the size of the current window by count. (Default = 1.) 
+<br>Same as: CTRL-W CTRL-_, CTRL-W+, CTRL-W-, CTRL-W_, :resize-. See page 48.) 
+<br>
+<br>
+<br>:resize count Change the size of the current window to count. If no count is 
+<br>specified, make the window as large as possible. (Same as CTRL-W CTRL-_, CTRL-W+, 
+<br>CTRL-W-, CTRL-W_, :res. See page 49.) 
+<br>
+<br>
+<br>482 Appendix D Command-Mode Commands 
+<br>
+<br>:resize +count Increase the size of the current window by count. (Default = 1.) 
+<br>(Same as: CTRL-W+, :res +. See page 48.) 
+<br>
+<br>:resize -count Decrease the size of the current window by count. (Default = 1.) 
+<br>(Same as: CTRL-W-, :res -. See page 48.) 
+<br>
+<br>:[range] ret [!] tabstop 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[range] retab [!] tabstop Replace tabs at the current tab stop with tabs with the 
+<br>tab stops set at {tabstop}. If the ‘expandtab’ option is set, replace all tabs with space. 
+<br>If the force option (!) is present, multiple spaces will be changed into tabs where 
+<br>appropriate. (Same as: :ret. See pages 267-268.) 
+<br>
+<br>:retu {expression} -or:
+<br>return {expression} 
+<br>358.) 
+<br>Return a value from a function. (Same as: :retu. See page 
+<br>:rew {file-list} -or:
+<br>rewind {file-list} 
+<br>170.) 
+<br>Edit the first file in the list. (Same as: :rew. See pages 44 and 
+<br>:[range] ri {width} -or:[
+<br>range] right {width} Right-justify the specified lines. If the width of a line is 
+<br>
+<br>
+<br>(Same as: :ri. See page 115.) 
+<br>
+<br>:rv[!] {file} -or
+<br>
+<br>
+<br>:rviminfo[!] {file} Read the viminfo file specified. If the override option is present 
+<br>(!), settings in the file override the current settings. (Same as: :rv. See page 233.) 
+<br>
+<br>:[range] s /{from}/{to}/{flags} Change the regular expression {from} to the string 
+<br>
+<br>{to}. See :substitute for a list of flags. (Same as: :substitute. See pages 102, 144, 
+<br>
+<br>160-161, 167-168, 309, and 401.) 
+<br>
+<br>:[count] sa[!] {number} Do a :[count]split followed by :argument[!] 
+<br>
+<br>:[count] sal -or
+<br>
+<br>
+<br>:[count] sall Open a window for all the files being edited.When a count is 
+<br>
+<br>specified, open up to count windows. (Note that the count can be specified after 
+<br>
+<br>the command—for example, :all count.) (Same as: :all, :sal. See page 243.) 
+<br>
+<br>:[count] sargument[!] {number} Do a :[count]split followed by 
+<br>:argument[!] number. (Same as: :sa. See page 245.) 
+<br>
+<br>:sb Same as: :sbuffer. (See page 51.) 
+<br>
+<br>
+<br>Command-Mode Commands 483 
+<br>
+<br>:[count] sba 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] sball Open a window for each buffer. If a count is specified, open at most 
+<br>count windows. (Same as: :ba, :ball, :sba. See page 246.) 
+<br>
+<br>:sb number Shorthand for :split and :buffer number. (See page 51.) 
+<br>:sbl[!] 
+<br>
+<br>-or:
+<br>sblast[!] Shorthand for :split and :blast. (Same as: :sbl. See page 52.) 
+<br>:sbm count[count] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:sbmodified count[count] Shorthand for :split and :bmodified. (Same as: :sbm. See 
+<br>page 52.) 
+<br>
+<br>:[count] sbn Shorthand for :split followed by :[count] bnext. 
+<br>(Same as: :sbnext. See page 51.) 
+<br>
+<br>:[count] sbN Shorthand for :split and :[count] bprevious. (Same as: :sbNext, 
+<br>:sbp, :sbprevious. See page 52.) 
+<br>
+<br>:[count] sbnext Shorthand for :split followed by :[count] bnext. 
+<br>(Same as: :sbn. See page 51.) 
+<br>:[count] sbNext 
+<br>
+<br>Shorthand for :split and :[count] bprevious. 
+<br>(Same as: :sbN, :sbp, :sbprevious. See page 52.) 
+<br>:[count] sbp 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] sbprevious Shorthand for :split and :[count] bprevious. (Same as: :sbN, 
+<br>:sbNext, :sbprevious. See page 51.) 
+<br>
+<br>:sbr[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:sbrewind[!] Shorthand for :split and :brewind. (Same as: :sbr. See page 52.) 
+<br>
+<br>:sbuffer number Shorthand for :split and :buffer number. (Same as: :sb. See page 
+<br>51.) 
+<br>
+<br>:se List all options that are not set to the default. (Same as: :set. See pages 95, 100, 
+<br>379, 382, and 394.) 
+<br>
+<br>:se {option} Set Boolean option. Depreciated: For all other types of options, show 
+<br>the value of the option. (See page 379.) 
+<br>:se {option}:{value} -or
+<br>
+<br>
+<br>:se {option}={value} Set an {option} to a {value}. (See page 379.) 
+<br>:se {option}^={number} 
+<br>
+<br>-or:
+<br>se {option}[!] Invert a Boolean option. (See page 379.) 
+<br>
+<br>
+<br>484 Appendix D Command-Mode Commands 
+<br>
+<br>:se {option}& Set the option to the default value. (See page 379.) 
+<br>
+<br>:se {option}+={value} Add a number to a numeric option. For a string option, 
+<br>append the {value} to the string. (See page 379.) 
+<br>
+<br>:se {option}-={number} Subtract a number to a numeric option. For a string 
+<br>option, remove the {value} from the string. (See page 379.) 
+<br>
+<br>:se {option}? List the value of an option. (See page 379.) 
+<br>
+<br>:se {option}^={number} 
+<br>
+<br>Multiply a number to a numeric option. Prepend string to 
+<br>the beginning of the option. (See page 379.) 
+<br>
+<br>:se all 
+<br>
+<br>List all options. (See page 382.) 
+<br>
+<br>:se all& 
+<br>
+<br>Set all options to their default values. (See page 382.) 
+<br>
+<br>:se inv{option} Invert a Boolean option. (See page 380.) 
+<br>
+<br>:se no{option} Clear a Boolean option. (See page 380.) 
+<br>
+<br>:set 
+<br>
+<br>List all options not set to the default. (Same as: :se. See pages 18, 95, 100, 379, 
+<br>382, and 394.) 
+<br>
+<br>:set {option} Set Boolean option. Depreciated: For all other types of options, show 
+<br>the value of the option.Depreciated: show all others. (See page 382.) 
+<br>
+<br>:set {option}:{value} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:set {option}={value} 
+<br>
+<br>Set an option. (See page 382.) 
+<br>
+<br>:set {option}[!] 
+<br>
+<br>Invert a Boolean option. (See page 382.) 
+<br>:set {option}& Set the option to the default value. (See page 382.) 
+<br>:set {option}+={value} Add a number to a numeric option. Append a string to a 
+<br>string option. (See page 382.) 
+<br>:set {option}-={value} Subtract a number from a numeric option. Remove a 
+<br>string from a string option. (See page 382.) 
+<br>:set {option}? List the value of an option. (See page 382.) 
+<br>:set {option}^={number} Multiply a number to a numeric option. Prepend string to 
+<br>the beginning of the option. (See page 382.) 
+<br>:set all List all options. (See page 382.) 
+<br>:set all& 
+<br>
+<br>Set all options to their default values. (See page 382.) 
+<br>
+<br>:set inv{option} 
+<br>
+<br>Invert a Boolean option. (See page 380.) 
+<br>
+<br>:set no{option} Clear a Boolean option. (See page 380.) 
+<br>
+<br>:[count] sf[!] +command {file} 
+<br>
+<br>-or
+<br>
+<br>
+<br>
+<br>Command-Mode Commands 485 
+<br>
+<br>:[count] sfind[!] +command {file} A combination of :count[count] split and :find. 
+<br>(Same as: :sf. See page 281.) 
+<br>
+<br>:sh 
+<br>
+<br>-or
+<br>
+<br>
+<br>:shell Suspend the editor and enter command mode (a.k.a. run a shell). (Same as: 
+<br>:sh. See pages 104, 144, 152, 319, and 346.) 
+<br>
+<br>:si {char} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:simlat {char} Simulate the pressing of Alt-{char}. (See page 344.) 
+<br>
+<br>:sl {seconds} -or
+<br>
+<br>
+<br>:sl {milliseconds)m Sleep the specified number of seconds or milliseconds. (Same 
+<br>as: gs, :sleep. See page 156.) 
+<br>
+<br>:sla[!]! 
+<br>
+<br>-or
+<br>
+<br>
+<br>:slast![!] :split followed by :last. If ! is specified, modified files whose windows 
+<br>are closed will have their contents discarded. (Same as: :sla. See page 245.) 
+<br>
+<br>:sleep {seconds} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:sleep {milliseconds)m Sleep the specified number of seconds or milliseconds. 
+<br>(Same as: gs, :sl. See page 156.) 
+<br>
+<br>:sm {char} Simulate the pressing of Alt-{char}. (Same as: :smagic. See page 310.) 
+<br>
+<br>: [range] sm /{from}/{to}/flags 
+<br>
+<br>-or
+<br>
+<br>
+<br>: [range] smagic /{from}/{to}/flags Substitute the pattern {to} for the pattern 
+<br>{from} for the given range assuming that the “magic” option is set for the duration 
+<br>of the command. (Same as: :sm. See page 310.) 
+<br>
+<br>:[count] sn[!] [file-list] :split followed by :[count] next If ! is specified, discard 
+<br>any changes to buffers that have been modified, but not written. If file-list is 
+<br>specified, change the arguments to that list. (Same as: :snext. See page 245.) 
+<br>
+<br>:[count] sN[!] :split followed by :count[count] previous. If ! is specified, discard 
+<br>any changes to buffers that have been modified, but not written. (Note:The count 
+<br>parameter can be specified after the command—for example, :sN count[count] .) 
+<br>(Same as: :sNext, :spr, :sprevious. See page 245.) 
+<br>
+<br>:[count] snext[!] file-list :split followed by :[count] next If ! is specified, discard 
+<br>any changes to buffers that have been modified, but not written. If file-list is 
+<br>specified, change the arguments to that list. (Same as: :sn. See page 246.) 
+<br>
+<br>:[count] sNext[!] :split followed by :[count] previous. If ! is specified, discard any 
+<br>changes to buffers that have been modified, but not written. (Note:The count 
+<br>parameter can be specified after the command—for example, :sN [count] .) (Same 
+<br>as: :sN, :spr, :sprevious. See page 245.) 
+<br>
+<br>
+<br>486 Appendix D Command-Mode Commands 
+<br>
+<br>:sni {command} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:sniff {command} Perform a command using the interface to Sniff+. If no command 
+<br>is present, list out information on the current connection. Sniff+ support has 
+<br>to be compiled in for this to work (not on by default). (Same as: :sni. See page 
+<br>174.) 
+<br>
+<br>: [range] sno /{from}/{to}/flags 
+<br>
+<br>-or
+<br>
+<br>
+<br>: [range] snomagic /{from}/{to}/flags Substitute the pattern {to} for the pattern 
+<br>{from} for the given range assuming that the ‘nomagic’ option is set. (Same as: 
+<br>:sno. See page 310.) 
+<br>
+<br>:so {file} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:source {file} Read in a session file. (Actually read in a whole set of commands.) 
+<br>(Same as: :so. See pages 95, 294, and 402.) 
+<br>
+<br>:[count] sp [+cmd] [file-name] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] split [+cmd] [file-name] Split the current window. If a count is specified, 
+<br>make the new window count lines high. If a filename is present, put that file in the 
+<br>
+<br>CTRL-WS, :sp. See pages 45, 47-48, 162, and 247.) 
+<br>
+<br>:[count] spr[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] sprevious[!] :split followed by :[count] previous. If ! is specified, discard 
+<br>any changes to buffers that have been modified, but not written. (Note:The 
+<br>count parameter can be specified after the command—for example, :sN [count] .) 
+<br>(Same as: :sN, :sNext, :spr. See page 245.) 
+<br>
+<br>:sr[!] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:srewind[!] :split followed by :rewind. If ! is specified, modified files whose 
+<br>windows are closed will have their contents discarded. (Same as: :sr. See page 245.) 
+<br>
+<br>:st! Suspend the editor (UNIX terminal only). If the ! option is not present and 
+<br>‘autowrite’ is set, all changed files will be saved. (Same as: :stop, :sus, :suspend. 
+<br>See page 156.) 
+<br>
+<br>:[count] sta[!] {function} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] stag[!]! {function} 
+<br>
+<br>A combination of :split and :tag. If a count is 
+<br>specified it is the height of the new window. (Same as: :sta. See page 81.) 
+<br>
+<br>:star[!]! 
+<br>
+<br>-or
+<br>
+<br>
+<br>:startinsert[!] ! Begin insert mode as if a normal i command had been entered. 
+<br>If the ! is present, the insert starts at the end of line as if an A command had been 
+<br>issued. (Same as: :star. See page 318.) 
+<br>
+<br>
+<br>Command-Mode Commands 487 
+<br>
+<br>:stj[!]! {ident} 
+<br>
+<br>-or:
+<br>stjump[!]! {ident} Do a :split and a :tjump. (Same as: :stj. See page 84.) 
+<br>:stop[!] ! Suspend the editor (UNIX terminal only). If the ! option is not present 
+<br>
+<br>and ‘autowrite’ is set, all changed files will be saved. (Same as: :st, :sus, :suspend. 
+<br>See page 156.) 
+<br>:sts[!]! {ident} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:stselect[!]! {ident} Do a :split and a :tselect. (Same as: :sts. See page 84.) 
+<br>:[range] substitute /{[from}]/{[to}]/{[flags}] Change the regular expression 
+<br>{from} to the string {to}. (Same as: :s. See pages 102, 144, 160-161, 167-168, 309, 
+<br>and 401.) The {flags} include the following: 
+<br>
+<br>c Confirm. Ask before making a change. 
+<br>e If the search pattern fails, do not issue an error message (useful for scripts). 
+<br>g Global. Change each occurrence on the line (not just the first one). 
+<br>i Ignore case. 
+<br>p Print each changed line. 
+<br>r When {from} is empty, use the last search pattern rather than the last {from} 
+<br>
+<br>for a :substitute command. (See page 100.) 
+<br>:sun [count] 
+<br>
+<br>-or:
+<br>sunhide [count] Open a new window for all hidden buffer. Limit the number of 
+<br>window to count, if specified. (Same as: :sun, :unh, :unhide. See page 244.) 
+<br>:sus[!] -or
+<br>
+<br>
+<br>:suspend[!] Suspend the editor (UNIX terminal only). Actually, works in Win32 
+<br>also.). If the ! option is not present and ‘autowrite’ is set, all changed files will be 
+<br>saved. (Same as: :stop, :sus. See page 156.) 
+<br>
+<br>:sv [+command] [filename] -or
+<br>
+<br>
+<br>:sview [+command] [file-name] Split the window like :split.The only difference is 
+<br>that the file is opened for viewing. (Same as: :sv. See page 48.) 
+<br>
+<br>:sw 
+<br>
+<br>-or
+<br>
+<br>
+<br>:swapname List name of the current swap file. (Same as: :sw. See page 150.) 
+<br>
+<br>:sy List out all the syntax elements. (Same as: :syntax. See pages 96, 394, and 
+<br>
+<br>405-407.) 
+<br>
+<br>:sy case match Syntax definitions are case sensitive. In other words, the case of the 
+<br>letters must match. (See page 407.) 
+<br>
+<br>
+<br>488 Appendix D Command-Mode Commands 
+<br>
+<br>:sy case ignore Syntax definitions are case not sensitive. In other words, case 
+<br>differences are ignored. (See page 407.) 
+<br>
+<br>:sy clear Clear out any existing syntax definitions. (See page 407.) 
+<br>
+<br>:sy cluster {name} contains={groups} add={groups} remove={group} Define a 
+<br>cluster of syntax groups. (See page 413.) 
+<br>
+<br>:sy sync ccomment group-name minlines={min} maxlines={max} Tell Vim to synchronize 
+<br>based on C-style comments. If a group name is specified, use that group for 
+<br>highlighting; otherwise, use the group name Comment.The ‘minlines’ and 
+<br>‘maxlines’ options tell Vim how much to look backward through the file for a 
+<br>comment. (See page 414.) 
+<br>
+<br>:sy include @{cluster} {file} Read in a syntax file and put all the defined groups 
+<br>in the specified cluster. (See page 413.) 
+<br>
+<br>:sy keyword {group} {keyword} ... {keyword} options Define a set of keywords for 
+<br>syntax highlighting.They will be highlighted according to {group-name}.The 
+<br>options may appear anywhere within the {keyword} list. Options can include ‘contained’, 
+<br>‘nextgroup’, ‘skipwhite’, ‘skipnl’, ‘skipempty’, and ‘transparent’. 
+<br>Keywords for abbreviations can be defined like ‘abbreviation’.This matches both 
+<br>‘abb’ and ‘abbreviation’. (See page 408.) 
+<br>
+<br>:sy list {group-name} List out the named syntax groups. (See page 414.) 
+<br>
+<br>:sy list @{cluster-name} List out the elements for syntax cluster. (See page 414.) 
+<br>
+<br>:sy match {group} excludenl {pattern} options Define a regular expression that 
+<br>matches a syntax element. Options can be ‘contained’, ‘nextgroup’, ‘skipwhite’, 
+<br>‘skipnl’, ‘skipempty’, ‘transparent’, and ‘contains’. (See page 408.) 
+<br>
+<br>:sy region options matchgroup={group} keepend excludenl \ start={pattern} 
+<br>
+<br>skip={pattern} end={pattern} Define a syntax-matching region that starts and 
+<br>ends with the specified pattern. Options can be ‘contained’, ‘nextgroup’, ‘skipwhite’, 
+<br>‘skipnl’, ‘skipempty’, ‘transparent’, ‘contains’, and ‘oneline’. (See 
+<br>page 408.) 
+<br>
+<br>:sy sync clear Remove all syntax synchronization directives. (See page 414.) 
+<br>
+<br>:sy sync clear {sync-group-name} sync-group-name ... Clear all the syntax synchronization 
+<br>commands for the named groups. (See page 414.) 
+<br>
+<br>:sy sync match {sync-group-name} grouphere {group-name} {pattern} 
+<br>
+<br>Define a 
+<br>synchronization command (in the group {sync-group-name}) that tells Vim that when 
+<br>it sees {pattern} that the group {group-name} follows the match. (See page 414.) 
+<br>
+<br>:sy sync match {sync-group-name} groupthere {group-name} {pattern} Define a 
+<br>synchronization command (in the group {sync-group-name}) that tells Vim that when 
+<br>it sees {pattern} that the group {group-name} precedes the match. (See page 414.) 
+<br>
+<br>
+<br>Command-Mode Commands 489 
+<br>
+<br>:sy sync minlines={min} 
+<br>
+<br>Define the minimum number of lines for a brute-force 
+<br>synchronization match. (See page 414.) 
+<br>
+<br>
+<br>:sy sync match {match-specification} Define a match or region to be skipped 
+<br>during synchronization. (See page 414.) 
+<br>
+<br>:sync 
+<br>
+<br>-or
+<br>
+<br>
+<br>:syncbind Cause all scroll-bound windows to go to the same location. (Same as: 
+<br>:sync. See page 276.) 
+<br>
+<br>:syntax List out all the syntax elements. (Same as: :sy. See pages 96, 394, and 405407.) 
+<br>
+<br>
+<br>:syntax case match Syntax definitions are case sensitive. In other words, the case of 
+<br>the letters must match. (See page 407.) 
+<br>
+<br>:syntax case ignore Syntax definitions are not case sensitive. In other word, case differences 
+<br>are ignored. (See page 407.) 
+<br>
+<br>:syntax clear Clear out any existing syntax definitions. (See page 407.) 
+<br>
+<br>:syntax cluster {name} contains={groups} add={groups} remove={group} 
+<br>
+<br>Define a 
+<br>cluster of syntax groups. (See page 414.) 
+<br>
+<br>:syntax sync ccomment group-name minlines={min} maxlines={max} Tell Vim to 
+<br>synchronize based on C-style comments. If a group name is specified, use that 
+<br>group for highlighting; otherwise, use the group name ‘Comment’.The ‘minlines’ 
+<br>and ‘maxlines’ options tell Vim how much to look backward through the file for a 
+<br>comment. (See page 414.) 
+<br>
+<br>:syntax include @{cluster} {file} Read in a syntax file and put all the defined 
+<br>groups in the specified cluster. (See page 414.) 
+<br>
+<br>:syntax keyword {group} {keyword} ... {keyword} options Define a set of keywords 
+<br>for syntax highlighting.They will be highlighted according to {group-name}. 
+<br>The options may appear anywhere within the {keyword} list. Options can 
+<br>include ‘contained’, ‘nextgroup’ ‘skipwhite’, ‘skipnl’, ‘skipempty’, and 
+<br>‘transparent’. Keywords for abbreviations can be defined like ‘abbreviation’. 
+<br>This matches both ‘abb’ and ‘abbreviation’. (See page 408.) 
+<br>
+<br>:syntax list {group-name} List out the named syntax groups. (See page 414.) 
+<br>
+<br>:syntax list @{cluster-name} List out the elements for syntax cluster. (See page 
+<br>414.) 
+<br>
+<br>:syntax match {group} excludenl {pattern} options Define a regular expression 
+<br>that matches a syntax element. Options can be ‘contained’, ‘nextgroup’, ‘skipwhite’, 
+<br>‘skipnl’, ‘skipempty’, ‘transparent’, and ‘contains’. (See page 408.) 
+<br>
+<br>
+<br>490 Appendix D Command-Mode Commands 
+<br>
+<br>:syntax region options matchgroup={group} keepend excludenl \ start={pattern} 
+<br>skip={pattern} end={pattern} Define a syntax-matching region that starts and 
+<br>ends with the specified pattern. Options can be ‘contained’, ‘nextgroup’, 
+<br>‘skipwhite’, ‘skipnl’, ‘skipempty’, ‘transparent’, ‘contains’, and ‘oneline’. 
+<br>(See page 408.) 
+<br>:syntax sync clear Remove all syntax synchronization directives. (See page 414.) 
+<br>:syntax sync clear {sync-group-name} sync-group-name ... Clear all the syntax 
+<br>synchronization commands for the named groups. (See page 414.) 
+<br>
+<br>:syntax sync match {sync-group-name} grouphere {group-name} {pattern} 
+<br>
+<br>Define a 
+<br>synchronization command (in the group {sync-group-name}) that tells Vim that when 
+<br>it sees {pattern} that the group {group-name} follows the match. (See page 414.) 
+<br>
+<br>:syntax sync match {sync-group-name} groupthere {group-name} {pattern} 
+<br>
+<br>Define 
+<br>a synchronization command (in the group {sync-group-name}) that tells Vim that 
+<br>when it sees {pattern} that the group {group-name} precedes the match. (See page 
+<br>414.) 
+<br>
+<br>:syntax sync minlines={min} 
+<br>
+<br>Define the minimum number of lines for a brute-
+<br>force synchronization match. (See page 414.) 
+<br>
+<br>:syntax sync region {region-specification} Define a match or region to be 
+<br>skipped during synchronization. (See page 414.) 
+<br>
+<br>:[range] t {address} Copy the range of lines below {address}. (Same as: :copy. 
+<br>See page 306.) 
+<br>:[count] ta! Go forward count tags. (Same as: :tag. See pages 81-82.) 
+<br>:ta! /{pattern} Search for all functions that match the regular expression defined 
+<br>by {pattern} and jump to the first one. (See pages 81-82.) 
+<br>:[count] tag! Go forward count tags. (Same as: :ta. See pages 81-82.) 
+<br>
+<br>:tag! /{pattern} Search for all functions that match the regular expression defined 
+<br>by {pattern} and jump to the first one. (See pages 81-82.) 
+<br>:tags List the tags. (See page 80.) 
+<br>:tc {command} 
+<br>
+<br>-or:
+<br>tcl {command} Execute a single Tcl {command}. (Same as: :tc. See page 174.) 
+<br>:[range] tcld {command} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[range] tcldo {command} Execute a Tcl {command} once for each line in the range. 
+<br>The variable “line” is set to the contents of the line. (Same as: :tcld. See page 174.) 
+<br>
+<br>
+<br>Command-Mode Commands 491 
+<br>
+<br>:tclf {file} -or:
+<br>tclfile {file} 
+<br>174.) 
+<br>:te {name} 
+<br>Execute the Tcl script in the given {file}. (Same as: :tclf. See page 
+<br>-or:
+<br>tearoff {name} 
+<br>:tj! ident -or-
+<br>Tear off the named menu. (Same as: :te. See page 339.) 
+<br>:tjump! ident Like :tselect, but if there is only one tag, automatically pick it. (Same 
+<br>
+<br>as: :tj. See page 83.) 
+<br>:[count] tl 
+<br>
+<br>-or:[
+<br>count] tlast Go to the last tag. (Same as: :tl. See page 81.) 
+<br>:tm {menu-item} {tip} 
+<br>
+<br>-or:
+<br>tmenu {menu-item} {tip} Define the “tip” text that displays when the cursor is 
+<br>
+<br>placed over an icon in the toolbar. (Same as: :tm. See page 337.) 
+<br>:[count] tn Go to the next tag. (Same as: :tnext. See page 83.) 
+<br>:[count] tN Go to the previous tag. (Same as: :tNext, :tp, :tprevious. See page 83.) 
+<br>
+<br>:[count] tnext Go to the next tag. (Same as: :tn. See page 83.) 
+<br>
+<br>:[count] tNext Go to the next tag. (Same as: :tN, :tp, :tprevious. See page 83.) 
+<br>:[count] tp 
+<br>
+<br>-or:[
+<br>count] tprevious Go to the previous tag. (Same as: :tp. See page 83.) 
+<br>:[count] tr -or
+<br>
+<br>
+<br>:[count] trewind Go to the first tag. (Same as: :tr. See page 83.) 
+<br>:ts! ident 
+<br>
+<br>-or
+<br>
+<br>
+<br>:tselect! ident List all the tags that match ident. If ident is not present, use the 
+<br>results of the last :tag command. After listing the tags, give the user a chance to 
+<br>select one and jump to it. (Same as: :ts. See page 83.) 
+<br>
+<br>:tu {menu-item} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:tunmenu {menu-item} Remove a “tip” from an menu item. (Same as: :tu. See page 
+<br>339.) 
+<br>
+<br>:u 
+<br>
+<br>Undo a change. (Same as: :undo. See page 318.) 
+<br>:una {lhs} 
+<br>
+<br>-or:
+<br>unabbreviate {lhs} Remove the abbreviation. (Same as: :una. See page 296.) 
+<br>
+<br>
+<br>492 Appendix D Command-Mode Commands 
+<br>
+<br>:undo Undo a change. (Same as: :u. See page 318.) 
+<br>:unh count[count] -or
+<br>
+<br>
+<br>:unhide count[count] Write the file in all windows. (Same as: :su, :sunhide, :unh. 
+<br>See page 244.) 
+<br>
+<br>:unl[!] {variable} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:unlet[!]! {variable} Remove the definition of the variable. If the force (!) 
+<br>option is present, do not issue an error message if the variable is not defined. (Same 
+<br>as: :unl. See page 353.) 
+<br>
+<br>:unm[!] {lhs} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:unmap {lhs} Remove a mapping. (Same as: :unm. See pages 299 and 301.) 
+<br>
+<br>:[mode] unme {menu-item} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[mode] unmenu {menu-item} Remove the menu item named {menu-item}.The 
+<br>wildcard “*” will match all menu items. (Same as: :unme. See page 339.) 
+<br>
+<br>:[range] up[!] [file] 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[range] up[!] >> [file] -or
+<br>
+<br>
+<br>:[range] up !{command} 
+<br>
+<br>-or:[
+<br>range] update[!] [file] 
+<br>
+<br>
+<br>-or
+<br>
+<br>
+<br>:[range] update[!] >> [file] -or
+<br>
+<br>
+<br>:[range] update !{command} Acts just like the :write command if the buffer is 
+<br>modified. Does absolutely nothing if it’s it is not. (Same as: :up. See page 316.) 
+<br>
+<br>: [range] v /{pattern}/ {command} Perform {command} on all lines that do not have 
+<br>{pattern} in them in the given range. (Same as: :vglobal. See page 312.) 
+<br>
+<br>:ve 
+<br>
+<br>-or:
+<br>version List version and configuration information, including the list of VIMRC 
+<br>files read in at startup. (Same as: :ve. See pages 95-96.) 
+<br>: [range] vg /{pattern}/ {command} -or
+<br>
+<br>
+<br>: [range] vglobal /{pattern}/ {command} Perform {command} on all lines that do 
+<br>
+<br>:vi [+cmd] {file} Close the current file and start editing the named file. If +cmd is 
+<br>specified, execute it as the first editing command. (Same as: :visual. See page 41.) 
+<br>
+<br>:vie [+cmd] {file} 
+<br>
+<br>-or
+<br>
+<br>
+<br>:view [+cmd] {file} Like :vi, but open the file read-only. (Same as: :vie. See page 
+<br>41.) 
+<br>
+<br>
+<br>Command-Mode Commands 493 
+<br>
+<br>:visual [+cmd] {file} Close the current file and start editing the named file. If 
+<br>+cmd is specified, execute it as the first editing command. (Same as: :vi. See page 
+<br>41.) 
+<br>
+<br>:vm 
+<br>
+<br>List all the mappings for visual-mode maps. (Same as: :vmap. See pages 297-298.) 
+<br>:vm {lhs} List the visual mode mapping of {lhs}. (See pages 297-298.) 
+<br>
+<br>:vm {lhs} {rhs} Define a keyboard mapping for visual mode. (See pages 297-298.) 
+<br>:vmap List all the visual-mode mappings. (Same as: :vm. See pages 297-298.) 
+<br>:vmap {lhs} List the visual-mode mapping of {lhs}. (See page 297-298.) 
+<br>
+<br>:vmap {lhs} {rhs} Define a keyboard mapping for visual mode. (See page 297-298.) 
+<br>:vmapc 
+<br>
+<br>-or:
+<br>vmapclear Clear all the visual-mode mappings. (Same as: :vmapc. See page 301.) 
+<br>:[priority] vme {menu-item} {command-string} 
+<br>
+<br>-or:[
+<br>priority] vmenu {menu-item} {command-string} Define a menu item that is available 
+<br>for visual mode only.The priority determines its placement in a menu. Higher 
+<br>command is selected, the command {command-string} is executed. (Same as: :vme. 
+<br>See page 334.) 
+<br>:vn {lhs} {rhs} 
+<br>
+<br>-or:
+<br>vnoremap {lhs} {rhs} Same as :vmap, but does not allow remapping of the {rhs}. 
+<br>(Same as: :vn. See page 301.) 
+<br>:[priority] vnoreme {menu-item} {command-string} 
+<br>
+<br>-or:[
+<br>priority] vnoremenu {menu-item} {command-string} 
+<br>
+<br>Like :vmenu, but the {command-
+<br>string} is not remapped. (Same as: :vnoreme. See page 338.) 
+<br>
+<br>:[range] w[!]! filename Write out the specified file. If no filename is specified, write 
+<br>to the current file.The range defaults to the entire file. If the force (!) option is 
+<br>present, overwrite an existing file, or override the read-only flag. (Same as: :write. 
+<br>See pages 41-42, 104, 134, 144, 151, 168, 242, and 315-316) 
+<br>
+<br>:[range] w[!]! >> file Append the specified range to the file.This will fail if the file 
+<br>does not exist unless the force (!) option is specified. (See page 310.) 
+<br>
+<br>:wa 
+<br>
+<br>-or:
+<br>wall Write the file in all windows. (Same as: :wa. See page 242.) 
+<br>:wh {expression} 
+<br>
+<br>-or:
+<br>while {expression} Start a loop. (Same as: :wh. See page 356.) 
+<br>
+<br>
+<br>494 Appendix D Command-Mode Commands 
+<br>
+<br>:wi {width} {height} 
+<br>
+<br>Obsolete older command to set the number of rows and 
+<br>columns. Use :set rows and :set columns instead. (Same as: :winsize. See page 
+<br>
+<br>325.) 
+<br>:winp {X} {Y} -or:
+<br>winpos {X} {Y} Set the position of the window on the screen. (Same as: :winp. See 
+<br>
+<br>page 325.) 
+<br>
+<br>:winsize {width} {height} 
+<br>
+<br>Obsolete older command to set the number of rows and 
+<br>columns. Use :set rows and :set columns instead. (Same as: :wi. See page 325.) 
+<br>
+<br>:wn 
+<br>
+<br>Shorthand for :write and :next. (Same as: :wnext. See pages 42-43.) 
+<br>
+<br>:[count] wnext[!] {+command} -or
+<br>
+<br>
+<br>:[count] wNext[!] {+command} 
+<br>
+<br>Shorthand for :write and :[count] next. 
+<br>(Same as: :wN, :wp, :wprevious. See page 43.) 
+<br>
+<br>:wp 
+<br>
+<br>-or
+<br>
+<br>
+<br>:[count] wprevious[!] Shorthand for :write and :[count] previous. 
+<br>(Same as: :wN, :wNext, :wp. See page 43.) 
+<br>
+<br>:[range] wq[!] file Write the file and exit. If a range is specified, only write the 
+<br>specified lines. If a file is specified, write the data to that file.When the override 
+<br>option (!) is present, attempt to overwrite existing files or read-only files. (See 
+<br>pages 202 and 322.) 
+<br>
+<br>:wqa[!] -or
+<br>
+<br>
+<br>:wqall[!] Shorthand for :wall and :qall. (Same as: :wqa, :xa, :xall. See page 
+<br>242.) 
+<br>
+<br>:write[!] Write out the current file. (See page 31.) 
+<br>
+<br>:[range] write[!]! {filename} Write out the specified file. If no filename is specified, 
+<br>write to the current file.The range defaults to the entire file. If the force (!) 
+<br>option is present, overwrite an existing file, or override the read-only flag. (Same as: 
+<br>:w. See pages 41-42, 104, 134, 144, 151, 168, 242, and 315-316.) 
+<br>
+<br>:[range] write[!]! >> {file} Append the specified range to the file.This will fail if 
+<br>the file does not exist unless the force (!) option is specified. (See page 310.) 
+<br>
+<br>:wv[!]! {file} -or
+<br>
+<br>
+<br>:wviminfo[!]! {file} Write the viminfo file specified. If the override option is present 
+<br>(!), any existing file will be overwritten. (Same as: :wv. See page 233.) 
+<br>
+<br>:[range] x[!]! file If the file has been modified, write it.Then exit. If the override 
+<br>(!) option is present, overwrite any existing file. (Same as: :xit. See page 202.) 
+<br>
+<br>
+<br>Command-Mode Commands 495 
+<br>
+<br>:X Prompt for an encryption key and assign the resulting value to the “key” option. 
+<br>(See page 143.) 
+<br>
+<br>:range ~flags count Repeat the last substitution, but the last search string as the 
+<br>{from} pattern rather than the {from} from the last substitution. (See page 311.) 
+<br>
+<br>:[range] xit[!] {file} If the file has been modified, write it.Then exit. If the override 
+<br>(!) option is present, overwrite any existing file. (Same as: :x. See page 202.) 
+<br>
+<br>:[range] y {register} -or
+<br>
+<br>
+<br>:[range] yank {register} Yank the range (default = current line) into the register 
+<br>(default = the unnamed register). (Same as: :y. See page 318.) 
+<br>
+<br>:[line] z{code} count[count] List the given line (default = current) and a few 
+<br>lines after it.The code controls what section of the text is listed.The count defines 
+<br>what “a few” is. (See page 309.) 
+<br>
+<br>:map Mode Table 
+<br>
+<br>NVO N V O IC I C 
+<br>:map :nm :vm :om :map! :im :cm 
+<br>:nmap :vmap :omap :imap :cmap 
+<br>:no :nn :vn :ono :no! :ino :cno 
+<br>:noreamp :nnremap :vnoremap :onoremap :noremap! :inoremap :cnoremap 
+<br>:unm :nun :vu :ou :unm! :iu :cu 
+<br>:unmap :numap :vumap :oumap :unmap! :iunmap :cunmap 
+<br>:mapc :nmapc :vmapc :omapc :mapc! :imapc :cmapc 
+<br>
+<br>:mapclear :nmapclear :vmapclear :omapclear :mapclear! :imapclear :cmapclear 
+<br>
+<br>Modes 
+<br>
+<br>N Normal 
+<br>V Visual 
+<br>O Operator pending 
+<br>I Insert 
+<br>C Command line 
+<br>
+<br>
+<br>Visual-Mode Commands 
+<br>
+<br><Esc> Cancel visual mode. (See page 57.) 
+<br>CTRL-] Jump to highlighted tag. (See page 60.) 
+<br>CTRL-\ CTRL-N Enter normal mode. (See page 58.) 
+<br>CTRL-G Toggle between select and visual mode. (See page 259.) 
+<br>CTRL-V Switch to visual block mode or exit block visual mode. (See 
+<br>
+<br>
+<br>page 59.) 
+<br>!program Pipe the selected text through an external program. (See 
+<br>
+<br>page 57.) 
+<br>$ Move to the end of the line. (See page 63.) 
+<br>< Shift lines to the left (different in block visual mode.) (See page 
+<br>
+<br>60.) 
+<br>= Indent the lines. (See page 60.) 
+<br>> Shift lines to the right (different in block visual mode.) 
+<br>:command Execute a colon-mode command on the selected lines. 
+<br>
+<br>~ 
+<br>
+<br>Invert the case of the selected text. 
+<br>“{register}c Delete and enter insert mode. (See page 59.) 
+<br>“{register}C Delete the selected lines and enter insert mode. (See page 59.) 
+<br>“{register}d Delete the highlighted text. (See pages 56, 251, and 252.) 
+<br>
+<br>
+<br>498 Appendix E Visual-Mode Commands 
+<br>
+<br>“{register}D 
+<br>
+<br>g? 
+<br>gJ 
+<br>
+<br>gq 
+<br>gv 
+<br>
+<br>J 
+<br>K 
+<br>
+<br>o 
+<br>
+<br>r 
+<br>
+<br>R 
+<br>“{register}s 
+<br>“{register}s 
+<br>u 
+<br>U 
+<br>V 
+<br>
+<br>“{register}x 
+<br>“{register}X 
+<br>“{register}y 
+<br>“{register}Y 
+<br>
+<br>Delete the highlighted lines. (See page 58.) 
+<br>Rot13 the text. (See page 257.) 
+<br>Join the selected lines with no spaces inserted between the 
+<br>words. (See pages 59 and 256.) 
+<br>Format a block. (See page 256.) 
+<br>Toggle between the current and previous visual-mode selection. 
+<br>(See pages 252-253.) 
+<br>Join the selected lines.(See pages 59 and 256.) 
+<br>Look up the selected word using the man command. (See page 
+<br>60.) 
+<br>Jump to the other end of a visual selection. (See pages 254 and 
+<br>255.) 
+<br>Delete and enter insert mode (different in block visual mode.) 
+<br>(See page 59.) 
+<br>Delete the selected lines and enter insert mode. (See page 59.) 
+<br>Delete and enter insert mode. (See page 59.) 
+<br>Delete the selected lines and enter insert mode. (See page 59.) 
+<br>Make the selected case all lowercase. (See page 255.) 
+<br>Make the selected case all uppercase. (See page 255.) 
+<br>Enter line visual mode, or exit to normal mode. (See page 59.) 
+<br>Delete the highlighted text. (See pages 56, 251, and 252.) 
+<br>Delete the highlighted lines. (See page 58.) 
+<br>Yank the highlighted text into a register. (See pages 59, 162, 156.) 
+<br>Yank the highlighted lines into a register. (See page 59.) 
+<br>
+<br>
+<br>Visual Block Commands 
+<br>
+<br>
+<br>> 
+<br>< 
+<br>Astring<Esc> 
+<br>cstring<Esc> 
+<br>
+<br>
+<br>Cstring<Esc> 
+<br>
+<br>Istring<Esc> 
+<br>O 
+<br>rchar 
+<br>
+<br>Move the block to the right. (See page 64.) 
+<br>Move the block to the left. (See page 164.) 
+<br>Append string to the right side of each line. (See page 63.) 
+<br>Delete the selected text and then insert the string on each line. 
+<br>(See page 62.) 
+<br>Delete selected text to end of line, then insert on each line. (See 
+<br>page 62.) 
+<br>Insert text on the left side of each line. (See page 60.) 
+<br>Go to the other corner diagonally. (See page 255.) 
+<br>Replace all the text with a single character. (See page 64.) 
+<br>
+<br>
+<br>
+<br>Select-Mode Commands 499 
+<br>
+<br>Select-Mode Commands 
+<br>
+<br>Starting Select Mode 
+<br>
+<br>gCTRL-H 
+<br>
+<br>Start select block mode. (See page 258.) 
+<br>
+<br>gh 
+<br>
+<br>Start select character mode. (See page 258.) 
+<br>
+<br>gH 
+<br>
+<br>Start select line mode. (See page 258.) 
+<br>
+<br>gV 
+<br>
+<br>Do not automatically reselect an area after a command has been 
+<br>executed. (See page 260.) 
+<br>
+<br>Select Mode Commands 
+<br>
+<br>Arrow, CTRL, Extend selection. (See page 258.) 
+<br>Function Keys 
+<br>(cursor motion) 
+<br>
+<br>
+<br>string<Esc> Delete the selected text and replace it with string. (See page 258.) 
+<br><BS> Backspace. (See page 258.) 
+<br>CTRL-H 
+<br>
+<br>
+<br>Delete the selected text. (See page 259.) 
+<br>
+<br>CTRL-O 
+<br>
+<br>Switch from select mode to visual mode for one command. (See 
+<br>page 259.) 
+<br>
+<br>
+<br>Insert-Mode Commands 
+<br>
+<br><BS> Delete character before the cursor. 
+<br>char1<BS>char2 Enter digraph (only when digraph option set). 
+<br><C-End> Cursor past end of file. (See page 228.) 
+<br>
+<br>
+<br><C-Home> Cursor to start of file. (See page 228.) 
+<br><C-Left> Cursor one word left. (See page 228.) 
+<br><C-Right> Cursor one word right. (See page 228.) 
+<br><CR> Begin new line. 
+<br><Del> Delete character under the cursor. 
+<br><Down> Cursor one line down. (See page 228.) 
+<br><End> Cursor past end of line. (See page 228.) 
+<br><Esc> End insert mode (unless ‘insertmode’ set).(See page 6 
+<br>
+<br>
+<br>and 10.) 
+<br><F1> Same as <Help>. 
+<br>
+<br><Help> Stop insert mode and display help window. 
+<br><Home> Cursor to start of line. (See page 228.) 
+<br><Insert> Toggle insert/replace mode. 
+<br><Left> Cursor one character left. (See page 228.) 
+<br><LeftMouse> Cursor at mouse click. (See page 109.) 
+<br>
+<br>
+<br>
+</body>
+</html>

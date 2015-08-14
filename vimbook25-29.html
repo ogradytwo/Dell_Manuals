@@ -1,0 +1,6464 @@
+<!Doctype>
+<html>
+<head>
+<style>
+  body{ color:GreenYellow;background-color:Black;font-family:arial}
+  h3   {color:Yellow}
+</style>
+</head>
+<body>
+<strong>
+
+<h3>
+Chapter 25 Complete Command-Mode (:) Commands 
+</h3>
+<br></h3>
+<br>
+<br>The count parameter specifies the number of lines to delete (more on this later in 
+<br>this section). 
+<br>The range parameter specifies the lines to use. Consider the following example 
+<br>(spaces added for readability): 
+<br>
+<br>:1, 3 delete 
+<br>
+<br>Figure 25.1 shows the results of this command. 
+<br>
+<br>1 A UNIX sales lady, Lenore, 
+<br>2 Enjoys work, but she likes the beach more. 
+<br>3 She found a good way 
+<br>4 To combine work and play: 
+<br>5 She sells C shells by the seashore. 
+<br>
+<br>
+<br>~ 
+<br>
+<br>1 To combine work and play: 
+<br>
+<br>2 She sells C shells by the seashor 
+<br>~ 
+<br>~ 
+<br>~ 
+<br>
+<br>~ 
+<br>3 fewer lines 
+<br>
+<br>Figure 25.1 :1,3 delete. 
+<br>
+<br>You have learned how to use search patterns for line specification. For example, the 
+<br>following command deletes starting from the first line with hello to the first line that 
+<br>contains goodbye. 
+<br>
+<br>:/hello/,/goodbye/ delete 
+<br>
+<br>Note: If goodbye comes before hello, the line range will be backwards, and the command 
+<br>will not work. 
+<br>
+<br>You can refine the search string specification by adding an offset. For example, 
+<br>/hello/+1 specifies the line one line after the line with the word hello in it.Therefore, 
+<br>the following command results in the screen shown in Figure 25.2. 
+<br>
+<br>:/beach/+1, /seashore/-1 delete 
+<br>
+<br>1 A UNIX sales lady, Lenore, 
+<br>2 Enjoys work, but she likes the beach more. 
+<br>3 She sells C shells by the seashore. 
+<br>
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>~ 
+<br>: /beach/+1, /seashore/–1 delete 
+<br>
+<br>Figure 25.2 Results of :/beach/+1, /seashore/-1 delete. 
+<br>
+<br>You can also use special shorthand operators for patterns, as follows: 
+<br>
+<br>\/ Search forward for the last pattern used. 
+<br>
+<br>\? Search backward for the last pattern used. 
+<br>
+<br>\& Search forward for the pattern last used as substitute pattern. 
+<br>
+<br>
+<br>Editing Commands 305 
+<br>
+<br>You can also chain patterns.The following command, for example, finds the string 
+<br>first and then searches for the string second. 
+<br>
+<br>/first//second/ 
+<br>
+<br>Figure 25.3 shows the result of this command: 
+<br>
+<br>:/found//work/ delete 
+<br>
+<br>1 A UNIX sales lady, Lenore, 
+<br>
+<br>2 Enjoys work, but she likes the beach more. 
+<br>
+<br>3 She found a good way 
+<br>
+<br>4 She sells C shells by the seashore. 
+<br>
+<br>~ 
+<br>~ 
+<br>:/found//work/ delete 
+<br>
+<br>
+<br>Figure 25.3 :/found//word/delete. 
+<br>
+<br>You can also specify a line number on which to start.To start the search at line 7, for 
+<br>instance, use the following command-line specification: 
+<br>
+<br>7/first/ 
+<br>
+<br>Other Ways to Specify Ranges 
+<br>
+<br>If you execute a : command with no count (as most users generally do), the Vim 
+<br>editor puts you into command mode and enables you to specify the range. If you give 
+<br>the command a count(5:, for example), the range is count lines (including the current 
+<br>one).The actual specification of this arrangement is that if you include a count, your 
+<br>line range is as follows: 
+<br>
+<br>:.,count -1 
+<br>
+<br>In the example original file, for instance, if you move to the top line and then execute 
+<br>the following command, you get the results shown in Figure 25.4: 
+<br>
+<br>3:delete 
+<br>
+<br>1 To combine work and play: 
+<br>
+<br>2 She sells C shells by the seashore. 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>~ 
+<br>3 fewer lines 
+<br>
+<br>
+<br>Figure 25.4 
+<br>
+<br>3:delete. 
+<br>
+<br>
+<br><h3>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+Chapter 25 Complete Command-Mode (:) Commands 
+</h3>
+<br></h3>
+<br>
+<br>Deleting with a Count 
+<br>
+<br>Another form of the delete command is as follows: 
+<br>:line delete count 
+<br>
+<br>
+<br>In this case, the :delete command goes to line (default = the current line) and then 
+<br>deletes count lines. 
+<br>If you execute the following command on the original example file, for instance, 
+<br>you get the results shown in Figure 25.5: 
+<br>
+<br>:3 delete 2 
+<br>
+<br>1 A UNIX sales lady, Lenore, 
+<br>2 Enjoys work, but she likes the beach more. 
+<br>3 She sells C shells by the seashore. 
+<br>
+<br>
+<br>~ 
+<br>~ 
+<br>~ 
+<br>:3 delete 2 
+<br>
+<br>
+<br>Figure 25.5 
+<br>
+<br>:3 delete 2. 
+<br>
+<br>Note 
+<br>
+<br>You can specify a line range for this type of command, but the first line is ignored and the second one is 
+<br>
+<br>used. 
+<br>
+<br>Copy and Move 
+<br>
+<br>The :copy command copies a set of lines from one point to another.The general form 
+<br>of the copy command is as follows: 
+<br>
+<br>:range copy address 
+<br>
+<br>If not specified, range defaults to the current line.This command copies the line in 
+<br>range to the line specified after address. Consider the following command, for example: 
+<br>
+<br>:1,3 copy 4 
+<br>
+<br>Executed on the original joke, you get the results shown in Figure 25.6. 
+<br>
+<br>1 A UNIX sales lady, Lenore, 
+<br>2 Enjoys work, but she likes the beach more. 
+<br>3 She found a good way 
+<br>4 To combine work and play: 
+<br>5 A UNIX sales lady, Lenore, 
+<br>6 Enjoys work, but she likes the beach more. 
+<br>7 She found a good way 
+<br>8 She sells C shells by the seashore. 
+<br>
+<br>
+<br>~ 
+<br>3 more lines 
+<br>
+<br>Figure 25.6 :1,3 copy 4. 
+<br>
+<br>
+<br>Inserting Text 307 
+<br>
+<br>The :move command is much like the :copy command, except the lines are moved 
+<br>rather than copied.The following command results in what is shown in Figure 25.7: 
+<br>
+<br>:1,3 move 4 
+<br>
+<br>1 To combine work and play: 
+<br>2 A UNIX sales lady, Lenore, 
+<br>3 Enjoys work, but she likes the beach more. 
+<br>4 She found a good way 
+<br>5 She sells C shells by the seashore. 
+<br>
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>~ 
+<br>~ 
+<br>3 lines moved 
+<br>
+<br>Figure 25.7 
+<br>
+<br>:1,3 move 4. 
+<br>
+<br>Inserting Text 
+<br>
+<br>Suppose that you want to insert a bunch of lines and for some reason you want to use 
+<br>command mode.You need to go to the line above where you want the new text to 
+<br>appear. In other words, you want the text to be inserted after the current line. 
+<br>
+<br>Now start the insert by executing the :append command.Type the lines that you 
+<br>want to add and finish by typing a line that consists of just a period (.). 
+<br>
+<br>The following example illustrates the :append command. 
+<br>
+<br>:% print 
+<br>
+<br>A UNIX sales lady, Lenore, 
+<br>
+<br>Enjoys work, but she likes the beach more. 
+<br>
+<br>She found a good way 
+<br>
+<br>To combine work and play: 
+<br>
+<br>She sells C shells by the seashore. 
+<br>
+<br>:1append 
+<br>
+<br>This line is appended. 
+<br>
+<br>. 
+<br>
+<br>:% print 
+<br>
+<br>A UNIX sales lady, Lenore, 
+<br>
+<br>This line is appended. 
+<br>
+<br>Enjoys work, but she likes the beach more. 
+<br>
+<br>She found a good way 
+<br>
+<br>To combine work and play: 
+<br>
+<br>She sells C shells by the seashore. 
+<br>
+<br>The general form of the :append command is as follows: 
+<br>:line append 
+<br>
+<br>The line is the line after which to insert the new text. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+308 Chapter 25 Complete Command-Mode (:) Commands 
+</h3>
+<br>
+<br>The :insert command also inserts text. It has a similar form: 
+<br>:line insert 
+<br>
+<br>It works just like :append except that :append inserts after and :insert inserts before 
+<br>the current line. 
+<br>
+<br>Printing with Line Numbers 
+<br>
+<br>You do not have to turn on the number option to print the text with line numbers. 
+<br>The :# command accomplishes the same thing as :print but includes line numbers: 
+<br>:1 print 
+<br>
+<br>A UNIX sales lady, Lenore, 
+<br>
+<br>:1 # 
+<br>
+<br>1 A UNIX sales lady, Lenore, 
+<br>
+<br>Printing with list Enabled 
+<br>
+<br>The 'list' option causes invisible characters to be visible.The :list command lists 
+<br>the specified lines, assuming that this option is on: 
+<br>:1,5 list 
+<br>
+<br>The following example shows the difference between :print and :list: 
+<br>:100,111 print 
+<br>
+<br>open_db(void) 
+<br>{ 
+<br>if (proto_db == NULL) { 
+<br>proto_db = gdbm_open(proto_db_name, 512, GDBM_READER , 
+<br>0666, NULL); 
+<br>if (proto_db == NULL) { 
+<br>fprintf(stderr, “Error: Could not open database %s\n”, 
+<br>proto_db_name); 
+<br>exit (8); 
+<br>} 
+<br>} 
+<br>} 
+<br>
+<br>:100,111 list 
+<br>
+<br>open_db(void)$ 
+<br>{$ 
+<br>
+<br>
+<br>if (proto_db == NULL) {$ 
+<br>^Iproto_db = gdbm_open(proto_db_name, 512, GDBM_READER, $ 
+<br>^I^I^I^I0666, NULL);$ 
+<br>^Iif (proto_db == NULL) {$ 
+<br>^I fprintf(stderr, “Error: Could not open database %s\n”, $ 
+<br>^I ^I^I proto_db_name);$ 
+<br>^I exit (8);$ 
+<br>^I}$ 
+<br>
+<br>}$ 
+<br>}$ 
+<br>
+<br>
+<br>
+<br>Substitute 309 
+<br>
+<br>Print the Text and Then Some 
+<br>
+<br>The :z command prints a range of lines (the current one being the default) and the 
+<br>lines surrounding them. For example, the following command prints line 100 and then 
+<br>a screen full of data: 
+<br>
+<br>:100 z 
+<br>
+<br>The :z command takes a count of the number of extra lines to list. For example, the 
+<br>following command lists line 100 and three additional lines: 
+<br>
+<br>:100 z 3 
+<br>
+<br>The :z command can be followed by a code indicating how much to display.The 
+<br>following table lists the codes: 
+<br>
+<br>Code Listing Start Listing End New Current Line 
+<br>
+<br>+ Current line One screen forward One screen forward 
+<br>-One screen back Current line Current line 
+<br>^ Two screens back One screen back One screen back 
+<br>. One-half screen back One-half screen forward One-half screen forward 
+<br>= One-half screen back One-half screen forward Current line 
+<br>Substitute 
+<br>
+<br>The format of the basic substitute command is as follows: 
+<br>:range substitute /from/to/flags count 
+<br>
+<br>Note 
+<br>
+<br>This example uses a slash (/) to separate the patterns. Actually you can use almost any character that 
+<br>does not appear in the patterns. The following, for example, is perfectly valid: 
+<br>
+<br>
+<br>:substitute +from+to+ 
+<br>
+<br>This can prove extremely useful when you are dealing with patterns that contain slashes, such as 
+<br>filenames: 
+<br>
+<br>
+<br>:1,$ substitute +/home/user+/apps/product+ 
+<br>
+<br>Delimiters can be any character except letters, digits, backslash, double quote, or 
+<br>vertical bar. 
+<br>
+<br>The Vim editor uses a special set of magic characters to represent special things. For 
+<br>example, star (*) stands for “repeat 0 or more times.” 
+<br>
+<br>If you set the 'nomagic' option, however, the magic meanings of some of these 
+<br>characters are turned off. (For a complete list of the magic characters and how the 
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+'nomagic' option affects them, see Chapter 19, “Advanced Searching Using Regular 
+</h3>
+<br>Expressions.”) 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+310 Chapter 25 Complete Command-Mode (:) Commands 
+</h3>
+<br>
+<br>The :smagic command performs a substitute but assumes that the 'magic' option 
+<br>is set during the command. 
+<br>For example, start in command mode with a one-line file.You start by printing the 
+<br>entire file: 
+<br>:%print 
+<br>Test aaa* aa* a* 
+<br>
+<br>Now set the 'magic' option and perform a substitution.The p flag tells the editor to 
+<br>print the line it changed: 
+<br>:set magic 
+<br>:1 substitute /a*/b/p 
+<br>bTest aaa* aa* a* 
+<br>
+<br>This command made only one change at the beginning of the line. So why did it 
+<br>change Test to b*Test when there is no a around? The answer is that the magic character 
+<br>star (*) matches zero or more times. Test begins with zero a’s. 
+<br>
+<br>But why did it make only one change? Because the :substitute command 
+<br>changes only the first occurrence unless the g flag is present. Now undo the change 
+<br>and try again: 
+<br>
+<br>:undo 
+<br>:1 substitute /a*/b/pg 
+<br>bTbebsbtb b*b b*b b*b 
+<br>
+<br>
+<br>This time you got what you wanted. Now try it again with the 'nomagic' option set: 
+<br>:undo 
+<br>:set nomagic 
+<br>:1 substitute /a*/b/pg 
+<br>Test aab ab b 
+<br>
+<br>Without 'magic', a star (*) is just a star. It is substituted directly. 
+<br>The :smagic command forces magic on the star (*) and other characters while the 
+<br>substitution is being made, resulting in the following: 
+<br>:undo 
+<br>:1 smagic /a*/b/pg 
+<br>bTbebsbtb b*b b*b b*b 
+<br>
+<br>The :snomagic forces 'magic' off. 
+<br>:undo 
+<br>:set magic 
+<br>:1 snomagic /a*/b/pg 
+<br>Test aab ab b 
+<br>
+<br>
+<br>The & command repeats the substitution.This enables you to keep your old from and 
+<br>to strings, but also to supply a different range or flags. The general form of this command 
+<br>is as follows: 
+<br>
+<br>:range& flags count 
+<br>
+<br>For example: 
+<br>:1 substitute /a\+/b/p 
+<br>Test b* aa* a* 
+<br>
+<br>
+<br>
+<br>Global Changes 311 
+<br>
+<br>The command changes the first occurrence of from on the line.You want the entire 
+<br>line, so you repeat the substitution with the g option: 
+<br>
+<br>:&g 
+<br>
+<br>Of course, this does not print (because the new flags—in this case g—replaces the flags 
+<br>and you did not specify p or, more specifically, pg).Take a look at the result: 
+<br>
+<br>:1 print 
+<br>
+<br>Test b* b* b* 
+<br>
+<br>This is what you wanted. 
+<br>
+<br>The :& command and the :substitute command with no from or to specified acts 
+<br>the same. 
+<br>
+<br>The normal-mode & command repeats the last :substitute command. If you were 
+<br>to execute the following command, for instance, you would change the first manager 
+<br>on line 5 to an idiot: 
+<br>
+<br>:5 substitute /manager/idiot/ 
+<br>
+<br>Now if you enter normal mode (through the :vi command) and execute an & command, 
+<br>the next manager on this line would change as well. If you were to move down 
+<br>to another line and execute an & command, you would change that line as well. If you 
+<br>give & a count, it will work on that many lines. 
+<br>
+<br>The :~ command acts just like the &g command, except that it uses as from the last 
+<br>search pattern (used for a / or ? search) rather than the last :substitute from string. 
+<br>The general form of this command is as follows: 
+<br>
+<br>:range~ flags count 
+<br>
+<br>Repeat Substitution 
+<br>
+<br>The & command repeats the last substitution. 
+<br>
+<br>Making g the Default 
+<br>
+<br>Generally the :substitute command changes only the first occurrence of the word 
+<br>unless you use the 'g' option.To make the 'g' option the default, use the following 
+<br>command: 
+<br>
+<br>:set gdefault 
+<br>
+<br>Note:This can break some scripts you may use. 
+<br>
+<br>Global Changes 
+<br>
+<br>The command-mode commands covered so far have one limitation:They work only 
+<br>on a contiguous set of lines. Suppose, however, that you want to change just the lines 
+<br>that contain a certain pattern. In such a case, you need the :global command. The 
+<br>general form of this command is as follows: 
+<br>
+<br>:range global /pattern/ command 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+312 Chapter 25 Complete Command-Mode (:) Commands 
+</h3>
+<br>
+<br>This tells Vim to perform the given command on all lines that contain the pattern in 
+<br>the specified range.To print all the lines within a file that contain the word Professor, 
+<br>for instance, use the following command: 
+<br>
+<br>:% global /Professor/ print 
+<br>
+<br>Professor: Yes. 
+<br>Professor: You mean it’s not supposed to do that? 
+<br>Professor: Well there was no Computer Center Bulletin 
+<br>
+<br>Professors of mathematics will prove the existence of 
+<br>
+<br>The :global! command applies the command to all the lines that do not match the 
+<br>given pattern, as will the :vglobal command. 
+<br>
+<br>Commands for Programs 
+<br>
+<br>The following sections describe some commands for programs. 
+<br>
+<br>Include File Searches 
+<br>
+<br>The :ijump command searches for the given pattern and jumps to the first occurrence 
+<br>of the word in the given range. It searches not only the current file, but all files 
+<br>brought in by #include directives.The general form of this command is as follows: 
+<br>
+<br>:range ijump count [/]pattern[/] 
+<br>
+<br>If a count is given, jump to the count occurrence of the pattern. The pattern is considered 
+<br>literal text unless it is enclosed in slashes (in which case, it is a regular expression). 
+<br>Consider the file hello.c, for example: 
+<br>#include <stdio.h> 
+<br>int main() 
+<br>{ 
+<br>printf(“Hello World\n”); 
+<br>return (0); 
+<br>} 
+<br>
+<br>The following command goes to the first line that contains define EOF: 
+<br>
+<br>:ijump /define\s*EOF/ 
+<br>
+<br>In this case, it is in the include file stdio.h. 
+<br>
+<br>The :ilist command acts like :ijump, except it lists the lines instead of jumping 
+<br>to them: 
+<br>
+<br>:ilist EOF 
+<br>
+<br>/usr/include/libio.h 
+<br>
+<br>1: 84 #ifndef EOF 
+<br>2: 85 # define EOF (-1) 
+<br>3: 327 && __underflow (_fp) == EOF ? EOF \ 
+<br>/usr/include/stdio.h 
+<br>
+<br>Commands for Programs 313 
+<br>
+<br>4: 83 #ifndef EOF 
+<br>5: 84 # define EOF (-1) 
+<br>6: 408 null terminator), or -1 on error or EOF. */ 
+<br>/usr/include/bits/stdio.h 
+<br>7: 138 if (__c == EOF) \ 
+<br>8: 157 if (_IO_putcun (*__ptr++, __stream) == EOF) \ 
+<br>The :isearch command is like :ilist, except that the first occurrence is listed: 
+<br>
+<br>:isearch EOF 
+<br>
+<br>#ifndef EOF 
+<br>
+<br>Finally, the command :isplit works like a :split and a :ijump. 
+<br>
+<br>Jumping to Macro Definitions 
+<br>
+<br>You learned how to use the command [CTRL-D to jump to the definition of the macro 
+<br>under the cursor.The following command accomplishes the same thing for the macro 
+<br>
+<br>:djump name 
+<br>
+<br>To jump to the macro MAX, for example, use this command: 
+<br>
+<br>:djump MAX 
+<br>
+<br>You do not have to know the full name of the macro to find its definition. If you 
+<br>know only part of a name, you can perform a regular expression search for the definition 
+<br>by enclosing the name in slashes, as follows: 
+<br>
+<br>:djump /MAX/ 
+<br>
+<br>This command finds the first definition of the macro with the word MAX in it. 
+<br>
+<br>You can give the :djump command a range argument that restricts the search to the 
+<br>given range: 
+<br>
+<br>:50,100 djump /MAX/ 
+<br>
+<br>This command finds the first definition of any macro containing the word MAX in 
+<br>lines 50 through 100. 
+<br>
+<br>If you do not want the first definition, but the second, you can add a count to the 
+<br>command.To find the second definition of MAX, for instance, use this command: 
+<br>
+<br>:djump 2 MAX 
+<br>
+<br>Split the Window and Go to a Macro Definition 
+<br>
+<br>The following command is shorthand for :split and :djump: 
+<br>:range dsplit count [/]pattern[/] 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+314 Chapter 25 Complete Command-Mode (:) Commands 
+</h3>
+<br>
+<br>Listing the Macros 
+<br>
+<br>The :dlist command works just like :djump, except that instead of moving to the 
+<br>macro definition, the command just lists all the definitions that match: 
+<br>
+<br>:dlist EOF 
+<br>
+<br>/usr/include/libio.h 
+<br>
+<br>1: 85 # define EOF (-1) 
+<br>/usr/include/stdio.h 
+<br>2: 84 # define EOF (-1) 
+<br>Listing the First Definition 
+<br>
+<br>The :dsearch command works just like :dlist, except that it displays only the first 
+<br>definition: 
+<br>
+<br>:dsearch EOF 
+<br>
+<br># define EOF (-1) 
+<br>
+<br>Override Option (!) 
+<br>
+<br>The :ilist, :ijump, :djump, :dlist, and :dsearch commands take an override option 
+<br>(!). If the ! is present, definitions within comments found as well. 
+<br>
+<br>Directory Manipulation 
+<br>
+<br>To change the current working directory, use the following command: 
+<br>
+<br>:cd dir 
+<br>
+<br>This command acts just like the system cd command. 
+<br>
+<br>On UNIX, it changes the current working directory to the given directory. If no 
+<br>directory is specified, it goes to the user’s home directory. 
+<br>
+<br>On Microsoft Windows, it goes to the indicated directory. If no directory is specified, 
+<br>it prints the current working directory. 
+<br>
+<br>The following command changes the directory to the previous path: 
+<br>
+<br>:cd 
+<br>
+<br>
+<br>In other words, it does a cd to the last directory you used as the current working 
+<br>directory. 
+<br>
+<br>To find out which directory Vim is currently using, use this command: 
+<br>
+<br>:pwd 
+<br>
+<br>Start deep in the directory tree, for instance: 
+<br>
+<br>:pwd 
+<br>
+<br>/mnt/sabina/sdo/writing/book/vim/book/11 
+<br>
+<br>
+<br>Current File 315 
+<br>
+<br>You are working on a UNIX system, so go to your $home directory: 
+<br>:cd 
+<br>:pwd 
+<br>/home/sdo 
+<br>
+<br>Jump into another directory: 
+<br>
+<br>:cd tmp 
+<br>:pwd 
+<br>/home/sdo/tmp 
+<br>
+<br>
+<br>Return to the previous directory: 
+<br>
+<br>:cd :
+<br>pwd 
+<br>/home/sdo 
+<br>
+<br>
+<br>Return to the previous directory before this one: 
+<br>
+<br>:cd :
+<br>pwd 
+<br>/home/sdo/tmp 
+<br>
+<br>
+<br>Current File 
+<br>
+<br>The following command prints out the current file and line information: 
+<br>
+<br>:file 
+<br>
+<br>If you want to change the name of what Vim thinks is the filename, use this command: 
+<br>
+<br>:file name 
+<br>
+<br>Suppose, for example, that you start editing a file called complete.txt.You get this file 
+<br>just right, so you write it out using the :write command. Now you want shorten the 
+<br>file and write it out as summary.txt. So now you execute this command: 
+<br>:file summary.txt 
+<br>
+<br>Now when you continue to edit, any changes are saved to summary.txt. 
+<br>Take a look at how this works.You start by editing the file star.txt. 
+<br>:file 
+<br>“star.txt” line 1 of 1 —100%— col 1 
+<br>
+<br>The :write command with no arguments writes the file to the current filename (in 
+<br>this case, star.txt). 
+<br>:write 
+<br>“star.txt” 1 line, 18 characters written 
+<br>
+<br>Now you want to change the filename to new.txt.The editor tells you that this is a 
+<br>
+<br>:file new.txt 
+<br>“new.txt” [Not edited] line 1 of 1 —100%— col 1 
+<br>
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+316 Chapter 25 Complete Command-Mode (:) Commands 
+</h3>
+<br>
+<br>The :write command is used to write the file. In this case, the current filename 
+<br>differs; it is new.txt. 
+<br>
+<br>:write 
+<br>
+<br>“NEW.TXT” [New File] 1 line, 18 characters written 
+<br>
+<br>There is another command similar to :file; the following command prints the current 
+<br>line number: 
+<br>
+<br>:= 
+<br>
+<br>For example: 
+<br>
+<br>:= 
+<br>
+<br>line 1 
+<br>
+<br>Advanced :write Commands 
+<br>
+<br>The :write command writes the buffer (or a selected range of lines) to a file. It has 
+<br>some additional options.The following command, for example, appends the contents 
+<br>of the file you are editing to the file named collect.txt: 
+<br>
+<br>:write >> collect.txt 
+<br>
+<br>If the collect.txt file does not exist, this command aborts with an error message. If 
+<br>you want to “append” to the file even if does not exist, use the force (!) option: 
+<br>
+<br>:write! >> collect.txt 
+<br>
+<br>The :write command can not only write to a file, but it can also be used to pipe the 
+<br>file to another program. On Linux or UNIX, for instance, you can send the file to a 
+<br>printer by using the following command: 
+<br>
+<br>:write !lpr 
+<br>
+<br>Warning 
+<br>
+<br>The following two commands are different; the difference being only the spacing: 
+<br>
+<br>:write! lpr 
+<br>:write !lpr 
+<br>
+<br>
+<br>The first writes to the file named lpr with the force option in place. The second sends the output to the 
+<br>command lpr. 
+<br>
+<br>
+<br>Updating Files 
+<br>
+<br>The :update command acts just like the :write command, with one exception: If the 
+<br>buffer is not modified, the command does nothing. 
+<br>
+<br>
+<br>Simple Edits 317 
+<br>
+<br>Reading Files 
+<br>
+<br>The :read command reads in a file.The general form of this command is as follows: 
+<br>:line read file 
+<br>
+<br>The preceding command reads the file in and inserts it just after line. If no file is specified, 
+<br>the current file is used. If no line is supplied, the current line is used. 
+<br>
+<br>Like :write, the :read command can use a command rather than a file.To read the 
+<br>output of a command and insert it after the current line, use the following command: 
+<br>
+<br>:line read !command 
+<br>
+<br>Register Execution 
+<br>
+<br><h3>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+Chapter 2, “Editing a Little Faster,” showed you how to record macros in registers. If 
+</h3>
+<br></h3>
+<br>you want to use these macros in command mode, you can execute the contents of a 
+<br>register with the following command: 
+<br>
+<br>:line@register 
+<br>
+<br>This command moves the cursor to the specified line, and then executes the register. 
+<br>This means that the following command executes the previous command line: 
+<br>
+<br>:@: 
+<br>
+<br>To execute the previous :@register command, use this command: 
+<br>
+<br>:line@@ 
+<br>
+<br>Simple Edits 
+<br>
+<br>The following sections describe simple edits. 
+<br>
+<br>Shifting 
+<br>
+<br>The :> command shifts lines to the right.The :< command shifts lines to the left. 
+<br>
+<br>The following command, for example, shifts lines 5 through 10 to the right: 
+<br>
+<br>:5, 10 > 
+<br>
+<br>Changing Text 
+<br>
+<br>The :change command acts just like the :delete command, except that it performs an 
+<br>:insert as well. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+318 Chapter 25 Complete Command-Mode (:) Commands 
+</h3>
+<br>
+<br>Entering Insert Mode 
+<br>
+<br>The :startinsert command starts insert mode as if you were in normal mode and 
+<br>were to press i. 
+<br>
+<br>Joining Lines 
+<br>
+<br>The :join command joins a bunch of lines (specified by the range parameter) together 
+<br>
+<br>into one line. Spaces are added to separate the lines. 
+<br>If you do not want the added spaces, use the :join! command. 
+<br>
+<br>Yanking Text 
+<br>
+<br>The following command yanks the specified lines into the register: 
+<br>:range yank register 
+<br>
+<br>If no register is specified, the unnamed register is used. 
+<br>
+<br>Putting Text 
+<br>
+<br>The :put command puts the contents of a register after the indicated line.To dump 
+<br>
+<br>the contents of register a after line 5, for example, use the following command: 
+<br>:5put a 
+<br>
+<br>If you want to put the text before the line, use this command: 
+<br>:5put! a 
+<br>
+<br>Undo/Redo 
+<br>
+<br>The :undo command undoes a change just like the u command does.The :redo 
+<br>
+<br>command redoes a change like CTRL-R does. 
+<br>To mark the beginning of the line, use the 
+<br>:mark {register} 
+<br>
+<br>
+<br>command. If a line is specified, that line will be marked.The :k command does the 
+<br>same thing, with the exception that you don’t have to put a space in front of the register 
+<br>
+<br>:100 mark x 
+<br>:100 ka 
+<br>
+<br>
+<br>Miscellaneous Commands 
+<br>
+<br>The following sections describe some miscellaneous commands you can use. 
+<br>
+<br>
+<br>Miscellaneous Commands 319 
+<br>
+<br>The :preserve Command 
+<br>
+<br>The :preserve command writes out the entire file to the “swap” file.This makes it 
+<br>possible to recover a crashed editing session without the original file. (If you do not 
+<br>use this command, you need both the swap file and the original to perform recovery.) 
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+See Chapter 14, “File Recovery and Command Line Arguments,” for information on 
+</h3>
+<br>recovering crashed sessions. 
+<br>
+<br>The Shell Commands 
+<br>
+<br>To execute a single shell command, use the following Vim command (where cmd is the 
+<br>system command to execute): 
+<br>
+<br>:!cmd 
+<br>
+<br>To find the current date, for instance, use this command: 
+<br>
+<br>:!date 
+<br>
+<br>The following command repeats the last shell command you executed: 
+<br>
+<br>:!! 
+<br>
+<br>Finally, the following command suspends Vim and goes to the command prompt: 
+<br>
+<br>:shell 
+<br>
+<br>You can now enter as many system commands as you want. After you have finished, 
+<br>you can return to Vim with the exit command. 
+<br>
+<br>Shell Configuration 
+<br>
+<br>The following several options control the actual execution of a command. 
+<br>
+<br>shell 
+<br>
+<br>The name of the shell (command processor). 
+<br>
+<br>shellcmdflag 
+<br>
+<br>Flag that comes after the shell. 
+<br>
+<br>shellquote 
+<br>
+<br>The quote characters around the command. 
+<br>
+<br>shellxquote 
+<br>
+<br>The quote characters for the command and the redirection. 
+<br>
+<br>shellpipe 
+<br>
+<br>String to make a pipe. 
+<br>
+<br>shellredir 
+<br>
+<br>String to redirect the output. 
+<br>
+<br>shellslash 
+<br>
+<br>Use forward slashes in filenames (MS-DOS only). 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+320 Chapter 25 Complete Command-Mode (:) Commands 
+</h3>
+<br>
+<br>Command History 
+<br>
+<br>The :history command prints out the current command-mode command history: 
+<br>
+<br>:history 
+<br># cmd history 
+<br>2 1 print 
+<br>35 
+<br>4 7 print 
+<br>
+<br>5 . print 
+<br>> 6 history 
+<br>The Vim editor maintains a set of histories for various commands. A code identifies 
+<br>
+<br>each of these: 
+<br>Code History Type 
+<br>c 
+<br>s 
+<br>e 
+<br>i 
+<br>a 
+<br>cmd 
+<br>search 
+<br>expr 
+<br>input 
+<br>all 
+<br>: 
+<br>/ 
+<br>= 
+<br>@ 
+<br>Command-line history (command-mode 
+<br>commands) 
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+Search strings (See Chapter 3, “Searching”) 
+</h3>
+<br>Expression register history 
+<br>Input line history (data typed in response to 
+<br>an :input operator) 
+<br>All histories 
+<br>
+<br>Therefore, to get a list of all the various history buffers, use the :history all command: 
+<br>:history all 
+<br># cmd history 
+<br>2 1 print 
+<br>35 
+<br>4 7 print 
+<br>
+<br>5 . print 
+<br>6 history 
+<br>> 
+<br>7 history all 
+<br>
+<br># search history 
+<br>
+<br>1 human 
+<br>
+<br>2 uni 
+<br>
+<br>3 comp 
+<br>
+<br>4 Seem 
+<br>> 5 \<At\> 
+<br>
+<br># expr history 
+<br>
+<br>1 55 
+<br>
+<br>2 2*88 
+<br>
+<br>> 
+<br>3 5+99 
+<br># input history 
+<br>Press Return or enter command to continue 
+<br>
+<br>The general form of the :history command is as follows: 
+<br>:history code first , last 
+<br>
+<br>
+<br>Miscellaneous Commands 321 
+<br>
+<br>If no first and last are specified, the whole history is listed.The first parameter defaults 
+<br>to the first entry in the history, and the last defaults to the last. Negative numbers indicate 
+<br>an offset from the end of the history. For example, –2 indicates the next-to-last 
+<br>history entry. 
+<br>
+<br>The following command, for example, list history entries 1 through 5 for 
+<br>command-mode commands: 
+<br>
+<br>:history c 1,5 
+<br>
+<br>And, this next command lists the last 5 search strings: 
+<br>:history s –5, 
+<br>
+<br>Setting the Number of Remembered Commands 
+<br>
+<br>The 'history' option controls how may commands to remember for command-
+<br>mode (: mode) commands.To increase the number of commands to remember (to 50, 
+<br>for instance), use this command: 
+<br>
+<br>:set history=50 
+<br>
+<br>Viewing Previous Error Messages 
+<br>
+<br>The Vim editor keeps track of the last few error and information messages displayed on 
+<br>the last line of the screen.To view the message history, use the following command: 
+<br>
+<br>:messages 
+<br>
+<br>“../joke.txt” 6092 lines, 174700 characters 
+<br>
+<br>Entering Ex mode. Type “visual” to go to Normal mode. 
+<br>
+<br>search hit BOTTOM, continuing at TOP 
+<br>
+<br>Not an editor command: xxxxx 
+<br>
+<br>search hit BOTTOM, continuing at TOP 
+<br>
+<br>search hit BOTTOM, continuing at TOP 
+<br>
+<br>Pattern not found: badbad 
+<br>
+<br>Not an editor command: :^H 
+<br>
+<br>Invalid address 
+<br>
+<br>Redirecting the Output 
+<br>
+<br>The following command causes all output messages to be copied to the file as well as 
+<br>to appear on the screen: 
+<br>
+<br>:redir > file 
+<br>
+<br>To end the copying, execute the following command: 
+<br>:redir END 
+<br>
+<br>This command proves useful for saving debugging information or messages for inclusion 
+<br>in a book. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+322 Chapter 25 
+</h3>
+<br>
+<br>Complete Command-Mode (:) Commands 
+<br>
+<br>You can also use the :redir command to append to a file by using this command: 
+<br>
+<br>:redir >> file 
+<br>
+<br>Executing a :normal Command 
+<br>
+<br>The :normal command executes a normal-mode command.The following command, 
+<br>for instance, changes the word where the cursor is located to the word DONE: 
+<br>
+<br>:normal cwDONE<Esc> 
+<br>
+<br>The group of commands is treated as one for the purposes of undo/redo. 
+<br>
+<br>The command should be a complete command. If you leave Vim hanging (suppose 
+<br>that you executed a command cwDone, for instance), the display will not update until 
+<br>the command is complete. 
+<br>
+<br>If you specify the '!' option, mappings will not be done on the command. 
+<br>
+<br>Getting Out 
+<br>
+<br>The following command writes the current file and closes the window: 
+<br>
+<br>:exit 
+<br>
+<br>When the last window is closed, the editor stops. 
+<br>If the override flag (!) is given, an attempt will be made to write the file even if it 
+<br>is marked read-only. 
+<br>
+<br>You can also specify a filename on the command line.The data will be written to 
+<br>this file before exiting.The following command, for example, saves the current file in 
+<br>save-it-it.txt and exits. 
+<br>
+<br>:exit save-it.txt 
+<br>
+<br>If you want to save only a portion of the file, you can specify a range of lines to 
+<br>write.To save only the first 100 lines of a file and exit, for example, use this command: 
+<br>
+<br>:1,100 exit save-it.txt 
+<br>
+<br>Write and Quit 
+<br>
+<br>The following command does the same thing that :exit does, except it always writes 
+<br>the file: 
+<br>:range wq! file 
+<br>
+<br>The :exit command writes only if the file has been changed. 
+<br>
+<br>
+<br>Advanced GUI Commands 
+<br>
+<br>THE VIM EDITOR IS HIGHLY CONFIGURABLE. This chapter shows you how to 
+<br>
+<br>customize the GUI. Among other things, you can configure the following in Vim: 
+<br>
+<br>
+<br>The size and location of the window 
+<br>
+<br>
+<br>The display of menus and toolbars 
+<br>
+<br>
+<br>How the mouse is used 
+<br>
+<br>
+<br>The commands in the menu 
+<br>
+<br>
+<br>The buttons on the toolbar 
+<br>
+<br>
+<br>The items in the pop-up menu 
+<br>
+<br>The remainder of this chapter introduces you to the commands that enable you to 
+<br>customize all these features. 
+<br>
+<br>Switching to the GUI Mode 
+<br>
+<br>Suppose you are editing in a terminal window and want to switch to the GUI mode. 
+<br>To do so, use the following command: 
+<br>
+<br>:gui 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+324 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>Window Size and Position 
+<br>
+<br>When you first start gvim (GUI Vim), the window is positioned by the windowing sys-
+<br>tem.The size of the window on UNIX is set to the size of the terminal window that 
+<br>
+<br>started the editor. In other words, if you have a 24×80 xterm window and start gvim, 
+<br>you get a 24×80 editing window. If you have a larger window, say 50×132, you get a 
+<br>50×132 editing window. 
+<br>
+<br>On UNIX you can tell gvim to start at a given location and size by using the 
+<br>-geometry flag.The general format of this option is as follows: 
+<br>
+<br>-geometry width+ x heightx_offset-y_offset 
+<br>
+<br>The width and height options specify the width and height of the window (in characters).
+<br>The x-offset and y-offset tell the X Windows System where to put the window. 
+<br>
+<br>The x-offset specifies the number of pixels between the left side of the screen and 
+<br>
+<br>the right side of the window. If the x-offset specification is negative, it specifies the 
+<br>
+<br>distance between the left edge of the editor and the right side of the screen. 
+<br>
+<br>Similarly, the y-offset specifies the top margin, or if negative, the bottom margin. 
+<br>Thus, the -geometry +0+0 option puts the window in the upper-left corner, 
+<br>
+<br>whereas -geometry -0-0 specifies the lower-right corner. 
+<br>The width and height parameters specify how big the editing window is to be in 
+<br>
+<br>lines and columns.To have a 24-by-80 editing window, for example, use the option 
+<br>
+<br>-geometry 80x24. 
+<br>
+<br>Figure 26.1 shows how these options work. 
+<br>
+<br>y-offset 
+<br>
+<br>x-offset 
+<br>
+<br>height 
+<br>
+<br>width 
+<br>
+<br>Figure 26.1 
+<br>
+<br>-geometry option. 
+<br>
+<br>
+<br>The guioptions 325 
+<br>
+<br>Microsoft Windows Size and Position Command-Line 
+<br>Specification 
+<br>
+<br>The Microsoft Windows version of gvim starts with an editing window of 80×25.The 
+<br>gvim editor uses the standard Microsoft Windows command-line option to specify an 
+<br>
+<br>initial size and position. Because Microsoft Windows does not have a standard option 
+<br>for this value, gvim does not have one either. 
+<br>
+<br>Moving the Window 
+<br>
+<br>The following command displays the current location (in pixels) of the upper-left 
+<br>corner of the window: 
+<br>
+<br>:winpos 
+<br>
+<br>If you want to move the window, you can use this command: 
+<br>
+<br>:winpos X Y 
+<br>
+<br>To position the screen 30 pixels down and 20 pixels over from the left, for instance, 
+<br>use the following command: 
+<br>
+<br>:winpos 20 30 
+<br>
+<br>Window Size 
+<br>
+<br>The following command displays the number of lines in the editing window: 
+<br>:set lines? 
+<br>
+<br>To change this number, use this command: 
+<br>
+<br>:set lines=lines 
+<br>
+<br>Lines is the number of lines you want in the new editing window. 
+<br>
+<br>To change the number of columns on the screen, use this command: 
+<br>
+<br>:set columns=columns 
+<br>
+<br>The :winsize Command 
+<br>
+<br>Older versions of Vim use a :winsize command.This command is deprecated because 
+<br>the :set lines and :set columns commands have superseded it. 
+<br>
+<br>The guioptions 
+<br>
+<br>You can control a number of GUI-based features with the 'guioptions' option.The 
+<br>general form this command is as follows: 
+<br>
+<br>:set guioptions=options 
+<br>
+<br>Options is a set of letters, one per option. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+326 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>The following options are defined: 
+<br>
+<br>a Autoselect 
+<br>When set, if you select text in the visual mode, Vim tries to 
+<br>put the selected text on the system’s global clipboard.This 
+<br>means that you can select text in one Vim session and paste 
+<br>it in another using the “*p command.Without this option 
+<br>you must use the “*y command to copy data to the clipboard. 
+<br>
+<br>
+<br>It also means that the selected text has been put on the 
+<br>global clipboard and is available to other applications. On 
+<br>UNIX, for example, this means that you can select text in 
+<br>visual mode, and then paste it into an xterm window using 
+<br>the middle mouse button. 
+<br>
+<br>If you are using Microsoft Windows, any text selected in 
+<br>visual mode is automatically placed on the clipboard. (Just 
+<br>as the Copy ^C menu item does in most other applications.) 
+<br>This means that you can select the text in Vim and 
+<br>paste it into a Microsoft Word document. 
+<br>
+<br>f Foreground 
+<br>On UNIX, the gvim command executes a fork() command 
+<br>
+<br>so that the editor can run in the background. Setting this 
+<br>flag prevents this, which is useful if you are writing a script 
+<br>that needs to run the gvim command to let the user edit a 
+<br>
+<br>file, and that needs to wait until the editing is done. (The -f 
+<br>command-line option accomplishes the same thing.) 
+<br>The f flag also proves useful if you are trying to debug the 
+<br>program. 
+<br>
+<br>Note 
+<br>
+<br>You must set this in the initialization file (because by the time you can set it from the edit window, it is 
+<br>
+<br>too late). 
+<br>
+<br>i Icon 
+<br>If set, gvim displays an attractive icon when the editor in 
+<br>minimized on an X Windows System. If not present, the 
+<br>program just displays the name of the file being edited 
+<br>with no icon (see Figure 26.2). 
+<br>
+<br>Figure 26.2 i option 
+<br>
+<br>m 
+<br>
+<br>Menu 
+<br>Display menu bar 
+<br>(see Figure 26.3) 
+<br>
+<br>
+<br>The guioptions 327 
+<br>
+<br>Figure 26.3 m option. 
+<br>
+<br>M No menu 
+<br>If this option is present during initialization, the system 
+<br>menu definition file $VIMRUNTIME/menu.vim is not read 
+<br>in. 
+<br>
+<br>Note 
+<br>
+<br>This option must be set in the vimrc file. (By the time givmrc is read, it is too late.) 
+<br>
+<br>g Gray 
+<br>Turn menu items that cannot be used gray. If not present, 
+<br>these items are removed from the menu (see Figure 26.4). 
+<br>
+<br>t Tear off 
+<br>Enable tear off menus. 
+<br>
+<br>These items are 
+<br>grayed-out. 
+<br>
+<br>
+<br>Items are removed. 
+<br>
+<br>Figure 26.4 g option. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+328 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>T Toolbar Include toolbar 
+<br>(see Figure 26.5) 
+<br>r Right scrollbar Put a scrollbar on the right (see Figure 26.6). 
+<br>
+<br>Figure 26.5 T option. 
+<br>l 
+<br>b 
+<br>Left scrollbar 
+<br>Bottom scrollbar 
+<br>Put a scrollbar on the left (see Figure 26.6). 
+<br>Put a scrollbar on the bottom (see Figure 26.6). 
+<br>Left scrollbar 
+<br>Bottom scrollbar 
+<br>Right scrollbar 
+<br>Figure 26.6 Scrollbars. 
+<br>v Vertical dialog boxes Use vertical alignment for dialog boxes (see Figure 26.7). 
+<br>
+<br>Figure 26.7 v option. 
+<br>
+<br>p Pointer callback fix 
+<br>This option is designed to fix some problems that might 
+<br>occur with some X11 window managers. It causes the program 
+<br>to use pointer callbacks.You must set this in the 
+<br>
+<br>gvimrc file. 
+<br>
+<br>
+<br>The guioptions 329 
+<br>
+<br>Changing the Toolbar 
+<br>
+<br>The 'toolbar' option controls the appearance of the toolbar. It is a set of values: 
+<br>
+<br>icon Display toolbar icons 
+<br>text Display text 
+<br>tooltips When the cursor hovers over an icon, display a ToolTip. 
+<br>
+<br>The default displays ToolTips and icons: 
+<br>
+<br>:set toolbar=icons,tooltips 
+<br>
+<br>Figure 26.8 shows how this option affects the screen. 
+<br>
+<br>:set toolbar=icons,tooltips 
+<br>
+<br>:set toolbar=icons,text,tooltips 
+<br>
+<br>:set toolbar=text,tooltips 
+<br>Figure 26.8 The 'toolbar' option. 
+<br>
+<br>
+<br>Note 
+<br>
+<br>To turn off the toolbar, you cannot set this option to the empty string. Instead use the following command: 
+<br>:set guioptions -= T 
+<br>
+<br>
+<br>Customizing the Icon 
+<br>
+<br>If you are editing in a terminal window, some terminals enable you to change the title 
+<br>of their window and their icon. If you want Vim to try to change the title to the 
+<br>
+<br>:set title 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+330 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>Sometimes the name of the file with its full path name is longer than the room you 
+<br>have for the title.You can change the amount of space used for the filename with the 
+<br>following command: 
+<br>
+<br>:set title=85 
+<br>
+<br>In this case, the title text can consume 85% of the title bar. 
+<br>
+<br>For example: 
+<br>
+<br>:set titlelen=45 
+<br>
+<br>Figure 26.9 shows how 'titlelen' can affect the display. 
+<br>
+<br>Figure 26.9 'titlelen' option. 
+<br>
+<br>If you do not like what Vim selects for your title, you can change it by setting the 
+<br>following: 
+<br>
+<br>:set titlestring=Hello\ World! 
+<br>
+<br>When you exit Vim, it tries to restore the old title. If it cannot restore it (because it is 
+<br>impossible to remember it), the editor sets the title to the string specified by the 
+<br>'titleold' option. For example: 
+<br>
+<br>:set titleold=vim\ was\ here! 
+<br>
+<br>When the window is iconified, the icon option tells Vim whether to attempt to put 
+<br>the name of the file in the icon title. If this option is set, Vim attempts to change the 
+<br>icon text. 
+<br>
+<br>If you do not like the Vim default, you can set the 'iconstring' option and that 
+<br>text will be used for the icon string. 
+<br>
+<br>The ‘icon’ option, if set causes the string under the icon to contain the name of the 
+<br>file being edited (or the value of ‘iconstring’ if set). If the option is turned off, the 
+<br>icons just have the generic title Vim. 
+<br>
+<br>Figure 26.10 shows the results of the following command: 
+<br>
+<br>:set iconstring=Now\ editing\ tutorial 
+<br>
+<br>
+<br>Mouse Customization 331 
+<br>
+<br>:set icon (Editing the file Makefile) :set noicon 
+<br>
+<br>Figure 26.10 The ‘icon’ option. 
+<br>
+<br>Mouse Customization 
+<br>
+<br>The Vim editor is one of the few UNIX text editors that is mouse-aware.That means 
+<br>you can use the mouse for a variety of editing operations.You can customize the utility 
+<br>of the mouse by using the options discussed in the following sections. 
+<br>
+<br>Mouse Focus 
+<br>
+<br>Generally when you want to move from one Vim editing window to another, you 
+<br>must use one of the window change commands such as CTRL-Wj or CTRL-Wk. If you 
+<br>execute the following command, the current Vim editing window is the one where 
+<br>the mouse pointer is located: 
+<br>
+<br>:set mousefocus 
+<br>
+<br>Note 
+<br>
+<br>This option affects only the windows within a Vim session. If you are using the X Windows System, the 
+<br>
+<br>selection of the current window (X Client window) is handled by the window manager. On Microsoft 
+<br>
+<br>Windows, the current window selection is handled by Microsoft Windows, which always forces you to 
+<br>
+<br>use “click to type.” 
+<br>
+<br>The ‘mousemodel’ Option 
+<br>
+<br>The 'mousemodel' option defines what the mouse does.There are three possible 
+<br>modes: extend, popup, and popup_setpos.To set the mouse model, use the following 
+<br>command: 
+<br>
+<br>:set mousemodel=mode 
+<br>
+<br>In all modes, the left mouse button moves the cursor, and dragging the cursor using 
+<br>the left button selects the text. 
+<br>
+<br>In extend mode, the right mouse button extends the text and the middle button 
+<br>pastes it in.This behavior is similar to the way an xterm uses the mouse. 
+<br>
+<br>In popup mode, the right mouse button causes a small pop-up menu to appear.This 
+<br>behavior is similar to what you find in most Microsoft Windows applications. 
+<br>
+<br>The popup_setpos mode is exactly like popup mode, except when you press the 
+<br>right mouse button, the text cursor is moved to the location of the mouse pointer, and 
+<br>then the pop-up menu appears. 
+<br>
+<br>The following table illustrates how 'mousemodel' affects the mouse buttons. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+332 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>Mouse extend popup popup_setpos 
+<br>Left Place cursor Place cursor Place cursor 
+<br>Drag-left Select text Select text Select text 
+<br>Shift-left Search word Extend selection Extend selection 
+<br>Right Extend selection Pop-up menu Move cursor, and then 
+<br>pop-up menu 
+<br>Drag-right Extend selection 
+<br>Middle Paste Paste Paste 
+<br>
+<br>Mouse Configuration 
+<br>
+<br>The 'mouse' option enables the mouse for certain modes.The possible modes are as 
+<br>follows: 
+<br>
+<br>
+<br>v Visual 
+<br>
+<br>i Insert 
+<br>
+<br>c Command-line 
+<br>
+<br>h All modes when in a help file except “hit-return” 
+<br>
+<br>a All modes except the “hit-return” 
+<br>
+<br>r “more-prompt” and “hit-return” prompt 
+<br>
+<br>Mouse Mapping 
+<br>
+<br>The left mouse button (<LeftMouse>) moves the text cursor to where the mouse 
+<br>pointer is located.The <RightMouse> command causes Vim to enter visual mode.The 
+<br>area between the text cursor and the mouse pointer is selected.The <MiddleMouse> 
+<br>acts like the P command and performs a put to insert in the unnamed register in the 
+<br>file. If you precede the mouse click with a register specification (such as “a, for 
+<br>instance), the contents of that register are inserted. 
+<br>
+<br>If you have a wheel on your mouse, the up-wheel (<MouseUp>) moves three lines 
+<br>up. Similarly, a down-wheel movement (<MouseDown>) moves three lines down. If you 
+<br>press Shift, the screen moves a page. In other words, <S-MouseUp> goes up a page and 
+<br><S-MouseDown> goes down a page. 
+<br>
+<br>Double-Click Time 
+<br>
+<br>The 'mousetime' option defines the maximum time between the two presses of a 
+<br>double-click.The format of this command is as follows: 
+<br>
+<br>:set mousetime=time 
+<br>
+<br>Time is the time in milliseconds. By default, this is half a second (500ms). 
+<br>
+<br>
+<br>Custom Menus 333 
+<br>
+<br>Hiding the Mouse Pointer 
+<br>
+<br>When you are editing with the GUI, you have a text cursor and a mouse pointer to 
+<br>deal with. If that is too confusing, you can tell Vim to turn off the mouse pointer 
+<br>when not in use.To enable this feature, use the following command: 
+<br>
+<br>:set mousehide 
+<br>
+<br>When you start typing, the mouse pointer disappears. It reappears when you move the 
+<br>mouse. 
+<br>
+<br>Select Mode 
+<br>
+<br>The 'selectmode' option defines when the editor starts select mode instead of visual 
+<br>mode.The following three events can trigger select mode: 
+<br>
+<br>mouse Moving the mouse (see 'mousemode', discussed earlier) 
+<br>key Using some special keys 
+<br>cmd The v, V, or CTRL-V command 
+<br>
+<br>The general form of the command is as follows: 
+<br>:set selectmode=mode 
+<br>
+<br>Mode is a comma-separated list of possible select events (mouse, key, cmd). 
+<br>
+<br>The 'keymodel' option allows the keys <Left>, <Right>, <Up>, <Down>, <End>, 
+<br><Home>, <PageUp>, and <PageDown> to do special things. If you set this option as follows, 
+<br>Shift+key starts a selection: 
+<br>
+<br>:set keymodel=startsel 
+<br>
+<br>If the option is set as follows, an unshifted Key results in the section being stopped: 
+<br>:set keymodel=stopsel 
+<br>
+<br>You can combine these options as well, as follows: 
+<br>:set keymodel=startsel,stopsel 
+<br>
+<br>Custom Menus 
+<br>
+<br>The menus that Vim uses are defined in the file $VIMRUNTIME/menu.vim. If you want to 
+<br>write your own menus, you might first want to look through that file. 
+<br>
+<br>To define a menu item, use the :menu command.The basic form of this command 
+<br>is as follows: 
+<br>
+<br>:menu menu-item command-string 
+<br>
+<br>(This command is very similar to the :map command.) 
+<br>
+<br>The menu-item describes where on the menu to put the item. A typical menu-item is 
+<br>File.Save, which represents the item Save under the menu File.The ampersand charac
+<br>
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+334 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>ter (&) is used to indicate an accelerator. In the gvim editor, for instance, you can use 
+<br>Alt-F to select File and S to select save.Therefore, the menu-item looks like 
+<br>&File.&Save. 
+<br>
+<br>The actual definition of the File.Save menu item is as follows: 
+<br>
+<br>:menu 10.340 &File.&Save<Tab>:w :confirm w<CR> 
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>The number 10.340 is called the priority number. It is used by the editor to decide 
+<br>where it places the menu item.The first number (10) indicates the position on the 
+<br>menu bar. Lower numbered menus are positioned to the left, higher numbers to the 
+<br>right. 
+<br>
+<br>The second number (340) determines the location of the item within the pull-
+<br>down menu. Lower numbers go on top, higher number on the bottom. 
+<br>
+<br>Figure 26.11 diagrams the priorities of the current menu items. 
+<br>The menu-item in this example is &File.&Save<Tab>:w.This brings up an important 
+<br>point: menu-item must be one word. If you want to put spaces or tabs in the name, you 
+<br>either use the <> notation (<space>, <tab>, for instance) or use the backslash (\) 
+<br>escape. 
+<br>
+<br>:menu 10.305 &File.&Do\ It :exit<CR> 
+<br>
+<br>In this example, the name of the menu item contains a space (Do It) and the 
+<br>command is :exit<CR>. 
+<br>
+<br>Finally, you can define menu items that exist for only certain modes.The general 
+<br>form of the menu command is as follows: 
+<br>
+<br>:[mode]menu [priority] menu-item command-string 
+<br>
+<br>Figure 26.11 Menu item priorities. 
+<br>
+<br>102040 50 60 70 9999 
+<br>
+<br>20.310 
+<br>
+<br>20.330 
+<br>
+<br>20.340 
+<br>
+<br>20.360 
+<br>
+<br>20.280 
+<br>
+<br>20.405 
+<br>
+<br>20.320 
+<br>
+<br>20.335 
+<br>
+<br>20.350 
+<br>
+<br>20.370 
+<br>
+<br>20.400 
+<br>
+<br>20.410 
+<br>
+<br>mode is one of the following: 
+<br>
+<br>
+<br>Custom Menus 335 
+<br>
+<br>Character Mode 
+<br>
+<br>a Normal, visual, and operator-pending 
+<br>
+<br>
+<br>v Visual 
+<br>
+<br>o Operator-pending 
+<br>i Insert 
+<br>c Command line 
+<br>Special Menu Names 
+<br>
+<br>There are some special menu names.These are 
+<br>
+<br>ToolBar The toolbar (the icons under the menu) 
+<br>
+<br>PopUp The pop-up window that appears when you press the right mouse 
+<br>
+<br>button in the edit window in certain modes 
+<br>
+<br>Toolbar Icons 
+<br>
+<br>The toolbar uses icons rather than text to represent the command. For example, the 
+<br>menu-item named ToolBar.New causes the New icon to appear on the toolbar.The 
+<br>Vim editor has 28 built-in icons.The following table lists these. 
+<br>
+<br>Each icon has two names.The New icon, for instance, can be specified as 
+<br>ToolBar.New or ToolBar.builtin00. 
+<br>
+<br>If the icon does not match one of the built-in icons, the editor looks for a file in 
+<br>the $VIMRUNTIME/bitmaps directory.The name of the icon file is NAME.BMP on 
+<br>Microsoft Windows and name.xpn on UNIX. On Microsoft Windows, the icon may be 
+<br>
+<br>any size. On UNIX, it must be 20×20 pixels. 
+<br>
+<br>Icon Name Alternative Name 
+<br>
+<br>New builtin00 
+<br>
+<br>Open builtin01 
+<br>
+<br>Save builtin02 
+<br>
+<br>Undo builtin03 
+<br>
+<br>continues 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+336 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>Icon 
+<br>
+<br>Name 
+<br>
+<br>Redo 
+<br>Cut 
+<br>Copy 
+<br>Paste 
+<br>Print 
+<br>Help 
+<br>Find 
+<br>SaveAll 
+<br>SaveSesn 
+<br>NewSesn 
+<br>LoadSesn 
+<br>RunScript 
+<br>Replace 
+<br>WinClose 
+<br>WinMax 
+<br>WinMin 
+<br>
+<br>Alternative Name 
+<br>
+<br>builtin04 
+<br>builtin05 
+<br>builtin06 
+<br>builtin07 
+<br>builtin08 
+<br>builtin09 
+<br>builtin10 
+<br>builtin11 
+<br>builtin12 
+<br>builtin13 
+<br>builtin14 
+<br>builtin15 
+<br>builtin16 
+<br>builtin17 
+<br>builtin18 
+<br>builtin19 
+<br>
+<br>
+<br>Custom Menus 337 
+<br>
+<br>Icon Name Alternative Name 
+<br>
+<br>WinSplit builtin20 
+<br>Shell builtin21 
+<br>FindPrev builtin22 
+<br>FindNext builtin23 
+<br>FindHelp builtin24 
+<br>Make builtin25 
+<br>TagJump builtin26 
+<br>RunCtags builtin27 
+<br>
+<br>
+<br>Toolbar Tips 
+<br>
+<br>The toolbar can display a “tip” when the cursor is placed over an icon.To define the 
+<br>tip, issue the following command: 
+<br>:tmenu menu-item tip 
+<br>
+<br>For example, the following command causes the tip Open file to display when the 
+<br>cursor rests over the Open icon (see Figure 26.12): 
+<br>:tmenu ToolBar.Open Open file 
+<br>
+<br>Figure 26.12 ToolTip. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+338 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>Listing Menu Mappings 
+<br>
+<br>The following command lists all the menu mappings: 
+<br>
+<br>:menu 
+<br>
+<br>:menu 
+<br>
+<br>—-Menus —1 
+<br>ToolBar 
+<br>
+<br>
+<br>10 Open 
+<br>v <C-C>:browse e<CR> 
+<br>
+<br>
+<br>o <C-C>:browse e<CR> 
+<br>20 Save 
+<br>v <C-C>:w<CR> 
+<br>
+<br>
+<br>o <C-C>:w<CR> 
+<br>... lots of other lines ... 
+<br>The problem with the :menu command is that you get 51 screens of data.That is a lot. 
+<br>To get just the menu items for a specific top-level menu, use the following command: 
+<br>
+<br>:menu menu 
+<br>
+<br>For example, the following command lists only the menu items for the File menu: 
+<br>
+<br>:menu File 
+<br>
+<br>The next command lists the items for just the File.Save menu: 
+<br>
+<br>:menu File.Save 
+<br>
+<br>:menu File.Save 
+<br>
+<br>—-Menus —
+<br>
+<br>
+<br>340 &Save :w 
+<br>v <C-C>:confirm w<CR> 
+<br>
+<br>
+<br>o <C-C>:confirm w<CR> 
+<br>The letters at the beginning of each line denote the mode in which the command 
+<br>applies.They correspond to the letters used for the mode parameter described earlier. 
+<br>
+<br>Executing a Menu Item 
+<br>
+<br>The following command executes the menu-item as if the user had selected the 
+<br>command from the menu: 
+<br>
+<br>:emenu menu-item 
+<br>
+<br>No Remapping Menus 
+<br>
+<br>The :menu command defines a menu item. If you want to define an item and make 
+<br>sure that no mapping is done on the right side, use the :noremenu command. 
+<br>
+<br>
+<br>Special GUI Commands 339 
+<br>
+<br>Removing Menu Items 
+<br>
+<br>The command removes an item from the menu: 
+<br>
+<br>:[mode]unmenu menu-item 
+<br>
+<br>If you use an asterisk (*) for the menu-item, the entire menu is erased. 
+<br>To remove a ToolTip, use the following command: 
+<br>
+<br>:tunmenu menu-item 
+<br>
+<br>Tearing Off a Menu 
+<br>
+<br>You can tear off a menu by using the dotted tear-off line on the GUI. Another way to 
+<br>do this is to execute the following command: 
+<br>
+<br>:tearoff menu-name 
+<br>
+<br>Special GUI Commands 
+<br>
+<br>The Vim editor has many commands designed for use in GUI-based menus.These 
+<br>commands are all based around various dialog boxes (such as the file browser connected 
+<br>with the File.Open menu). 
+<br>
+<br>The File Browsers 
+<br>
+<br>The :browse command opens up a file browser and then executes a command on the 
+<br>file selected. For example, the following command opens a file browser and enables 
+<br>the user to select a file (see Figure 26.13): 
+<br>
+<br>:browse edit 
+<br>
+<br>The editor then performs an :edit file command. 
+<br>
+<br>Figure 26.13 File browser. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+340 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>The general form of the :browse command is as follows: 
+<br>:browse command [directory] 
+<br>
+<br>
+<br>The command is any editor command that takes a filename as an argument. Commands 
+<br>
+<br>such as :read, :write, and :edit fall into this category. 
+<br>
+<br>The [directory] parameter, if present, determines the directory in which the browser 
+<br>
+<br>starts. 
+<br>
+<br>If the [directory] parameter is not present, the directory for the browser is selected 
+<br>
+<br>according to the 'browsedir' option.This option can have one of three values: 
+<br>
+<br>last Use the last directory browsed (default). 
+<br>
+<br>buffer Use the same directory as the current buffer. 
+<br>
+<br>current 
+<br>
+<br>Always use the current directory. 
+<br>
+<br>Therefore, if you always want to start in the current directory, put the following 
+<br>
+<br>command in your initialization file: 
+<br>
+<br>:set browsedir=current 
+<br>
+<br>Finding a String 
+<br>
+<br>The following command displays a search dialog box (see Figure 26.14): 
+<br>:promptfind [string] 
+<br>
+<br>Figure 26.14 promptfind dialog box. 
+<br>
+<br>If a string is specified, the string is used as the initial value of the Find What field. 
+<br>When the user presses the Find Next button, the Vim editor searches for the given 
+<br>
+<br>string. 
+<br>
+<br>Replace Dialog Box 
+<br>
+<br>There is a similar dialog box for the replace command. 
+<br>
+<br>The following command displays a Replace dialog box (see Figure 26.15): 
+<br>:promptrepl string 
+<br>
+<br>
+<br>Special GUI Commands 341 
+<br>
+<br>Figure 26.15 promptrepl dialog box. 
+<br>
+<br>If a string parameter is present, it is used for the Find What parameter. 
+<br>
+<br>Finding Help 
+<br>
+<br>The following command brings up a dialog box that enables you to type in a subject 
+<br>that will be used to search the help system: 
+<br>
+<br>:helpfind 
+<br>
+<br>Confirmation 
+<br>
+<br>The ':confirm' option executes a command such as :quit that has the potential for 
+<br>destroying data. If the execution of the command would destroy data, a confirmation 
+<br>dialog box displays. 
+<br>
+<br>For example, the following command on a modified buffer results in the dialog box 
+<br>displayed in Figure 26.16: 
+<br>
+<br>:confirm :quit 
+<br>
+<br>Figure 26.16 Confirmation dialog box. 
+<br>
+<br>Figure 26.17 Confirmation without a GUI. 
+<br>
+<br>Note 
+<br>
+<br>This command works for the terminal version of Vim as well, but the Confirmation dialog box does not 
+<br>look as nice. Ths is illustrated in Figure 26.17. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+342 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>Browsing the Options 
+<br>
+<br>The following command opens a window that enables you to browse through the 
+<br>options: 
+<br>
+<br>:browse set 
+<br>
+<br>Figure 26.18 shows the screen. 
+<br>
+<br>Each “set” line shows the current value of an option (on the left). 
+<br>
+<br>Hit <CR> on a “set” line to execute it. 
+<br>A boolean option will be toggled. 
+<br>For other options you can edit the value. 
+<br>
+<br>
+<br>Hit <CR> on a help line to open a help window on this option. 
+<br>Hit <CR> on an index line to jump there. 
+<br>Hit <Space> on a “set” line to refresh it. 
+<br>
+<br>
+<br>1 important 
+<br>2 moving around, searching and patterns 
+<br>3 tags 
+<br>4 displaying text 
+<br>5 syntax and highlighting 
+<br>6 multiple windows 
+<br>
+<br>
+<br>Figure 26.18 
+<br>
+<br>:browse set. 
+<br>
+<br>This window gives you access to all the options.The beginning is a short table of 
+<br>contents, starting with the following: 
+<br>1 important 
+<br>2 moving around, searching and patterns 
+<br>
+<br>You can use the cursor commands to position the cursor on one of the items and 
+<br>press Return to get a list of the options for this section. If you were to move the cursor 
+<br>down to the first entry (important) and press Return, for instance, you would get 
+<br>Figure 26.19. 
+<br>
+<br>1 important 
+<br>
+<br>compatible behave very Vi compatible (not advisable) 
+<br>set nocp cp 
+<br>cpoptions list of flags to specify Vi compatibility 
+<br>set cpo=aABceFs 
+<br>insertmode use Insert mode as the default mode 
+<br>set noim im 
+<br>paste paste mode, insert typed text literally 
+<br>set nopaste paste 
+<br>pastetoggle key sequence to toggle paste mode 
+<br>set pt= 
+<br>helpfile name of the main help file 
+<br>set hf=/usr/local/share/vim/vim56/doc/help.txt 
+<br>
+<br>
+<br>Figure 26.19 :browse set detail screen. 
+<br>
+<br>The first option in this window is the 'compatible' option. According to the help 
+<br>text beside it, setting this option causes Vim to “behave very Vi compatible (not advisable).”
+<br>The abbreviation for this option is 'cp', and the current setting is 'nocp'. 
+<br>
+<br>If you move down to the 'compatible' line and press Return, you get a full help 
+<br>screen on the option (see Figure 26.20). 
+<br>
+<br>
+<br>Coloring 343 
+<br>
+<br>*`compatible´* *´cp´* *´nocompatible´* *´nocp´* 
+<br>
+<br>´compatible´ ´cp´ boolean (default on, off when a .vimrc file is found) 
+<br>global 
+<br>(not in Vi) 
+<br>
+<br>
+<br>This option has the function of making Vim either more Vi-compatible, 
+<br>or behave in a more useful way. This is a special kind of option, 
+<br>because when it´s set or reset, other options are also changed as a 
+<br>side effect. CAREFUL: Setting or resetting this option can have a lot 
+<br>of unexpected effects: Mappings are interpreted in another way, undo 
+<br>behaves differently, etc. 
+<br>By default this option is on and the Vi defaults are used for the 
+<br>
+<br>options.txt [help][RO] 
+<br>
+<br>compatible behave very Vi compatible (not advisable) 
+<br>
+<br>option-window 
+<br>
+<br>Figure 26.20 :browse set help screen. 
+<br>
+<br>If you move down to the set nocp line and press <CR>, the option is toggled. (This 
+<br>works for all Boolean options.) 
+<br>The next option ('cpoptions') is a string.To change its value, just edit it using the 
+<br>
+<br>Using the Clipboard 
+<br>
+<br>The 'clipboard' option controls how Vim treats text selected with the mouse. If you 
+<br>use the following command, Vim takes all the text that should go in the unnamed register 
+<br>and puts it in the clipboard register: 
+<br>
+<br>:set clipboard=unnamed 
+<br>
+<br>This means that the text is placed on the system clipboard and can be pasted into 
+<br>other applications. 
+<br>Another option is this: 
+<br>
+<br>:set clipboard=autoselect 
+<br>
+<br>When this option is set, any text selected in visual mode is put on the system 
+<br>clipboard (if possible). (The a flag of the 'guioptions' option does the same thing.) 
+<br>The 'autoselect' option works for both the GUI and console versions of Vim. 
+<br>
+<br>Coloring 
+<br>
+<br>When Vim starts the GUI, it tries to figure out whether you have a light or dark 
+<br>background and performs the following command to set the proper value: 
+<br>
+<br>:set background=value 
+<br>
+<br>The syntax files use the value of this option to determine which colors to use. 
+<br>
+<br>Warning 
+<br>
+<br>When the GUI is started, the value of this option is light. The gvimrc file is then read and processed. 
+<br>
+<br>After this, the window is created. Only after the window is created can Vim tell the color of the back
+<br>
+<br>
+<br>ground, so it is only after this that the background option is set. This means that anything in the gvimrc 
+<br>
+<br>that depends on the background being correct will fail. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+344 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>Selecting the Font 
+<br>
+<br>If you do not like the font that Vim uses for its GUI, you can change it by using the 
+<br>following option: 
+<br>:set guifont=font 
+<br>
+<br>Font is the name of a font. On an X Windows System, you can use the command 
+<br>xlsfonts to list out the available fonts. On Microsoft Windows, you can get a list of 
+<br>fonts from the Control Panel. 
+<br>
+<br>You can also use the following command: 
+<br>:set guifont=* 
+<br>
+<br>
+<br>This command causes Vim to bring up a font selection window from which you can 
+<br>pick your font. 
+<br>
+<br>Customizing Select Mode 
+<br>
+<br>The 'selection' option defines how a selection is handled.The possible values are as 
+<br>follows 
+<br>
+<br>old—Does not allow selection for one character past the end of a line.The last 
+<br>character of the selection is included in the operation. 
+<br>
+<br>
+<br>inclusive—The character past the end of the line is included, and the last 
+<br>character of the selection is included in the operation. 
+<br>
+<br>
+<br>exclusive—The character past the end of the line is included, and the last 
+<br>character of the selection is not included in the operation. 
+<br>
+<br>
+<br>Mouse Usage in Insert Mode 
+<br>
+<br>Clicking the left mouse button (<LeftMouse> in Vim terminology) causes the cursor to 
+<br>move to where the mouse pointer is pointing. 
+<br>If you have a wheel on your mouse, the mouse-wheel commands act just like they 
+<br>do in normal mode. 
+<br>
+<br>Microsoft Windows–Specific Commands 
+<br>
+<br>By setting the ‘winalt keys’ option to “no,” Vim will take over the entire keyboard. 
+<br>This means that you can use the Alt key for keyboard commands and mappings. 
+<br>However, Microsoft Windows generally uses the Alt key to access menus. 
+<br>The :simalt key simulates the pressing of Alt+key.You can use this in the 
+<br>following command, for example: 
+<br>
+<br>:map <M-f> :simalt f<CR> 
+<br>
+<br>
+<br>Microsoft Windows-Specific Commands 345 
+<br>
+<br>This command tells Vim that when Meta-F (Alt+f in Microsoft Windows terminology) 
+<br>is pressed, the editor is to simulate the pressing of the Alt+f key.This brings down 
+<br>the File menu. 
+<br>
+<br>Changing the Appearance of the Cursor 
+<br>
+<br>The 'guicursor' option defines how the cursor looks for the GUI version of Vim. 
+<br>The format of this command is as follows: 
+<br>
+<br>:set guicursor=mode:style[-highlight],mode:style[-highlight],... 
+<br>
+<br>You can set the mode as follows: 
+<br>v Visual mode 
+<br>ve Visual mode with ‘selection’ exclusive (same as v, if not specified) 
+<br>
+<br>o Operator-pending mode 
+<br>i Insert mode 
+<br>r Replace mode 
+<br>c Command-line normal (append) mode 
+<br>ci Command-line insert mode 
+<br>cr Command-line replace mode 
+<br>sm showmatch in insert mode 
+<br>a All modes 
+<br>
+<br>You can combine by separating them with hyphens, as follows: 
+<br>The style is as follows: 
+<br>horN Horizontal bar, N percent of the character height 
+<br>verN 
+<br>
+<br>Vertical bar, N percent of the character width 
+<br>block block cursor, fills the whole character 
+<br>blinkwaitN 
+<br>
+<br>
+<br>blinkonN 
+<br>
+<br>blinkoffN 
+<br>When these options are specified, the system waits for blinkwait 
+<br>milliseconds, and then turns the cursor off for blinkoff and on for 
+<br>blinkon.The off/on cycle repeats. 
+<br>
+<br>
+<br>And highlight is a highlight group name. 
+<br>The following table describes the default value for this option. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+346 Chapter 26 Advanced GUI Commands 
+</h3>
+<br>
+<br>Highlight 
+<br>Parameter Modes Cursor Type Group 
+<br>Visual 
+<br>Command-line 
+<br>ve:ver35-Cursor Visual selection Vertical bar cursor Cursor 
+<br>exclusive 35% high 
+<br>o:hor50-Cursor Operator-pending Horizontal cursor Cursor 
+<br>half size 
+<br>i-ci:ver25-Cursor Insert Small vertical bar Cursor 
+<br>Command insert (35% high) block 
+<br>r-cr:hor20-Cursor Replace Small horizontal bar Cursor 
+<br>Command replace (20% width) 
+<br>sm:block-Cursor-Showmatch Block cursor with Cursor 
+<br>blinkwait175fast 
+<br>blinking 
+<br>blinkoff150blinkon175 
+<br>
+<br>
+<br>X Windows System–Specific Commands 
+<br>
+<br>In the X Windows System, the window manager is responsible for the border around 
+<br>the window and other decorations.The 'guiheadroom' option tells the Vim editor 
+<br>how big the margin is around the window (top and bottom) so that when it goes into 
+<br>full screen mode, it can leave room for the border. 
+<br>
+<br>Selecting the Connection with :shell 
+<br>Commands 
+<br>
+<br>What happens when you are using the GUI window and you try to execute a :shell 
+<br>command? Usually the system uses a UNIX device called pty to handle the command 
+<br>interface. 
+<br>
+<br>If you want to connect using a pipe, set the following option: 
+<br>
+<br>:set noguipty 
+<br>
+<br>Otherwise the default is used and a pty connection made between the shell and 
+<br>the GUI: 
+<br>
+<br>:set guipty 
+<br>
+<br>
+<br>MS-DOS-Specific Commands 347 
+<br>
+<br>MS-DOS-Specific Commands 
+<br>
+<br>The following command changes the screen mode of an MS-DOS window: 
+<br>
+<br>:mode mode 
+<br>
+<br>This command is effective only if you are editing inside MS-DOS; it does not work 
+<br>inside a Microsoft Windows GUI. 
+<br>
+<br>Mode is an MS-DOS screen mode such as B80, B40, c80, c40, or one of the screen-
+<br>mode numbers. 
+<br>
+<br>
+<br>Expressions and Functions 
+<br>
+<br>THE VIM EDITOR CONTAINS A RICH script language.This command language gives you 
+<br>
+<br>tremendous flexibility when it comes to customizing your editor for specialized tasks. 
+<br>This chapter covers the following: 
+<br>
+<br>
+<br>Basic variables and expressions 
+<br>
+<br>
+<br>The :echo statement 
+<br>
+<br>
+<br>Control statements 
+<br>
+<br>
+<br>User-defined functions 
+<br>
+<br>
+<br>A complete list of built-in functions 
+<br>
+<br>Basic Variables and Expressions 
+<br>
+<br>The Vim editor enables you to define, set, and use your own variables.To assign a 
+<br>value to a variable, use the :let command.The general form of this command is as 
+<br>follows: 
+<br>
+<br>:let {variable} = {expression} 
+<br>
+<br>The Vim editor uses the same style variable names as most other languages—that is, a 
+<br>variable begins with a letter or underscore and then consists of a series of letters, digits, 
+<br>and the underscore. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+350 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>To define the variable line_size, for example, use this command: 
+<br>
+<br>:let line_size = 30 
+<br>
+<br>To find out what the variable is, use the :echo command: 
+<br>
+<br>:echo “line_size is” line_size 
+<br>
+<br>When entered, this command results in Vim displaying the following on the last line: 
+<br>
+<br>line_size is 30 
+<br>
+<br>Variables can contain numbers (such as 30) or strings (such as “foo”). For example: 
+<br>
+<br>:let my_name = “Steve Oualline” 
+<br>
+<br>Special Variable Names 
+<br>
+<br>The Vim editor uses special prefixes to denote different types of variables.The prefixes 
+<br>are as follows: 
+<br>
+<br>Name Use 
+<br>
+<br>All uppercase, digits, and Variable which can be stored in the viminfo file. 
+<br>underscore if the ‘viminfo‘ option contains the “!” flag 
+<br>Initial uppercase letter Variable saved by the make session (:mksession) 
+<br>
+<br>command. 
+<br>Lowercase letter somewhere 
+<br>inside 
+<br>
+<br>
+<br>:let Save_this_option = 1 “ Options saved in session 
+<br>:let forget_this = “yes” “ Discarded between sessions 
+<br>
+<br>All lowercase, digits, and A variable not stored in any save file. 
+<br>
+<br>underscore 
+<br>
+<br>$environment 
+<br>
+<br>Environment variable. 
+<br>
+<br>@register 
+<br>
+<br>Text register. 
+<br>
+<br>&option 
+<br>
+<br>The name of an option. 
+<br>
+<br>b:name 
+<br>
+<br>The variable is local to the buffer. Each buffer can 
+<br>have a different value of this variable. 
+<br>
+<br>w:name 
+<br>
+<br>A variable local to a window. 
+<br>g:name A global variable. (Used inside functions to denote 
+<br>global variables.) 
+<br>
+<br>a:name 
+<br>
+<br>An argument to a function. 
+<br>
+<br>v:name 
+<br>
+<br>A Vim internal variable. 
+<br>
+<br>
+<br>Basic Variables and Expressions 351 
+<br>
+<br>Some examples: 
+<br>“ The environment variable $PAGER contains the name of the page viewing command 
+<br>
+<br>:let $PAGER = “/usr/local/bin/less” 
+<br>
+<br>“ Display the value of the last search pattern 
+<br>
+<br>:echo “Last search was “@/ 
+<br>
+<br>“ The following two commands do the same thing 
+<br>
+<br>:let &autoindent = 1 
+<br>
+<br>:set autoindent 
+<br>
+<br>“ Define the syntax for the current buffer 
+<br>
+<br>:let b:current_syntax = c 
+<br>
+<br>“Note: This doesn’t handle all the side effects associated with “changing the 
+<br>
+<br>language of the buffer 
+<br>
+<br>The internal variables (v:name) are used by Vim to store a variety of information.The 
+<br>following table shows the full list of variables. 
+<br>
+<br>Variable Functions 
+<br>v:count The count given for the last normal-mode command. 
+<br>v:count1 Like v:count, except that it defaults to 1 if no count is 
+<br>specified. 
+<br>v:errmsg The last error message. 
+<br>v:warningmsg The last warning message. 
+<br>v:statusmsg The last status message. 
+<br>v:shell_error Result of the last shell command. If 0, the command worked; 
+<br>if non-0, the command failed. 
+<br>v:this_session Full filename of the last loaded or saved session file. 
+<br>v:version Version number of Vim.Version 5.01 is stored as 501. 
+<br>
+<br>Constants 
+<br>
+<br>The Vim editor uses a variety of constants.There are the normal integers: 
+<br>123 “ Simple integer 
+<br>0123 “ Octal integer 
+<br>0xAC “ Hexadecimal 
+<br>
+<br>There are also string constants: 
+<br>“string” “ A simple string 
+<br>‘string’ “ A literal string 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+352 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>The difference between a simple string and a literal string is that in a simple string, 
+<br>characters escaped by backslash are expanded, whereas in a literal string a backslash is 
+<br>just a backslash. For example: 
+<br>
+<br>:echo “>\100<” 
+<br>>@< 
+<br>:echo ‘>\100<’ 
+<br>>\100< 
+<br>
+<br>Note 
+<br>
+<br>The character number octal 100 is @. 
+<br>
+<br>Expressions 
+<br>
+<br>You can perform a variety of operations on integers.These include the arithmetic 
+<br>
+<br>operators: 
+<br>int + int Addition 
+<br>int – int Subtraction 
+<br>int * int Multiplication 
+<br>int / int Integer divide (and truncate) 
+<br>int % int Modulo 
+<br>– int Negation 
+<br>
+<br>Note 
+<br>
+<br>Strings are automatically converted to integers when used in conjunction with these operators. 
+<br>
+<br>In addition, a number of logical operators work on both strings and integers.These 
+<br>return a 1 if the comparison succeeds and 0 if it does not. 
+<br>
+<br>var == var Check for equality. 
+<br>
+<br>var != var Inequality. 
+<br>
+<br>var < var Less than. 
+<br>
+<br>var <= var Less than or equal to. 
+<br>
+<br>var > var Greater than. 
+<br>
+<br>var >= var Greater than or equal to. 
+<br>In addition, the comparison operators compare a string against a regular expression. 
+<br>For example, the following checks the given string (“word”) against the regular expression 
+<br>“\w*” and returns a 1 if the string matches the expression: 
+<br>
+<br>“word” =~ “\w*” 
+<br>
+<br>
+<br>Entering Filenames 353 
+<br>
+<br>The two regular expression comparison operators are as follows: 
+<br>
+<br>string =~ regexp Regular expression matches. 
+<br>
+<br>string !~ regexp Regular expression does not match. 
+<br>
+<br>In addition, strings have the following special comparisons: 
+<br>
+<br>string ==? string Strings equal, ignore case. 
+<br>
+<br>string ==# string Strings equal, case must match. 
+<br>
+<br>string !=? string Strings not equal, ignore case. 
+<br>
+<br>string !=# string Strings not equal, case must match. 
+<br>
+<br>string <? string Strings less than, ignore case. 
+<br>
+<br>string <# string Strings less than, case must match. 
+<br>
+<br>string <=? string Strings less than or equal, ignore case. 
+<br>
+<br>string <=# string Strings less than or equal, case must match. 
+<br>
+<br>string >? string Strings greater than, ignore case. 
+<br>
+<br>string ># string Strings greater than, case must match. 
+<br>
+<br>string >=? string Strings greater than or equal, ignore case. 
+<br>
+<br>string >=# string Strings greater than or equal, case must match. 
+<br>
+<br>There are three forms of each operator.The bare form (i.e. ==) honors the 
+<br>‘ignorecase’ option.The “?” form (i.e.==?) always ignores case differences while 
+<br>the “#” form (i.e.==#) never ignores different case characters. 
+<br>
+<br>Deleting a Variable 
+<br>
+<br>The following command deletes a variable: 
+<br>
+<br>:unlet[!] {name} 
+<br>
+<br>Generally, if you try to delete a variable that does not exist, an error result. If the override 
+<br>(!) character is present, no error message results. 
+<br>
+<br>Entering Filenames 
+<br>
+<br>When you are entering a filename, you can use a number of special words and characters, 
+<br>as follows: 
+<br>
+<br>% Current filename 
+<br>
+<br># 
+<br>
+<br>Alternate filename 
+<br>
+<br><cword> 
+<br>
+<br>The word under the cursor. 
+<br>
+<br><cWORD> 
+<br>
+<br>The WORD under the cursor. 
+<br>
+<br><cfile> 
+<br>
+<br>The filename under the cursor. 
+<br><afile> The name of a file being read or written during the execution of a 
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+related autocommand. (See Chapter 13,“Autocommands,” for more 
+</h3>
+<br>information.) 
+<br>
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+354 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br><abuf> 
+<br>
+<br>The current buffer number in an autocommand. 
+<br><amatch> Like <abuf>, but when used with a FileType or Syntax event it is 
+<br>
+<br><sfile> 
+<br>
+<br>The name of the file currently being :sourced. 
+<br>
+<br>You can modify each of these words by one or more of the modifiers listed here (for 
+<br>example, the :p modifier, which turns a filename into a full pathname). If the name of 
+<br>the file under the cursor is test.c, for instance, <cfile> would be test.c. On the 
+<br>other hand, <cfile:p> would be /home/oualline/examples/test.c. 
+<br>
+<br>You can use the following modifiers: 
+<br>:p Turn a filename into a full path. Must appear first if multiple 
+<br>modifiers are used. 
+<br>
+<br>:~ 
+<br>
+<br>Turn an absolute path such as /home/oualline/examples/test.c 
+<br>into a short version using the ~ notation, such as 
+<br>~oualline/examples/test.c. 
+<br>
+<br>:. 
+<br>
+<br>Turn the path into one relative to the current directory, if 
+<br>possible. 
+<br>:h Head of the filename. For example, ../path/test.c yields 
+<br>../path. 
+<br>
+<br>:t 
+<br>
+<br>Tail of the filename.Therefore, ../path/test.c yields test.c. 
+<br>
+<br>:r 
+<br>
+<br>Filename without extension.Therefore, ../path/test.c yields 
+<br>test. 
+<br>:e Extension. 
+<br>:s?from?to? Substitution changing the pattern from to the pattern to, first 
+<br>occurrence. 
+<br>
+<br>:gs?from?to? 
+<br>
+<br>Substitution changing the pattern from to the pattern to, all 
+<br>occurrences. 
+<br>
+<br>How to Experiment 
+<br>
+<br>You can determine how Vim will apply modifiers to a filename. First create a text file 
+<br>whose content is the filename on which you want to run experiments. Put the cursor 
+<br>on this filename and then use the following command to test out a modifier: 
+<br>
+<br>:echo expand(“<cword>:p”) 
+<br>
+<br>(Change :p to whatever modifier you want to check.) 
+<br>The following sections discuss the :echo statement and expand function in more 
+<br>
+<br>detail. 
+<br>
+<br>
+<br>Control Statements 355 
+<br>
+<br>The :echo Statement 
+<br>
+<br>
+<br>The :echo statement just echoes its arguments. For example: 
+<br>:echo “Hello world” 
+<br>
+<br>Hello world 
+<br>
+<br>You can also use it to display the value of a variable: 
+<br>
+<br>:let flag=1 
+<br>:echo flag 
+<br>
+<br>
+<br>The :echon command echoes the arguments, but does not output a newline. For 
+<br>example: 
+<br>
+<br>:echo “aa” | echo “bb” 
+<br>
+<br>aa 
+<br>bb 
+<br>
+<br>
+<br>:echon “aa” | echon “bb” 
+<br>
+<br>aabb 
+<br>
+<br>Note 
+<br>
+<br>The bar (|) is used to separate two commands on the same line. 
+<br>
+<br>Echoing in Color 
+<br>
+<br>You can use the :echohl command to change the color of the output :echo to a 
+<br>given highlight group. For example: 
+<br>
+<br>:echohl ErrorMsg 
+<br>:echo “A mistake has been made” 
+<br>:echohl None 
+<br>
+<br>
+<br>Note 
+<br>
+<br>Good programming practice dictates that you always reset the highlighting to None after your message. 
+<br>That way you do not affect other :echo commands. 
+<br>
+<br>If you want to see what highlight groups are defined, use this command: 
+<br>:highlight 
+<br>
+<br>Control Statements 
+<br>
+<br>The Vim editor has a variety of control statements that enable you to change the flow 
+<br>of a macro or function.With these, you can make full use of Vim’s sophisticated script 
+<br>language. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+356 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>The :if Statement 
+<br>
+<br>The general form of the :if statement is as follows: 
+<br>:if {condition} 
+<br>: “ Statement 
+<br>: “ Statement 
+<br>:endif 
+<br>
+<br>
+<br>The statements inside the :if statement are executed if the condition is non-zero.The 
+<br>four-space indent inside the :if is optional, but encouraged because it makes the program 
+<br>much more readable. 
+<br>
+<br>The :if statement can have an else clause: 
+<br>:if {condition} 
+<br>: “ Statement 
+<br>: “ Statement 
+<br>:else 
+<br>
+<br>
+<br>: “ Statement 
+<br>: “ Statement 
+<br>:endif 
+<br>
+<br>
+<br>Finally, the :elseif keyword is a combination of :if and :else. Using it removes the 
+<br>:if &term == “xterm” 
+<br>: “ Do xterm stuff 
+<br>:elseif &term == “vt100” 
+<br>: “ Do vt100 stuff 
+<br>:else 
+<br>: “ Do non xterm and vt100 stuff 
+<br>:endif 
+<br>
+<br>Looping 
+<br>
+<br>The :while command starts a loop.The loop ends with the :endwhile command: 
+<br>:while counter < 30 
+<br>: let counter = counter + 1 
+<br>
+<br>: “ Do something 
+<br>
+<br>:endwhile 
+<br>
+<br>The :continue command goes to the top of the loop and continues execution.The 
+<br>:break command exits the loop: 
+<br>:while counter <: 30 
+<br>: if skip_flag 
+<br>: continue 
+<br>: endif 
+<br>: if exit_flag 
+<br>: break 
+<br>: endif 
+<br>: “Do something 
+<br>:endwhile 
+<br>
+<br>
+<br>Defining Your Own Functions 
+<br>
+<br>The :execute Command 
+<br>
+<br>The :execute executes the argument as a normal command-mode command: 
+<br>
+<br>:let command = “echo ‘Hello world!’” 
+<br>
+<br>:execute command 
+<br>
+<br>Hello World 
+<br>
+<br>Defining Your Own Function 
+<br>
+<br>The Vim editor enables you to define your own functions.The basic function declaration 
+<br>begins as follows: 
+<br>:function {name}({var1}, {var2}, ...) 
+<br>
+<br>Note 
+<br>
+<br>Function names must begin with a capital letter. 
+<br>
+<br>It ends as follows: 
+<br>
+<br>:endfunction 
+<br>
+<br>Let’s define a short function to return the smaller of two numbers, starting with this 
+<br>declaration: 
+<br>
+<br>:function Min(num1, num2) 
+<br>
+<br>This tells Vim that the function is named Min and it takes two arguments (num1 and 
+<br>
+<br>The first thing you need to do is to check to see which number is smaller: 
+<br>
+<br>: if a:num1 < a:num2 
+<br>
+<br>The special prefix a: tells Vim that the variable is a function argument. Let’s assign the 
+<br>variable smaller the value of the smallest number: 
+<br>
+<br>: if a:num1 < a:num2 
+<br>: let smaller = a:num1 
+<br>: else 
+<br>: let smaller = a:num2 
+<br>: endif 
+<br>
+<br>The variable smaller is a local variable. All variables used inside a function are local 
+<br>unless prefixed by a g:. 
+<br>
+<br>Warning 
+<br>
+<br>A variable outside a function declaration is called var; whereas inside if you want to refer to the same 
+<br>variable, you need to call it g:var. Therefore, one variable has two different names depending on the 
+<br>context. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+358 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>You now use the :return statement to return the smallest number to the user. Finally, 
+<br>you end the function: 
+<br>
+<br>: return smaller 
+<br>:endfunction 
+<br>
+<br>The complete function definition is as follows: 
+<br>
+<br>:function Min(num1, num2) 
+<br>
+<br>: if a:num1 < a:num2 
+<br>: let smaller = a:num1 
+<br>: else 
+<br>: let smaller = a:num2 
+<br>: endif 
+<br>: return smaller 
+<br>
+<br>:endfunction 
+<br>
+<br>Note 
+<br>
+<br>I know that this function can be written more efficiently, but it is designed to be a tutorial of features, 
+<br>
+<br>
+<br>Using a Function 
+<br>
+<br>You can now use your function in any Vim expression. For example: 
+<br>
+<br>:let tiny = Min(10, 20) 
+<br>
+<br>You can also call a function explicitly using the function name with the :call 
+<br>command: 
+<br>
+<br>:[range] call {function}([parameters]) 
+<br>
+<br>If a [range] is specified, the function is called for each line, unless the function is a special 
+<br>“range”-type function (as discussed later). 
+<br>
+<br>Function Options 
+<br>
+<br>If you attempt to define a function that already exists, you will get an error.You can 
+<br>use the force option (!) to cause the function to silently replace any previous definition 
+<br>of the function: 
+<br>
+<br>:function Max(num1, num2) 
+<br>
+<br>: “ Code 
+<br>:endfunction 
+<br>
+<br>:function Max(num1, num2, num3) 
+<br>
+<br>— error — 
+<br>
+<br>:function! Max(num1, num2, num3) 
+<br>
+<br>— no error — 
+<br>
+<br>
+<br>Defining Your Own Functions 
+<br>
+<br>By putting the range keyword after the function definition, the function is considered 
+<br>a range function. For example: 
+<br>
+<br>:function Count_words() range 
+<br>
+<br>When run on a range of lines, the variables a:firstline and a:lastline are set to 
+<br>the first and last line in the range. 
+<br>
+<br>If the word abort follows the function definition, the function aborts on the first 
+<br>error. For example: 
+<br>
+<br>:function Do_It() abort 
+<br>
+<br>Finally, Vim enables you to define functions that have a variable number of arguments. 
+<br>The following command, for instance, defines a function that must have 1 argument 
+<br>(start) and can have up to 20 additional arguments: 
+<br>
+<br>:function Show(start, ...) 
+<br>
+<br>The variable a:1 contains the first optional argument, a:2 the second, and so on.The 
+<br>variable a:0 contains the number of extra arguments. For example: 
+<br>
+<br>:function Show(start, ...) 
+<br>
+<br>: let index = 1 “ Loop index 
+<br>
+<br>: echo “Show is” a:start 
+<br>
+<br>: 
+<br>
+<br>: while (index <= a:0) 
+<br>
+<br>: echo “Arg” index “is “ a:index 
+<br>
+<br>: let index = index + 1 
+<br>
+<br>: endwhile 
+<br>
+<br>:endfunction 
+<br>
+<br>Listing Functions 
+<br>
+<br>The :function command lists all the user-defined functions: 
+<br>
+<br>:function 
+<br>
+<br>function FTCheck_nroff() 
+<br>function FTCheck_asm() 
+<br>
+<br>
+<br>To see what is in a single function, execute this command: 
+<br>:function {name} 
+<br>
+<br>For example: 
+<br>
+<br>:function Show 
+<br>
+<br>function Show 
+<br>
+<br>let index = 1 “ Loop index 
+<br>
+<br>echo “Show is” a:start 
+<br>
+<br>while (index <= a:0) 
+<br>
+<br>echo “Arg” index “is “a:.index 
+<br>
+<br>let index = index + 1 
+<br>
+<br>endwhile 
+<br>
+<br>endfunction 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+360 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>Deleting a Function 
+<br>
+<br>To delete a function, use this command: 
+<br>
+<br>:delfunction name 
+<br>
+<br>User-Defined Commands 
+<br>
+<br>The Vim editor enables you to define your own commands.You execute these commands 
+<br>just like any other command-mode command.To define a command, use the 
+<br>:command command, as follows: 
+<br>
+<br>:command Delete_first :1delete 
+<br>
+<br>Now when you execute the command 
+<br>
+<br>:Delete_first 
+<br>
+<br>the Vim editor performs a 
+<br>
+<br>:1delete 
+<br>
+<br>which deletes the first line. 
+<br>
+<br>Note 
+<br>
+<br>User-defined commands must start with a capital letter. 
+<br>
+<br>To list out the user-defined commands, execute the following command: 
+<br>
+<br>:command 
+<br>
+<br>To remove the definition of a user-defined command, issue the :delcommand, as 
+<br>follows: 
+<br>
+<br>:delcommand Delete_one 
+<br>
+<br>You can clear all user-defined commands with the following command: 
+<br>
+<br>:comclear 
+<br>
+<br>User-defined commands can take a series of arguments.The number of arguments 
+<br>must be specified by the -nargs option on the command line. For instance, the example 
+<br>Delete_one command takes no arguments, so you could have defined it as follows: 
+<br>
+<br>:command Delete_first -nargs=0 1delete 
+<br>
+<br>However, because -nargs=0 is the default, you do not need to specify it. 
+<br>The other values of -nargs are as follows: 
+<br>-nargs=0 No arguments 
+<br>-nargs=1 One argument 
+<br>-nargs=* Any number of arguments 
+<br>-nargs=? Zero or one argument 
+<br>-nargs=+ One or more arguments 
+<br>
+<br>
+<br>User-Defined Commands 361 
+<br>
+<br>Inside the command definition, the arguments are represented by the <args> keyword. 
+<br>For example: 
+<br>
+<br>:command -nargs=+ Say :echo “<args>” 
+<br>
+<br>Now when you type 
+<br>
+<br>:Say Hello World 
+<br>
+<br>the system echoes 
+<br>
+<br>Hello World 
+<br>
+<br>Some commands take a range as their argument.To tell Vim that you are defining such 
+<br>a command, you need to specify a -range option.The values for this option are as 
+<br>follows: 
+<br>
+<br>-range Range is allowed. Default is the current line. 
+<br>-range=% Range is allowed. Default is the while file. 
+<br>-range=count Range is allowed, but it is really just a single number whose 
+<br>
+<br>
+<br>default is count. 
+<br>
+<br>When a range is specified, the keywords <line1> and <line2> get the values of the 
+<br>first and last line in the range. 
+<br>For example, the following command defines the SaveIt command, which writes 
+<br>out the specified range to the file save_file: 
+<br>
+<br>:command -range=% SaveIt :<line1>, <line2> write! save_file 
+<br>
+<br>Some of the other options and keywords are as follows: 
+<br>-count=number 
+<br>
+<br>The command can take a count whose default is number.The 
+<br>resulting count is stored in the <count> keyword. 
+<br>-bang You can use the override (!) modifier. If present, a ! will be 
+<br>stored in the keyword <bang>. 
+<br>
+<br>
+<br>-register 
+<br>You can specify a register. (The default is the unnamed register.) 
+<br>The register specification is put in the <reg> (a.k.a. <register>) 
+<br>keyword. 
+<br>
+<br>
+<br>The <f-args> keyword contains the same information as the <args> keyword, except 
+<br>in a format suitable for use as function call arguments. For example: 
+<br>
+<br>:command -nargs=* DoIt :call AFunction(<f-args>) 
+<br>:DoIt a b c 
+<br>
+<br>
+<br>Execute the following command: 
+<br>
+<br>:call AFunction(“a”, “b”, “c”) 
+<br>
+<br>Finally, you have the <lt> keyword. It contains the character <. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+362 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>Built-In Functions 
+<br>
+<br>The Vim editor has a number of built-in functions.This section lists all the built-in 
+<br>functions. 
+<br>
+<br>append({line_number}, {string}) 
+<br>
+<br>What it does: 
+<br>Parameters: 
+<br>
+<br>
+<br>line_number 
+<br>
+<br>string 
+<br>
+<br>Returns: 
+<br>
+<br>argc() 
+<br>
+<br>What it does: 
+<br>Returns: 
+<br>
+<br>argv({number}) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>
+<br>Returns: 
+<br>
+<br>Appends the string as a new line after line_number. 
+<br>
+<br>The line number after which the text is to be inserted. A value 
+<br>of 0 causes the text to be inserted at the beginning of the file. 
+<br>The string to be inserted after the given line. 
+<br>
+<br>
+<br>Integer flag. 
+<br>0 = no error; 1 = error caused by a line_number out of range. 
+<br>
+<br>
+<br>Counts the number of arguments in the argument list. 
+<br>Integer. 
+<br>The argument count. 
+<br>
+<br>
+<br>Returns an argument in the argument list. 
+<br>
+<br>
+<br>The argument index. Argument 0 is the first argument in 
+<br>the argument list (not the name of the program, as in C 
+<br>programming). 
+<br>
+<br>
+<br>String. 
+<br>Returns the requested argument. 
+<br>
+<br>
+<br>browse(save, title, initial_directory, default) 
+<br>
+<br>What it does: 
+<br>
+<br>Parameters: 
+<br>
+<br>save 
+<br>
+<br>title 
+<br>initial_directory 
+<br>default 
+<br>
+<br>Returns: 
+<br>
+<br>Displays a file browser and lets the user pick a file.This works 
+<br>only in the GUI version of the editor. 
+<br>
+<br>
+<br>An integer that indicates whether the file is being read or 
+<br>saved. If save is non-0, the browser selects a file to write. If 0, a 
+<br>file is selected for reading. 
+<br>Title for the dialog box. 
+<br>The directory in which to start browsing. 
+<br>Default filename. 
+<br>
+<br>
+<br>String. 
+<br>The name of the file selected. If the user selected Cancel or an 
+<br>error occurs, an empty string is returned. 
+<br>
+<br>
+<br>
+<br>Built-In Functions 363 
+<br>
+<br>bufexists(buffer_name) 
+<br>What it does: Checks to see whether a buffer exists. 
+<br>Parameter: 
+<br>buffer_name The name of a buffer to check for existence. 
+<br>Returns: Integer flag. 
+<br>Returns true (1) if the buffer exists and false (0) otherwise. 
+<br>bufloaded(buffer_name) 
+<br>What it does: Check to see whether a buffer is loaded. 
+<br>Parameter: 
+<br>buffer_name The name of a buffer to check to see whether it is currently 
+<br>loaded. 
+<br>Returns: Integer flag. 
+<br>Returns true (1) if the buffer is loaded and false (0) otherwise. 
+<br>
+<br>bufname(buffer_scpecification) 
+<br>
+<br>What it does: Find the indicated buffer. 
+<br>Parameter: 
+<br>
+<br>buffer_specification 
+<br>A buffer number or a string that specifies the buffer. If a number 
+<br>is supplied, buffer number buffer_specification is returned. If a 
+<br>string is supplied, it is treated as a regular expression and the list 
+<br>of buffers is searched for a match and the match returned. 
+<br>There are three special buffers: % is the current buffer, # is the 
+<br>alternate buffer, and $ is the last buffer in the list. 
+<br>
+<br>Returns: 
+<br>String. 
+<br>String containing the full name of the buffer or an empty 
+<br>string if there is an error or no matching buffer can be found. 
+<br>
+<br>bufnr(buffer_expression) 
+<br>
+<br>What it does: Obtains the number of a buffer. 
+<br>Parameter: 
+<br>
+<br>buffer_expression A buffer specification similar to the one used by the bufname 
+<br>function. 
+<br>Returns: Integer. 
+<br>Number of the buffer, or –1 for error. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+364 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>bufwinnr(buffer_expression) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>buffer_expression 
+<br>
+<br>Returns: 
+<br>
+<br>byte2line(byte_index) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>byte_index 
+<br>
+<br>Returns: 
+<br>
+<br>char2nr(character) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>character 
+<br>
+<br>Returns: 
+<br>
+<br>col(location) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>location 
+<br>
+<br>Returns: 
+<br>
+<br>Obtains the window number for a buffer. 
+<br>
+<br>A buffer specification similar to the one used by the bufname 
+<br>function. 
+<br>
+<br>
+<br>Integer. 
+<br>The number of the first window associated with the buffer or 
+<br>–1 if there is an error or no buffer matches the buffer_expression. 
+<br>
+<br>
+<br>Converts a byte index into a line number. 
+<br>
+<br>The index of a character within the current buffer. 
+<br>
+<br>Integer. 
+<br>The line number of the line that contains the character at 
+<br>byte_index or –1 if byte_index is out of range. 
+<br>
+<br>
+<br>Converts a character to a character number. 
+<br>
+<br>A single character to be converted. If a longer string is supplied, 
+<br>only the first character is used. 
+<br>
+<br>
+<br>Integer. 
+<br>The character number. For example, char2nr(“A”) is 65. (The 
+<br>ASCII code for ‘A’ is 65.) 
+<br>
+<br>
+<br>Returns the column of the specified location. 
+<br>
+<br>
+<br>Is a mark specification (for example, ‘‘x) or “.” to obtain the 
+<br>column where the cursor is located. 
+<br>
+<br>
+<br>Integer. 
+<br>The column where the mark or cursor resides, or 0 if there is 
+<br>an error. 
+<br>
+<br>
+<br>
+<br>Built-In Functions 365 
+<br>
+<br>confirm({message}, {choice_list}, [default], [type]) 
+<br>
+<br>What it does: Displays a dialog box giving the user a number of choices and 
+<br>returns what the user chooses. 
+<br>Parameters: 
+<br>{message} 
+<br>{choice_list} 
+<br>A prompt message displayed in the dialog box. 
+<br>A string containing a list of choices.The newline (“\n”) separates 
+<br>each choice.The ampersand (&) is used to indicate an 
+<br>accelerator character. 
+<br>[default] 
+<br>[type] 
+<br>An index indicating default choice.The first button is #1. If 
+<br>this parameter is not specified, the first button is selected. 
+<br>The type of the dialog box to be displayed.The choices are 
+<br>“Error”, “Question”, “Info”, “Warning”, or “Generic”.The 
+<br>default is “Generic”. 
+<br>Returns: Integer. 
+<br>The choice number (starting with 1), or 0 if the user aborted 
+<br>out of the dialog box by pressing <ESC> or CTRL-C. 
+<br>Examples: 
+<br>
+<br>echo confirm(“Choose one”, “&One\n&Two\n&Three”, 2, “Error”) 
+<br>echo confirm(“Choose one”, “&One\n&Two\n&Three”, 1, “Question”) 
+<br>echo confirm(“Choose one”, “&One\n&Two\n&Three”, 1, “Warning”) 
+<br>echo confirm(“Choose one”, “&One\n&Two\n&Three”, 0, “Info”) 
+<br>echo confirm(“Choose one”, “&One\n&Two\n&Three”, 0, “Generic”) 
+<br>
+<br>Figure 27.1 shows the various types of confirmation dialog boxes. 
+<br>
+<br>Error Question Info 
+<br>
+<br>Warning Generic 
+<br>Figure 27.1 Dialog box types. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+366 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>Note 
+<br>
+<br>This function works on both the GUI and console version of the editor. The console versions of the dialog 
+<br>
+<br>boxes do not look as nice: 
+<br>
+<br>:echo confirm(“Hello”, “&One\n&Two”, 1, “Error”) 
+<br>
+<br>Hello 
+<br>[O]ne, (T)wo: O 
+<br>
+<br>delete({file_name}) 
+<br>What it does: Deletes the file. 
+<br>Parameter: 
+<br>{file_name} The name of the file to delete. 
+<br>Returns: Integer. 
+<br>0 means that the file was deleted. Non-0 for error. 
+<br>
+<br>did_filetype() 
+<br>
+<br>What it does: 
+<br>Checks to see whether the FileType event has been done.This 
+<br>command is useful in conjunction with the autocommands. 
+<br>
+<br>Returns: 
+<br>Integer. 
+<br>Non-0 if autocommands are being executed and at least one 
+<br>FileType event has occurred. 0 otherwise. 
+<br>
+<br>escape({string}, {character_list}) 
+<br>
+<br>What it does: 
+<br>Turns a {string} of characters into an escaped string.The 
+<br>{character_list} specifies the character to be escaped. 
+<br>
+<br>Parameters: 
+<br>
+<br>{string} The string you want to escape. 
+<br>{character_list} The list of characters in {string} that need to have the escape 
+<br>character (\) put in front of them. 
+<br>Returns: String. 
+<br>The escaped string. For example: 
+<br>
+<br>:echo escape(“This is a ‘test’.”, “ ‘“) 
+<br>
+<br>This\ is\ a\ \’test\’.” 
+<br>
+<br>
+<br>Built-In Functions 367 
+<br>exists({string}) 
+<br>What it does: Checks to see whether the item specified by [{string} exits. 
+<br>Parameters: 
+<br>{string} An item to check.This can be used to specify an option 
+<br>('&autoindent'), an environment variable ('$VIMHOME'), a 
+<br>built-in function name ('*escape'), or a simple variable 
+<br>('var_name'). (Note:The quotation marks are required because 
+<br>you are passing in a string.) 
+<br>Returns: Integer. 
+<br>Returns 1 if the item exists, 0 otherwise. 
+<br>expand({string}, [flag]) 
+<br>What it does: Returns a list of files that match the {string}.This string can 
+<br>contain wildcards and other specifications. For example, 
+<br>expand(“*.c”) returns a list of all C files. 
+<br>Parameters: 
+<br>{string} A string to be expanded.The string can contain any of the 
+<br>special file characters described earlier. Note:The 'suffixes' 
+<br>and 'wildignore' options affect how the expansion is carried 
+<br>out. 
+<br>When a special word such as '<cfile>' is expanded, no further 
+<br>expansion is performed. If the cursor is on the string 
+<br>'~/.vimrc', for example, 'expand('<cfile>')' results in 
+<br>'~/.vimrc'. 
+<br>If you want the full filename, however, you need to expand 
+<br>twice.Therefore, 'expand(expand('<cfile>'))' returns 
+<br>'/home/oualline/.vimrc'. 
+<br>The 'wildignore' and 'suffixes' options are honored unless 
+<br>a non-0 [flag] argument is supplied. 
+<br>Returns: String list. 
+<br>A list of filenames that match the {string} separated by new-
+<br>lines. If nothing matches, an empty string is returned. 
+<br>filereadable({file_name}) 
+<br>What it does: Checks to see whether a file is readable. 
+<br>Parameter: 
+<br>{file_name} The name of the file to check. 
+<br>Returns: Integer. 
+<br>Non-0 number is returned when the file exists and can be 
+<br>read. A 0 indicates that the file does not exist or is protected 
+<br>against reading. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+368 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>fnamemodify({file_name}, {modifiers}) 
+<br>
+<br>What it does: 
+<br>Parameters: 
+<br>
+<br>
+<br>{file_name} 
+<br>{modifiers} 
+<br>
+<br>Returns: 
+<br>
+<br>getcwd() 
+<br>
+<br>What it does: 
+<br>Returns: 
+<br>
+<br>getftime({file_name}) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>{file_name} 
+<br>
+<br>Returns: 
+<br>
+<br>getline({line_number}) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>{line_number} 
+<br>
+<br>Returns: 
+<br>
+<br>getwinposx() getwinposy() 
+<br>
+<br>What they do: 
+<br>Returns: 
+<br>
+<br>Applies the {modifiers} to the {file_name} and return the result. 
+<br>
+<br>The name of a file. 
+<br>
+<br>Modification flags such as “:r:h”. 
+<br>String. 
+<br>The modified filename. 
+<br>
+<br>
+<br>Obtains the current working directory. 
+<br>String. 
+<br>The current directory. 
+<br>
+<br>
+<br>Gets the modification time of a file. 
+<br>
+<br>
+<br>The name of the file to check. 
+<br>Integer. 
+<br>The modification time of the file (in UNIX format, seconds 
+<br>since January 1, 1970), or –1 for error. 
+<br>
+<br>
+<br>Gets a line from the current editing buffer. 
+<br>
+<br>
+<br>The line number of the line to get or “.” for the line the cursor 
+<br>
+<br>
+<br>is on. 
+<br>String. 
+<br>The text of the line or an empty string if the {line_number} is 
+<br>out of range. 
+<br>
+<br>
+<br>Return the x or y position of the Vim GUI window. 
+<br>Integer. 
+<br>The location in pixels of the x or y position of the GUI window, 
+<br>or –1 when the information is not available. 
+<br>
+<br>
+<br>
+<br>glob({file_name}) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>{file_name} 
+<br>
+<br>Returns: 
+<br>
+<br>has({feature}) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>{feature} 
+<br>
+<br>Returns: 
+<br>
+<br>histadd({history}, {command}) 
+<br>
+<br>What it does: 
+<br>Parameters: 
+<br>
+<br>
+<br>{history} 
+<br>
+<br>Returns: 
+<br>
+<br>histdel({history}, [pattern]) 
+<br>
+<br>What it does: 
+<br>Parameters: 
+<br>
+<br>
+<br>{history} 
+<br>
+<br>[pattern] 
+<br>
+<br>Returns: 
+<br>
+<br>Built-In Functions 369 
+<br>
+<br>Expands the wildcards in the filename and return a list of files. 
+<br>
+<br>A string representing the filename pattern to match.You can 
+<br>also use an external command enclosed in backticks (`). For 
+<br>example glob(“`find . -name ‘*.c’ -print`”). 
+<br>
+<br>
+<br>String list. 
+<br>The list of files matched (separated by <NL>), or the empty 
+<br>string if nothing matches. 
+<br>
+<br>
+<br>Checks to see whether a particular feature is installed. 
+<br>
+<br>A string containing the feature name. 
+<br>Integer flag. 
+<br>1 if the feature is compiled in, or 0 if it is not. 
+<br>
+<br>
+<br>Adds an item to one of the history lists. 
+<br>
+<br>
+<br>Name of the history to use. Names are as follows: 
+<br>“cmd” “:” Command history 
+<br>“search” “/” Search pattern history 
+<br>“expr” “=” Expressions entered for “= 
+<br>“input” “@” Input line history 
+<br>
+<br>
+<br>Integer flag. 
+<br>1 for okay, 0 for error. 
+<br>
+<br>
+<br>Removes commands from a history. 
+<br>
+<br>
+<br>Which history list to use. 
+<br>A regular expression that defines the items to be removed. If 
+<br>
+<br>
+<br>Integer flag. 
+<br>1 for okay, 0 for error. 
+<br>
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+370 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>histget({history}, [index]) 
+<br>
+<br>What it does: 
+<br>Parameters: 
+<br>
+<br>{history} 
+<br>[index] 
+<br>
+<br>Returns: 
+<br>
+<br>histnr({history}) 
+<br>
+<br>What it does: 
+<br>
+<br>{history}. 
+<br>
+<br>Parameter: 
+<br>
+<br>{history} 
+<br>
+<br>Returns: 
+<br>
+<br>hlexists({name}) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>{name} 
+<br>
+<br>Returns: 
+<br>
+<br>hlID({name}) 
+<br>
+<br>What it does: 
+<br>
+<br>Parameter: 
+<br>
+<br>{name} 
+<br>
+<br>Returns: 
+<br>
+<br>hostname() 
+<br>
+<br>What it does: 
+<br>Returns: 
+<br>
+<br>Obtains an item from the history. 
+<br>
+<br>
+<br>Which history list to use. 
+<br>An index of the item to get.The newest entry is –1, the next 
+<br>on. If no [index] is specified, the last entry is returned. 
+<br>
+<br>
+<br>String. 
+<br>The specified item in the history, or an empty string if there is 
+<br>an error. 
+<br>
+<br>
+<br>Returns the number of the current entry in the given 
+<br>
+<br>
+<br>The history to be examined. 
+<br>Integer. 
+<br>The number of the last item in the history or –1 for error. 
+<br>
+<br>
+<br>Checks to see whether a syntax highlighting group exists. 
+<br>
+<br>
+<br>Name of the group to check for. 
+<br>Integer flag 
+<br>Non-0, the group exists; 0 it does not. 
+<br>
+<br>
+<br>Given the name of a syntax highlight group, returns the ID 
+<br>
+<br>
+<br>Name of the syntax highlighting group. 
+<br>Integer. 
+<br>The ID number. 
+<br>
+<br>
+<br>Gets the name of the computer. 
+<br>String. 
+<br>The hostname of the computer. 
+<br>
+<br>
+<br>
+<br>Built-In Functions 371 
+<br>
+<br>input({prompt}) 
+<br>What it does: Asks a question and gets an answer. 
+<br>Parameter: 
+<br>{prompt} The prompt to be displayed. 
+<br>Returns: String. 
+<br>What the user types in as a response. 
+<br>isdirectory({file_name}) 
+<br>What it does: Tests to see whether {file_name} is a directory. 
+<br>Parameter: 
+<br>{file_name} The name of the item to be checked. 
+<br>Returns: Integer flag. 
+<br>1, it is a directory; 0 it is not a directory or does not exist. 
+<br>
+<br>libcall({dll_name}, {function}, {argument}) 
+<br>
+<br>What it does: 
+<br>Calls a function in a DLL file. (Microsoft Windows only). 
+<br>
+<br>Parameters: 
+<br>
+<br>{dll_name} 
+<br>Name of a shared library (DLL) file in which the {function} is 
+<br>
+<br>defined. 
+<br>{function} The name of the function 
+<br>{argument} A single argument. If this argument is an integer, it will be 
+<br>
+<br>passed as an integer. If it is a string, it will be passed as 
+<br>“char *”. 
+<br>
+<br>Note 
+<br>
+<br>The function must return a string or NULL. A function that returns a random pointer might crash Vim. 
+<br>
+<br>Returns: 
+<br>String. 
+<br>Whatever the function returns. 
+<br>
+<br>line({position}) 
+<br>
+<br>What it does: 
+<br>Given a marker or other position indicator, returns the line 
+<br>
+<br>Parameter: 
+<br>
+<br>{position} 
+<br>The position marker.This can be a mark: ‘x, the current cursor 
+<br>location “.”, or the end-of-file “$”. 
+<br>
+<br>Returns: 
+<br>Integer. 
+<br>The line number or 0 if the marker is not set or another error 
+<br>occurs. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+372 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>line2byte({line_number}) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>{line_number} 
+<br>
+<br>Returns: 
+<br>
+<br>localtime() 
+<br>
+<br>What it does: 
+<br>Returns: 
+<br>
+<br>
+<br>maparg({name}, [mode]) 
+<br>
+<br>What it does: 
+<br>Parameters: 
+<br>
+<br>
+<br>{name} 
+<br>
+<br>{mode} 
+<br>
+<br>Returns: 
+<br>
+<br>mapcheck({name}, [mode]) 
+<br>
+<br>What it does: 
+<br>Parameters: 
+<br>
+<br>
+<br>{name} 
+<br>
+<br>{mode} 
+<br>
+<br>Returns: 
+<br>
+<br>For example: 
+<br>
+<br>:map ax Test 
+<br>:echo maparg(“ax”) 
+<br>
+<br>Test 
+<br>
+<br>:echo maparg(“axx”) 
+<br>
+<br>:echo mapcheck(“ax”) 
+<br>
+<br>Test 
+<br>
+<br>Converts a line number to a byte index. 
+<br>
+<br>
+<br>The line number to be converted.This can also be a mark 
+<br>(‘x'), the current cursor position ('.') or the last line in the 
+<br>buffer ('$'). 
+<br>
+<br>
+<br>Integer. 
+<br>The byte index of the first character in the line starting with 1. 
+<br>An error results in a return of –1. 
+<br>
+<br>
+<br>Returns the current time in the UNIX standard time format. 
+<br>Integer. 
+<br>The number of seconds past January 1, 1970. 
+<br>
+<br>
+<br>Returns what a key is mapped to. 
+<br>
+<br>
+<br>The name of a {lhs} mapping. 
+<br>The mode in which the string is mapped.This defaults to “”. 
+<br>String. 
+<br>The resulting mapping string. An empty string is returned if 
+<br>there is no mapping. 
+<br>
+<br>
+<br>Checks to see whether a mapping exists. 
+<br>
+<br>
+<br>The name of a {lhs} mapping. 
+<br>The mode in which the string is mapped.This defaults to “”. 
+<br>String. 
+<br>This returns any mapping that can match {name}.This differs 
+<br>slightly from the maparg function in that it looks at mappings 
+<br>for conflicting names. If you have a mapping for “ax,” for 
+<br>instance, it will conflict with “axx”. 
+<br>
+<br>
+<br>:echo mapcheck(“axx”) 
+<br>
+<br>Test 
+<br>
+<br>
+<br>match({string}, {pattern}) 
+<br>
+<br>What it does: 
+<br>
+<br>Parameters: 
+<br>
+<br>{string} 
+<br>
+<br>{pattern} 
+<br>
+<br>Returns: 
+<br>
+<br>matchend({string}, {pattern}) 
+<br>
+<br>What it does: 
+<br>
+<br>matchstr({string}, {pattern}) 
+<br>
+<br>What it does: 
+<br>Parameters: 
+<br>
+<br>
+<br>{string} 
+<br>
+<br>{pattern} 
+<br>
+<br>Returns: 
+<br>
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>Returns: 
+<br>
+<br>rename({from}, {to}) 
+<br>
+<br>What it does: 
+<br>Parameters: 
+<br>
+<br>
+<br>{from} 
+<br>
+<br>{to} 
+<br>
+<br>Returns: 
+<br>
+<br>Built-In Functions 373 
+<br>
+<br>Checks to see whether {string} matches {pattern}. Setting the 
+<br>‘ignorecase’ option causes the editor to ignore upper/lowercase 
+<br>
+<br>
+<br>difference. 
+<br>
+<br>
+<br>String to check. 
+<br>Pattern to check it against.This pattern acts like magic was set. 
+<br>
+<br>
+<br>Integer. 
+<br>The index of the first character of {string} where {pattern} 
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>occurs.The first character is number 0. If nothing matches, a 
+<br>
+<br>
+<br>–1 is returned. 
+<br>
+<br>
+<br>Similar to the match function, except that it returns the index 
+<br>of the character of {string} just after where {pattern} occurs. 
+<br>
+<br>
+<br>Like the match function, but returns the string that matches. 
+<br>
+<br>
+<br>String to check. 
+<br>Pattern to check it against.This pattern acts like magic was set. 
+<br>
+<br>
+<br>String. 
+<br>The part of {string} that matches or the empty string if 
+<br>
+<br>
+<br>Turns a number into a character. 
+<br>
+<br>
+<br>The number of an ASCII character. 
+<br>
+<br>
+<br>String of length 1. 
+<br>The ASCII character for the number. 
+<br>
+<br>
+<br>Renames a file. 
+<br>
+<br>
+<br>The name of the existing file. 
+<br>The name to which we want to rename the file. 
+<br>
+<br>
+<br>Integer flag. 
+<br>0 for success, non-0 for failure. 
+<br>
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+374 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>setline({line_number}, {line}) 
+<br>
+<br>What it does: 
+<br>
+<br>Parameters: 
+<br>
+<br>{line_number} 
+<br>
+<br>{line} 
+<br>
+<br>Returns: 
+<br>
+<br>strftime({format}, [time]) 
+<br>
+<br>What it does: 
+<br>
+<br>Parameters: 
+<br>
+<br>{format} 
+<br>
+<br>[time] 
+<br>
+<br>Returns: 
+<br>
+<br>strlen({string}) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>{string} 
+<br>
+<br>Returns: 
+<br>
+<br>Replaces the contents of line {line_number} with the string 
+<br>{line}. 
+<br>
+<br>
+<br>The number of the line to change. 
+<br>
+<br>
+<br>The text for the replacement line. 
+<br>Integer flag. 
+<br>0 for no error, non-0 if there was a problem. 
+<br>
+<br>
+<br>Returns the time formatted according to the {format} string. 
+<br>The conversion characters that can be put in the string are 
+<br>determined by your system’s strftime function. 
+<br>
+<br>
+<br>The format string. 
+<br>
+<br>
+<br>The time (in seconds since 1970) to be used. (Default is now). 
+<br>String. 
+<br>The time string containing the formatted time. 
+<br>
+<br>
+<br>Computes the length of a {string}. 
+<br>
+<br>The string whose length you want. 
+<br>Integer. 
+<br>The length of the string. 
+<br>
+<br>
+<br>strpart({string}, {start}, {length}) 
+<br>
+<br>What it does: Returns the substring of {string} that starts at index {start} and 
+<br>up to {length} characters long. 
+<br>For example: 
+<br>:echo strpart(“This is a test”, 0, 4) 
+<br>This 
+<br>:echo strpart(“This is a test”, 5, 2) 
+<br>is 
+<br>
+<br>If the {start} or {length} parameters specify non-existent characters, they are 
+<br>ignored. For example, the following strpart command starts to the left of the first 
+<br>character: 
+<br>
+<br>:echo strpart(“This is a test”, -2, 4) 
+<br>
+<br>Th 
+<br>
+<br>
+<br>Built-In Functions 375 
+<br>
+<br>Parameters: 
+<br>{string} The string from which you want a piece. 
+<br>{start} The location of the start of the string you want to extract. 
+<br>{length} The length of the string to extract. 
+<br>Returns: String. 
+<br>The substring extracted for {string}. 
+<br>strtrans({string}) 
+<br>What it does: Translates the unprintable characters in {string} to printable 
+<br>ones. 
+<br>Parameter: 
+<br>{string} A string containing unprintable characters. 
+<br>Returns: String. 
+<br>The resulting string has unprintable characters, such as CTRLA 
+<br>translated to ^A. 
+<br>
+<br>substitute({string}, {pattern}, {replace}, {flag}) 
+<br>
+<br>What it does: 
+<br>In {string}, changes the first match of {pattern} with {replace}. 
+<br>This is the equivalent of performing the following on a line 
+<br>containing {string}: 
+<br>
+<br>:. substitute /{pattern}/{replace}/{flag} 
+<br>
+<br>Parameters: 
+<br>
+<br>{string} The string in which the replacement is to be made. 
+<br>{pattern} A {pattern} used to specify the portion of {string} to be 
+<br>
+<br>replaced. 
+<br>{replace} The replacement text. 
+<br>{flag} If the empty string, replace just the first occurrence. If “g”, 
+<br>
+<br>replace all occurrences. 
+<br>Returns: String. 
+<br>The string that results from the substitution. 
+<br>
+<br>synID({line}, {column}, {transparent_flag}) 
+<br>
+<br>What it does: 
+<br>Returns the syntax ID of the item at the given {line} and 
+<br>{column}. 
+<br>
+<br>Parameters: 
+<br>
+<br>{line}, {column} The location of the item in the buffer. 
+<br>{transparent_flag} If non-0, transparent items are reduced to the items they reveal. 
+<br>Returns: Integer. 
+<br>The Syntax ID. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+376 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>synIDattr({sytnax_id}, {attribute}, [mode]) 
+<br>
+<br>What it does: 
+<br>Parameters: 
+<br>
+<br>
+<br>{syntax_id} 
+<br>
+<br>{attribute} 
+<br>“name” 
+<br>“fg” 
+<br>“bg” 
+<br>“fg#” 
+<br>“bg#” 
+<br>“bold” 
+<br>“italic” 
+<br>“reverse” 
+<br>“inverse” 
+<br>“underline” 
+<br>
+<br>{mode} 
+<br>
+<br>Returns: 
+<br>
+<br>synIDtrans({syntax_id}) 
+<br>
+<br>What it does: 
+<br>Parameter: 
+<br>
+<br>
+<br>{syntax_id} 
+<br>
+<br>Returns: 
+<br>
+<br>system({command}) 
+<br>
+<br>What it does: 
+<br>
+<br>Parameter: 
+<br>
+<br>{command} 
+<br>
+<br>Returns: 
+<br>
+<br>tempname() 
+<br>
+<br>What it does: 
+<br>Returns: 
+<br>
+<br>Obtains an attribute of a syntax color element. 
+<br>
+<br>The syntax identification number. 
+<br>
+<br>The name of an attribute.The attributes are as follows: 
+<br>The name of the syntax item 
+<br>Foreground color 
+<br>Background color 
+<br>Foreground color in #RRGGBB form 
+<br>Background color in #RRGGBB form 
+<br>“1” if this item is bold 
+<br>“1” if this item is italic 
+<br>“1” if this item is reverse 
+<br>Same as “reverse” 
+<br>“1” if this item is underlined 
+<br>
+<br>Which type of terminal to get the attributes for.This can be 
+<br>“gui”,“cterm”, or “term”. It defaults to the terminal type you 
+<br>are currently using. 
+<br>
+<br>
+<br>String. 
+<br>The value of the attribute. 
+<br>
+<br>
+<br>Returns a translated syntax ID. 
+<br>
+<br>
+<br>The ID of the syntax element. 
+<br>Integer. 
+<br>The translated syntax ID. 
+<br>
+<br>
+<br>Executes the external command named {command} and captures 
+<br>the output.The options ‘shell’ and ‘shellredir’ apply 
+<br>to this function. 
+<br>
+<br>
+<br>A command to execute. 
+<br>String. 
+<br>Whatever the command output is returned. 
+<br>
+<br>
+<br>Generates a temporary filename. 
+<br>String. 
+<br>The name of a file that can be safely used as a temporary file. 
+<br>
+<br>
+<br>
+<br>Built-In Functions 377 
+<br>visualmode() 
+<br>What it does: Gets the last visual mode. 
+<br>Returns: String. 
+<br>The last visual mode as a command string.This is either v, V, or 
+<br>CTRL-V. 
+<br>virtcol({location}) 
+<br>What it does: 
+<br>Parameter: 
+<br>{location} 
+<br>Returns: 
+<br>Computes the virtual column of the given {location}. 
+<br>A location indicator such as .” (cursor location), ‘a (mark a), 
+<br>or $” (end of the buffer). 
+<br>Integer. 
+<br>The location of the virtual column (that is, the column number 
+<br>assuming that tabs are expanded and unprintable characters 
+<br>are made printable). 
+<br>winbufnr({number}) 
+<br>What it does: Gets the buffer number of the buffer that is in a window. 
+<br>Parameter: 
+<br>{number} 
+<br>Returns: 
+<br>The window number or 0 for the current window. 
+<br>Integer. 
+<br>Buffer number or –1 for error. 
+<br>winheight({number}) 
+<br>What it does: 
+<br>Parameter: 
+<br>{number} 
+<br>Returns: 
+<br>Gets the height of a window. 
+<br>The window number or 0 for the current window. 
+<br>Integer. 
+<br>Window height in lines or –1 for error. 
+<br>winnr() 
+<br>What it does: Gets the current window number. 
+<br>Returns: Integer. 
+<br>The current window number.The top window is #1. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+378 Chapter 27 Expressions and Functions 
+</h3>
+<br>
+<br>Obsolete Functions 
+<br>
+<br>A few functions are currently obsolete and have been replaced with newer versions; 
+<br>however, you might still find some scripts that use them. 
+<br>
+<br>Obsolete Name 
+<br>
+<br>buffer_exists() 
+<br>buffer_name() 
+<br>buffer_number() 
+<br>last_buffer_nr() 
+<br>file_readable() 
+<br>highlight_exists() 
+<br>highlightID() 
+<br>
+<br>Replacement 
+<br>
+<br>bufexists() 
+<br>bufname() 
+<br>bufnr() 
+<br>bufnr(“$”) 
+<br>filereadable() 
+<br>hlexists() 
+<br>hlID() 
+<br>
+<br>
+<br>Customizing the Editor 
+<br>
+<br>THE VIM EDITOR IS HIGHLY CUSTOMIZABLE. It gives you a huge number of options. 
+<br>
+<br>This chapter discusses how to use the ones that enable you to customize the appearance 
+<br>and the behavior of your Vim editor. 
+<br>
+<br>This chapter discusses the following: 
+<br>
+<br>
+<br>The :set command (in extreme detail) 
+<br>
+<br>
+<br>Local initialization files 
+<br>
+<br>
+<br>Customizing keyboard usage 
+<br>
+<br>
+<br>Customizing messages and the appearance of the screen 
+<br>
+<br>
+<br>Other miscellaneous commands 
+<br>
+<br>Setting 
+<br>
+<br>The Vim editor has a variety of ways of setting options. Generally, to set an option, 
+<br>you use the following command: 
+<br>
+<br>:set option=value 
+<br>
+<br>This works for most options. Boolean options are set with this command: 
+<br>:set option 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+380 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>They are reset with the following command: 
+<br>
+<br>:set nooption 
+<br>
+<br>To display the value of an option, use this command: 
+<br>
+<br>:set option? 
+<br>
+<br>If you want to set an option to its default value, use the following command: 
+<br>
+<br>:set option& 
+<br>
+<br>Boolean Options 
+<br>
+<br>You can perform the following operations on a Boolean option. 
+<br>
+<br>Operation Meaning 
+<br>
+<br>:set option Turn the option on. 
+<br>:set nooption Turn the option off. 
+<br>:set option! Invert the option. 
+<br>:set invoption Invert the option. 
+<br>:set option& Set the option to the default value. 
+<br>
+<br>
+<br>For example: 
+<br>
+<br>:set list 
+<br>:set list? 
+<br>
+<br>
+<br>list 
+<br>
+<br>:set nolist 
+<br>:set list? 
+<br>
+<br>
+<br>
+<br>:set list! 
+<br>:set list? 
+<br>
+<br>
+<br>list 
+<br>
+<br>:set list& 
+<br>:set list? 
+<br>
+<br>
+<br>
+<br>Numeric Options 
+<br>
+<br>You can perform the following operations on a numeric option. 
+<br>
+<br>Command Meaning 
+<br>
+<br>:set option += value Add value to the option. 
+<br>:set option -= value Subtract value from the option. 
+<br>:set option ^= value Multiply the option by value. 
+<br>:set option& Set the option to the default value. 
+<br>
+<br>
+<br>
+<br>Setting 381 
+<br>
+<br>For example: 
+<br>
+<br>:set shiftwidth=4 
+<br>:set shiftwidth += 2 
+<br>:set shiftwidth? 
+<br>
+<br>
+<br>shiftwidth=6 
+<br>
+<br>:set shiftwidth-=3 
+<br>:set shiftwidth 
+<br>
+<br>
+<br>shiftwidth=3 
+<br>
+<br>:set shiftwidth ^= 2 
+<br>:set shiftwidth 
+<br>
+<br>
+<br>shiftwidth=6 
+<br>
+<br>:set shiftwidth& 
+<br>:set shiftwidth 
+<br>
+<br>
+<br>shiftwidth=8 
+<br>
+<br>String-Related Commands 
+<br>
+<br>You can perform the following operations on string options: 
+<br>
+<br>Command Meaning 
+<br>
+<br>:set option += value Add value to the end of the option. 
+<br>
+<br>:set option -= value Remove value (or characters) from the option. 
+<br>
+<br>:set option ^= value Add value to the beginning of the option. 
+<br>
+<br>For example: 
+<br>
+<br>:set cinwords=test 
+<br>:set cinwords? 
+<br>
+<br>
+<br>cinwords=test 
+<br>
+<br>:set cinwords+=end 
+<br>:set cinwords? 
+<br>
+<br>
+<br>cinwords=test,end 
+<br>
+<br>:set cinwords-=test 
+<br>:set cinwords? 
+<br>
+<br>
+<br>cinwords=end 
+<br>
+<br>:set cinwords^=start 
+<br>:set cinwords? 
+<br>
+<br>
+<br>cinwords=start,end 
+<br>
+<br>Another Set Command 
+<br>
+<br>The following command sets a Boolean option (such as list and nolist), but it 
+<br>
+<br>displays the value of other types of options: 
+<br>:set option 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+382 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>However, it is not a good idea to use this form of the command to display an option 
+<br>value because it can lead to errors if you are not careful. It is much better to use the 
+<br>following command to display the value of an option: 
+<br>
+<br>:set option? 
+<br>
+<br>An alternative form of the 
+<br>
+<br>:set option = value 
+<br>
+<br>command is this command: 
+<br>
+<br>:set option:value 
+<br>
+<br>Other :set Arguments 
+<br>
+<br>The following command prints out all the options that differ from their default values: 
+<br>
+<br>:set 
+<br>
+<br>The following command prints all options: 
+<br>
+<br>:set all 
+<br>
+<br>This command prints out all the terminal control codes: 
+<br>
+<br>:set termcap 
+<br>
+<br>Finally, to reset everything to the default values, use this command: 
+<br>
+<br>:set all& 
+<br>
+<br>Chaining Commands 
+<br>
+<br>You can put several :set operations on one line.To set three different options, for 
+<br>example, use the following command: 
+<br>
+<br>:set list shiftwidth=4 incsearch 
+<br>
+<br>Automatically Setting Options in a File 
+<br>
+<br>You can put Vim settings in your files.When Vim starts editing a file, it reads the first 
+<br>few lines of the file, looking for a line like this: 
+<br>
+<br>vim: set option-command option-command option-command .... 
+<br>
+<br>This type of line is called a modeline. 
+<br>In a program, for instance, a typical modeline might look like this: 
+<br>
+<br>/* vim: set shiftwidth=4 autoindent : */ 
+<br>
+<br>An alternate format is: 
+<br>
+<br>Vim: option-command:.option-command: ...: 
+<br>
+<br>
+<br>Setting 383 
+<br>
+<br>The option 'modeline’ turns on and off this behavior.The option 'modeline' controls 
+<br>how many lines are read at the start and end of the file when Vim looks for setting 
+<br>commands. 
+<br>
+<br>If you set the following option, for instance, Vim does not look for modelines: 
+<br>
+<br>:set nomodeline 
+<br>
+<br>If the following option is set, Vim does look at the top and bottom of each file for the 
+<br>:set modeline 
+<br>
+<br>For example, you may see lines like the following at the end of many of the Vim help 
+<br>files: 
+<br>vim:tw=78:ts=8:sw=8: 
+<br>
+<br>This sets the ‘tw’ (‘textwidth’) option to 78, the ‘ts’ (‘tabstop’)to 8, and the ‘sw’ 
+<br>(‘shiftwidth’)to 8.These settings make the text in the help files look nice. By using 
+<br>modelines, the creators of the help file make sure that the text is formatted correctly 
+<br>
+<br>Another example: For this book, I have had to create a number of C programming 
+<br>examples.When I copy these programs into the word processor, the tabs get really 
+<br>screwed up.The solution to this problem is to make sure that there are no tabs in the 
+<br>program. One way to do this is to put a line like this at the end of the file: 
+<br>
+<br>/* vim: set expandtabs : */ 
+<br>
+<br>This turns on 'expandtabs' and causes Vim to never insert a real tab—well, almost 
+<br>If you have some custom settings for your own C programs, you can put a line near 
+<br>the top of bottom of your program like this: 
+<br>/* vim: set cindent:shiftwidth=4:smarttabs : */ 
+<br>
+<br>Local .vimrc Files 
+<br>
+<br>Suppose you want to have different settings for each directory. One way to do this is 
+<br>to put a .vimrc or .gvimrc file in each directory.That is not enough, however, because 
+<br>by default Vim ignores these files. 
+<br>
+<br>To make Vim read these files, you must execute the following command: 
+<br>
+<br>:set exrc 
+<br>
+<br>Note 
+<br>
+<br>The .vimrc and .gvimrc files are read from the current directory, even if the file being edited is 
+<br>located in a different directory. 
+<br>
+<br>Setting this option is considered a security problem. After all, bad things can easily be 
+<br>dumped into these files, especially if you are editing files in someone else’s directory. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+384 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>To avoid security problems, you can set the security option using this command: 
+<br>
+<br>:set secure 
+<br>
+<br>This option prevents the execution of the :autocommand, :write, and :shell commands 
+<br>from inside an initialization file. 
+<br>
+<br>Customizing Keyboard Usage 
+<br>
+<br>The Vim editor is highly customizable.This section shows you how to fine-tune the 
+<br>keyboard usage so that you can get the most out of your editor. 
+<br>
+<br>Microsoft Windows 
+<br>
+<br>Most programs that run under Microsoft Windows use the Alt keys to select menu 
+<br>items. However, Vim wants to make all keys available for commands.The 
+<br>’winaltkeys’ option controls how the Alt keys are used. 
+<br>
+<br>If you use the following command, for example, all the Alt keys are available for 
+<br>command mapping with the :map command: 
+<br>:set winaltkeys=no 
+<br>
+<br>Typing ALT-F will not select the file menu, but will instead execute the command 
+<br>mapped to ALT-F. A typical mapping might be this: 
+<br>:map <M-f> :write 
+<br>
+<br>(Remember: Vim “spells” ALT as M-, which stands for Meta.) 
+<br>If you use the following command, all the Alt keys will select menu items and none 
+<br>of them can be used for mapping: 
+<br>
+<br>:set winaltkeys=yes 
+<br>
+<br>The third option is a combination of yes and no: 
+<br>
+<br>:set winaltkeys=menu 
+<br>
+<br>In this mode, if an Alt key can be used for a menu, it is; otherwise, it is used for :map 
+<br>commands. So ALT-F selects the File menu, whereas you can use ALT-X (which is not a 
+<br>menu shortcut) for :map commands. 
+<br>
+<br>Two options control how Vim reads the keyboard when you are using the console 
+<br>version of Vim from an MS-DOS window.The following option tells Vim to read 
+<br>characters directly from the console: 
+<br>
+<br>:set conskey 
+<br>
+<br>Do not set this option if you plan to use your Vim editor to read a script file from the 
+<br>standard input. 
+<br>The next option tells Vim to use the BIOS for reading the keyboard: 
+<br>
+<br>:set bioskey 
+<br>
+<br>
+<br>Customizing Keyboard Usage 385 
+<br>
+<br>Again, do not use this if you plan using a script file for a redirected standard in. By 
+<br>pointing Vim at the BIOS, you get faster response to CTRL-C and Break interrupts. 
+<br>
+<br>Customizing Keyboard Mappings 
+<br>
+<br>Most UNIX function keys send out a string of characters beginning with <Esc> when 
+<br>they are pressed. But a problem exists: the <Esc> key is used to end insert mode. So 
+<br>how do you handle function keys in insert mode? 
+<br>
+<br>The solution is for Vim to wait a little after an <Esc> key is pressed to see whether 
+<br>anymore characters come in. If they do, Vim knows that a function key has been 
+<br>pressed and acts accordingly.To turn on this feature, execute the following command: 
+<br>
+<br>:set esckeys 
+<br>
+<br>But what about other key sequences? These are controlled by the following options: 
+<br>
+<br>:set timeout 
+<br>:set ttimeout 
+<br>
+<br>
+<br>The following table shows the effects of these settings. 
+<br>
+<br>timeout ttimeout Result 
+<br>
+<br>
+<br>Nothing times out. 
+<br>
+<br>timeout 
+<br>
+<br>N/A All key codes (<F1>, <F2>, and so on) and :map 
+<br>macros time out. 
+<br>
+<br>
+<br>The option ‘timeoutlen’ determines how long to wait after Esc has been pressed to 
+<br>see whether something follows.The default is as follows, which equals one second 
+<br>(1000 milliseconds): 
+<br>
+<br>:set timeoutlen=1000 
+<br>
+<br>Generally, ‘timeoutlen’ controls how long to wait for both function keys and keyboard 
+<br>mapping strings. If you want to have a different timeout for keyboard mapping 
+<br>strings, use the ‘timeoutlen’ options: 
+<br>
+<br>:set ttimeoutlen=500 
+<br>
+<br>These two timeouts tell Vim to wait 1/2 second after an <Esc> key has been pressed to 
+<br>see whether you have a function key or one second to see whether it is a keyboard 
+<br>mapping. (In other words, if Vim reads enough to determine that what comes after the 
+<br>Esc press cannot possibly be a keyboard mapping sequence, it will wait only one second 
+<br>between characters trying to figure out what function key has been typed.) 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+386 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>Confirmation 
+<br>
+<br>Generally, when you do something that Vim considers questionable, such as quitting 
+<br>from a modified buffer, the command fails. If you set the ‘confirm’ option, however, 
+<br>and use the following command, Vim displays a confirmation dialog box instead of 
+<br>
+<br>failing: 
+<br>
+<br>:set confirm 
+<br>
+<br>When you try to :quit a buffer containing a modified file, for example, the Vim 
+<br>editor displays a confirmation dialog box (see Figure 28.1). 
+<br>
+<br>Figure 28.1 Confirmation dialog box. 
+<br>
+<br>Customizing Messages 
+<br>
+<br>Vim generally uses the bottom line of the screen for messages. Sometimes these messages 
+<br>exceed one line and you get a prompt that states something like Press Return 
+<br>to Continue.To avoid these prompts, you can increase the number of message lines by 
+<br>setting the ‘cmdheight’ options.To change the height of the message space to 3, for 
+<br>
+<br>instance, use this command: 
+<br>
+<br>:set cmdheight=3 
+<br>
+<br>Showing the Mode 
+<br>
+<br>When you set the ‘showmode’ option, the Vim editor displays the current mode in the 
+<br>lower-left corner of the screen.To set this mode, use the following command: 
+<br>
+<br>:set showmode 
+<br>
+<br>Showing Partial Commands 
+<br>
+<br>If you set the ‘showcmd’ option, any partial command is displayed at the lower-right of 
+<br>the screen while you type it. Suppose you execute the following command: 
+<br>
+<br>:set showcmd 
+<br>
+<br>Now you enter an fx command to search for x.When you type the f, an f appears in 
+<br>the lower-right corner. 
+<br>
+<br>
+<br>Customizing Messages 387 
+<br>
+<br>This is nice for more complex commands because you can see the command as it 
+<br>is assembled. For example, the command displays the entire command (incomplete as 
+<br>it is) in the lower-right corner: 
+<br>
+<br>“y2f 
+<br>
+<br>Figure 28.2 shows how ‘cmdheight’, ‘showmode’, and ‘showcmd’ affect the screen. 
+<br>
+<br>cmdheight 
+<br>
+<br>showmode showcmd 
+<br>
+<br>Figure 28.2 
+<br>
+<br>‘showmode’ and ‘showcmd’. 
+<br>
+<br>Short Messages 
+<br>
+<br>Another way to limit the “Press Return” prompts is to set the “short message” option. 
+<br>This shortens many common messages.The flags in the ‘shortmess’ option determine 
+<br>which messages are shortened.The general form of this command is as follows: 
+<br>
+<br>:set shortmess=flags 
+<br>
+<br>The following table lists the flags. 
+<br>
+<br>Flag Short Value Long Value Default 
+<br>f (3 of 5) (file 3 of 5) On 
+<br>i [noeol] [Incomplete last line] On 
+<br>l 999L, 888C 999 lines, 888 characters On 
+<br>m [+] [Modified] Off 
+<br>r [RO] [readonly] Off 
+<br>w [w] written Off 
+<br>x [dos] [dos format] On 
+<br>
+<br>continues 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+388 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>Flag Short Value Long Value Default 
+<br>x [unix] [unix format] On 
+<br>x [mac] [mac format] On 
+<br>
+<br>a 
+<br>All the abbreviations: filmnrwx. 
+<br>
+<br>A 
+<br>Eliminate the “attention” messages issued when Vim finds an existing 
+<br>swap file. (Default = off.) 
+<br>
+<br>I 
+<br>
+<br>Eliminate the introduction screen. (Default = off.) 
+<br>
+<br>o 
+<br>
+<br>Sometimes you will perform an operation that writes a file and then 
+<br>does something else that writes a message, such as executing a :wnext 
+<br>command. If this option is not set, you will get two messages and will 
+<br>probably have to go through a “Press Return” prompt to see the second 
+<br>one. If this option is set (the default), the first message is overwritten by 
+<br>the second. (Default = on.) 
+<br>
+<br>O 
+<br>If you get a message stating that you are reading a file, it will overwrite 
+<br>any previous message. (Default = on.) 
+<br>
+<br>s 
+<br>
+<br>If set, do not issue a “Search Hit Bottom, Continuing at Top” or “Search 
+<br>Hit Top, Continuing at Bottom” message. (Default = off.) 
+<br>
+<br>t 
+<br>
+<br>If set, truncate the filename at the beginning of the message if it is too 
+<br>long to fit on one line.Thus, a long filename, such as /home/ 
+<br>oualline/writing/books/vim-book/editor-messages/my-replies/ 
+<br>
+<br>tuesday.txt, appears as <itor-messages/my-replies/tuesday.txt (or 
+<br>something similar). (Default = off.) (Does not change the message in ex 
+<br>mode.) 
+<br>
+<br>T 
+<br>Truncate messages in the middle if they are too long.The deleted portion 
+<br>will appear as an ellipsis (...). (Default = on.) (Does not apply to ex 
+<br>mode.) 
+<br>
+<br>W 
+<br>Drop “written” or “[w]” when writing a file. Default = off.) 
+<br>
+<br>The ‘terse’ Option 
+<br>
+<br>To set the ‘terse’ option, issue the following command: 
+<br>:set terse 
+<br>
+<br>This command adds the s flag to the ‘shortmess’ option. Setting ‘noterse’ removes 
+<br>this flag. 
+<br>
+<br>The “File Modified” Warning 
+<br>
+<br>Generally, Vim warns when you do a :shell command and the file is modified before 
+<br>you return to Vim. If you want to turn off this option, execute the following command: 
+<br>
+<br>:set nowarn 
+<br>
+<br>
+<br>Customizing Messages 389 
+<br>
+<br>Error Bells 
+<br>
+<br>When Vim gets an error, it just displays an error message. It is silent. If you are more 
+<br>audio-oriented than visually proficient, you might want to turn on error bells.This 
+<br>following command causes Vim to beep when there is an error: 
+<br>
+<br>:set errorbells 
+<br>
+<br>Beeping can sometimes disturb others in an office or classroom environment. An alternative 
+<br>to audio bells is a “visual” bell.When this option is set, the screen flashes (everything 
+<br>will go into reverse video and back to normal quickly).To set this option, use 
+<br>the following command: 
+<br>
+<br>:set visualbell 
+<br>
+<br>Status Line Format 
+<br>
+<br>You can customize the status line.You can use the following option to define your 
+<br>status line: 
+<br>
+<br>:set statusline=format 
+<br>
+<br>The format string is a printf line format string. 
+<br>
+<br>A % is used to indicate a special field. For example, %f tells Vim to include the filename 
+<br>in the status line.The following command 
+<br>
+<br>:set statusline=The\ file\ is\ \”%f\” 
+<br>
+<br>gives you the following status line: 
+<br>The file is “sample.txt” 
+<br>
+<br>You can specify a minimum and maximum width for an item. For example, the command 
+<br>tells Vim that the filename must take up 8 characters, but is limited to only 19: 
+<br>
+<br>:set statusline=%8.19f 
+<br>
+<br>Items are right-justified. If you want them left-justified, put a -just after the %. For 
+<br>example: 
+<br>
+<br>->%10.10f<-->%-10.10f<
+<br>
+<br>
+<br>-> foo.txt<-->foo.txt <
+<br>
+<br>
+<br>Numeric items are displayed with leading zeros omitted. If you want them, put a zero 
+<br>after the %.To display the column number, for instance, with leading zeros, use the following 
+<br>command: 
+<br>
+<br>:set statusline=%05.10c 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+390 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>Format 
+<br>
+<br>%( ... %) 
+<br>
+<br>%{n}* 
+<br>
+<br>%< 
+<br>
+<br>%= 
+<br>
+<br>% 
+<br>%B 
+<br>
+<br>%F 
+<br>%H 
+<br>%L 
+<br>
+<br>%M 
+<br>
+<br>%O 
+<br>%P 
+<br>%R 
+<br>%V 
+<br>
+<br>%W 
+<br>
+<br>%Y 
+<br>
+<br>Type 
+<br>
+<br>Number 
+<br>
+<br>String 
+<br>Flag 
+<br>Number 
+<br>Flag 
+<br>Number 
+<br>String 
+<br>Flag 
+<br>Number 
+<br>
+<br>Flag 
+<br>Flag 
+<br>
+<br>Description 
+<br>
+<br>Define an item group. If all the items in this group 
+<br>are empty, the entire item group (and any text inside 
+<br>it) disappears. 
+<br>
+<br>Uses the highlight group Usern for the rest of the 
+<br>line (or until another %n* is seen).The format %0* 
+<br>returns the line to normal highlighting. 
+<br>
+<br>If the highlight group User1 is underlined, for 
+<br>example, the status line 
+<br>
+<br>:set statusline=File:\ %1*%f%0* 
+<br>
+<br>gives you the following status line: 
+<br>File: sample.txt 
+<br>
+<br>Define a location where the status line can be 
+<br>
+<br>chopped off if it is too long. 
+<br>Defines a location in the “middle” of the line. All the 
+<br>text to the left of this will be placed on the left side 
+<br>of the line, and the text to the right will be put 
+<br>against the right margin. 
+<br>
+<br>For example: 
+<br>
+<br>:set statusline=<-Left%=Right-> 
+<br>
+<br>results in 
+<br>
+<br><-Left Right-> 
+<br>
+<br>The character %. 
+<br>
+<br>
+<br>The number of the character under the cursor in 
+<br>hexadecimal. 
+<br>Filename including the full path. 
+<br>“HLP” if this is a help buffer. 
+<br>Number of lines in buffer. 
+<br>“+” if the buffer is modified. 
+<br>Byte offset in the file in hexadecimal form. 
+<br>The % of the file in front of the cursor. 
+<br>“RO” if the buffer is read-only. 
+<br>Virtual column number.This is the empty string if 
+<br>
+<br>
+<br>equal to %c. 
+<br>“PRV” if this is the preview window. 
+<br>File type. 
+<br>
+<br>
+<br>
+<br>Customizing Messages 391 
+<br>
+<br>Format Type Description 
+<br>
+<br>a% String 
+<br>
+<br>%b 
+<br>
+<br>Number 
+<br>
+<br>%c 
+<br>
+<br>Number 
+<br>%f String 
+<br>%h Flag 
+<br>
+<br>%l 
+<br>
+<br>Number 
+<br>%m Flag 
+<br>%n 
+<br>
+<br>Number 
+<br>
+<br>%o 
+<br>
+<br>Number 
+<br>
+<br>%p 
+<br>
+<br>Number 
+<br>%r Flag 
+<br>%t String 
+<br>
+<br>%v 
+<br>
+<br>Number 
+<br>%w Flag 
+<br>%y 
+<br>
+<br>Flag 
+<br>
+<br>%{expr%} 
+<br>
+<br>If you are editing multiple files, this string is 
+<br>“({current} of {arguments})”. For example: 
+<br>
+<br>(5 of 18) 
+<br>
+<br>If there is only one argument in the command line, 
+<br>this string is empty. 
+<br>The number of the character under the cursor in 
+<br>
+<br>
+<br>decimal. 
+<br>Column number. 
+<br>The filename as specified on the command line. 
+<br>[Help] if this is a help buffer. 
+<br>Line number. 
+<br>[+] if the buffer is modified. 
+<br>Buffer number. 
+<br>Number of characters before the cursor including the 
+<br>
+<br>
+<br>character under the cursor. 
+<br>Percentage through file in lines. 
+<br>[RO] if the buffer is read-only. 
+<br>The filename (without any leading path information). 
+<br>Virtual column number. 
+<br>[Preview] if this is a preview window. 
+<br>Type of the file as [type]. 
+<br>The result of evaluating the expression expr. 
+<br>
+<br>
+<br>The flag items get special treatment. Multiple flags, such as RO and PRV, are automatically 
+<br>separated from each other by a comma. Flags such as + and help are automatically 
+<br>separated by spaces. For example: 
+<br>
+<br>:set statusline=%h%m%r 
+<br>
+<br>can look like this: 
+<br>[help] [+] [RO] 
+<br>
+<br>Note 
+<br>
+<br>For the purpose of this example, we are ignoring the fact that we have done the improbable and 
+<br>modified a read-only buffer. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+392 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>Rulers 
+<br>
+<br>If you do not like the default status line, you can turn on the ruler option: 
+<br>
+<br>:set ruler 
+<br>
+<br>This causes Vim to display a status line that looks like this: 
+<br>help.txt [help][RO] 1,1 Top 
+<br>
+<br>
+<br>After the file name and flags, this displays the current column, the virtual column, and 
+<br>
+<br>an indicator showing you how far you are through the file. 
+<br>If you want to define your own ruler format, use this command: 
+<br>:set rulerformat=string 
+<br>
+<br>String is the same string used for the ‘statusline’ option. 
+<br>
+<br>Reporting Changes 
+<br>
+<br>When you delete or change a number of lines, Vim tells you about it if the number of 
+<br>lines is greater than the value of the ‘report’ option.Therefore, to report information 
+<br>on all changes, use the following command: 
+<br>
+<br>:set report=0 
+<br>
+<br>On the other hand, if you do not want to be told about what you have changed, you 
+<br>can set this to a higher value. 
+<br>
+<br>Help Window Height 
+<br>
+<br>You can set the minimum size of the help window by using the following command: 
+<br>:set helpheight={height} 
+<br>
+<br>This minimum is used when opening the help window.The height can get smaller 
+<br>afterwards. 
+<br>
+<br>Preview Window Height 
+<br>
+<br>You can also specify the height of the preview window by using the following 
+<br>command: 
+<br>:set previewheight={height} 
+<br>
+<br>Defining How ‘list’ Mode Works 
+<br>
+<br>Generally, ‘list’ uses ^I for <Tab> and $ for the end of the line.You can customize 
+<br>this behavior.The ‘listchars’ option defines how list mode works. 
+<br>The format for this command is as follows: 
+<br>:set listchars=key:string,key:string 
+<br>
+<br>
+<br>Defining How ‘list’ Mode Works 393 
+<br>
+<br>The possible values for the key:string pairs are as follows: 
+<br>eol:{char} Define the character to be put after the end of the line. 
+<br>
+<br>tab:{char1}{char2} A tab is displayed as {char1} followed by enough {char2} 
+<br>to fill the width. 
+<br>trail:{char} Character for showing trailing spaces 
+<br>extends:{char} Character used at the end of a line that wraps to the next 
+<br>line in screen space. 
+<br>
+<br>
+<br>For example: 
+<br>
+<br>:set listchars=tab:>
+<br>
+<br>
+<br>shows up with tabs like this: 
+<br>
+<br>>-------Tabbing 
+<br>can>----be 
+<br>fun if you >----know how 
+<br>to set the list >------->-------command. 
+<br>
+<br>
+<br>Another example: 
+<br>
+<br>:set listchars=tab:>-,trail:= 
+<br>
+<br>Gives us: 
+<br>
+<br>This line>------==== 
+<br>has spaces and tabs>----=== 
+<br>at the end===== 
+<br>of the line==== 
+<br>
+<br>
+<br>Suppose that you have set the following options: 
+<br>
+<br>:set nowrap 
+<br>:set listchars=extends:+ 
+<br>
+<br>
+<br>Figure 28.3 displays the results. 
+<br>
+<br>The student technicians were used to t+ 
+<br>technician took the back off a termina+ 
+<br>loose chip and instead found a large h+ 
+<br>board. He decided to talk to the prof+ 
+<br>
+<br>
+<br>Technician: Did you pile papers on+ 
+<br>
+<br>Professor: Yes. 
+<br>
+<br>Figure 28.3 listchars=extends:+. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+394 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>Changing the Highlighting 
+<br>
+<br>You can change the highlighting of various objects by using the ‘highlight’ option. 
+<br>
+<br>The format for this option is as follows: 
+<br>
+<br>:set highlight=key:group, [key:group].... 
+<br>
+<br>Key is a key letter listed in the following table, and group is the name of a highlight 
+<br>
+<br>group. 
+<br>The keys are as follows: 
+<br>
+<br>Key Default 
+<br>
+<br>8 SpecialKey 
+<br>
+<br>@ 
+<br>
+<br>NonText 
+<br>
+<br>M ModeMsg 
+<br>
+<br>S StatusLineNC 
+<br>
+<br>V VisualNOS 
+<br>
+<br>W 
+<br>
+<br>WildMenu 
+<br>
+<br>d Directory 
+<br>e ErrorMsg 
+<br>i IncSearch 
+<br>l Search 
+<br>m MoreMsg 
+<br>
+<br>r Question 
+<br>s StatusLine 
+<br>t Title 
+<br>
+<br>v Visual 
+<br>w WarningMsg 
+<br>
+<br>Meaning 
+<br>
+<br>This highlighting is applied when :map lists out a 
+<br>
+<br>special key. 
+<br>Applied to the ~ and @ character that Vim uses to 
+<br>display stuff that is not in the buffer. 
+<br>
+<br>
+<br>The mode information in the lower left of the 
+<br>
+<br>screen. (See the 'showmode' option.) 
+<br>Status line for every window except the current 
+<br>one. 
+<br>
+<br>
+<br>Text selected in visual mode when Vim does not 
+<br>own the selection. 
+<br>Items displayed as part of a wildcard completion 
+<br>set. 
+<br>Directories listed when you press CTRL-D. 
+<br>Error messages. 
+<br>Text highlighted as part of an incremental search. 
+<br>Text highlighted as part of a search. 
+<br>
+<br>
+<br>The --More -- prompt. 
+<br>
+<br>The line number printed by the :number command. 
+<br>The “Press Return” prompt and other questions. 
+<br>The status line of the current windows. 
+<br>Titles for commands that output information in 
+<br>
+<br>
+<br>sections, such as :syntax, :set all, and others. 
+<br>Text selected in visual mode. 
+<br>Warning messages. 
+<br>
+<br>
+<br>
+<br>Restoring the Screen 395 
+<br>
+<br>You can use a number of shorthand characters for highlighting, including the following: 
+<br>
+<br>r 
+<br>
+<br>Reverse 
+<br>
+<br>i 
+<br>
+<br>Italic 
+<br>
+<br>b 
+<br>
+<br>Bold 
+<br>
+<br>s 
+<br>
+<br>Standout 
+<br>
+<br>u 
+<br>
+<br>Underline 
+<br>
+<br>
+<br>None 
+<br>
+<br>-
+<br>
+<br>None 
+<br>
+<br>Therefore, you can specify that the error message use the highlight group ErrorMsg by 
+<br>executing the following command: 
+<br>
+<br>:set highlight=e:ErrorMsg 
+<br>
+<br>Or, you can use the shorthand to tell Vim to display error message in reverse, bold, 
+<br>italic, by issuing this command: 
+<br>
+<br>:set highlight=evrb 
+<br>
+<br>In actual practice, you would not define just one mode with a :set highlight 
+<br>command. In practice, this command can get quite complex. 
+<br>
+<br>If a key is not specified, the default highlighting is used. 
+<br>
+<br>The ‘more’ Option 
+<br>
+<br>When the ‘more’ option is set, any command that displays more than a screen full of 
+<br>data pauses with a “More” prompt. If not set, the listing just scrolls off the top of the 
+<br>screen.The default is as follows: 
+<br>
+<br>:set more 
+<br>
+<br>Number Format 
+<br>
+<br>The following command defines which types of numbers can be recognized by the 
+<br>CTRL-A and CTRL-X commands: 
+<br>
+<br>:set nrformats=octal,hex 
+<br>
+<br>(Decimal format is always recognized.) 
+<br>
+<br>Restoring the Screen 
+<br>
+<br>When the following option is set, Vim attempts to restore the contents of the terminal 
+<br>screen to its previous value: 
+<br>
+<br>:set restorescreen 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+396 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>In other words, it tries to make the screen after you run Vim look just like it did 
+<br>before your ran the program. 
+<br>
+<br>Pasting Text 
+<br>
+<br>The X Windows xterm program enables you to select text by drawing the mouse over 
+<br>it while the left button is held down.This text can then be “pasted” into another window. 
+<br>However, some of Vim’s capabilities can easily get in the way when pasting text 
+<br>into the window. 
+<br>
+<br>To avoid problems, you can set paste mode using the following command: 
+<br>
+<br>:set paste 
+<br>
+<br>This is shorthand for setting a number of options: 
+<br>
+<br>:set textwidth=0 
+<br>
+<br>:set wrapmargin=0 
+<br>
+<br>:set noautoindent 
+<br>
+<br>:set nosmartindent 
+<br>
+<br>:set nocindent 
+<br>
+<br>:set softtabstop=0 
+<br>
+<br>:set nolisp 
+<br>
+<br>:set norevins 
+<br>
+<br>:set noruler 
+<br>
+<br>:set noshowmatch 
+<br>
+<br>:set formatoptions=”” 
+<br>
+<br>At times, you might want paste mode and you might not.The 'pastetoggle' option 
+<br>enables you to define a key that toggles you between paste mode and nopaste mode. 
+<br>To use the F12 key to toggle between these two modes, for instance, use the following 
+<br>command: 
+<br>
+<br>:set pastetoggle=<F12> 
+<br>
+<br>When paste mode is turned off, all the options are restored to the values they had 
+<br>when you set paste mode. 
+<br>
+<br>Wildcards 
+<br>
+<br>When you are entering a command in ex mode, you can perform filename completion. 
+<br>If you want to read in the file input.txt, for example, you can enter the following 
+<br>command: 
+<br>
+<br>:read input<Tab> 
+<br>
+<br>Vim will try to figure out which file you want. If the only file in your current 
+<br>directory is input.txt, it will appear as this: 
+<br>
+<br>:read input.txt 
+<br>
+<br>
+<br>Wildcards 397 
+<br>
+<br>If several files that with the word input, the first will display. By pressing Tab again, you 
+<br>get the second file that matches; press Tab again, and you get the third, and so on. 
+<br>To define which key accomplishes the wildcard completion, use the following 
+<br>command: 
+<br>:set wildchar=character 
+<br>
+<br>If you are using filename completion inside a macro, you need to set the ‘wildcharm’ 
+<br>(which stand for wild-char-macro). It is the character that accomplishes filename completion 
+<br>from inside a macro. For example: 
+<br>
+<br>:set wildcharm=<F12> 
+<br>:map <F11> :read in<F12> 
+<br>
+<br>
+<br>Now when you press F11, it will start a read command for the file in-whatever. 
+<br>You probably do not want to match backup file or other junk files.To tell Vim 
+<br>what is junk, use this command: 
+<br>
+<br>:set wildignore=pattern,pattern 
+<br>
+<br>Every file that matches the given pattern will be ignored.To ignore object and backup 
+<br>files, for example, use the following command: 
+<br>
+<br>:set wildignore=*.o,*.bak 
+<br>
+<br>The ‘suffixes’ option lists a set of file name suffixes that will be given a lower priority 
+<br>when it comes to matching wildcards. In other words if a file has one of these suffixes 
+<br>it will be placed at the end of any wildcard list. 
+<br>
+<br>Generally, the filename completion code does not display a list of possible matches. 
+<br>If you set the option 
+<br>
+<br>:set wildmenu 
+<br>
+<br>when you attempt to complete a filename, a menu of possible files displays on the 
+<br>status line of the window (see Figure 28.4). 
+<br>
+<br>This is a test 
+<br>
+<br>~ 
+<br>~ 
+<br>~ 
+<br>~ 
+<br>
+<br>
+<br>~ 
+<br>~ 
+<br>in.txt index.txt indoors.txt input.txt > 
+<br>:read /tmp/in.txt 
+<br>
+<br>Figure 28.4 Filename completion. 
+<br>
+<br>The arrow keys cause the selection to move left and right.The > at the end of the line 
+<br>indicates that there are more choices to the right.The <Down> key causes the editor to 
+<br>go into a directory.The <Up> key goes to the parent directory. Finally, <Enter> selects 
+<br>the item. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+398 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>You can customize the behavior of the file completion logic by using the 
+<br>‘wildmode’ option.The following command causes Vim to complete only the first 
+<br>match: 
+<br>
+<br>:set wildmode= 
+<br>
+<br>If you keep pressing the ‘wildchar’ key, only the first match displays. Figure 28.5 
+<br>shows how this option works. 
+<br>
+<br>First "wildchar" 
+<br>
+<br>in.txt input.txt invoide.txt 
+<br>
+<br>Figure 28.5 
+<br>
+<br>wildmode=. 
+<br>
+<br>The following command causes Vim to complete the name with the first file it can 
+<br>find: 
+<br>
+<br>:set wildmode=full 
+<br>
+<br>After that, if you keep pressing the ‘wildchar’ key, the other files that match are gone 
+<br>through in order. Figure 28.6 shows what happens when this option is enabled. 
+<br>
+<br>Next "wildchar" Next "wildchar" 
+<br>First "wildchar" 
+<br>in.txt input.txt invoide.txt 
+<br>
+<br>Next "wildchar" 
+<br>
+<br>Figure 28.6 wildmode = full. 
+<br>
+<br>The following command causes the pressing of ‘wildchar’ to match the longest 
+<br>common substring and then stop: 
+<br>
+<br>:set wildmode=longest 
+<br>
+<br>If you use the following command, you accomplish the same thing; but the display is 
+<br>just the list of files on the ‘wildmenu’ line: 
+<br>
+<br>:set wildmode=longest:full 
+<br>
+<br>The following command displays a list of possible matches when the ‘wildchar’ is 
+<br>pressed (see Figure 28.7): 
+<br>
+<br>:set wildmode=list 
+<br>
+<br>This mode does not complete the match. If you want that to happen as well, use this 
+<br>option: 
+<br>
+<br>:set wildmode=list:full 
+<br>
+<br>
+<br>Memory Options 399 
+<br>
+<br>~ 
+<br>~ 
+<br>~ 
+<br>:read /tmp/in.txt 
+<br>/tmp/in.txt /tmp/inside.txt 
+<br>/tmp/index.txt /tmp/invoices.txt 
+<br>/tmp/indoors.txt /tmp/inward.txt 
+<br>:read /tmp/in 
+<br>
+<br>Figure 28.7 
+<br>
+<br>wildmode=list. 
+<br>
+<br>Finally, to complete the longest common substring and list the files, use the following 
+<br>option: 
+<br>
+<br>:set wildmode=list:longest 
+<br>
+<br>You can use these options in a set.The first option is used the first time the ‘wildchar’ 
+<br>is pressed, the second option is used the second time you press ‘wildchar’, and so on, 
+<br>for up to four presses.Therefore, if you want to complete the longest substring 
+<br>(longest) and then go through the list (full), use the following option: 
+<br>
+<br>:set wildmode=longest,full 
+<br>
+<br>Customizing Behavior of the ScreenMovement Commands 
+<br>
+<br>When the ‘startofline’ option is set, the screen movement commands as well as several 
+<br>cursor movement commands such as H, M, L, and G move the cursor to the start 
+<br>of a line. If it is not set, the cursor remains in the same column (or as close as possible). 
+<br>
+<br>File Writing Options 
+<br>
+<br>If set, the ‘write’ option lets Vim write files. If this option is not set, you can view 
+<br>the file only.This is useful if you want to use Vim as a secure viewer. 
+<br>
+<br>Generally, when you try to write a file that you should not, Vim makes you use the 
+<br>override option (!). If you want to live dangerously, you can tell Vim to always assume 
+<br>that this option is present for writing type commands by executing the following command: 
+<br>
+<br>
+<br>:set writeany 
+<br>
+<br>Memory Options 
+<br>
+<br>To set the maximum memory for one buffer, use this command: 
+<br>
+<br>:set maxmem={size} 
+<br>
+<br>{size} is the memory limit in kilobytes. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+400 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>To define total amount of memory for all buffers, use the following command: 
+<br>
+<br>:set maxmemtot={size} 
+<br>
+<br>Function Execution Options 
+<br>
+<br>The ‘maxfuncdepth’ option defines the maximum number of nested functions. 
+<br>Similarly, the ‘maxmapdepth’ parameter defines the maximum number of nested 
+<br>mappings. 
+<br>
+<br>Terminal Options 
+<br>
+<br>The following sections describe the terminal options. 
+<br>
+<br>Terminal Name 
+<br>
+<br>The name of your terminal is stored in the ‘term’ option. Generally, you do not need 
+<br>to set this option because it is set by your shell or operating environment. However, 
+<br>you might need to read it to enable terminal-specific macros. 
+<br>
+<br>Lazy Redraw 
+<br>
+<br>The ‘lazyredraw’ option is useful for a slow terminal. It prevents Vim from redrawing 
+<br>the screen in the middle of a macro.The default is as follows: 
+<br>
+<br>:set nolazyredraw 
+<br>
+<br>This option is has been made obsolete by current terminal technology. If you do set 
+<br>this option, you do not see macros being executed. 
+<br>
+<br>Internal Termcap 
+<br>
+<br>The UNIX system has a database of terminal control codes called termcap.The Vim 
+<br>editor has its own built-in database as well. If the ‘ttybuiltin’ option is enabled, this 
+<br>internal database is searched first. 
+<br>
+<br>Fast Terminals 
+<br>
+<br>If the ‘ttyfast’ option is set, Vim assumes you have a fast terminal connection and 
+<br>changes the output to produce a smoother update, but one with more characters. If 
+<br>you have a slow connection, you should reset this option. 
+<br>
+<br>Mouse Usage Inside a Terminal 
+<br>
+<br>The ‘ttymouse’ option controls the terminal mouse codes.This option is of interest 
+<br>to those trying to do fancy things with terminal control codes. For example, if you 
+<br>want to use the mouse buttons <LeftMouse> and <RightMouse> in console editing, 
+<br>you should enable this option. 
+<br>
+<br>
+<br>Some More Obscure Options 401 
+<br>
+<br>How Much to Scroll 
+<br>
+<br>The ‘ttyscroll’ option controls how many lines to scroll the screen when an update 
+<br>is required.You can adjust this to a small number if you are on a slow terminal. 
+<br>
+<br>Some More Obscure Options 
+<br>
+<br>This section discusses some of the more obscure options in Vim.These were kept 
+<br>around for compatibility with Vi and to support equipment that was long ago 
+<br>rendered obsolete. 
+<br>
+<br>Compatibility 
+<br>
+<br>The following option makes Vim act as much like Vi as possible: 
+<br>
+<br>:set compatible 
+<br>
+<br>If you enable this option, many of the examples in this book will not work properly. 
+<br>This option is generally set unless there is a $HOME/.vimrc file present. 
+<br>
+<br>Similarly, the following command enables you to fine-tune Vi compatibility: 
+<br>
+<br>:set cpoptions={characters} 
+<br>
+<br>This next command makes the g and c options on the :substitute command to act 
+<br>like they do for the UNIX editor Ed: 
+<br>
+<br>:set edcompatible 
+<br>
+<br>The following option sets lisp mode.This sets a number of options to make Lisp 
+<br>programming easier: 
+<br>
+<br>:set lisp 
+<br>
+<br>The ‘tildeop' option makes ~ behave like an operator.This is for Vi compatibility. If 
+<br>this option is turned off, the ~ command will switch the case of a single character. 
+<br>With the following, the ~ command takes the form of ~motion: 
+<br>
+<br>:set tildeop 
+<br>
+<br>Note 
+<br>
+<br>The g~ command always behaves as an operator regardless of this option. 
+<br>
+<br>The ‘helpfile’ option defines the location of the main help file.This option proves 
+<br>useful if you want to redirect where the :help command gets its information. For 
+<br>example: 
+<br>
+<br>:set helpfile=/usr/sdo/vim/my_help.txt 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+402 Chapter 28 Customizing the Editor 
+</h3>
+<br>
+<br>Weirdinvert 
+<br>
+<br>The following command has been provided for backward compatibility with version 
+<br>
+<br>4.0 of Vim: 
+<br>:set weirdinvert 
+<br>
+<br>It has been made obsolete by the t_xs string. (See the Vim terminal help documentation 
+<br>for more information.) Some terminals, such as hpterm, need to have t_xs set to 
+<br>work. If you have one of these, you might want to look at the help text: 
+<br>
+<br>:help hpterm 
+<br>
+<br>Debugging 
+<br>
+<br>The following option causes a delay of time (in milliseconds) between each character 
+<br>output: 
+<br>:set writedelay={time} 
+<br>
+<br>The ‘verbose’ option controls how much Vim chatters while performing its job (the 
+<br>
+<br>higher the number, the more output).The current numbers are as follows: 
+<br>>= 1 When a file is read during a :source command. 
+<br>>= 1 
+<br>
+<br>When the .viminfo file is read or written. 
+<br>>= 8 Files for which a group of autocommands is executed. 
+<br>>= 9 Every executed autocommand. 
+<br>>=15 Every executed function line. 
+<br>
+<br>Obsolete Options 
+<br>
+<br>The ‘textauto’ and ‘textmode’ options are obsolete. Use the options ‘fileformats’ 
+<br>and ‘fileformat’ instead. 
+<br>
+<br>Legacy Options 
+<br>
+<br>Vim tries to be as compatible with the old Vi editor as possible. Vi has a number of 
+<br>options that mean something to Vi, but are not relivant to Vim. In order to be fully 
+<br>compatible with Vi, the Vim editor won’t generate an error message if you set any of 
+<br>these options. But the options themselves have no effect on the editor. 
+<br>
+<br>The options are: 
+<br>autoprint beautify flash graphic hardtabs 
+<br>mesg novice open optimize prompt 
+<br>
+<br>redraw slowopen sourceany window w300 
+<br>w1200 w9600 
+<br>
+<br>
+<br>Language-Dependent 
+<br>Syntax Options 
+<br>
+<br>SYNTAX COLORING IS CONTROLLED BY language-dependent syntax files that reside 
+<br>
+<br>in $VIMRUNTIME/syntax/language.vim. 
+<br>
+<br>You can make your own copy of these syntax files and modify and update them if 
+<br>their syntax coloring is not what you desire. 
+<br>
+<br>You can also set a number of language-specific options. (This chapter covers the 
+<br>language-dependent syntax option for each language Vim knows about.) These 
+<br>options must be turned on before you edit the file.You can fake this by setting 
+<br>the option and then turning the syntax coloring off and back on. 
+<br>
+<br>Assembly Language 
+<br>
+<br>There are a number of different assembly languages out there. By default, Vim assumes 
+<br>that you are using a GNU-style assembly language.The other assemblers supported are 
+<br>as follows: 
+<br>
+<br>asm GNU assembly (the default) 
+<br>
+<br>asmh8300 Hitachi H-8300 
+<br>
+<br>masm Microsoft MASM 
+<br>
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+404 Chapter 29 Language-Dependent Syntax Options 
+</h3>
+<br>
+<br>To let Vim know you are using another assembly language, execute the following 
+<br>command: 
+<br>
+<br>:let asmsyntax=language 
+<br>
+<br>In the preceding command, language is one of the assembly language keywords listed 
+<br>earlier. 
+<br>
+<br>Basic 
+<br>
+<br>Both Visual Basic and Standard Basic both use files that end in .BAS.To tell the difference 
+<br>between the two, the Vim editor reads the first five lines of the file and checks 
+<br>for the string VB_Name. (Files with the extension .FRM are always Visual Basic.) 
+<br>
+<br>C and C++ 
+<br>
+<br>You can perform a number of customizations for the C and C++ syntax colors, 
+<br>including the following: 
+<br>
+<br>c_comment_strings Highlight strings and numbers inside comments. 
+<br>
+<br>/* Example a: “Highlighted String” 
+<br>
+<br>c_space_errors Flag trailing whitespace and spaces in front of a <Tab>. 
+<br>
+<br>/* In the following we use “.” for blank and */ 
+<br>/* —> for tab. */ 
+<br>int..——>foo;...... 
+<br>
+<br>
+<br>c_no_trail_space_error Do not flag trailing whitespace. 
+<br>
+<br>int..——>foo;...... 
+<br>
+<br>c_no_tab_space_error Do not flag spaces before a <Tab>. 
+<br>
+<br>int..——>foo;...... 
+<br>
+<br>c_no_ansi Do not highlight ANSI types and constants. 
+<br>
+<br>size_t foo; /* :unlet c_no_ansi */ 
+<br>int i = INT_MIN; /* :unlet c_no_ansi */ 
+<br>size_t foo; /* :let c_no_ansi = 1 */ 
+<br>int i = INT_MIN; /* :let c_no_ansi = 1 */ 
+<br>
+<br>c_ansi_typedefs Highlight ANSI typedefs. 
+<br>
+<br>size_t foo; /* :unlet c_ansi_typedefs */ 
+<br>int i = INT_MIN; /* :unlet c_ansi_typedefs */ 
+<br>size_t foo; /* :let c_ansi_typedefs = 1 */ 
+<br>
+<br>
+<br>DTD 405 
+<br>
+<br>int i = INT_MIN; /* :let c_ansi_typedefs = 1 */ 
+<br>
+<br>c_ansi_constants Highlight ANSI types. 
+<br>
+<br>size_t foo; /* :unlet c_ansi_constants */ 
+<br>int i = INT_MIN; /* :unlet c_ansi_constants */ 
+<br>size_t foo; /* :set c_no_ansi_constants = 1 */ 
+<br>int i = INT_MIN; /* :let c_ansi_constants = 1 */ 
+<br>
+<br>c_no_utf Highlight \u or \U in strings. 
+<br>
+<br>char *f = “\uFF + \Uffff”; /* :let c_no_utf = 1*/ 
+<br>char *f = “\uFF + \Uffff”; /* :unlet c_no_utf */ 
+<br>
+<br>c_no_if0 Do not highlight #if 0 / #endif blocks as comments. 
+<br>c_no_cformat Do not highlight %-formats in strings. 
+<br>
+<br>printf(“%3f\n”, f); /* :let c_no_cformat = 1 */ 
+<br>printf(“%3f\n”, f); /* :unlet c_no_cformat */ 
+<br>
+<br>Sometimes you will notice some highlighting errors in comments or #if 0 / #endif 
+<br>blocks.You can fix these by redrawing the screen using the CTRL-L command.To fix 
+<br>them permanently, you need to increase the number of lines searched for syntax 
+<br>matches by using the following command: 
+<br>
+<br>:let c_minlines = number 
+<br>
+<br>In the preceding command, number is the minimum number of lines to search. Setting 
+<br>this to a large number helps to eliminate syntax coloration errors. 
+<br>
+<br>COBOL 
+<br>
+<br>There are two versions of COBOL highlighting: fresh development and legacy.To 
+<br>enable legacy highlighting, use the following command: 
+<br>
+<br>:let cobol_legacy_code = 1 
+<br>
+<br>DTD 
+<br>
+<br>DTD is usually case sensitive.To make it not case sensitive, use this command: 
+<br>
+<br>:let dtd_ignore_case = 1 
+<br>
+<br>The syntax highlighting flags unknown tags as errors.To turn off this feature, use the 
+<br>following command: 
+<br>
+<br>:let dtd_no_tag_errors = 1 
+<br>
+<br>The parameter entity names are highlighted using the Type highlight group with the 
+<br>Comment group.You can turn this off by using the following command: 
+<br>
+<br>:let dtd_no_parameter_entities=1 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+406 Chapter 29 Language-Dependent Syntax Options 
+</h3>
+<br>
+<br>Eiffel 
+<br>
+<br>Eiffel is not case sensitive, but the standard style guidelines require the use of upper/
+<br>lowercase.The syntax highlighting rules are designed to encourage you to follow the 
+<br>standard guidelines.To disable case checking, use the following command: 
+<br>
+<br>:let eiffel_ignore_case = 1 
+<br>
+<br>You cause the syntax coloring to check for the proper capitalization for Current,Void, 
+<br>Result, Precursor, and NONE, by using this command: 
+<br>:let eiffel_strict = 1 
+<br>
+<br>If you want to really check the syntax against the style guide, use the following 
+<br>command: 
+<br>:let eiffel_pedantic = 1 
+<br>
+<br>You can use the lowercase versions of current, void, result, precursor, and none by 
+<br>setting eiffel_lower_case_predef, as follows: 
+<br>:let eiffel_lower_case_predef = 1 
+<br>
+<br>To handle ISE’s proposed new syntax, use the following command: 
+<br>:let eiffel_ise = 1 
+<br>
+<br>For support of hexadecimal constants, use this: 
+<br>:let eiffel_hex_constsnts = 1 
+<br>
+<br>
+<br>ERLANG 
+<br>
+<br>ERLANG stands for ERicsson LANGuage.The syntax coloring has two options: 
+<br>erlang_keywords Disable the highlighting of keywords. 
+<br>erlang_characters Disable the highlighting of special characters. 
+<br>
+<br>FVWM 
+<br>
+<br>FVWM is a window manager. If you are editing configuration files for this program, 
+<br>you need to tell Vim the location of the color file using the following command: 
+<br>:let rgb_file=”/usr/X11/lib/X11/rgb.txt” 
+<br>
+<br>This example shows the location of the rgb.txt file that comes with Linux. Other 
+<br>systems may put it in /usr/lib or other locations. 
+<br>
+<br>
+<br>Java 407 
+<br>
+<br>HTML 
+<br>
+<br>
+<br>The HTML syntax file uses the following highlight tags: 
+<br>
+<br>htmlTitle 
+<br>
+<br>htmlH1 
+<br>
+<br>htmlH2 
+<br>
+<br>htmlH3 
+<br>
+<br>htmlH4 
+<br>
+<br>htmlH5 
+<br>
+<br>htmlH6 
+<br>
+<br>htmlBold 
+<br>
+<br>htmlBoldUnderline 
+<br>
+<br>htmlBoldUnderlineItalic 
+<br>
+<br>htmlUnderline 
+<br>
+<br>htmlUnderlineItalic 
+<br>
+<br>htmlItalic 
+<br>
+<br>htmlLink 
+<br>
+<br>If you want to turn off some of syntax coloring, use the following command: 
+<br>
+<br>:let html_no_rendering = 1 
+<br>
+<br>If you want to define your own colors for these items, put the color-setting 
+<br>commands in your VIMRC and use the following command: 
+<br>
+<br>:let html_my_rendering = 1 
+<br>
+<br>Some files contain <!--and --!> or <! and !> for comments. If you want these 
+<br>comments highlighted, use the following command: 
+<br>
+<br>:let html_wrong_comments = 1 
+<br>
+<br>Java 
+<br>
+<br>The Java syntax has the following options: 
+<br>java_mark_braces_in_parens_as_errors If set, braces inside parentheses are 
+<br>
+<br>flagged as errors (Java 1.0.2).This is legal 
+<br>in Java 1.1. 
+<br>java_highlight_java_lang_ids Highlight all the identifiers in java.lang.*. 
+<br>java_highlight_functions = “indent” Set if function declarations are always 
+<br>indented. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+408 Chapter 29 Language-Dependent Syntax Options 
+</h3>
+<br>
+<br>java_highlight_function = “style” 
+<br>java_highlight_debug 
+<br>
+<br>java_allow_cpp_keywords 
+<br>
+<br>java_ignore_javadoc 
+<br>java_javascript 
+<br>
+<br>java_css 
+<br>
+<br>java_vb 
+<br>
+<br>Lace 
+<br>
+<br>Function declarations are not indented. 
+<br>Highlight debug statement 
+<br>
+<br>(System.out.println and 
+<br>System.err.println). 
+<br>Mark all C and C++ keywords as an 
+<br>
+<br>error.This helps prevent you from using 
+<br>them, so your code is more portable to 
+<br>C or C++. 
+<br>
+<br>Turn off highlighting for Javadoc. 
+<br>
+<br>Turn on highlighting for JavaScript inside 
+<br>Javadoc. 
+<br>Turn on highlighting for CSS style sheets 
+<br>
+<br>inside of Javadoc 
+<br>
+<br>Turn on highlighting for VB scripts. 
+<br>
+<br>The specification of the language states that it is not case sensitive. Good style is case 
+<br>sensitive. If you want to turn off the “good style” case-sensitive feature, use the following 
+<br>command: 
+<br>
+<br>:let lace_case_insensitive=1 
+<br>
+<br>Lex 
+<br>
+<br>Lex files are divided up into major sections separated by lines consisting of %%. If you 
+<br>write long Lex files, the syntax highlighting may not be able to find the %%.To fix this 
+<br>problem you might need to increase the minlines syntax option by using a command 
+<br>such as this: 
+<br>
+<br>:syntax sync minlines = 300 
+<br>
+<br>Lite 
+<br>
+<br>Lite uses a SQL-like query language.You can enable highlighting of SQL inside strings 
+<br>with the following command: 
+<br>
+<br>:let lite_sql_query = 1 
+<br>
+<br>If you have large commands, you might want to increase the number of lines used for 
+<br>synchronizing the syntax coloring: 
+<br>
+<br>:let lite_minlines = 500 
+<br>
+<br>
+<br>Perl 409 
+<br>
+<br>Maple 
+<br>
+<br>Maple V, by Waterloo Maple Inc., is a symbolic algebra language. It has many different 
+<br>packages that the user can selectively load. If you want to highlight the syntax for all 
+<br>packages, use the following command: 
+<br>
+<br>:let mvpkg_all = 1 
+<br>
+<br>If you want to enable specific packages, use one or more of the following options: 
+<br>
+<br>mv_DEtools mv_genfunc mv_networks mv_process 
+<br>mv_Galois mv_geometry mv_numapprox mv_simplex 
+<br>mv_GaussInt mv_grobner mv_numtheory mv_stats 
+<br>mv_LREtools mv_group mv_orthopoly mv_student 
+<br>mv_combinat mv_inttrans mv_padic mv_sumtools 
+<br>mv_combstruct mv_liesymm mv_plots mv_tensor 
+<br>mv_difforms mv_linalg mv_plottools mv_totorder 
+<br>mv_finance mv_logic mv_powseries 
+<br>
+<br>Perl 
+<br>
+<br>If you include POD documentation in your files, you can enable POD syntax highlighting 
+<br>using the following command: 
+<br>
+<br>:let perl_include_POD = 1 
+<br>
+<br>If you do not include POD documents, you should. Perl is bad enough when it is 
+<br>documented. 
+<br>
+<br>The following option changes how Perl displays package names in references (such 
+<br>as $PkgName::VarName): 
+<br>
+<br>:let perl_want_scope_in_variables = 1 
+<br>
+<br>If you use complex variable declarations such as “@{${“var”}}”, you need the following: 
+<br>
+<br>:let perl_extended_vars = 1 
+<br>
+<br>The following option tells the syntax coloring to treat strings as a statement: 
+<br>
+<br>:let perl_string_as_statement = 1 
+<br>
+<br>If you have trouble with synchronization, you might want to change some of the 
+<br>following options: 
+<br>
+<br>:let perl_no_sync_on_sub = 1 
+<br>
+<br>:let perl_no_sync_on_global = 1 
+<br>
+<br>:let perl_sync_dist = lines 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+410 Chapter 29 Language-Dependent Syntax Options 
+</h3>
+<br>
+<br>Php3 
+<br>
+<br>The following options control the highlighting for Php3: 
+<br>php3_sql_query Highlight SQL queries inside string. 
+<br>
+<br>php3_baselib Highlight baselib methods. 
+<br>php3_minlines Number of lines to synchronize the syntax coloring. 
+<br>
+<br>
+<br>Phtml 
+<br>
+<br>To highlight SQL syntax in a string, use the following: 
+<br>:let phtml_sql_query = 1 
+<br>
+<br>
+<br>To change the synchronization window, use this command: 
+<br>:let phtml_minlines = lines 
+<br>
+<br>
+<br>PostScript 
+<br>
+<br>The options for PostScript highlighting are as follows: 
+<br>postscr_level Set the PostScript language level (default = 2). 
+<br>postscr_display Highlight display postscript features. 
+<br>
+<br>postscr_ghostscript Hightlight GhostScript-specific syntax. 
+<br>postscr_fonts For font highlighting (off by default for speed). 
+<br>postscr_encodings Encoding tables (off by default for speed). 
+<br>
+<br>postscr_andornot_binary Color logical operators differently. 
+<br>
+<br>Printcap and Termcap 
+<br>
+<br>If you are doing complex work, I feel for you.These files are cryptic enough as is and 
+<br>dealing with long and complex ones is especially difficult. As far as Vim is concerned, 
+<br>you might want to increase the number of lines used for synchronization: 
+<br>
+<br>:let ptcap_minlines = 100 
+<br>
+<br>Rexx 
+<br>
+<br>You can adjust the number of lines used for synchronization with the following 
+<br>option: 
+<br>:let rexx_minlines = lines 
+<br>
+<br>
+<br>TeX 411 
+<br>
+<br>Sed 
+<br>
+<br>To make tabs stand out, you can use the :set list option.You can highlight them 
+<br>differently by using the following command: 
+<br>
+<br>:let highlight_sedtabs = 1 
+<br>
+<br>Hint: If you execute a 
+<br>
+<br>:set tabstop = 1 
+<br>
+<br>as well, it makes it easy to count the number of tabs in a string. 
+<br>
+<br>Shell 
+<br>
+<br>The following options change the highlighting for shell scripts: 
+<br>bash_is_sh Highlight bash syntax. 
+<br>highlight_balanced_quotes Highlight single quotes inside double quotes (that 
+<br>
+<br>is,“x ‘x’ x”) 
+<br>highlight_function_name Highlight the function name in a declaration 
+<br>sh_minlines Set the number of lines for synchronization 
+<br>sh_maxlines Limit the number of lines for synchronization 
+<br>
+<br>(speeds things up). 
+<br>
+<br>Speedup 
+<br>
+<br>The options for Speedup are as follows: 
+<br>strict_subsections Only highlight the keywords that belong in each 
+<br>
+<br>subsection. 
+<br>highlight_types Highlight stream types as a type. 
+<br>oneline_comments = 1 Allow code after any number of # comments. 
+<br>oneline_comments = 2 Show code starting with the second # as an error 
+<br>
+<br>(default). 
+<br>oneline_comments = 3 If the line contains two or more # characters in it, 
+<br>highlight the entire line as an error. 
+<br>
+<br>TeX 
+<br>
+<br>TeX is a complex language that can fool the syntax highlighting. If the editor fails to 
+<br>find the end of a texZone, put the following comment in your file: 
+<br>
+<br>%stopzone 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+412 Chapter 29 Language-Dependent Syntax Options 
+</h3>
+<br>
+<br>TinyFugue 
+<br>
+<br>To adjust the synchronization limit for TinyFugue files, use this option: 
+<br>
+<br>:let tf_minlines = lines 
+<br>
+<br>
+<br>How to Write a Syntax File 
+<br>
+<br>
+<br>SUPPOSE YOU WANT TO DEFINE YOUR OWN syntax file.You can start by taking a 
+<br>
+<br>look at the existing syntax files in the $VIMRUNTIME/syntax directory. After that, you 
+<br>can either adapt one of the existing syntax files or write your own. 
+<br>
+<br>Basic Syntax Commands 
+<br>
+<br>Let’s start with the basic options. Before we start defining any new syntax, we need to 
+<br>clear out any old definitions: 
+<br>
+<br>:syntax clear 
+<br>
+<br>Some languages are not case sensitive, such as Pascal. Others, such as C, are case sensitive.
+<br>You need to tell which type you have with the following commands: 
+<br>
+<br>:syntax case match 
+<br>
+<br>:syntax case ignore 
+<br>
+<br>The 'match' option means that Vim will match the case of syntax elements.Therefore, 
+<br>int differs from Int and INT. If the 'ignore' option is used, the following are equivalent: 
+<br>Procedure, PROCEDURE, and procedure. 
+<br>
+<br>The :syntax case commands can appear anywhere in a syntax file and affect all 
+<br>the syntax definitions that follow. In most cases, you have only one :syntax case 
+<br>command in your syntax file; if you work with an unusual language that contains both 
+<br>case-sensitive and non-case-sensitive elements, however, you can scatter the :syntax 
+<br>case command throughout the file. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+
+
+
+</body>
+</html>

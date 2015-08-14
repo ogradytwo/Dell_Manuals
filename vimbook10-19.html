@@ -1,0 +1,5813 @@
+<!Doctype>
+<html>
+<head>
+<style>
+  body{ color:GreenYellow;background-color:Black;font-family:arial}
+  h3   {color:Yellow}
+</style>
+</head>
+<body>
+<strong>
+<h3>
+108 Chapter 10 Basic GUI Usage 
+</h3>
+<br>
+<br>Figure 10.2 UNIX with the Motif toolkit. 
+<br>
+<br>Figure 10.3 Microsoft Windows. 
+<br>
+<br>If you have a choice of UNIX GUIs to choose from, it is recommended that you use 
+<br>the GTK version. 
+<br>
+<br>Mouse Usage 
+<br>
+<br>Standards are wonderful. In Microsoft Windows, you can use the mouse to select text 
+<br>in a standard manner.The X Window system also has a standard system for using the 
+<br>mouse. Unfortunately, these two standards are not the same. 
+<br>
+<br>Fortunately, you can customize Vim.You can make the behavior of the mouse look 
+<br>like an X Window system mouse or a Microsoft Windows mouse.The following command 
+<br>makes the mouse behave like an X Window mouse: 
+<br>
+<br>:behave xterm 
+<br>
+<br>The following command makes the mouse look like a Microsoft Windows mouse: 
+<br>:behave mswin 
+<br>
+<br>The default behavior of the mouse on UNIX systems is xterm.The default behavior 
+<br>on a Microsoft Windows system is selected during the installation process. 
+<br>
+<br>In addition to controlling the behavior of the mouse, the :behave command affects 
+<br>
+<br>the following options: 
+<br>Setting for Setting for 
+<br>Option :behave mswin :behave xterm 
+<br>‘selectmode’ mouse,key (empty) 
+<br>‘mousemodel’ popup extend 
+<br>‘keymodel’ startsel,stopsel (empty) 
+<br>‘selection’ exclusive inclusive 
+<br>
+<br>
+<br>Tear-Off Menus 109 
+<br>
+<br>X Mouse Behavior 
+<br>
+<br>When xterm behavior is enabled, the mouse behavior is as follows: 
+<br><Left Mouse> Move the cursor. 
+<br>Drag with <Left Mouse> Select text in visual mode. 
+<br><Right Mouse> Extend select from cursor location to the location of 
+<br>
+<br>the mouse. 
+<br><Middle Mouse> Paste selected text into the buffer at the mouse 
+<br>location. 
+<br>
+<br>Microsoft Windows Mouse Behavior 
+<br>
+<br>When mswin behavior is enabled, the mouse behavior is as follows: 
+<br><Left Mouse> Move the cursor. 
+<br>Drag with <Left Mouse> Select text in select mode. 
+<br><S-Left Mouse> Extend selection to the cursor location. 
+<br><S-Right Mouse> Display pop-up menu. 
+<br><Middle Mouse> Paste the text on the system Clipboard into file. 
+<br>
+<br>Special Mouse Usage 
+<br>
+<br>You can issue a number of other special commands for the mouse, including the 
+<br>following 
+<br><S-Left Mouse> Search forward for the next occurrence of the word 
+<br>under the cursor. 
+<br><S-Right Mouse> Search backward for the preceding occurrence of the 
+<br>word under the cursor. 
+<br><C-Left Mouse> Jump to the tag whose name is under the cursor. 
+<br><C-Right Mouse> Jump to the preceding tag in the stack. 
+<br>
+<br>Tear-Off Menus 
+<br>
+<br>The menus in Vim (all GUI versions except Athena) have an interesting feature: “tearoff 
+<br>” menus. If you select the first menu item (the dotted lines), you can drag the menu 
+<br>to another location on the screen. Figure 10.4 shows how to tear off a menu. 
+<br>
+<br>Note 
+<br>
+<br>If you execute a command that requires a motion, such as dmotion, you can use the left mouse button 
+<br>for the motion. 
+<br>
+<br>
+<h3>
+110 Chapter 10 Basic GUI Usage 
+</h3>
+<br>
+<br>Figure 10.4 Tear-off menus. 
+<br>
+<br>When torn off, the menu remains as its own window until you close it using the 
+<br>
+<br>
+<br>Figure 10.5 Toolbar. 
+<br>
+<br>Toolbar 
+<br>
+<br>A toolbar appears in the GTK and MS-Windows versions of the GUI. It looks something 
+<br>like Figure 10.5. 
+<br>The icons perform the following functions: 
+<br>
+<br>
+<br>Open. Brings up a File Open dialog box. 
+<br>Save. Saves the current file. 
+<br>Save All. Save all the open files in all windows and buffers. 
+<br>Print. Print to system printer. 
+<br>Undo. 
+<br>Redo. 
+<br>
+<br>
+<br>
+<br>Toolbar 111 
+<br>
+<br>Cut. (Actually “delete.”) 
+<br>Copy. (Actually “yank.”) 
+<br>Paste. 
+<br>Search. Brings up a dialog box so that you can enter a pattern. 
+<br>Find Next. 
+<br>Find Previous. 
+<br>Replace. Brings up a Search-and-Replace dialog box. 
+<br>Make Session. Brings up a dialog box so that you can enter the name of a 
+<br>
+<br>
+<br>session file to write to. 
+<br>
+<br>
+<br>Load Session. Brings up a dialog box so that you can select the session file 
+<br>to load. 
+<br>Script. Brings up a dialog box so that you can select a script to run. 
+<br>Make. Performs a :make. 
+<br>
+<br>
+<br>Shell. Does a :shell. 
+<br>
+<br>Make Tags. Does a :!ctags -R . command. 
+<br>
+<br>Tag. Jumps to the definition of the tag under the cursor. 
+<br>
+<br>Help. Brings up the general help screen. 
+<br>
+<br>Help Search. Brings up a dialog box so that you can enter a help topic to 
+<br>
+<br>be displayed.This button is slightly misnamed because it does not do a 
+<br>
+<br>general search of the help documents, but only looks for tags. 
+<br>
+<br>
+<br>Dealing with Text Files 
+<br>
+<br>DESPITE THE PROLIFERATION OF WORD PROCESSING tools such as Microsoft Word, 
+<br>
+<br>StarOffice, and such, people still use plain-text files for documentation because this 
+<br>type of file is the most easily read. 
+<br>
+<br>In this chapter, you learn about the following: 
+<br>
+<br>
+<br>Automatic text wrapping 
+<br>
+<br>
+<br>Text formatting command 
+<br>
+<br>
+<br>Text formatting options 
+<br>
+<br>
+<br>Dealing with different file formats 
+<br>
+<br>
+<br>Troff-related commands 
+<br>
+<br>
+<br>The rot13 algorithm 
+<br>
+<br>Automatic Text Wrapping 
+<br>
+<br>The Vim editor has a number of functions that make dealing with text easier. By 
+<br>default, the editor does not perform automatic line breaks. In other words, you have to 
+<br>press <Enter> yourself.This is extremely useful when you are writing programs where 
+<br>you want to decide where the line ends. It is not so good when you are creating documentation 
+<br>and do not want to have to worry about where to break the lines. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+114 Chapter 11 Dealing with Text Files 
+</h3>
+<br>
+<br>If you set the ‘textwidth’ option, Vim automatically inserts line breaks. Suppose, 
+<br>for example, that you want a very narrow column of only 30 characters.You need to 
+<br>execute the following command: 
+<br>
+<br>:set textwidth=30 
+<br>
+<br>Now you start typing (ruler added): 
+<br>
+<br>123 
+<br>12345678901234567890123456789012345 
+<br>I taught programming for a while 
+<br>
+<br>
+<br>The word while makes the line longer than the 30-character limit.When Vim sees this, 
+<br>it inserts a line break and you get the following: 
+<br>
+<br>I taught programming for a 
+<br>while 
+<br>
+<br>
+<br>Continuing on, you can type in the rest of the paragraph: 
+<br>
+<br>I taught programming for a 
+<br>while. One time, I was stopped 
+<br>by the Fort Worth police 
+<br>because my homework was too 
+<br>hard. True story. 
+<br>
+<br>
+<br>You do not have to type newlines; Vim puts them in automatically. 
+<br>You can specify when to break the line in two different ways.The following option 
+<br>tells Vim to break the line 30 characters from the left side of the screen: 
+<br>:set textwidth=30 
+<br>
+<br>If you use the following option, you tell Vim to break the lines so that you have margin 
+<br>characters from the right side of the screen.: 
+<br>
+<br>:set wrapmargin=margin 
+<br>
+<br>Therefore, if you have a screen that is 80 characters wide, the following commands do 
+<br>the same thing: 
+<br>
+<br>:set wrapmargin=10 
+<br>:set textwidth=70 
+<br>
+<br>
+<br>The Vim editor is not a word processor. In a word processor, if you delete something 
+<br>at the beginning of the paragraph, the line breaks are reworked. In Vim they are not; 
+<br>so if you delete some words from the first line, all you get is a short line: 
+<br>
+<br>I taught for a 
+<br>while. One time, I was stopped 
+<br>by the Fort Worth police 
+<br>because my homework was too 
+<br>hard. True story. 
+<br>
+<br>
+<br>Note 
+<br>
+<br>The ‘textwidth’ option overrules ‘wrapmargin’. 
+<br>
+<br>
+<br>Text Formatting Command 115 
+<br>
+<br>This does not look good; so how do you get the paragraph into shape? There are several 
+<br>ways.The first is to select the paragraph as part of a visual selection: 
+<br>
+<br>I taught for a 
+<br>while. One time, I was stopped 
+<br>by the Fort Worth police 
+<br>because my homework was too 
+<br>hard. True story. 
+<br>
+<br>
+<br>Then you execute the gq command to format the paragraph. 
+<br>
+<br>I taught for a while. One 
+<br>time, I was stopped by the 
+<br>Fort Worth police because my 
+<br>homework was too hard. True 
+<br>story. 
+<br>
+<br>
+<br>Another way to format a paragraph is to use the gqmotion command.Therefore to 
+<br>format 5 lines, you use the command gq4j. (The 4j tells gq to format this line and the 
+<br>
+<br>The move forward paragraph command (})also proves useful in such cases.To format 
+<br>a paragraph, for example, position the cursor on the first line of the paragraph and 
+<br>use the command gq}. It is much easier to use this command than to count the lines. 
+<br>
+<br>The command gqip formats the current paragraph. (The gq formats the selected 
+<br>text and the ip selects the “inner paragraph.”) This is easier than gq} because you don’t 
+<br>have to put the cursor on the beginning of a paragraph. 
+<br>
+<br>Finally, to format a line, use the gqgq command.You can shorten this to gqq. 
+<br>
+<br>Text Formatting Command 
+<br>
+<br>To center a range of lines, use the following command: 
+<br>
+<br>:range center width 
+<br>
+<br>If a width is not specified, it defaults to the value of ‘textwidth’. (If ‘textwidth’ is 0, 
+<br>the default is 80.) For example: 
+<br>
+<br>:1,5 center 30 
+<br>
+<br>results in the following: 
+<br>
+<br>I taught for a while. One 
+<br>time, I was stopped by the 
+<br>Fort Worth police because my 
+<br>homework was too hard. True 
+<br>
+<br>
+<br>story. 
+<br>
+<br>Similarly, the command :right right-justifies the text. So, 
+<br>:1,5 right 30 
+<br>
+<br>
+<h3>
+116 Chapter 11 Dealing with Text Files 
+</h3>
+<br>
+<br>gives results in the following: 
+<br>
+<br>I taught for a while. One 
+<br>time, I was stopped by the 
+<br>Fort Worth police because my 
+<br>homework was too hard. True 
+<br>story. 
+<br>
+<br>
+<br>Finally there is this command: 
+<br>
+<br>:range left margin 
+<br>
+<br>Unlike :center and :right, however, the argument to :left is not the length of the 
+<br>line. Instead it is the left margin. If this is 0, the text will be put against the left side of 
+<br>the screen. If it is 5, the text will be indented 5 spaces. 
+<br>
+<br>For example, these commands 
+<br>
+<br>:1 left 5 
+<br>:2,5 left 0 
+<br>
+<br>
+<br>result in the following:: 
+<br>
+<br>I taught for a while. One 
+<br>time, I was stopped by the 
+<br>Fort Worth police because my 
+<br>homework was too hard. True 
+<br>story. 
+<br>
+<br>
+<br>Justifying Text 
+<br>
+<br>The Vim editor has no built-in way of justifying text. However, there is a neat macro 
+<br>package that does the job.To use this package, execute the following command: 
+<br>
+<br>:source $VIMRUNTIME/macros/justify.vim 
+<br>
+<br>This macro file defines a new visual command _j.To justify a block of text, highlight 
+<br>the text in visual mode and then execute _j. 
+<br>
+<br>Fine-Tuning the Formatting 
+<br>
+<br>A number of options enable you to fine-tune and customize your spaces. 
+<br>
+<br>The joinspaces Option 
+<br>
+<br>The J command joins two lines putting in one space to separate them. If the 
+<br>‘joinspaces’ option is set, when the first line ends with a punctuation mark (period, 
+<br>question mark, or exclamation point), two spaces are added. 
+<br>
+<br>Input the following (= represents a space): 
+<br>
+<br>This=is=a=test. 
+<br>Second=line. 
+<br>
+<br>
+<br>When the ‘joinspaces’ option is turned off with the following command 
+<br>
+<br>:set nojoinspaces 
+<br>
+<br>
+<br>Fine-Tuning the Formatting 117 
+<br>
+<br>the result of a J on the first line is as follows: 
+<br>This=is=a=test.=Second=line. 
+<br>
+<br>If the option is set using this command 
+<br>
+<br>:set joinspaces 
+<br>
+<br>the result is as follows: 
+<br>This=is=a=test.==Second=line. 
+<br>
+<br>The formatoptions Option 
+<br>
+<br>‘formatoptions’ controls how Vim performs automatic wrapping.The Vim editor is 
+<br>smart about comments and does a proper job of formatting them.With 
+<br>‘formatoptions’ you can control both how text and comments are wrapped. 
+<br>
+<br>The format of this option is as follows: 
+<br>
+<br>:set formatoptions=characters 
+<br>
+<br>where characters is a set of formatting flags.The following list identifies the formatting 
+<br>flags. 
+<br>
+<br>t 
+<br>
+<br>Automatically wrap text. 
+<br>
+<br>c 
+<br>
+<br>Automatically wrap comments. Insert the comment leader automatically. 
+<br>
+<br>r 
+<br>
+<br>Insert comment leader in a comment when a new line is inserted. 
+<br>
+<br>o 
+<br>
+<br>Insert comment leader in a comment when a new line is created using the 
+<br>O and o command. 
+<br>q Allow gq to format comments. 
+<br>2 Format based on the indent of the second line, not the first. 
+<br>v 
+<br>
+<br>
+<br>Do old-style Vi text wrapping.Wrap only on blanks that you enter. 
+<br>b Wrap only on blanks you type, but only if they occur before ‘textwidth’. 
+<br>l Do not break line in insert mode. Only let gq break the lines. 
+<br>
+<br>
+<br>Take a look at how these flags affect the formatting. 
+<br>
+<br>The t flag must be on for normal text to be wrapped.The c flag must be on for 
+<br>comments to be wrapped.Therefore, setting the ‘formatoptions’ option using the 
+<br>following command is good for programming: 
+<br>
+<br>:set formatoptions=c 
+<br>
+<br>Long lines inside a comment are automatically wrapped. Long lines of code (Vim calls 
+<br>them text) are not wrapped. Actually you want to set this option: 
+<br>
+<br>:set formatoptions=cq 
+<br>
+<br>This tells Vim to not only wrap comments, but also to reformat comments as part of a 
+<br>gq command. 
+<br>
+<br>
+<h3>
+118 Chapter 11 Dealing with Text Files 
+</h3>
+<br>
+<br>Vim is smart about comments.When it wraps a line in the middle of a C-style com
+<br>
+<br>
+<br>mand, it automatically adds the comment header in front of the line. Suppose, for 
+<br>example, that you enter the following command: 
+<br>
+<br>/* This is a test of a long line. 
+<br>
+<br>This line is longer than the ‘textwidth’, so it wraps. Because it is in a comment, Vim 
+<br>automatically puts in an asterisk (*).Therefore, although you typed everything on one 
+<br>line, the result is as follows: 
+<br>
+<br>/* This is a test of a long 
+<br>
+<br>* line. 
+<br>But suppose you actually type <Enter>? By default, Vim does not insert the asterisk. 
+<br>This means that if you type a two-line comment, you get the following: 
+<br>/* Line 1 
+<br>Line 2 
+<br>
+<br>If you put an r flag in the ‘formatoptions‘, however, Vim automatically supplies the 
+<br>comment leader (*) when you press Return: 
+<br>/* Line 1 
+<br>
+<br>* Line 2 
+<br>If you want to have this done for the O and o commands, you need to put in the o flag 
+<br>as well. 
+<br>
+<br>Text Formatting Options 
+<br>
+<br>The 2 option tells Vim to format based on the second line of the text rather than the 
+<br>first. For example, the original example text is displayed in Figure 11.1. 
+<br>
+<br>If you do not have the 2 flag in the formatoptions and you reformat the paragraph 
+<br>with gq}, you get the results shown in Figure 11.2. 
+<br>
+<br>The first Centronics Printer manual had a whole 
+<br>chapter devoted to how to open up the packing 
+<br>crate and find the manual. (What did they think we 
+<br>were reading anyway?) 
+<br>~ 
+<br>
+<br>~ 
+<br>~ 
+<br>~ 
+<br>
+<br>
+<br>~ 
+<br>
+<br>Figure 11.1 The original text. 
+<br>
+<br>The first Centronics Printer manual 
+<br>had a whole chapter devoted to how 
+<br>to open up the packing crate and 
+<br>find the manual. (What did they 
+<br>think we were reading anyway?) 
+<br>
+<br>~ 
+<br>~ 
+<br>~ 
+<br>
+<br>
+<br>~ 
+<br>
+<br>Figure 11.2 Formatted text (no 2 flag). 
+<br>
+<br>
+<br>Fine-Tuning the Formatting 119 
+<br>
+<br>If you go back to the original paragraph, however, set the 2 flag with the following 
+<br>
+<br>:set formatoptions += 2 
+<br>
+<br>and reformat using gq}, you will get the results shown in Figure 11.3. 
+<br>The v flag character controls where a line will be split. Suppose that you have the 
+<br>following line: 
+<br>This is a test of the very long line wrapping 
+<br>
+<br>Now add the word logic to the end of the sentence.Without the v flag, the result is 
+<br>as follows: 
+<br>This is a test of the very 
+<br>long line wrapping logic. 
+<br>
+<br>With v in ‘formatoptions‘, you get the following: 
+<br>This is a test of the very long line wrapping 
+<br>logic. 
+<br>
+<br>Even though the existing line is much longer than ‘textwidth’, with v set, Vim will 
+<br>add. 
+<br>
+<br>If the l character is present in the ‘formatoptions’, Vim will break only the line if 
+<br>the space you type is less than the ‘textwidth’. If you add the word logic to the preceding 
+<br>example, you get the following: 
+<br>
+<br>This is a test of the very long line wrapping logic. 
+<br>
+<br>If you were to type this line from scratch, however, you would get the following: 
+<br>This is a test of the very 
+<br>long line wrapping logic. 
+<br>
+<br>Using an External Formatting Program 
+<br>
+<br>By default, Vim uses its internal formatting logic to format the text. If you want, however, 
+<br>you can run an external program to do the job. On UNIX, the standard program 
+<br>fmt does a good job of doing the work. If you want to use this command for the gq 
+<br>
+<br>work, set the following option: 
+<br>
+<br>:set formatprg=fmt 
+<br>
+<br>The first Centronics Printer manual 
+<br>had a whole chapter devoted to how to 
+<br>open up the packing crate and find the 
+<br>manual. (What did they think we were 
+<br>reading anyway?) 
+<br>~ 
+<br>~ 
+<br>
+<br>
+<br>~ 
+<br>~ 
+<br>
+<br>
+<br>Figure 11.3 Formatted text (2 set). 
+<br>
+<br>
+<h3>
+120 Chapter 11 Dealing with Text Files 
+</h3>
+<br>
+<br>Even without this option, however, you can always use the filter (!) command to format 
+<br>text.To run a paragraph through the program fmt, for example, use the command 
+<br>!}fmt.The ! starts a filter command, the } tells Vim to filter a paragraph, and the rest 
+<br>(fmt) is the name of the command to use. 
+<br>
+<br>File Formats 
+<br>
+<br>Back in the early days, the old Teletype machines took two character times to do a 
+<br>to the first position, it tried to print it on-the-fly, leaving a smudge in the middle of 
+<br>the page. 
+<br>
+<br>The solution was to make the newline two characters: <Return> to move the 
+<br>carriage to column 1, and <Line Feed> to move the paper up. 
+<br>
+<br>When computers came out, storage was expensive. Some people decided that they 
+<br>did not need two characters for end-of-line.The UNIX people decided they could 
+<br>use <Line Feed> only for end-of-line.The Apple people standardized on <Return>. 
+<br>The MS-DOS (and Microsoft Windows) folks decided to keep the old <Return> 
+<br><Line Feed>. 
+<br>
+<br>This means that if you try to move a file from one system to another, you have line 
+<br>problems.The Vim editor automatically recognizes the different file formats and handles 
+<br>things properly behind your back. 
+<br>
+<br>The option ‘fileformats’ contains the various formats that will be tried when a 
+<br>first and MS-DOS format second: 
+<br>
+<br>:set fileformats=unix,dos 
+<br>
+<br>The detected file format is stored in the ‘fileformat’ option.To see which format you 
+<br>have, execute the following command: 
+<br>
+<br>:set fileformat? 
+<br>
+<br>You can use the ‘fileformat’ option to convert from one file format to another. 
+<br>Suppose, for example, that you have an MS-DOS file named readme.txt that you 
+<br>want to convert to UNIX format. 
+<br>
+<br>Start by editing the MS-DOS format file: 
+<br>
+<br>$ vim README.TXT 
+<br>
+<br>Now change the file format to UNIX: 
+<br>
+<br>:set fileformat=unix 
+<br>
+<br>When the file is written, it will be in UNIX format. 
+<br>
+<br>Note 
+<br>
+<br>If you are an old Vi user and tried to edit an MS-DOS format file, you would have found that each line 
+<br>ended with a ^M character. (^M is <Return>.) Fortunately, Vim handles both UNIX and MS-DOS file 
+<br>formats automatically. 
+<br>
+<br>
+<br>Troff-Related Movement 121 
+<br>
+<br>Changing How the Last Line Ends 
+<br>
+<br>The Vim editor assumes that your file is made up of lines.This means that Vim 
+<br>assumes that the last line in the file ends in an <EOL> character. Sometimes you will 
+<br>encounter a strange file that contains an incomplete line.When Vim encounters this 
+<br>type of file, it sets the ‘noendofline’ option. (If your file ends in a complete line, the 
+<br>‘endofline’ option is set.) 
+<br>
+<br>If you want to change whether or not your file ends in an <EOL>, use the command 
+<br>
+<br>:set endofline 
+<br>
+<br>(Last line ends in <EOL>.) 
+<br>or 
+<br>
+<br>:set noendofline 
+<br>
+<br>(Last line does not have an <EOL>.) This option only works when the ‘binary’ 
+<br>option is set. 
+<br>
+<br>Troff-Related Movement 
+<br>
+<br>A number of commands enable you to move through text. The ) command moves 
+<br>
+<br>forward one sentence. The ( command does the same thing backward. 
+<br>
+<br>The } command moves forward one paragraph, and { moves one paragraph backward. 
+<br>
+<br>Figure 11.4 shows how these commands work. 
+<br>At one time the troff program was the standard UNIX word processor. It takes as 
+<br>input a text file with processing directives in it and formats the text. Although troff is 
+<br>rarely used these days, the Vim editor still contains an option for dealing with this 
+<br>formatter. 
+<br>
+<br>The troff program uses macros to tell it what to do. Some of these macros start 
+<br>paragraphs. In the following example, for instance, the macro .LP starts each paragraph: 
+<br>
+<br>.LP 
+<br>
+<br>This is a test of the \fItroff\fP text processor. 
+<br>
+<br>It takes encode text and typesets it. 
+<br>
+<br>.LP 
+<br>
+<br>This is the second paragraph. 
+<br>
+<br>.B rgview 
+<br>
+<br>.SH DESCRIPTION 
+<br>
+<br>.B Vim 
+<br>
+<br>is a text editor that is upwards compatible to Vi. 
+<br>
+<br>} It can be used to edit any ASCII text. 
+<br>
+<br>It is especially useful for editing 
+<br>
+<br>programs. 
+<br>
+<br>.PP 
+<br>
+<br>There are a lot of enhancements above Vi: multi level 
+<br>
+<br>multi windows and buffers, syntax hightlighting, comman 
+<br>
+<br>editing, filename completion, on–line help, visual sel 
+<br>
+<br>} See “:help vi_diff.txt” for a summary of the differenc 
+<br>
+<br>.B Vim 
+<br>
+<br>and Vi. 
+<br>
+<br>.PP 
+<br>
+<br>While running 
+<br>
+<br>.B Vim 
+<br>
+<br>Figure 11.4 
+<br>
+<br>} command. 
+<br>
+<br>
+<h3>
+122 Chapter 11 Dealing with Text Files 
+</h3>
+<br>
+<br>Because troff uses lots of different macro packages, Vim needs to know which macros 
+<br>start a paragraph.The ‘paragraphs’ option does this.The format of this option is as 
+<br>follows: 
+<br>
+<br>:set paragraphs=”macromacromacro...” 
+<br>
+<br>Each macro is the two-character name of a troff macro. For example: 
+<br>
+<br>:set paragraphs=”P<Space>LP” 
+<br>
+<br>tells Vim that the macros .P and .LP start a paragraph. (Note that you use P<Space> 
+<br>to indicate the .P macro.) By default, the ‘paragraphs’ option is as follows: 
+<br>
+<br>:set paragraphs=IPLPPPQPP LIpplpipbp 
+<br>
+<br>This means that the following macros 
+<br>
+<br>.IP .LP .PP .QP .P .LI 
+<br>.pp .lp .ip .bp 
+<br>
+<br>
+<br>start a new paragraph. 
+<br>
+<br>Section Moving 
+<br>
+<br>The [[ and [] commands move a section backward. A section is defined by any text 
+<br>separated by a page break character (CTRL-L).The reason there are two movement 
+<br>commands is that these commands also move forward and backward through procedures. 
+<h3>
+(Chapter 7, “Commands for Programmers,” contains information on programming 
+</h3>
+<br>commands.) 
+<br>
+<br>The ]] and ][ commands perform the forward movements as seen in Figure 11.5. 
+<br>
+<br>This is page 1 
+<br>
+<br>]] 
+<br>
+<br>^L 
+<br>This is page 2 
+<br>
+<br>]] 
+<br>
+<br>Another paragraph 
+<br>^L 
+<br>This is page 3 
+<br>with a two line paragarph 
+<br>
+<br>And another one 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>~ 
+<br>
+<br>Figure 11.5 The ]] command. 
+<br>
+<br>
+<br>Encrypting with rot13 123 
+<br>
+<br>Defining Sections 
+<br>
+<br>You can also define a section using troff macros.The ‘sections‘ option acts much 
+<br>like the ‘paragraph‘ option, except that it defines the macros that separate sections 
+<br>rather than paragraphs.The default is as follows: 
+<br>
+<br>:set section=SHNHH HUnhsh 
+<br>
+<br>Encrypting with rot13 
+<br>
+<br>If you want to encrypt a block of text with the rot13 algorithm, use the g?motion 
+<br>command.The rot13 encryption is an extremely weak encryption scheme designed to 
+<br>obscure text. It is frequently used in news posting for potentially offensive material. 
+<br>
+<br>Naturally g?g? or g?? encrypts the current line. 
+<br>
+<br>You can decrypt the rot13 encryption by encrypting the text twice. 
+<br>
+<br>
+<br>Automatic Completion 
+<br>
+<br>THE VIM EDITOR CAN AUTOMATICALLY COMPLETE words on insertion.This is where 
+<br>
+<br>you type the first part of a word, press CTRL-P, and Vim guesses at the rest. How it 
+<br>decides what to use for completion is both simple and flexible.This chapter covers 
+<br>every aspect of this function. 
+<br>
+<br>This chapter discusses the following: 
+<br>
+<br>
+<br>Automatic completion 
+<br>
+<br>
+<br>How to customize the automatic completion feature 
+<br>
+<br>
+<br>How to use different types of completions 
+<br>
+<br>Automatic Completion 
+<br>
+<br>When you are entering text, Vim can assist you to complete words. Suppose, for 
+<br>example, that you are creating a C program and want to type in the following: 
+<br>
+<br>total = ch_array[0] + ch_array[1] + ch_array[2]; 
+<br>
+<br>You start by entering the following: 
+<br>total = ch_array[0] + ch_ 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+126 Chapter 12 Automatic Completion 
+</h3>
+<br>
+<br>At this point, you tell Vim to complete the word using the command CTRL-P.This 
+<br>command tells Vim to search a word to complete. In this case, it is the word ch_array. 
+<br>So typing CTRL-P gives you the following: 
+<br>
+<br>total = ch_array[0] + ch_array 
+<br>
+<br>After a little more typing, you get this: 
+<br>
+<br>total = ch_array[0] + ch_array[1] + 
+<br>
+<br>If you now type CTRL-P again, Vim will search again for a word that completes the 
+<br>word before the cursor. (In this case, it is “”.) The first word that matches is ch_array. 
+<br>
+<br>Typing CTRL-P again gives you the next word that matches (in this case, total). A 
+<br>third CTRL-P causes the editor to run out of words, so it returns to the original entry: 
+<br>“ ”. A fourth CTRL-P causes the editor to start over again with ch_array. 
+<br>
+<br>How Vim Searches for Words 
+<br>
+<br>The Vim editor goes through a lot of effort to find words to complete. By default, it 
+<br>uses the following search algorithm: 
+<br>
+<br>1. Current file 
+<br>2. Files in other windows 
+<br>3. Other file in the currently loaded buffers 
+<br>4. Files in unloaded buffers 
+<br>5. The current “tags” list 
+<br>6. All files #included by the current file 
+<br>You can customize the search order. (This is described in the section “Customization 
+<br>of Completion.”) 
+<br>
+<br>Searching Forward 
+<br>
+<br>When you type CTRL-P, Vim searches backward for a word to complete.The CTRL-N 
+<br>command searches forward. Other than the direction, it acts just like the CTRL-P 
+<br>command. 
+<br>
+<br>Customization of Completion 
+<br>
+<br>The ‘ignorecase’ option tells the editor to try all words regardless of case: 
+<br>
+<br>:set ignorecase 
+<br>
+<br>Therefore, if you have the option on, when you try to complete the string ins, Vim 
+<br>will consider INSERT, Inside, and instep, all as candidates (assuming that they appear in 
+<br>the text). 
+<br>
+<br>
+<br>Automatic Completion Details 127 
+<br>
+<br>When you match words in this way, the completed word takes on the case of the 
+<br>matched word.Therefore, the completion list for ins is as follows: 
+<br>
+<br>instep 
+<br>
+<br>Inside 
+<br>
+<br>INSERT 
+<br>
+<br>What if you want to match INSERT, but put the word insert (lowercase) in your text. 
+<br>You must tell Vim to infer the case of the new word from what is typed, not what is 
+<br>matched.You can set the following option: 
+<br>
+<br>:set infercase 
+<br>
+<br>Then the match list is as follows: 
+<br>
+<br>instep 
+<br>
+<br>inside 
+<br>
+<br>insert 
+<br>
+<br>Automatic Completion Details 
+<br>
+<br>For the most part, the Vim editor does the right thing when it comes to automatic 
+<br>completion. At times, however, you might want to fine-tune your completions. 
+<br>
+<br>The ‘complete’ option controls where Vim searches for words.The form of this 
+<br>option is as follows: 
+<br>
+<br>:set complete=key,key,key 
+<br>
+<br>key is a key letter (and possible argument).The possible key values are as follows: 
+<br>
+<br>. 
+<br>
+<br>Current file 
+<br>b Files in loaded buffers, not in a window 
+<br>d Definitions in the current file and in files included by a #include directive 
+<br>i Files included by the current file through the use of a #include directive 
+<br>k The file defined by the ‘dictionary’ option (discussed later in this chapter) 
+<br>
+<br>
+<br>kfile 
+<br>
+<br>The file named {file} 
+<br>
+<br>t 
+<br>
+<br>The “tags” file. (The ] character can be used as well.) 
+<br>u Unloaded buffers 
+<br>w Files in other windows 
+<br>
+<br>
+<br>The Include Path 
+<br>
+<br>Vim uses the ‘path’ option to tell it where to look for files that were included in the 
+<br>current file. (Note that the ‘path’ option also is used for other commands such as 
+<br>:find.) 
+<br>
+<br>
+<h3>
+128 Chapter 12 Automatic Completion 
+</h3>
+<br>
+<br>Specifying a Dictionary 
+<br>
+<br>The following option 
+<br>
+<br>:set dictionary=file,file,... 
+<br>
+<br>defines a file to be searched when you press CTRL-P and CTRL-N to match words.To 
+<br>use on Linux, for example, the dictionary file is in /usr/dict/words.Therefore, to add 
+<br>this file to the list of dictionaries searched for, use the following command: 
+<br>
+<br>:set dictionary=/usr/dict/words 
+<br>
+<br>If you have a local list of words, you can search this too: 
+<br>
+<br>:set dictionary=/home/oualline/words,/usr/doc/words 
+<br>
+<br>You can also specify a dictionary by putting the file after the k (key). For example: 
+<br>
+<br>:set complete=k/usr/oualline/words 
+<br>
+<br>You can use the k flag multiple times, each with a different file: 
+<br>:set complete=k/usr/dict/words,k/usr/share/words 
+<br>
+<br>Controlling What Is Searched For 
+<br>
+<br>CTRL-P and CTRL-N enable you to perform a wide variety of searches.What if you want 
+<br>to restrict yourself to just one type of search, however? For that you use the CTRL-X 
+<br>command.When you type CTRL-X, you enter the CTRL-X submode.You can then fine-
+<br>tune your search using one of the commands: 
+<br>
+<br>CTRL-D 
+<br>
+<br>Macro definitions 
+<br>
+<br>CTRL-F 
+<br>
+<br>Filenames 
+<br>
+<br>CTRL-K 
+<br>
+<br>Dictionary 
+<br>
+<br>CTRL-I 
+<br>
+<br>Current files and #included files 
+<br>CTRL-L 
+<br>
+<br>
+<br>Whole lines 
+<br>
+<br>CTRL-] 
+<br>
+<br>Tags 
+<br>
+<br>CTRL-P 
+<br>
+<br>Same as CTRL-P without the CTRL-X (find previous match) 
+<br>CTRL-N 
+<br>
+<br>Same as CTRL-N without the CTRL-X (find next match) 
+<br>
+<br>The CTRL-X CTRL-D command searches for a #define macro definition. It will search 
+<br>included files as well. After typing this command, you can type CTRL-N to search for 
+<br>the next definition and CTRL-P for the previous. 
+<br>
+<br>Take a look at how this works on the following test file. 
+<br>
+<br>
+<br>Automatic Completion Details 129 
+<br>
+<br>File include.h 
+<br>
+<br>#define MAX(x, y) ((x) < (y) ? (y) : (x)) 
+<br>#define MIN(x, y) ((x) < (y) ? (x) : (y)) 
+<br>int sum(int i1, int i2) 
+<br>{return(i1+i2);} 
+<br>
+<br>
+<br>File main.c 
+<br>
+<br>#include “include.h” 
+<br>#define MORE “/usr/ucb/more” 
+<br>
+<br>
+<br>You can start by editing main.c. If you type CTRL-X, you enter CTRL-X mode.The 
+<br>editor now displays a mini-prompt at the bottom of the screen (see Figure 12.1). 
+<br>
+<br>Suppose that you want to look for a macro definition.You would now type CTRL-D. 
+<br>The screen briefly displays the fact that there are three matches, and then displays a 
+<br>
+<br>At this point, CTRL-N searches for the next match (and CTRL-P searches for the 
+<br>previous one).The CTRL-D key acts just like CTRL-P. Using these keys, you can cycle 
+<br>through the list of definitions until you find the one that you want. 
+<br>
+<br>Tag Search 
+<br>
+<br>The CTRL-X CTRL-] searches for the next tag. A tag is a C function definition.The 
+<br>program ctags generates a list of C function definitions (tags) and stores them in the 
+<br>tags file.We have generated our tags file using the following command: 
+<br>
+<br>$ ctags *.c *.h 
+<br>
+<br>Now when we enter CTRL-X CTRL-] in insert mode, we get what is shown in 
+<br>Figure 12.3. 
+<br>
+<br>#include “include.h” 
+<br>#define MORE “/usr/ucb/more” 
+<br>
+<br>
+<br>~ 
+<br>~ 
+<br>~ 
+<br>–– ^X mode (^E/^Y/^L/^]/^F/^I/^K/^D/^N/^P) –– 
+<br>
+<br>Figure 12.1 CTRL-X mode. 
+<br>
+<br>#include “include.h” 
+<br>#define MORE “/usr/ucb/more” 
+<br>MAX 
+<br>
+<br>
+<br>~ 
+<br>~ 
+<br>~ 
+<br>–– Definition completion (^D/^N/^P) –– 
+<br>
+<br>
+<br>Figure 12.2 CTRL-X CTRL-D. 
+<br>
+<br>
+<h3>
+130 Chapter 12 Automatic Completion 
+</h3>
+<br>
+<br>#include “include.h” 
+<br>
+<br>#define MORE “/usr/ucb/more” 
+<br>
+<br>MORE 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>~ 
+<br>–– Tag completion (^]/^N/^P) –– 
+<br>
+<br>
+<br>Figure 12.3 CTRL-X CTRL-]. 
+<br>
+<br>The result of typing CTRL-P a couple of times is shown in Figure 12.4. 
+<br>
+<br>By default, the Vim editor just displays the name alone. If you execute the following 
+<br>command, the entire tag (the function prototype) displays: 
+<br>
+<br>:set showfulltag 
+<br>
+<br>If you repeat your matching commands with this option enabled, you get the results 
+<br>shown in Figure 12.5. 
+<br>
+<br>Finding Filenames 
+<br>
+<br>If you use the CTRL-X CTRL-F command, the Vim editor will match a filename. It scans 
+<br>the current directory for files and displays each one that matches the word in front of 
+<br>the cursor. 
+<br>
+<br>Suppose, for example, that you have the following files in the current directory: 
+<br>
+<br>main.c sub_count.c sub_done.c sub_exit.c 
+<br>
+<br>Now enter insert mode and start typing: 
+<br>
+<br>The exit code is in the file sub 
+<br>
+<br>At this point, you enter the command CTRL-X CTRL-F.The editor now completes the 
+<br>current word sub by looking at the files in the current directory.The first match is 
+<br>sub_count.c.This is not the one you want, so you match the next file by typing CTRL-N. 
+<br>
+<br>This match is sub_done.c.Typing CTRL-N again takes you to sub_exit.c. 
+<br>
+<br>#include “include.h” 
+<br>
+<br>#define MORE “/usr/ucb/more” 
+<br>
+<br>sum 
+<br>
+<br>~ 
+<br>~ 
+<br>~ 
+<br>–– Tag completion (^]/^N/^P) –– 
+<br>
+<br>
+<br>Figure 12.4 Finding previous completions. 
+<br>
+<br>#include “include.h” 
+<br>
+<br>#define MORE “/usr/ucb/more” 
+<br>
+<br>int sum(int i1, int i2) 
+<br>
+<br>~ 
+<br>~ 
+<br>~ 
+<br>–– Tag completion (^]/^N/^P) –– 
+<br>
+<br>
+<br>Figure 12.5 The results. 
+<br>
+<br>
+<br>Automatic Completion Details 131 
+<br>
+<br>The results: 
+<br>The exit code is in the file sub_exit.c 
+<br>
+<br>
+<br>Line Mode 
+<br>
+<br>All the commands discussed so far work on words only.The CTRL-X CTRL-L command 
+<br>works on lines. If you enter CTRL-X CTRL-L in the example, for instance, you get the 
+<br>results shown in Figure 12.6. 
+<br>
+<br>You can now use CTRL-N and CTRL-P to go up and down lines. 
+<br>
+<br>#include “include.h” 
+<br>
+<br>#define MORE “/usr/ucb/more” 
+<br>
+<br>#define MORE “/usr/ucb/more” 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>~ 
+<br>–– Whole line completion (^L/^N/^P) –– 
+<br>
+<br>
+<br>Figure 12.6 
+<br>
+<br>CTRL-X CTRL-L. 
+<br>
+<br>Adjusting the Screen 
+<br>
+<br>There are two more CTRL-X commands which suprisingly don’t do completion. 
+<br>
+<br>After typing CTRL-X, you can move the screen up and down a little.The CTRL-Y 
+<br>command scrolls down, whereas the CTRL-E scrolls up. 
+<br>
+<br>
+<br>Autocommands 
+<br>
+<br>ONE OF THE NICE ATTRIBUTES OF THE Vim editor is its flexibility. One of the fea
+<br>
+<br>
+<br>tures that makes it so flexible is the autocommand. An autocommand is a command executed 
+<br>automatically in response to some event, such as a file being read or written or a 
+<br>buffer change. 
+<br>
+<br>Through the use of autocommands, for example, you can train Vim to edit compressed 
+<br>files. (You define an autocommand that uncompresses the file on read and 
+<br>another one to compress the file on write. See the file 
+<br>$VIMRUNTIME/vimrc_example.vim in your VIM installation.) 
+<br>
+<br>In this chapter, you learn about the following: 
+<br>
+<br>
+<br>Basic autocommands 
+<br>
+<br>
+<br>Autocommand groups 
+<br>
+<br>
+<br>Listing and removing autocommands 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+134 Chapter 13 Autocommands 
+</h3>
+<br>
+<br>Basic Autocommands 
+<br>
+<br>Suppose you want to put a date stamp on the end of a file every time it is written. 
+<br>One way you could do this is to define a function: 
+<br>:function DateInsert() 
+<br>: $read !date “ Insert the date at the end ($) 
+<br>: “ of the file. 
+<br>:endfunction 
+<br>
+<br>Now when you want to write the file all you have to do is to call this function: 
+<br>:call DateInsert() 
+<br>
+<br>Then you write the file. 
+<br>That may be a little difficult, so you can map this to a key: 
+<br>:map <F12> :call DateInsert()<CR> \| :write<CR> 
+<br>
+<br>This makes things “easy” because now you just have to press <F12> every time you 
+<br>want to write the file. 
+<br>
+<br>If you forget, however, and use the normal Vim file writing commands, you screw 
+<br>things up. It would be nice if you could do things automatically.That is where auto-
+<br>commands come in. 
+<br>
+<br>The command 
+<br>:autocmd FileWritePre * :call DateInsert()<CR> 
+<br>
+<br>
+<br>causes the command :call DateInsert() to be executed for all files (*) just before 
+<br>writing the file (FileWritePre).You do not need to put in a :write command because 
+<br>this autocommand is executed just before each :write. In other words, with this 
+<br>command enabled, when you do a :write, Vim checks for any FileWritePre 
+<br>autocommands and executes them, and then it performs the :write. 
+<br>
+<br>The general form of the :autocmd command is as follows: 
+<br>:autocmd group events file_pattern nested command 
+<br>
+<br>The group name is optional. It is used in managing and calling the commands (more 
+<br>on this later).The events parameter is a list of events (comma separated) that trigger the 
+<br>command. (A complete list of events appears later in this chapter.) The file_pattern is a 
+<br>filename (including wildcards).The nested flag allows for nesting of autocommands, 
+<br>and finally, the command is the command to be executed. 
+<br>
+<br>Groups 
+<br>
+<br>The :augroup command starts the definition of a group of autocommands.The group 
+<br>:augroup cprograms 
+<br>: autocmd FileReadPost *.c :set cindent 
+<br>: autocmd FileReadPost *.cpp :set cindent 
+<br>:augroup END 
+<br>
+<br>
+<br>Basic Autocommands 135 
+<br>
+<br>Because the :autocmd definitions are inside the scope :augroup, they are put in the 
+<br>cprograms group. 
+<br>
+<br>The commands in this group are executed after reading a file that ends in .c or 
+<br>.cpp. If you want to add another command to this group for headers, you can use the 
+<br>:augroup command or just include a group name in your specification: 
+<br>
+<br>:autocmd cprograms FileReadPost *.h :set cindent 
+<br>
+<br>Now suppose you are editing a file called sam.cx that you would like treated as a C 
+<br>program.You can tell Vim to go through all the cprograms autogroup commands and 
+<br>execute the ones that match *.c for the FileReadPost event.The command to do this 
+<br>is as follows: 
+<br>
+<br>:doautocmd cprograms FileReadPost foo.c 
+<br>
+<br>The general form of the :doautocmd command is this: 
+<br>:doautocmd group event file_name 
+<br>
+<br>This executes the autocommand group pretending that the current file is file_name 
+<br>rather than the current one. If the group is omitted, all groups are used and if file_name 
+<br>is left off, the current filename is used.The event must be specified and is the event 
+<br>that Vim pretends has just happened. 
+<br>
+<br>The following command does the same thing as :doautocmd except it executes 
+<br>once for each buffer: 
+<br>
+<br>:doautoall group event file_name 
+<br>
+<br>(Note: Do not use this to trigger autocommands that switch buffers, create buffers, or 
+<br>delete them. In other words, when using this command, leave the buffers alone.) 
+<br>
+<br>Events 
+<br>
+<br>You can use the following events to trigger an autocommand: 
+<br>BufNewFile Triggered when editing a file that does 
+<br>BufReadPre BufReadPost Triggered before (BifReadPre) / after 
+<br>(BufReadPost) reading a buffer 
+<br>BufRead 
+<br>
+<br>Alias for BufReadPost. 
+<br>BufFilePre BufFilePost Before / after changing the name of a 
+<br>buffer with the :file command. 
+<br>FileReadPre FileReadPost Before / after reading a file with the 
+<br>:read command. For FileReadPost, the 
+<br>marks ‘[ and ‘] will be the beginning 
+<br>and end of the text read in. 
+<br>FilterReadPre FilterReadPost Before / after reading a file with a filter 
+<br>command. 
+<br>
+<br>
+<br>
+<h3>
+136 Chapter 13 Autocommands 
+</h3>
+<br>FileType 
+<br>Syntax 
+<br>StdinReadPre 
+<br>BufWritePre 
+<br>StdReadPost 
+<br>BufWritePost 
+<br>When the filetype option is set. 
+<br>When the syntax option is set. 
+<br>Before / after reading from the standard 
+<br>input. (The editor must have been 
+<br>started as vim–.) 
+<br>Before / after writing the entire buffer 
+<br>to a file. 
+<br>BufWrite Alias for BufWritePre. 
+<br>FileWritePre FileWritePost Before / after writing part of a buffer 
+<br>to a file. 
+<br>FileAppendPre FileAppendPost Before / after appending to a file. 
+<br>FilterWritePre FilterWritePost Before / after writing a file for a filter 
+<br>command. 
+<br>FileChangedShell 
+<br>FocusGained FocusLost 
+<br>This is triggered when Vim runs a shell 
+<br>command and then notices that the 
+<br>modification time of the file has 
+<br>changed. 
+<br>Triggered when Vim gets or loses input 
+<br>focus.This means that Vim is running 
+<br>in GUI mode and becomes the current 
+<br>window or something else becomes the 
+<br>current window. 
+<br>CursorHold Occurs after the user pauses typing for 
+<br>more than the timeout specified by the 
+<br>updatetime option. 
+<br>BufEnter BufLeave When a buffer is entered or left. 
+<br>BufUnload Triggered just before a buffer is 
+<br>unloaded. 
+<br>BufCreate BufDelete Just after a buffer is created or just 
+<br>before it is deleted. 
+<br>WinEnter 
+<br>GuiEnter 
+<br>VimEnter 
+<br>WinLeave Going into or out of a window. 
+<br>The GUI just started. 
+<br>The Vim editor just started and the 
+<br>initialization files have been read. 
+<br>VimLeavePre The Vim editor is exiting, but has not 
+<br>written the .viminfo file. 
+<br>VimLeave The Vim editor is exiting, and the 
+<br>.viminfo file has been written. 
+<br>
+<br>
+<br>Basic Autocommands 137 
+<br>
+<br>FileEncoding The fileencoding option has just been 
+<br>set. 
+<br>TermChanged The term option changed. 
+<br>
+<br>User 
+<br>Not a real event, but used as a fake 
+<br>event for use with :doautocmd. 
+<br>
+<br>When writing a file, Vim triggers only one pair of the following events: 
+<br>
+<br>BufWritePre BufWritePost 
+<br>
+<br>FilterWritePre FilterWritePost 
+<br>
+<br>FileAppendPre FileAppendPost 
+<br>
+<br>FileWritePre FileWritePost 
+<br>
+<br>When reading a file, one of the following set of events will be triggered: 
+<br>
+<br>BufNewFile 
+<br>
+<br>BufReadPre BufReadPost 
+<br>
+<br>FilterReadPre FilterReadPost 
+<br>
+<br>FileReadPre FileReadPost 
+<br>
+<br>File Patterns 
+<br>
+<br>The filename pattern matching uses the UNIX standard system.The following list 
+<br>identifies the special characters in the file matching patterns. 
+<br>
+<br>* Match any characters, any length 
+<br>? Match any single character 
+<br>, Separates alternate patterns 
+<br>one,two,three 
+<br>
+<br>Match the string one, two, or three. 
+<br>\? The ?. 
+<br>
+<br>
+<br>\, The ,. 
+<br>\character Treat character as a search pattern character. For example, 
+<br>a\+ matches a, aa, aaa, and so on. 
+<br>
+<br>Nesting 
+<br>
+<br>Generally, commands executed as the result of an autocommand event will not trigger 
+<br>any new events. If you read a file in response to a Syntax C, for example, it will not 
+<br>trigger a FileReadPre event. If you include the keyword nested, these events will be 
+<br>triggered. For example: 
+<br>
+<br>:autocmd FileChangedShell *.c nested e! 
+<br>
+<br>
+<h3>
+138 Chapter 13 Autocommands 
+</h3>
+<br>
+<br>Listing Autocommands 
+<br>
+<br>The following command lists all the autocommands: 
+<br>
+<br>:autocmd 
+<br>
+<br>For example: 
+<br>
+<br>:autocmd 
+<br>—-Auto-Commands —filetype 
+<br>BufEnter 
+<br>
+<br>
+<br>*.xpm if getline(1) =~ “XPM2”|set ft=xpm2|endif 
+<br>
+<br>*.xpm2 set ft=xpm2 
+<br>... 
+<br>FileType 
+<br>
+<br>
+<br>* set formatoptions=tcql nocindent comments& 
+<br>c set formatoptions=croql cindent 
+<br>... 
+<br>filetype StdinReadPost 
+<br>
+<br>
+<br>* if !did_filetype()|so scripts.vim|endif 
+<br>Syntax 
+<br>OFF syn clear 
+<br>abc so $VIMRUNTIME/syntax/abc.vim 
+<br>
+<br>
+<br>(Listing truncated.) 
+<br>
+<br>From this, you can see a number of commands under the group filetype.These 
+<br>
+<br>command are triggered by the BufEnter and StdinReadPost events.There are also a 
+<br>
+<br>couple of commands with no group name triggered by the FileType event. 
+<br>
+<br>If you want a subset of all the commands, try the following: 
+<br>
+<br>:autocmd group event pattern 
+<br>
+<br>If group is specified, only the commands for that group are listed. Event can be one of 
+<br>the previously defined events or * for all events.The pattern specifies an optional file 
+<br>matching pattern. Only the commands that match are listed. 
+<br>
+<br>For example: 
+<br>
+<br>:autocmd filetype BufEnter *.xpm 
+<br>—-Auto-Commands —filetype 
+<br>BufEnter 
+<br>
+<br>
+<br>*.xpm if getline(1) =~ “XPM2”|set ft=xpm2|endif 
+<br>
+<br>Removing Commands 
+<br>
+<br>The command :autocmd! removes autocommands.The matching rules are the same 
+<br>for listing commands, so the following removes all the autocommands: 
+<br>
+<br>:autocmd! 
+<br>
+<br>To remove the commands for a specific group, execute this command: 
+<br>
+<br>:autocmd! group 
+<br>
+<br>
+<br>Ignoring Events 139 
+<br>
+<br>You can also specify events and patterns for the group, as follows: 
+<br>:autocmd! group event pattern 
+<br>
+<br>Again, event can be * to match all events. 
+<br>
+<br>You can use the :autocmd! command to remove existing commands and define a 
+<br>
+<br>:autocmd! group event pattern nested command 
+<br>
+<br>This is the equivalent of the following: 
+<br>
+<br>:autocmd! group event pattern 
+<br>
+<br>:autocmd group event pattern nested command 
+<br>
+<br>Ignoring Events 
+<br>
+<br>At times, you will not want to trigger an autocommand.The eventignore option contains 
+<br>a list of events that will be totally ignored. For example, the following causes all 
+<br>Window Enter and Leave events to ignored: 
+<br>
+<br>:set eventignore=WinEnter,WinLeave 
+<br>
+<br>To ignore all events, use the following command: 
+<br>:set eventignore=all 
+<br>
+<br>
+<br>File Recovery and 
+<br>Command-Line Arguments 
+<br>
+<br>THE VIM EDITOR IS DESIGNED TO SURVIVE system crashes with minimum losses of 
+<br>
+<br>data.This chapter discusses how to use Vim’s crash recovery procedures. 
+<br>In this chapter, you learn about the following: 
+<br>
+<br>
+<br>Command-line arguments for file recovery 
+<br>
+<br>
+<br>Encryption 
+<br>
+<br>
+<br>Batch files and scripts 
+<br>
+<br>
+<br>Additional command-line arguments 
+<br>
+<br>
+<br>Backup file options 
+<br>
+<br>
+<br>How to do file recovery 
+<br>
+<br>
+<br>Advanced swap file management 
+<br>
+<br>
+<p>
+</p>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+142 Chapter 14 File Recovery and Command-Line Arguments 
+</h3>
+<br>
+<br>Command-Line Arguments 
+<br>
+<br>There are several useful command-line arguments.The most useful is --help, which 
+<br>displays a short help screen listing all the command-line arguments: 
+<br>$ vim --help 
+<br>VIM -Vi IMproved 5.6 (2000 Jan 16, compiled Jan 20 2000 17:35:46) 
+<br>
+<br>usage: vim [options] [file ..] 
+<br>or: vim [options] or: 
+<br>vim [options] -t tag 
+<br>or: vim [options] -q [errorfile] 
+<br>edit specified file(s) 
+<br>read text from stdin 
+<br>edit file where tag is defined 
+<br>edit file with first error 
+<br>Options: 
+<br>
+<br>--End of options 
+<br>-g Run using GUI (like “gvim”) 
+<br>— lots of other help — 
+<br>
+<br>To find out which version of Vim you have as well as to list the compilation options, 
+<br>use the following command: 
+<br>$ vim --version 
+<br>VIM -Vi IMproved 5.6 (2000 Jan 16, compiled Jan 20 2000 17:35:46) 
+<br>Compiled by oualline@www.oualline.com, with (+) or without (-): 
+<br>+autocmd +browse +builtin_terms +byte_offset +cindent +cmdline_compl 
+<br>+cmdline_info +comments +cryptv -cscope +dialog_con_gui 
+<br>+digraphs -emacs_tags +eval +ex_extra +extra_search 
+<br>-farsi +file_in_path -osfiletype +find_in_path +fork() +GUI_GTK 
+<br>-hangul_input +insert_expand -langmap +linebreak +lispindent 
+<br>+menu +mksession +modify_fname +mouse -mouse_dec -mouse_gpm 
+<br>-mouse_netterm +mouse_xterm -multi_byte -perl +quickfix -python 
+<br>-rightleft +scrollbind +smartindent -sniff +statusline +syntax 
+<br>+tag_binary +tag_old_static -tag_any_white -tcl +terminfo +textobjects 
+<br>+title +user_commands +visualextra +viminfo +wildignore +wildmenu 
+<br>+writebackup +X11 -xfontset -xim +xterm_clipboard -xterm_save 
+<br>system vimrc file: “$VIM/vimrc” 
+<br>user vimrc file: “$HOME/.vimrc” 
+<br>user exrc file: “$HOME/.exrc” 
+<br>system gvimrc file: “$VIM/gvimrc” 
+<br>user gvimrc file: “$HOME/.gvimrc” 
+<br>system menu file: “$VIMRUNTIME/menu.vim” 
+<br>fall-back for $VIM: “/usr/local/share/vim” 
+<br>Compilation: gcc -c -I. -Iproto -DHAVE_CONFIG_H -DUSE_GUI_GTK 
+<br>-I/usr/X11R6/include -I/usr/lib/glib/include -g -O2 -Wall 
+<br>-I/usr/X11R6/include 
+<br>Linking: gcc -o vim -L/usr/lib -L/usr/X11R6/lib -lgtk -lgdk -rdynamic 
+<br>-lgmodule -lglib -ldl -lXext -lX11 -lm -L/usr/X11R6/lib -lXt -lX11 
+<br>-lncurses 
+<br>
+<br>To view a file, you can “edit” it in read-only mode by using the -R command: 
+<br>$ vim -R file.txt 
+<br>
+<br>On most systems, the following command does the same thing: 
+<br>$ view file.txt 
+<br>
+<br>
+<br>Inserting Registers 143 
+<br>
+<br>Encryption 
+<br>
+<br>The -x argument tells Vim to encrypt the file. For example, create a file that contains 
+<br>something you want to keep secret: 
+<br>
+<br>$ vim -x secret.txt 
+<br>
+<br>The editor now prompts you for a key used for encrypting and decrypting the file: 
+<br>Enter encryption key: 
+<br>
+<br>You can now edit this file normally and put in all your secrets.When you finish 
+<br>editing the file and tell Vim to exit, the file is encrypted and written. 
+<br>
+<br>If you try to print this file using the cat or type commands, all you get is garbage. 
+<br>
+<br>Switching Between Encrypted and Unencrypted Modes 
+<br>
+<br>The option 'key' contains your encryption key. If you set this option to the empty 
+<br>string (“”), you turn off encryption: 
+<br>
+<br>:set key= 
+<br>
+<br>If you set this to a password, you turn on encryption. For example: 
+<br>
+<br>:set key=secret (Not a good idea!) 
+<br>
+<br>Setting the encryption key this way is not a good idea because the password appears in 
+<br>the clear. Anyone shoulder surfing can read your password. 
+<br>
+<br>To avoid this problem, the :X command was created. It asks you for an encryption 
+<br>key and sets the key option to whatever you type in. (Note that the password will not 
+<br>be echoed. Instead * is printed for each character entered.) 
+<br>
+<br>:X 
+<br>
+<br>Enter encryption key: 
+<br>
+<br>Limits on Encryption 
+<br>
+<br>The encryption algorithm used by Vim is weak. It is good enough to keep out the 
+<br>casual prowler, but not good enough keep out a cryptology expert with lots of time 
+<br>on his hands. Also you should be aware that the swap file is not encrypted; so while 
+<br>you are editing, people with superuser privileges can read the unencrypted text from 
+<br>this file. 
+<br>
+<br>One way to avoid letting people read your swap file is to avoid using one. If the -n 
+<br>argument is supplied on the command line, no swap file is used (instead, Vim puts 
+<br>everything in memory). For example, to edit the encrypted file file.txt and to avoid 
+<br>swap file problems use the following command: 
+<br>
+<br>$ vim -x -n file.txt 
+<br>
+<br>Note 
+<br>
+<br>If you use the –n argument, file recovery is impossible. 
+<br>
+<br>
+<h3>
+144 Chapter 14 File Recovery and Command-Line Arguments 
+</h3>
+<br>
+<br>Also while the file is in memory, it is in plain text. Anyone with privilege can look in 
+<br>the editor’s memory and discover the contents of the file. If you use a session file, be 
+<br>aware that the contents of text registers are written out in the clear as well. 
+<br>
+<br>If you really want to secure the contents of a file, edit it only on a portable computer 
+<br>locked up in a big safe when not in use. 
+<br>
+<br>Executing Vim in a Script or Batch File 
+<br>
+<br>Suppose you have a lot of files in which you need to change the string —person— to 
+<br>Jones. How do you do that? One way is to do a lot of typing.The other is to write a 
+<br>shell script or batch file to do the work. 
+<br>
+<br>The Vim editor does a superb job as a screen-oriented editor when started in 
+<br>commented command files; so here you will use ex mode instead.This mode gives 
+<br>you a nice command-line interface that makes it easy to put into a batch file. 
+<br>
+<br>The ex mode commands you need are as follows: 
+<br>
+<br>:%s/—person—/Jones/g 
+<br>:write 
+<br>:quit 
+<br>
+<br>You put these commands in the file change.vim. Now to run the editor in batch 
+<br>mode, use this command: 
+<br>
+<br>$ vim -es file.txt <change.vim 
+<br>
+<br>This runs the Vim editor in ex mode (-e flag) on the file file.txt and reads from the 
+<br>file change.vim.The -s flag tells Vim to operate in silent mode. In other words, do not 
+<br>keep outputting the : prompt, or any other prompt for that matter. 
+<br>
+<br>Additional Command-Line Arguments 
+<br>
+<br>A number of command-line arguments are designed to control the behavior of the 
+<br>editor. For example, you may want to restrict what you can do in Vim. The arguments 
+<br>to support this are as follows: 
+<br>
+<br>-R Open the file for read-only. 
+<br>-m Modifications are not allowed.This argument is more of a recommendation 
+<br>than a restriction because all it does is set the 'nowrite' option. It does not 
+<br>prevent you from setting the 'write' option and modifying the file. 
+<br>-Z Restricted mode. This prevents the user from using :shell or other commands 
+<br>to run an external shell. It does not prevent the user from trying to 
+<br>edit another file using the :vi file command. 
+<br>
+<br>
+<br>Additional Command-Line Arguments 145 
+<br>
+<br>The other arguments enable you to choose which initialization files you read: 
+<br>-u file Use file rather than .vimrc for initialization. If the filename is NONE, no 
+<br>initialization file is used. 
+<br>-U file Use file rather than .gvimrc for initialization. If the filename is NONE, no 
+<br>initialization file is used. 
+<br>
+<br>-i file Use file rather than the .viminfo file. 
+<br>
+<br>In UNIX, the Vim editor is actually one file with several different names (links).The 
+<br>editor starts in different modes, depending on with which name it is started.The 
+<br>
+<br>vim Start Vim in console mode. (Edits inside the current window.) 
+<br>gvim 
+<br>
+<br>
+<br>Start Vim in GUI mode. (The editor creates its own window for editing.) 
+<br>
+<br>ex 
+<br>
+<br>Start in ex mode. 
+<br>view Start in normal mode, read-only. 
+<br>gview Start in GUI mode, read-only. 
+<br>rvim Start in console mode, restricted. 
+<br>rview Start in console mode, read-only, restricted. 
+<br>
+<br>
+<br>rgvim 
+<br>
+<br>Start in GUI mode, restricted. 
+<br>rgview Start in GUI mode, read-only, restricted. 
+<br>vi Linux only. Alias for vim. 
+<br>
+<br>
+<br>You can use command-line arguments to set the initial mode as well: 
+<br>-g Start Vim in GUI mode (same as using the command gvim). 
+<br>-v 
+<br>
+<br>Start Vim in visual mode (same as using the command vim). 
+<br>-e 
+<br>
+<br>
+<br>Start Vim in ex mode (same as using the command ex on most systems). 
+<br>
+<br>You can use a number of command-line arguments to debug and test, including the 
+<br>following: 
+<br>
+<br>-Vnumber 
+<br>Display extra messages letting you know what is going inside the 
+<br>editor.The higher the number, the more output you get.This is used 
+<br>for debugging your Vim scripts. 
+<br>
+<br>
+<br>-f 
+<br>Foreground. Do not start a GUI in the background.This proves 
+<br>useful when gvim is run for another program that wants to wait until 
+<br>the program finishes. It is also extremely useful for debugging. 
+<br>
+<br>
+<br>-w script 
+<br>Write all characters entered by the user into the script file. If the 
+<br>script file already exists, it is appended to. 
+<br>
+<br>
+<br>-W script Like -w, but overwrite any existing data. 
+<br>-s script Play back a script recorded with -w. 
+<br>
+<br>
+<br>
+<br>146 
+<br><h3>
+<h3>
+Chapter 14 File Recovery and Command-Line Arguments 
+</h3>
+<br></h3>
+<br>
+<br>-T terminal 
+<br>Set the terminal type. On UNIX, this overrides the value of the 
+<br>$TERM environment variable. (Of course, if the $TERM environment 
+<br>is wrong, lots of other programs will be screwed up as well.) 
+<br>
+<br>You also have compatibility arguments.These are of use only if you really want Vim to 
+<br>act like Vi. 
+<br>-N Non-compatible mode.This argument makes Vim act like Vim rather than 
+<br>Vi. This argument is set by default when a .vimrc file is present. 
+<br>-C Compatible.This turns off many of the Vim special features and makes the 
+<br>editor look as much like Vi as possible. 
+<br>
+<br>-l 
+<br>Lisp mode.This mode is an obsolete holdover from the old Vi days. It sets 
+<br>the 'lisp' and 'showmatch' options.The Vim file-type-related commands do 
+<br>a much better job of handling Lisp programs, and they do it automatically. 
+<br>
+<br>Finally, you have a few arguments that cannot be classified any other way: 
+<br>-d device Amiga only. Open the given device for editing. 
+<br>
+<br>-b 
+<br>Binary mode. Sets noexpandtab, textwidth=0, nomodeline, and 
+<br>binary. 
+<br>
+<br>Foreign Languages 
+<br>
+<br>The Vim editor can handle a variety of languages. Unfortunately, to edit these languages, 
+<br>you do not only need a Vim editor with the language features compiled in, but 
+<br>you also need special fonts and other operating system support.This means that unfortunately 
+<br>foreign language support is beyond the scope of this book. 
+<br>
+<br>But the command-line arguments for the foreign languages are as follows: 
+<br>
+<br>-F 
+<br>
+<br>Farsi 
+<br>
+<br>-H 
+<br>
+<br>Hebrew 
+<br>
+<br>Backup Files 
+<br>
+<br>Usually Vim does not produce a backup file. If you want to have one, all you need to 
+<br>do is execute the following command: 
+<br>:set backup 
+<br>
+<br>The name of the backup file is the original file with a “~” added to the end. If your 
+<br>file is named data.txt, for example, the backup file name is data.txt~. 
+<br>If you do not like the fact that the backup files end with ~, you can change the 
+<br>extensions by using the following: 
+<br>:set backupext=string 
+<br>
+<br>If 'backupext' is .bak, data.txt is backed up to data.txt.bak. 
+<br>
+<br>
+<br>Backup Files 147 
+<br>
+<br>The Vim editor goes you one better when it comes to the backup file. If you set 
+<br>the 'patchmode' option, Vim backs up the file being edited to a file with the same 
+<br>file does not exist. 
+<br>
+<br>For example, suppose you execute this command: 
+<br>
+<br>:set patchmode=.org 
+<br>
+<br>Now you edit the existing file data.txt for the first time.When you exit Vim checks 
+<br>to see whether the file data.txt.org exists. It does not, so the old file is saved under 
+<br>that name.The next time you edit, the file does exist; so the backup is written to 
+<br>data.txt~.The file data.txt.org is not used from now on. Instead, all backups will go 
+<br>to data.txt~. 
+<br>
+<br>Usually Vim puts the backup file in the same directory as the file itself.You can 
+<br>change this with the 'backupdir' option. For example, the following causes all backup 
+<br>files to be put in the ~/tmp directory: 
+<br>
+<br>:set backupdir=~/tmp/ 
+<br>
+<br>This can create problems if you edit files of the same name in different directories. 
+<br>That is because their backup files will all go to the ~/tmp directory and the name collision 
+<br>will cause the old backup files to disappear. 
+<br>
+<br>The 'backupdir' option can actually take a series of directories, separated by 
+<br>comma.The editor puts the backup file in the first directory where a backup file can be 
+<br>created. 
+<br>
+<br>Controlling How the File Is Written 
+<br>
+<br>Generally when Vim writes a file, the following operations are performed: 
+<br>
+<br>1. 
+<br>Vim checks to see whether the file has been changed outside of Vim. For example, 
+<br>someone could have overwritten the file with a new one. If this happens, a 
+<br>warning is issued and the editor asks if you want to continue. 
+<br>2. 
+<br>If the 'writebackup' or 'backup' option is set, any old backup file is removed. 
+<br>The current file is then copied to the backup file. 
+<br>3. 
+<br>The buffer is written out to the file. 
+<br>4. 
+<br>If the 'patchmode' option is set and no patch file exists, the backup file is 
+<br>renamed to become the patch file. 
+<br>5. 
+<br>If the 'backup' option is not set, and 'writebackup' is set, remove the backup 
+<br>file. 
+<br>The reason that Vim overwrites the existing file is to preserve any hard links that you 
+<br>might have on a UNIX system. On non-UNIX systems the backup is created by 
+<br>renaming the original file instead of making a copy. 
+<br>
+<br>Note 
+<br>
+<br>If you set the 'nobackup' and 'nowritebackup' options, Vim just overwrites the existing file. This 
+<br>can cause loss of data if the disk fills up during the file update. 
+<br>
+<br>
+<br>
+<h3>
+148 Chapter 14 File Recovery and Command-Line Arguments 
+</h3>
+<br>
+<br>By default, the 'writebackup' option is set.This means that the system Vim uses to 
+<br>write a file makes it very difficult to lose data. 
+<br>
+<br>By using this method, there is no chance you will lose your file if the disk fills up. 
+<br>You may not be able to write out the new version of the file, but at least you do not 
+<br>lose the old one. 
+<br>
+<br>Basic File Recovery 
+<br>
+<br>Suppose that you want to edit a file called sample.txt.You start Vim with the following 
+<br>command: 
+<br>
+<br>$ gvim sample.txt 
+<br>
+<br>The editor now creates a swap file to temporarily hold the changes you make until 
+<br>you write the file.When you finish editing, the swap file is deleted. 
+<br>
+<br>If the editor is aborted during mid-edit, however, it does not get a chance to delete 
+<br>the swap file.This means that if you are in the middle of Vim sessions and your system 
+<br>locks, forcing a reboot, the swap file will not be deleted. 
+<br>
+<br>When Vim first starts editing a file, it checks for a swap file. If it finds one, that 
+<br>means that either another editing session is in progress or another editing session was 
+<br>started and the editor got aborted.Therefore, Vim issues a warning (see Figure 14.1), 
+<br>and gives you a chance to decide what to do. 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>
+<br>~ 
+<br>
+<br>ATTENTION 
+<br>
+<br>Found a swap file by the name ".sample.txt.swp" 
+<br>
+<br>dated: Thu Feb 17 22:44:00 2000 
+<br>
+<br>owned by: sdo 
+<br>
+<br>file name: /tmp/sample.txt 
+<br>
+<br>modified: no 
+<br>
+<br>host name: www.oualline.com 
+<br>
+<br>user name: sdo 
+<br>
+<br>process ID: 8449 (still running) 
+<br>
+<br>While opening file "sample.txt" 
+<br>
+<br>dates: Thu Feb 17 22:45:33 2000 
+<br>
+<br>(1) 
+<br>Another program may be editing the same file. 
+<br>If this is the case, be careful not to end up with two 
+<br>different instances of the same file when making changes. 
+<br>Quit, or continue with caution. 
+<br>(2) 
+<br>An edit session for this file crashed. 
+<br>If this is the case, use ":recover" or "vim –r sample.txt" 
+<br>to recover the changes (see ":help recovery)". 
+<br>If you did this already, delete the swap file ".sample.txt.swp" 
+<br>to avoid this message. 
+<br>Figure 14.1 File in use warning. 
+<br>
+<br>At this point, you have four options: 
+<br>
+<br>Open Read-Only 
+<br>This option causes Vim to open the file read-only.You 
+<br>should choose this option if you want to look at the file and 
+<br>there is another editing session still running. 
+<br>
+<br>
+<br>Basic File Recovery 149 
+<br>
+<br>Edit anyway A.K.A. Damn the torpedoes, full steam ahead. If you select 
+<br>this option, you can edit the file. Do not choose this option 
+<br>unless you really know what you are doing. Note that if you 
+<br>have two or more edit sessions running on a single file, the 
+<br>last session to write the file wins. 
+<br>Recover If you were editing the file and the editor got aborted due 
+<br>to a system crash or some other reason, choose this option. It 
+<br>examines the swap file for changes and attempts to restart 
+<br>you session from where you left off. It usually comes close, 
+<br>but examine your file carefully because the last few edits may 
+<br>have disappeared. 
+<br>Quit Forget about trying to change this file. 
+<br>
+<br>After selecting one of these options, you can edit normally. Be careful if you choose 
+<br>Recover, because all your changes may not have been saved. 
+<br>
+<br>Recovering from the Command Line 
+<br>
+<br>If you know the name of the file you were editing when your editing session was 
+<br>aborted, you can start Vim in recovery mode using the -r argument. If you were 
+<br>editing the file commands.c when you were rudely interrupted, for example, you can 
+<br>recover with the following command: 
+<br>
+<br>$ vim -r commands.c 
+<br>
+<br>If you want to get a list of recoverable editor sessions, use this command: 
+<br>
+<br>$ vim -r 
+<br>
+<br>This causes Vim to check for swap files in the current directory and the standard 
+<br>temporary directories. For example: 
+<br>
+<br>$ vim -r 
+<br>Swap files found: 
+<br>In current directory: 
+<br>--none -In 
+<br>directory ~/tmp: 
+<br>
+<br>--none -In 
+<br>directory /var/tmp: 
+<br>
+<br>--none -In 
+<br>directory /tmp: 
+<br>
+<br>1. 
+<br>.script.txt.swp 
+<br>dated: Fri Feb 18 19:48:46 2000 
+<br>owned by: sdo 
+<br>file name: /tmp/script.txt 
+<br>
+<br>modified: no 
+<br>host name: www.oualline.com 
+<br>user name: sdo 
+<br>process ID: 26473 (still running) 
+<br>
+<br>process number of the editor that created the swap file is 26473.The process is still 
+<br>
+<br>
+<h3>
+150 Chapter 14 File Recovery and Command-Line Arguments 
+</h3>
+<br>
+<br>running, so you probably do not want to try to edit or recover the file using this edit 
+<br>session.You probably want to find the window for process 26473 and use it instead. 
+<br>
+<br>Several options and other commands affect file recovery. See the section “Advanced 
+<br>File Recovery” for more information. 
+<br>
+<br>Advanced Swap File Management 
+<br>
+<br>The Vim editor goes to a great deal of trouble not to overwrite any old swap files.The 
+<br>first time a file is edited, the swap file name is .file.txt.swp. If the editor is aborted 
+<br>and you start editing again, the next swap file is called .file.txt.swo, and then 
+<br>.file.txt.swn, and so on. 
+<br>
+<br>You can tell Vim to recover using a specific swap file by specifying the name of the 
+<br>swap file with the command: 
+<br>
+<br>$ vim -r file.txt.swo 
+<br>
+<br>To find out the name of the swap file you are currently using, execute the following 
+<br>command: 
+<br>
+<br>:swapname 
+<br>
+<br>This displays the name of the swap file. 
+<br>
+<br>Controlling When the Swap File Is Written 
+<br>
+<br>Usually the swap file is written every 4 seconds or when you type 200 characters. 
+<br>These values are determined by the 'updatecount' and 'updatetime' options.To 
+<br>change the amount of time Vim waits before writing the swap file to 23 seconds, for 
+<br>example, use the following command: 
+<br>
+<br>:set updatetime=23000 
+<br>
+<br>To change the number of characters you have to type before Vim writes stuff to the 
+<br>swap file to 400, for instance, use this command: 
+<br>
+<br>:set updatecount=400 
+<br>
+<br>If you change the 'updatecount' to 0, the swap file will not be written. 
+<br>
+<br>However, the decision whether to write a swap file is better controlled by the 
+<br>'swapfile' option. If you have this option set, a swap file will be created (the default): 
+<br>
+<br>:set swapfile 
+<br>
+<br>If you do not want a swap file, use the following command: 
+<br>
+<br>:set noswapfile 
+<br>
+<br>This option can be set/reset for each edited file. If you edit a huge file and don’t care 
+<br>about recovery, set 'noswapfile'. If you edit a file in another window, it will still use a 
+<br>swap file. 
+<br>
+<br>Note 
+<br>
+<br>The 'updatetime' is specified in milliseconds. 
+<br>
+<br>
+<br>Advanced Swap File Management 151 
+<br>
+<br>On UNIX and Linux, when you “write” a file, the data usually goes into a memory 
+<br>buffer and is actually written to the disk when the operating system “thinks” it is 
+<br>appropriate.This usually takes only a few seconds. If you want to make sure that the 
+<br>data gets to disk, however, you want to use the following command: 
+<br>
+<br>:set swapsync 
+<br>
+<br>This command tells Vim to perform a sync operation after each writing of the swap 
+<br>file to force the data onto the disk.The 'swapsync' option can be empty, 'fsync', or 
+<br>'sync', depending on what system call you want to do the writing. 
+<br>
+<br>Controlling Where the Swap File Is Written 
+<br>
+<br>Generally, Vim writes the swap file in the same directory as the file itself.You can 
+<br>change this by using the 'directory' option. For example, the following tells Vim to 
+<br>put all swap files in /tmp: 
+<br>
+<br>:set directory=/tmp (Not a good idea) 
+<br>
+<br>This is not a good idea because if you try to edit the file readme.txt in two different 
+<br>directories at the same time, you encounter a swap file collision. 
+<br>
+<br>You can set the 'directory' option to a list of directories separated by a comma 
+<br>(,). It is highly recommended that you use a period (.) as the first item it this list.The 
+<br>swap file will be written to the first directory in the list in which Vim can write the 
+<br>file. For example, the following tells Vim to write the swap file in the current directory, 
+<br>and then to try /tmp: 
+<br>
+<br>:set directory=.,/tmp 
+<br>
+<br>Saving Your Work 
+<br>
+<br>Suppose you have made a bunch of changes and you want to make sure they stick 
+<br>around even if Vim or the operating system crashes. One way to save your changes is 
+<br>to use the following command to write out the file: 
+<br>
+<br>:write 
+<br>
+<br>However, this command overwrites your existing file with all your changes. 
+<br>
+<br>The following is a related command: 
+<br>
+<br>:preserve 
+<br>
+<br>This command writes all the edits to the swap file.The original file remains 
+<br>unchanged and will not be changed until you do a :write or exit with ZZ. If the 
+<br>system crashes, you can use the swap file to recover all your edits. Note that after a 
+<br>:preserve, you can recover even if the original file is lost.Without this command, you 
+<br>
+<br>
+<h3>
+152 Chapter 14 File Recovery and Command-Line Arguments 
+</h3>
+<br>
+<br>The :recover Command 
+<br>
+<br>The following command tries to recover the file named file.txt: 
+<br>:recover file.txt 
+<br>
+<br>It is just like this command: 
+<br>$ vim -r file.txt 
+<br>
+<br>
+<br>If the file you are trying to recover is currently being edited this command fails. If no 
+<br>
+<br>filename is specified, it defaults to the file in the current buffer. 
+<br>If you want to discard any changes you have made to the file and attempt to 
+<br>
+<br>recover, use the following command: 
+<br>:recover! file.txt 
+<br>
+<br>
+<br>MS-DOS Filenames 
+<br>
+<br>If you are on an MS-DOS or Windows 3.1 machine, you are stuck with very limited 
+<br>filenames.The Vim editor detects this and limits the swap filename to something that 
+<br>can be used on this type of machine.Whereas the normal swap file for foo.txt is 
+<br>
+<br>.foo.txt.swp, for example, if you are in short name mode, it is foo_txt.swp. 
+<br>
+<br>You can set the 'shortname' option to force Vim to use this convention.This is 
+<br>
+<br>useful if have a Linux or other system and are editing files on an MS-DOS partition. 
+<br>
+<br>In this case, the operating system (Linux) supports long filenames, but the actual disk 
+<br>
+<br>you are working on (MS-DOS format) does not.Therefore, you need to tell Vim to 
+<br>
+<br>use the short swap names by giving it the following command: 
+<br>:set shortname 
+<br>
+<br>This option is not available for the MS-DOS version of Vim because it would be 
+<br>always on. Instead, it is used when you are cross-platform editing. 
+<br>
+<br>readonly and modified Options 
+<br>
+<br>The 'modified' flag is set if the buffer has been modified.You probably do not want to 
+<br>set this option yourself because it is handled automatically.You can use the value of 
+<br>this option in macros, however. 
+<br>
+<br>The 'readonly' flag is also set automatically if the file is read-only. In only one 
+<br>
+<br>circumstance should you reset this: when you are using a source control system that 
+<br>
+<br>
+<br>The editor warns you that the file is read-only and sets the 'readonly' option. At 
+<br>
+<br>this point, you realize that you forgot to tell the source control system that you want 
+<br>
+<br>to edit the file. So you use :shell to go to the command prompt and execute the 
+<br>
+<br>commands needed to tell the system that you want to edit the file.The RCS system 
+<br>
+<br>uses the co -l command to do this, for example; the SCCS system uses sccs edit. 
+<br>
+<br>
+<br>readonly and modified Options 153 
+<br>
+<br>After getting permission to edit the file, you use the exit command to return to 
+<br>Vim, where you execute the following command to mark the file as editable: 
+<br>
+<br>:set noreadonly 
+<br>
+<br>
+<br>Miscellaneous Commands 
+<br>
+<br>THIS CHAPTER DISCUSSES ALL THE COMMANDS that do not quite fit in any other 
+<br>chapter. In this chapter, you learn about the following: 
+<br>
+<br>
+<br>Getting character number information 
+<br>
+<br>
+<br>How to go to a specific byte in the file 
+<br>
+<br>
+<br>Redrawing the screen 
+<br>
+<br>
+<br>Sleeping 
+<br>
+<br>
+<br>Terminal control 
+<br>
+<br>
+<br>Suspending the editor 
+<br>
+<br>
+<br>Reshowing the introduction screen 
+<br>
+<br>Printing the Character 
+<br>
+<br>The command :ascii or ga prints the number of the character under the cursor.The 
+<br>output looks like this: 
+<br>
+<br><*> 42, Hex 2a, Octal 052 
+<br>
+<br>If editing a multibyte (Japanese or Chinese for example) file, and the character under 
+<br>the cursor is a double-byte character, the output shows both bytes. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+156 Chapter 15 Miscellaneous Commands 
+</h3>
+<br>
+<br>Going to a Specific Character in the File 
+<br>
+<br>The countgo command goes to byte number count of the file.The command g CTRL-G 
+<br>displays the current byte number of a file (along with the current line, column, and 
+<br>other information). 
+<br>
+<br>The command :goto offset also positions the cursor to a given byte location 
+<br>within the file. 
+<br>
+<br>The gg command acts much like the G command. It goes to the line specified by 
+<br>its count. For example, 5gg goes to line 5.The difference between gg and G is that if 
+<br>
+<br>Screen Redraw 
+<br>
+<br>The CTRL-L command redraws the screen.This proves useful when you are on a terminal 
+<br>and some system message or other text screws up your screen.With the advent 
+<br>of the dedicated GUI, the need for this command is greatly diminished. 
+<br>
+<br>Sleep 
+<br>
+<br>The :sleep time command does nothing for the specified number of seconds. If time 
+<br>ends in m, it is specified in milliseconds.This command proves useful when you want 
+<br>to pause during the execution of a macro. 
+<br>
+<br>The countgs command also sleeps for count seconds. 
+<br>
+<br>Terminal Control 
+<br>
+<br>On most terminals, the CTRL-S command stops output.To restart it again, you type 
+<br>CTRL-Q.These commands are not part of Vim; to avoid keyboard conflicts, however, 
+<br>they are not used by any Vim commands. 
+<br>
+<br>You should not try to use these commands in a :map command because your terminal 
+<br>might interpret them and they might never get to Vim. 
+<br>
+<br>Suspending the Editor 
+<br>
+<br>If you are on UNIX in terminal mode, you can suspend the editor with the normal-
+<br>mode command CTRL-Z.To continue editing, use the shell command fg.This works 
+<br>only on shells that have job control.The :suspend command does the same thing. 
+<br>
+<br>Note 
+<br>
+<br>CTRL-Z in insert mode inserts the character CTRL-Z; it does not suspend the editor. 
+<br>
+<br>
+<br>Open Mode 157 
+<br>
+<br>General Help 
+<br>
+<br>The :help, <F1> and <Help> commands all display the general help screen. 
+<br>
+<br>Window Size 
+<br>
+<br>The z height <CR> command resizes the current window to height. If there is only 
+<br>one window open, Vim will desplay only height lines. (The rest will be blank.) This is 
+<br>useful for slow terminals. 
+<br>
+<br>Viewing the Introduction Screen 
+<br>
+<br>If you start Vim without a filename, you will see an introductory flash screen.This 
+<br>screen disappears when you type the first character. If you want to see it again, issue 
+<br>the following command: 
+<br>
+<br>:intro 
+<br>
+<br>Open Mode 
+<br>
+<br>The Vim editor has all the capabilities of the Vi editor except one: open mode.This 
+<br>mode is Vi’s way of coping with terminals it does not understand. It is difficult to get 
+<br>into this mode, difficult to use it, and the fact that Vim does not have it is no great 
+<br>loss. 
+<br>
+<br>Vim does have a command to enter open mode, but when you issue the command 
+<br>
+<br>:open 
+<br>
+<br>all you get is an error message. 
+<br>
+<br>
+<br>Cookbook 
+<br>
+<br>THIS CHAPTER PRESENTS A COOKBOOK FULL OF short recipes for doing some 
+<br>
+<br>common (and not so common) Vim editing. 
+<br>The “recipes” include the following: 
+<br>
+<br>
+<br>Character twiddling 
+<br>
+<br>
+<br>Replacing one word with another using one command 
+<br>
+<br>
+<br>Interactively replacing one word with another 
+<br>
+<br>
+<br>Moving text 
+<br>
+<br>
+<br>Copying a block of text from one file to another 
+<br>
+<br>
+<br>Sorting a section 
+<br>
+<br>
+<br>Finding a procedure in a C program 
+<br>
+<br>
+<br>Drawing comment boxes 
+<br>
+<br>
+<br>Reading a UNIX man page 
+<br>
+<br>
+<br>Trimming the blanks off an end-of-line 
+<br>
+<br>
+<br>Oops, I left the file write-protected 
+<br>
+<br>
+<br>Changing Last, First to First Last 
+<br>
+<br>
+<br>How to edit all the files containing a given word 
+<br>
+<br>
+<br>Finding all occurrences of a word 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+160 Chapter 16 Cookbook 
+</h3>
+<br>
+<br>Character Twiddling 
+<br>
+<br>If you type fast, your fingers can easily get ahead of your mind. Frequently people 
+<br>
+<br>transpose characters. For example, the word the comes out teh. 
+<br>To swap two characters (for example, e with h), put the cursor on the e and type xp. 
+<br>The x command deletes a character (the e), and the p pastes it after the cursor 
+<br>
+<br>(which is now placed over the h). 
+<br>
+<br>Replacing One Word with Another UsingOne Command 
+<br>
+<br>Suppose you want to make all idiots into managers. 
+<br>Execute the following command: 
+<br>
+<br>
+<br>:1,$s/idiots/managers/g 
+<br>
+<br>The colon (:) indicates that you are going to execute an ex type command. All ex 
+<br>commands begin with range of line numbers on which the command operates. In this 
+<br>case, the whole document is chosen, from line 1 to the last line ($).The shorthand for 
+<br>1,$ is simply % as shown previously. 
+<br>
+<br>The :s (abbreviation for :substitute) command performs a substitution.The old 
+<br>
+<br>text follows enclosed in slashes (/idiots/).The replacement text comes next, also 
+<br>
+<br>delimited by the slashes (/managers/).The g flag tells the editor that this is a global 
+<br>
+<br>change and so if the word idiots appears more than once on a line, to change them all. 
+<br>
+<br>The Virgin What!? 
+<br>
+<br>A church just bought its first computer and was learning how to use it. The church secretary decided to 
+<br>
+<br>set up a form letter to be used in a funeral service. Where the person’s name was to be, she put in the 
+<br>
+<br>word name. When a funeral occurred, she would change this word to the actual name of the departed. 
+<br>
+<br>One day, there were two funerals, first for a lady named Mary, and then later one for someone named 
+<br>
+<br>Edna. So the secretary used global replace to change name to Mary. So far, so good. Next, she generated 
+<br>
+<br>the service for the second funeral by changing the word Mary to Edna. That was a mistake 
+<br>
+<br>Imagine the minister’s surprise when he started reading the part containing the Apostles’ Creed and saw, 
+<br>
+<br>“Born of the Virgin Edna.” 
+<br>
+<br>Interactively Replacing One Word with Another 
+<br>
+<br>Suppose you want to replace every occurrence of the word idiot with the word 
+<br>manager, but you want the chance to review each change before you do it. 
+<br>
+<br>
+<br>Moving Text 161 
+<br>
+<br>To do so, follow these steps: 
+<br>
+<br>1. 
+<br>Use 1G to go to the top of the document. 
+<br>2. 
+<br>Execute /idiot to find the first occurrence of the word idiot. 
+<br>3. 
+<br>Issue the command cwmanager<Esc>. 
+<br>4. 
+<br>Change the word (cw) to manager. 
+<br>5. 
+<br>Use the n command to repeat the last search (find the next idiot). 
+<br>6. 
+<br>Execute the . command to repeat the last edit (change one word to manager). If 
+<br>you do not want to change the word, skip this step. 
+<br>7. 
+<br>Repeat steps 4 and 5 until you have replaced all occurrences of idiot to manager. 
+<br>Alternate Method 
+<br>
+<br>Execute the following command: 
+<br>:%s/idiot/manager/cg 
+<br>
+<br>This starts an ex-mode command :substitute (abbreviated :s).The % tells Vim to 
+<br>apply this command to every line in the file.You change idiot to manager.The c flag 
+<br>tells :substitute to get confirmation before each change.The g flag tells the command 
+<br>to change all occurrences on the line. (The default is to change just the first 
+<br>occurrence.) 
+<br>
+<br>Moving Text 
+<br>
+<br>Suppose you want to move a bunch of paragraphs from the top of the document to 
+<br>the bottom. 
+<br>
+<br>To do so, follow these steps: 
+<br>
+<br>1. 
+<br>Move the cursor to the top of the paragraph you want to move. 
+<br>2. 
+<br>Use ma to place a mark named a at this location. 
+<br>3. 
+<br>Move the cursor to the bottom of the paragraph to be moved. 
+<br>4. 
+<br>Execute d’a to delete to mark a.This puts the deleted text in a register. 
+<br>5. 
+<br>Move the cursor to the line where the text is to go.The paragraph will be 
+<br>placed after this one. 
+<br>6. 
+<br>Use the p command to paste the text below the cursor. 
+<br>Another method consists of the following steps: 
+<br>
+<br>1. 
+<br>Select the first line as in the previous list; make it mark a. 
+<br>2. 
+<br>Move to the bottom of the paragraph (use the } command). Mark b. 
+<br>3. 
+<br>Move to the line above where you want to put the text, and type the command: 
+<br>:’a,’b move . 
+<br>
+<br>
+<h3>
+162 Chapter 16 Cookbook 
+</h3>
+<br>
+<br>Copying a Block of Text from One Fileto Another 
+<br>
+<br>The old Vi editor did not handle multiple files very well. Fortunately, Vim does a 
+<br>superb job of dealing with more than one file.There are lots of different ways to copy 
+<br>text from one to another. If you are used to the traditional Vi-style commands, you 
+<br>can use a method based around that style. On the other hand, Vim has a very nice 
+<br>visual mode.You can use it as well. Finally, Vim can make use of the system Clipboard 
+<br>to move text from one Vim program to another. All these methods work, and work 
+<br>well.Which one you should use is a matter of taste. 
+<br>
+<br>Method: Two Windows with Traditional Vi-Style Commands 
+<br>
+<br>To copy a block of text between files, follow these steps: 
+<br>
+<br>1. 
+<br>Edit the first file. 
+<br>2. 
+<br>Execute :split second_file to go to the second file. Opens another window 
+<br>and starts editing the second file in it. 
+<br>3. 
+<br>Use CTRL-W p to go to the “previous” window, the one with the original file. 
+<br>4. 
+<br>Go to the top line to be copied. 
+<br>5. 
+<br>Mark this line as mark a by using the ma command. 
+<br>6. 
+<br>Go to the bottom line to be copied 
+<br>7. 
+<br>Execute y’a to yank (copy in Microsoft parlance) the text from the current 
+<br>cursor location to mark a (‘a) into the default register. 
+<br>8. 
+<br>Use CTRL-W p to go to the file that will receive the text. 
+<br>9. 
+<br>Go to the line where the insert is to occur.The text will be placed before this 
+<br>line. 
+<br>10. 
+<br>Issue the P command to put (paste in Microsoft terminology) the text in the 
+<br>default register above the current line. 
+<br>Method: Two Windows Using Visual Mode 
+<br>
+<br>To copy a block of text between files, follow these steps: 
+<br>
+<br>1. 
+<br>Edit the first file. 
+<br>2. 
+<br>Execute :split to edit the second file. 
+<br>3. 
+<br>Use CTRL-W p to go to the “previous” window, the one with the original file. 
+<br>4. 
+<br>Go to the start of the text to be copied. 
+<br>5. 
+<br>Issue the V command to start visual mode. 
+<br>6. 
+<br>Go to the end of the text to be copied.The selected text will be highlighted. 
+<br>7. Execute y to yank (Copy in Microsoft parlance) the text into the default register. 
+<br>
+<br>Sorting a Section 163 
+<br>
+<br>8. 
+<br>Use CTRL-W p to go to the file that will receive the text. 
+<br>9. 
+<br>Go to the line where the insert is to occur.The text will be placed before this 
+<br>line. 
+<br>10. 
+<br>Issue the P command to put (paste in Microsoft terminology) the text in the 
+<br>default register above the current line. 
+<br>Method: Two Different Vim Programs 
+<br>
+<br>In this method, you start up two Vim programs and copy text from one to another. 
+<br>You do this by using the system Clipboard register (“*). 
+<br>
+<br>1. 
+<br>Edit the first file. 
+<br>2. 
+<br>Start another Vim program to edit the second file. 
+<br>3. 
+<br>Go to the window with the first file in it. 
+<br>4. 
+<br>Go to the start of the text to be copied. 
+<br>5. 
+<br>Issue the V command to start visual mode. 
+<br>6. 
+<br>Go to the end of the text to be copied.The selected text will be highlighted. 
+<br>7. 
+<br>Use the “*y command to yank (copy in Microsoft parlance) the text into the 
+<br>system Clipboard register (“*). 
+<br>8. 
+<br>Change to the other editing command. (Make that editor your active window.) 
+<br>9. 
+<br>Go to the line where the insert is to occur.The text will be placed before this 
+<br>line. 
+<br>10. 
+<br>Issue the command “*P to put (paste in Microsoft terminology) the text in the 
+<br>system Clipboard register (“*) above the current line. 
+<br>Note 
+<br>
+<br>This method enables you to not only move text between two Vim applications, but also to “yank” and 
+<br>“put” between Vim and other applications as well. For example, you can select text in an xterm window 
+<br>using the mouse and paste it into a Vim editing using “*P. Or you can copy text into the system register 
+<br>in a Vim session and paste it into a Microsoft Word document using the Edit, Paste commands. 
+<br>
+<br>Sorting a Section 
+<br>
+<br>Frequently you will be editing a file with a list of names in it (for example, a list of 
+<br>object files that make up a program). For example: 
+<br>
+<br>version.o 
+<br>pch.o 
+<br>getopt.o 
+<br>util.o 
+<br>getopt1.o 
+<br>inp.o 
+<br>patch.o 
+<br>backupfile.o 
+<br>
+<br>
+<br>
+<h3>
+164 Chapter 16 Cookbook 
+</h3>
+<br>
+<br>This list would be nice in alphabetic order (or at least ASCII order).To alphabetize 
+<br>this list, follow these steps: 
+<br>
+<br>1. 
+<br>Move the cursor to the first line to be sorted. 
+<br>2. 
+<br>Use the command ma to mark the first line as mark a. 
+<br>3. 
+<br>Move to the bottom of the text to be sorted. 
+<br>4. 
+<br>Execute the !’asort command.The ! command tells Vim to run the text 
+<br>through a UNIX command.The ‘a tells the editor that the text to be worked 
+<br>on starts at the current line and ends at mark a. 
+<br>The command that the text is to go through is sort. 
+<br>The result looks like this: 
+<br>backupfile.o 
+<br>getopt.o 
+<br>getopt1.o 
+<br>inp.o 
+<br>patch.o 
+<br>pch.o 
+<br>util.o 
+<br>version.o 
+<br>
+<br>
+<br>Visual Method 
+<br>
+<br>1. 
+<br>Move the cursor to the first line to be sorted. 
+<br>2. 
+<br>Issue the v command to enter visual mode. 
+<br>3. 
+<br>Move to the bottom of the text to be sorted.The text will be highlighted. 
+<br>4. 
+<br>Execute the !sort command.The ! command tells Vim to run the highlighted 
+<br>text through the UNIX command sort. 
+<br>Warning 
+<br>
+<br>compilation) looks more like this: 
+<br>OBJS = \ 
+<br>version.o \ 
+<br>pch.o \ 
+<br>getopt.o \ 
+<br>util.o \ 
+<br>getopt1.o \ 
+<br>inp.o \ 
+<br>patch.o \ 
+<br>backupfile.o 
+<br>
+<br>
+<br>Finding a Procedure in a C Program 
+<br>
+<br>Notice that the backslash (\) is used to indicate a continuation line. After sorting this 
+<br>
+<br>looks like the following: 
+<br>OBJS = \ 
+<br>backupfile.o 
+<br>getopt.o \ 
+<br>getopt1.o \ 
+<br>inp.o \ 
+<br>patch.o \ 
+<br>pch.o \ 
+<br>util.o \ 
+<br>version.o \ 
+<br>
+<br>The names are in order, but the backslashes are wrong. Do not forget to fix them 
+<br>using normal editing before continuing: 
+<br>
+<br>OBJS = \ 
+<br>backupfile.o \ 
+<br>getopt.o \ 
+<br>getopt1.o \ 
+<br>inp.o \ 
+<br>patch.o \ 
+<br>pch.o \ 
+<br>util.o \ 
+<br>version.o 
+<br>
+<br>Finding a Procedure in a C Program 
+<br>
+<br>The Vim program was designed by programmers for programmers.You can use it to 
+<br>locate procedures within a set of C or C++ program files. 
+<br>
+<br>First, however, you must generate a table of contents file called a tags file. (This file 
+<br>has been given the obvious name tags.) The ctags command generates this table of 
+<br>contents file. 
+<br>
+<br>To generate a table of contents of all the C program files in your current working 
+<br>directory, use the following command: 
+<br>
+<br>$ ctags *.c 
+<br>
+<br>For C++, use this command: 
+<br>$ ctags *.cpp 
+<br>
+<br>If you use an extension other than .cpp for your C++ files, use it rather than .cpp. 
+<br>
+<br>After this file has been generated, you tell Vim that you want to edit a procedure 
+<br>and it will find the file containing that procedure and position you there. If you want 
+<br>to edit the procedure write_file, for example, use the following command: 
+<br>
+<br>$ gvim -t write_file 
+<br>
+<br>
+<h3>
+166 Chapter 16 Cookbook 
+</h3>
+<br>
+<br>Now suppose as you are looking at the write_file procedure that it calls setup_data 
+<br>and you need to look at that procedure.To jump to that function, position the cursor 
+<br>at the beginning of the word setup_data and press CTRL-].This tells Vim to jump to the 
+<br>definition of this procedure.This repositioning occurs even if Vim has to change files 
+<br>to do so. 
+<br>
+<br>Note 
+<br>
+<br>If you have edited the current file and not saved it, Vim will issue a warning and ignore the CTRL-] 
+<br>
+<br>command. 
+<br>
+<br>A number of tag-related commands enable you to jump forward/backward through 
+<br>tags, split the windows and put the called procedure in the other window, find inexact 
+<br>tags, and many more things. 
+<br>
+<br>Drawing Comment Boxes 
+<br>
+<br>I like to put a big comment box at the top of each of my procedures. For example: 
+<br>
+<br>/******************************************************* 
+<br>* Program — Solve it — Solves the worlds problems. * 
+<br>* All of them. At once. This will be a great * 
+<br>* program when I finish it. * 
+<br>*******************************************************/ 
+<br>
+<br>
+<br>Drawing these boxes like this is tedious at best. But Vim has a useful feature called 
+<br>abbreviations that makes things easier. 
+<br>First, you need to create a Vim initialization file called ~/.vimrc.The ~/.vimrc file 
+<br>must contain the following lines: 
+<br>
+<br>:ab #b /*************************************** 
+<br>:ab #e <Space>****************************************/ 
+<br>
+<br>
+<br>These commands define a set of Vim abbreviations. Abbreviations were discussed in 
+<br><h3>
+<h3>
+Chapter 8,“Basic Abbreviations, Keyboard Mapping, and Initialization Files.” 
+</h3>
+<br></h3>
+<br>To create a comment box, enter #b<Enter>;.The screen looks like this: 
+<br>
+<br>/************************************************ 
+<br>
+<br>Enter the comments, including the beginning and ending * characters. Finally, end the 
+<br>comment by typing #e<Enter>.This causes the ending comment to be entered. 
+<br>Another (better) option is to use an external program like boxes (see http:// 
+<br>www.vim.org), which generates all kinds of ASCII art boxes and can be customized. 
+<br>Here, one might visually select the text and then issue the command :’<,’> 
+<br>!boxes –r ,which would remove an existing box and put a new box around the text. 
+<br>
+<br>Note 
+<br>
+<br>This page was written in Vim. So how did we enter the #b and #e? Easy, we typed in #bb and the 
+<br>
+<br>deleted a character. (We could not enter #b or it would have been expanded.) The actual command was 
+<br>
+<br>i#bb<Esc>x. 
+<br>
+<br>
+<br>Trimming the Blanks off an End-of-Line 167 
+<br>
+<br>Another good tool for this sort of thing is tal, which lines up the final character (the 
+<br>*, here) so it looks nice. 
+<br>
+<br>Reading a UNIX man Page 
+<br>
+<br>You can use the Vim editor to browse through text files. One of the most useful sets 
+<br>of files to browse through is the man pages. Unfortunately, man pages try to simulate 
+<br>formatting by underlining characters using a sequence such as <BS>x for x.This make 
+<br>viewing of the man page in Vim difficult. If you try to read a man page directly, you 
+<br>will see something like this: 
+<br>
+<br>N^HNA^HAM^HME^HE 
+<br>
+<br>date -print or set the system date and time 
+<br>
+<br>To get rid of these characters, use the standard UNIX command ul -i.This is a 
+<br>formatting program that removes the hard-to-read control characters.The result looks 
+<br>like this: 
+<br>
+<br>NAME 
+<br>
+<br>!!!! 
+<br>
+<br>date -print or set the system date and time 
+<br>
+<br>Now all that is needed is to put three commands together: the man command to get 
+<br>the manual page, the ul -i command to fix the formatting, and vim to read the page. 
+<br>The resulting command is as follows: 
+<br>
+<br>$ man date | ul -i | vim – 
+<br>
+<br>Another technique is to use Vim: 
+<br>:%s/.\b//g 
+<br>
+<br>This will remove all characters followed by the backspace (\b), rendering the file 
+<br>readable. 
+<br>
+<br>Trimming the Blanks off an End-of-Line 
+<br>
+<br>Some people find spaces and tabs at the end of a line useless, wasteful, and ugly.To 
+<br>remove whitespace at the end of every line, execute the following command: 
+<br>
+<br>:%s/\s*$// 
+<br>
+<br>The colon (:) tells Vim to enter command mode. All command-mode commands start 
+<br>with a line range; in this case, the special range % is used, which represents the entire 
+<br>file. 
+<br>
+<br>The first set of slashes encloses the “from text.”The text is “any whitespace” (\s), 
+<br>repeated zero or more times (*), followed by “end-of-line” ($).The result is that this 
+<br>pattern matches all trailing whitespace. 
+<br>
+<br>The matching text is to be replaced by the text in the next set of slashes.This text 
+<br>is nothing, so the spaces and tabs are effectively removed. 
+<br>
+<br>
+<h3>
+168 Chapter 16 Cookbook 
+</h3>
+<br>
+<br>Oops, I Left the File Write-Protected 
+<br>
+<br>Suppose you are editing a file and you have made a lot of changes.This is a very 
+<br>important file and to preserve it from any casual changes, you write-protected it, even 
+<br>against yourself. 
+<br>
+<br>The Vim editor enables you to edit a write-protected file with little or no warning. 
+<br>The only trouble is that when you try to exit using ZZ you get the following error: 
+<br>
+<br>file.txt File is read-only 
+<br>
+<br>And Vim does not exit. 
+<br>
+<br>So what can you do? You do not want to throw away all those changes, but you 
+<br>
+<br>Use the command :w! to force the writing of the file. 
+<br>
+<br>Another option: Use the :w otherfilename command to save your work in a different 
+<br>file so you can fix the file permissions if that is what is required. 
+<br>
+<br>Changing Last, First to First, Last 
+<br>
+<br>You have a list of names in the following form: 
+<br>
+<br>Last, First 
+<br>
+<br>How do you change them to 
+<br>
+<br>First, Last 
+<br>
+<br>You can do so with one command: 
+<br>
+<br>:1,$s/\([^,]*\), \(.*$\)/\2 \1/ 
+<br>
+<br>The colon (:) tells Vim that this is an ex-style command. 
+<br>
+<br>The line range for this command is the whole file, as indicated by the range 1,$. 
+<br>
+<br>The s (abbreviations for :substitute) tells Vim to perform a string substitution. 
+<br>
+<br>The old text is a complex regular expression.The \( . . . \) delimiters are used 
+<br>to inform the editor that the text that matches the regular expression inside the parentheses 
+<br>is to be remembered for later use. 
+<br>
+<br>The text in the first \( . . . \) is assigned to \1 in the replacement text.The 
+<br>second set of text inside \( . . . \) is assigned \2, and so on. 
+<br>
+<br>In this case, the first regular expression is any bunch of characters that does not 
+<br>include a comma.The [^,] means anything but a comma, and the * means a bunch 
+<br>(zero or more characters). Note:This means that all leading spaces will also be 
+<br>matched, which may not be what is desired. 
+<br>
+<br>The second expression matches anything ( .* up to the end-of-line: $). 
+<br>
+<br>The result of this substitution is that the first word on the line is assigned to \1 and 
+<br>the second to \2.These values are used in the end of the command to reverse the 
+<br>words. 
+<br>
+<br>
+<br>How to Edit All the Files that Contain a Given Word 169 
+<br>
+<br>The following example shows the relationship between the \( \) enclosed strings 
+<br>
+<br>and the \1, \2 markers. 
+<br>
+<br>Match anything but comma 
+<br>
+<br>Any Character 
+<br>Repeated 0 or more times 
+<br>The end of the line 
+<br>
+<br>:1,$s/\([ˆ,]*\) , \(.*$\) /\2 \1/ 
+<br>
+<br>Any character, repeated, 
+<br>followed by EOL 
+<br>The character space 
+<br>The character comma 
+<br>Repeated 0 or more times 
+<br>Closes the [ ] expression 
+<br>The character comma 
+<br>Match anything 
+<br>except the next character 
+<br>Starts a set of matches 
+<br>
+<br>The next example breaks out the various parts of the regular expressions used in this 
+<br>illustration: 
+<br>
+<br>:l,$s/\([ˆ,]*\), \(.*$\)/\2 \1/ 
+<br>
+<br>String matched by first 
+<br>\( \) 
+<br>
+<br>
+<br>String matched by second 
+<br>\( \( 
+<br>
+<br>
+<br>Slash separating old/new 
+<br>strings 
+<br>Second \( \) 
+<br>First \( \) 
+<br>
+<br>
+<br>How to Edit All the Files that Contain a 
+<br>Given Word 
+<br>
+<br>If you are a UNIX user, you can use a combination of Vim and grep to edit all the files 
+<br>that contain a given word.This is extremely useful if you are working on a program 
+<br>and want to view or edit all the files that contain a specified variable. 
+<br>
+<br>For example, suppose you want to edit all the C program files that contain the 
+<br>word frame_counter.To do this you use the command: 
+<br>
+<br>$ vim `grep -l ‘frame_counter’ *.c` 
+<br>
+<br>Let’s look at this command in detail.The grep command searches through a set of files 
+<br>
+<br>for a given word. Because the -l option is specified, the command will only list the 
+<br>files containing the word and not print the line itself.The word it is searching for is 
+<br>frame_counter. Actually, this can be any regular expression. (Note:What grep uses for 
+<br>
+<br>regular expressions is not as complete or complex as what Vim uses.) 
+<br>
+<br>
+<h3>
+170 Chapter 16 Cookbook 
+</h3>
+<br>
+<br>The entire command is enclosed in backticks (`).This tells the UNIX shell to run 
+<br>
+<br>this command and pretend that the results were typed on the command line. So what 
+<br>
+<br>happens is that the grep command is run and produces a list of files, these files are put 
+<br>
+<br>on the Vim command line.This results in Vim editing the file list that is the output of 
+<br>
+<br>grep.You can then use the commands :n and :rewind to browse through the files. 
+<br>
+<br>Why show this here? This is a feature of the UNIX shell (such as ‘bash’), and isn’t 
+<br>
+<br>part of Vim’s repertoire.The way to accomplish something similar within Vim, and 
+<br>
+<br>which works on Win32 as well is: 
+<br>
+<br>:args `grep –l ‘frame_counter’ *.c` 
+<br>
+<br>which will set the ‘argument list’, in other words, the files “on the command line.” 
+<br>
+<br>Finding All Occurrences of a Word Using theBuilt-in Search Commands 
+<br>
+<br>The Vim editor has a built-in :grep command that you can use to search a set of files 
+<br>for a given string. If you want to find all occurrences of error_string in all C program 
+<br>files, for example, enter the following command: 
+<br>
+<br>:grep error_string *.c 
+<br>
+<br>This causes Vim to search for a string (error_string) in all the specified files (*.c). 
+<br>
+<br>The editor will now open the first file where a match is found. Position the file on 
+<br>
+<br>the first matching line.To go to the next matching line (no matter what file), use the 
+<br>
+<br>:cnext command.To go to the previous match, use the :cprev command. 
+<br>
+<br>Note:The Vim grep command uses the external grep (on Unix) or findstr (on 
+<br>
+<br>Windows) commands.You can change the external command used by setting the 
+<br>
+<br>option 'grepprg'. 
+<br>
+<br>
+<br>Topics Not Covered 
+<br>
+<br>THE VIM EDITOR HAS A TREMENDOUSLY RICH set of features. Unfortunately, a few 
+<br>
+<br>areas are beyond the scope of this book, and therefore are not covered here.These 
+<br>include support for commercial applications that I do not have access to and foreign 
+<br>languages.This chapter briefly describes the commands omitted from the rest of the 
+<br>book. 
+<br>
+<br>Interfaces to Other Applications 
+<br>
+<br>The Vim editor is designed to interface with many common commercial packages as 
+<br>well as a few Open Source packages. Because I do not have these packages installed, I 
+<br>could not examine and test these commands. Some brief documentation appears here. 
+<br>
+<br>Cscope 
+<br>
+<br>The cscope command is designed to examine a set of C or C++ programs and produce 
+<br>a database containing information about the location of functions and variables 
+<br>in the programs.You can then use the Cscope program to query this database to 
+<br>locate where an identifier is defined or used. Cscope is available from 
+<br>http://cscope.sourceforge.net. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+172 Chapter 17 Topics Not Covered 
+</h3>
+<br>
+<br>For full information use the following command: 
+<br>
+<br>:help cscope 
+<br>
+<br>Cscope-Related Command Reference 
+<br>
+<br>:cs arguments 
+<br>
+<br>:cscope argument 
+<br>Handle various activities associated with the Cscope 
+<br>program. 
+<br>
+<br>:cstag procedure 
+<br>Go to the tag in the CScope database named 
+<br>procedure. 
+<br>
+<br>:set csprg=program 
+<br>
+<br>:set cscopeprg=program 
+<br>Define the name of the Cscope program 
+<br>(Default=cscope). 
+<br>
+<br>:set cst 
+<br>
+<br>:set cscopetag 
+<br>
+<br>:set nocst 
+<br>
+<br>:set nocscopetag 
+<br>If set, this option causes the commands that do tag 
+<br>Cscope database rather than tags. 
+<br>
+<br>:set csto=flag 
+<br>
+<br>:set cscopetagorder=flag 
+<br>Define the search order for the CScope tag-searching 
+<br>commands. If flag is 0, the default, search the CScope 
+<br>database, followed by tags. If flag is 1, search tags first. 
+<br>
+<br>:set csverb 
+<br>
+<br>:set cscopeverbose 
+<br>
+<br>:set nocsverb 
+<br>
+<br>:set nocscopeverbose 
+<br>If set, output error messages occur when Vim looks 
+<br>for a CScope database and fails to find it.This proves 
+<br>useful when debugging initialization files that try to 
+<br>load a set of databases (default=nocscopeverbose). 
+<br>
+<br>OLE 
+<br>
+<br>The OLE system is a method by which programs running under Microsoft Windows 
+<br>can communicate with each other.The Vim editor can act as an OLE server.This 
+<br>means that you can write Microsoft Windows programs that interface to it. For those 
+<br>of you who know how to write Visual Basic or other Microsoft-based applications, 
+<br>you can find more information by using the command: 
+<br>
+<br>:help ole-interface 
+<br>
+<br>
+<br>Interfaces to Other Applications 173 
+<br>
+<br>Perl 
+<br>
+<br>The Perl interface enables you to execute perl command from Vim and also gives the 
+<br>Perl programs an interface that they can use to access some of Vim’s functions. For a 
+<br>complete description of what is available, execute the following command: 
+<br>
+<br>:help perl 
+<br>
+<br>Perl Interface Command Reference 
+<br>
+<br>:pe command 
+<br>:perl command Execute a single perl command. 
+<br>:rangeperld command 
+<br>:rangeperldo command Execute a perl command on a range of lines.The 
+<br>perl variable $_ is set to each line in range. 
+<br>
+<br>Python 
+<br>
+<br>The Python interface enables you to execute Python statements and programs from 
+<br>within Vim. Like Perl, the Python interface provides you with lots of functions and 
+<br>objects that enable you to access parts of the Vim editor. For complete help, execute 
+<br>the following: 
+<br>
+<br>:help python 
+<br>
+<br>Python Interface Command Reference 
+<br>
+<br>:rangepy statement 
+<br>
+<br>:rangepython statement Execute a single Python statement. 
+<br>
+<br>:rangepyf file 
+<br>
+<br>:rangepyfile file Execute the Python program contained in file. 
+<br>
+<br>Sniff+ 
+<br>
+<br>Sniff+ is a commercial programming environment.The Vim editor enables you to 
+<br>interface with this program. 
+<br>
+<br>To get complete help on using this programming tool, execute the following 
+<br>command: 
+<br>
+<br>:help sniff 
+<br>
+<br>
+<h3>
+174 Chapter 17 Topics Not Covered 
+</h3>
+<br>
+<br>Sniff+ Interface Command Reference 
+<br>
+<br>:sni command 
+<br>
+<br>:sniff command 
+<br>Perform a command using the interface to Sniff+. If 
+<br>current connection. 
+<br>
+<br>Tcl 
+<br>
+<br>Tcl is another scripting language. As usual, Vim provides you with a way to execute 
+<br>Tcl scripts as well as an interface for accessing parts of Vim from within Tcl. For full 
+<br>information, use the following command: 
+<br>
+<br>:help tcl 
+<br>
+<br>Tcl Interface Command Reference 
+<br>
+<br>:tc command 
+<br>
+<br>:tcl command 
+<br>Execute a single Tcl command. 
+<br>
+<br>:rangetcld command 
+<br>
+<br>:rangetcldo command 
+<br>
+<br>Execute a Tcl command once for each line in the 
+<br>range.The variable line is set to the contents of the 
+<br>line. 
+<br>
+<br>:tclf file 
+<br>
+<br>:tclfile file 
+<br>Execute the Tcl script in the given file. 
+<br>
+<br>Foreign Languages 
+<br>
+<br>The Vim editor can handle many different types of foreign languages. Unfortunately, 
+<br>the author cannot. Here is a very short listing of the commands available to you for 
+<br>editing in other languages. For complete information, you need to consult the Vim 
+<br>documentation and as well as the documentation that came with your computer 
+<br>system. 
+<br>
+<br>Although Vim contains many language-specific options, a few are fairly generic. 
+<br><F8> Toggle between left-to-right and right-to-left modes. 
+<br>:set rl 
+<br>
+<br>:set rightleft 
+<br>
+<br>:set norl 
+<br>
+<br>:set norightleft 
+<br>When set, indicates that the file is displayed right to 
+<br>left rather than left to right (default=norightleft). 
+<br>
+<br>
+<br>Foreign Languages 175 
+<br>
+<br>:set ari 
+<br>:set allowrevins 
+<br>:set noari 
+<br>:set noallowrevins When set, let CTRL-_ toggle the revins option. 
+<br>This enables you to input languages that run from 
+<br>right to left rather than left to right. 
+<br>:set ri 
+<br>:set revins 
+<br>:set nori 
+<br>:set norevins When set, insert mode works right to left rather 
+<br>than left to right.The CTRL-_ command toggles 
+<br>this option if the option allowrevins is set. 
+<br>:set gfs=f1,f2 
+<br>:set guifontset=f1,f2 Define a font f1 for English and another f2 for a 
+<br>foreign language. 
+<br>This works only if Vim was compiled with the 
+<br>fontset enabled and only applies on UNIX 
+<br>systems. 
+<br>:set lmap=ch1ch2,ch1ch2 
+<br>:set langmap=ch1ch2,ch1ch2 Define a keyboard mapping for a foreign 
+<br>language. 
+<br>
+<br>Chinese 
+<br>
+<br>Written Chinese is a beautiful pictographic language where one character can convey 
+<br>a world of meaning. Unfortunately typing that one character can be extremely difficult 
+<br>given the limits of a computer keyboard. 
+<br>
+<br>Chinese can be written left to right, right to left, or up to down.The Vim editor 
+<br>supports right to left and left to right. It also supports both traditional Chinese characters 
+<br>as well as simplified Chinese. 
+<br>
+<br>Note 
+<br>
+<br>The Vim documentation does not contain help on the subject of Chinese input. That is operating system 
+<br>dependent. 
+<br>
+<br>
+<h3>
+176 Chapter 17 Topics Not Covered 
+</h3>
+<br>
+<br>Chinese-Related Command Reference 
+<br>
+<br>:set fe=encoding 
+<br>
+<br>:set fileencoding=encoding 
+<br>Set the file encoding to be used for this file. For 
+<br>the Chinese language, this can be taiwan for the 
+<br>traditional Chinese character set or prc for simplified 
+<br>Chinese. 
+<br>
+<br>Farsi 
+<br>
+<br>The Farsi language is supported, although you must explicitly enable Farsi when you 
+<br>compile the editor. It is not enabled by default.To edit in a Farsi file, start Vim in Farsi 
+<br>mode by using the —F option. For example: 
+<br>
+<br>$ vim —F file.txt 
+<br>
+<br>You can get complete information on Farsi editing by executing the following 
+<br>command: 
+<br>
+<br>:help farsi 
+<br>
+<br>Farsi-Related Command Reference 
+<br>
+<br>:set fk 
+<br>
+<br>:set fkmap 
+<br>
+<br>:set nofk 
+<br>
+<br>:set nofkmap 
+<br>
+<br>If set, this option tells Vim that you are using a Farsi 
+<br>keyboard (default=nofkmap). 
+<br>
+<br>:set akm 
+<br>
+<br>:set altkeymap 
+<br>
+<br>:set noakm 
+<br>
+<br>:set noaltkeymap 
+<br>
+<br>When altkeymap is set, the alternate keyboard mapping 
+<br>is Farsi. If noaltkeymap is set, the default alternate 
+<br>keyboard mapping is Hebrew 
+<br>(default=noaltkeymap). 
+<br>
+<br>CTRL-_ 
+<br>
+<br>Toggle between Farsi and normal mode (insert-mode 
+<br>command). 
+<br>
+<br><F9> 
+<br>
+<br>Toggles the encoding between ISIR-3342 standard 
+<br>and Vim extended ISIR-3342 (supported only in 
+<br>right-to-left mode). 
+<br>
+<br>
+<br>Foreign Languages 177 
+<br>
+<br>Hebrew 
+<br>
+<br>Hebrew is another language that goes right to left.To start editing a Hebrew file, use 
+<br>the following command: 
+<br>
+<br>$ vim —H file.txt 
+<br>
+<br>To get help editing in this language, execute the following command: 
+<br>
+<br>:help hebrew 
+<br>
+<br>Hebrew-Related Command Reference 
+<br>
+<br>:set hk 
+<br>:set hkmap 
+<br>:set nohk 
+<br>:set nohkmap Turn on (or off) the Hebrew keyboard mapping 
+<br>(default=nohkmap). 
+<br>:set hkp 
+<br>:set hkmapp 
+<br>:set nohkp 
+<br>:set nohkmapp When set, this option tells Vim that you are using a 
+<br>phonetic Hebrew keyboard, or a standard English 
+<br>keyboard (default=nohkmapp). 
+<br>:set al=number 
+<br>:set aleph=number Define the numeric value of the first character in the 
+<br>Hebrew alphabet.The value used depends on how 
+<br>your system encodes the Hebrew characters. (Default: 
+<br>Microsoft DOS: 128. Other systems: 224) 
+<br>CTRL-_ Toggle between reverse insert and normal insert 
+<br>modes. Hebrew is usually inserted in reverse, like 
+<br>Farsi. 
+<br>:set akm 
+<br>:set altkeymap 
+<br>:set noakm 
+<br>:set noaltkeymap If altkeymap is set, the alternate keyboard mapping is 
+<br>Farsi. If noaltkeymap is set, the default alternate keyboard 
+<br>mapping is Hebrew (default=noaltkeymap). 
+<br>
+<br>
+<h3>
+178 Chapter 17 Topics Not Covered 
+</h3>
+<br>
+<br>Japanese 
+<br>
+<br>Japanese-encoded files are supported. Unfortunately there is no specific online help for 
+<br>Japanese. 
+<br>
+<br>Japanese-Related Command Reference 
+<br>
+<br>:set fe=japan 
+<br>
+<br>:set fileencoding=japan 
+<br>Tells Vim that the current file is encoded using the 
+<br>Japanese character set. 
+<br>
+<br>Korean 
+<br>
+<br>To edit in Korean, you need to tell Vim about your keyboard and where your fonts 
+<br>reside.You can obtain information on how to do this by executing the following command: 
+<br>
+<br>
+<br>:help hangul 
+<br>
+<br>Korean-Related Command Reference 
+<br>
+<br>:set fe=korea 
+<br>
+<br>:set fileencoding=korea 
+<br>Tells Vim that the current file is encoded using the 
+<br>Korean character set. 
+<br>
+<br>Binary Files 
+<br>
+<br>Editing binary files using a text editor is tricky at best and suicidal at worst. If you 
+<br>have the right combination of expertise and desperation, you can use Vim to edit 
+<br>binary files. 
+<br>
+<br>:set bin 
+<br>
+<br>:set binary 
+<br>
+<br>:set nobin 
+<br>
+<br>:set nobinary If set, then set things up for editing a binary file. 
+<br>
+<br>Note 
+<br>
+<br>I realize that some people out there need to edit a binary file and that you know what you are doing. For 
+<br>those of you in that situation, Vim is an excellent editor. 
+<br>
+<br>Fortunately for those who need to, Vim comes with a great utility, ‘xxd’ which allows one to edit binary 
+<br>files almost painlessly. See the online docs for more information: 
+<br>
+<br>:help xxd 
+<br>
+<br>
+<br>Operating System File Modes 179 
+<br>
+<br>Modeless (Almost) Editing 
+<br>
+<br>If you enable the 'insertmode' option, insert mode is the default. If you want to 
+<br>switch to normal, use the CTRL-O command to execute a normal-mode command. 
+<br>This option is for people who do not like modes and are willing to deal with the confusing 
+<br>setting it generates. 
+<br>
+<br>:set im 
+<br>
+<br>:set insertmode 
+<br>
+<br>:set noim 
+<br>
+<br>:set noinsertmode 
+<br>
+<br>Make insert mode the default. 
+<br>
+<br>CTRL-L 
+<br>
+<br>Leave insert mode if 'insertmode' is set. 
+<br>
+<br>Operating System File Modes 
+<br>
+<br>Some operating systems keep file type information around on the file.The two operating 
+<br>systems covered in this book do not have this feature. If the OS does determine 
+<br>the file type, the result will be saved in the 'osfiletype' option. 
+<br>
+<br>:set osf=type 
+<br>
+<br>:set osfiletype=type This is set to the file type detected by an OS capable of 
+<br>doing so. 
+<br>
+<br>
+<br>:set st=type 
+<br>
+<br>:set shelltype=type Define the shell type for an Amiga. 
+<br>
+<br>
+<br>The Details 
+<br>
+<br>18 Complete Basic Editing 
+<br>19 Advanced Searching Using Regular Expressions 
+<br>20 Advanced Text Blocks and Multiple Files 
+<br>21 All About Windows and Sessions 
+<br>22 Advanced Visual Mode 
+<br>23 Advanced Commands for Programmers 
+<br>24 All About Abbreviations and Keyboard Mapping 
+<br>25 Complete Command-Mode Commands 
+<br>26 Advanced GUI Commands 
+<br>27 Expressions and Functions 
+<br>28 Customizing the Editor 
+<br>29 Language-Dependent Syntax Options 
+<br>30 How to Write a Syntax File 
+<br>
+<br>
+<br>Complete Basic Editing 
+<br>
+<br>
+<br>NCHAPTER2,“EDITING ALITTLEFASTER,”you were introduced to some of the 
+<br>
+<br>basic editing commands.You can do 90% of most common edits with these commands. 
+<br>If you want to know everything about basic editing, however, read this chapter. 
+<br>
+<br><h3>
+<h3>
+Chapter 2, for example, discussed the w command to move forward one word.This 
+</h3>
+<br></h3>
+<br>chapter devotes a page to discussing in detail how to define exactly what a word is. 
+<br><h3>
+<h3>
+Chapter 2 described how to use two commands (CTRL-D and CTRL-U) to move screen 
+</h3>
+<br></h3>
+<br>up and down through the text.There are actually six commands to do this, with 
+<br>options, and that does not include the other dozen or so positioning commands.This 
+<br>chapter discusses the complete command list. 
+<br>
+<br>Generally you will not use all the commands in this chapter. Instead you will pick 
+<h3>
+out a nice subset you like and use them. Chapter 2 presented one subset. If you prefer 
+</h3>
+<br>to pick your own, however, read this chapter and have fun. 
+<br>
+<br>Word Movement 
+<br>
+<br>The Vim editor has many different commands to enable you move to the beginning 
+<br>
+<br>or end of words. But you can also customize the definition of a word through the use 
+<br>of some of the Vim options.The following sections explore in depth the word-
+<br>movement commands. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+184 Chapter 18 Complete Basic Editing 
+</h3>
+<br>
+<br>Move to the End of a Word 
+<br>
+<br>The w command moves forward one word.You actually wind up on the beginning of 
+<br>the next word.The e command moves forward one word, but leaves you on the end 
+<br>of the word. 
+<br>
+<br>The ge command moves backward to the end of the preceding word. 
+<br>
+<br>Figure 18.1 shows how the various word-movement commands work. 
+<br>
+<br>w www e ee 
+<br>
+<br>Profanity is the one language that all programmers understand. 
+<br>
+<br>gege geb bb 
+<br>
+<br>Figure 18.1 Word movement commands. 
+<br>
+<br>Defining What a Word Is 
+<br>
+<br>So what is a word, anyway? There are two answers to this question: 
+<br>
+<br>1. 
+<br>The Vim editor does a good job of defining a sane answer to this question. (Skip 
+<br>to the next section.) 
+<br>2. 
+<br>If you want to know the details, read the rest of this section. 
+<br>Your first answer to “What is a word?” might be the easy answer: It is a series of 
+<br>letters. However, a C programmer might consider something like size56 to be word. 
+<br>Therefore, another answer might be to use the C identifier definition: the letters, 
+<br>digits, and the underscore. 
+<br>
+<br>But LISP programmers can use the dash (-) in a variable name.They consider the 
+<br>
+<br>word total-size a single word. C programmers consider it two words. So how do you 
+<br>
+<br>resolve this conflict? 
+<br>
+<br>The Vim solution is to create an option that defines what is in a word and what is 
+<br>
+<br>:set iskeyword=specification 
+<br>
+<br>To see what the current value of this option is, use this command: 
+<br>
+<br>:set iskeyword? 
+<br>
+<br>The following represents a typical value: 
+<br>
+<br>iskeyword=@,48-57,_,192-255 
+<br>
+<br>This is all the letters (@), the digits (ASCII characters numbered 48-57 or 0-9), the 
+<br>underscore (_) and the international letters (192-255, à through Ÿ). 
+<br>
+<br>
+<br>Word Movement 185 
+<br>
+<br>The specification consists of characters separated by commas. If you want the word 
+<br>characters to be exclusively vowels, for instance, use this command: 
+<br>
+<br>:set iskeyword=a,e,i,o,u 
+<br>
+<br>You can specify a range of characters by using a dash.To specify all the lowercase 
+<br>letters, for example, issue the following command: 
+<br>
+<br>:set iskeyword=a-z 
+<br>
+<br>For characters that cannot be specified directly (such as comma and dash), you can use 
+<br>a decimal number. If you want a word to be the lowercase letters and the dash (character 
+<br>#45), use the following command: 
+<br>
+<br>:set iskeyword=a-z,45 
+<br>
+<br>The @ character represents all characters where the C function isalpha() returns 
+<br>true. (This might vary, depending on the setting of the C locale, and also depending 
+<br>on the C compiler and OS you are using to build Vim!) 
+<br>
+<br>To exclude a character or set of character, precede it with a circumflex (^).The 
+<br>following command defines a word as all the letters except lowercase q: 
+<br>
+<br>:set iskeyword=@,^q 
+<br>
+<br>The @ character is represented by @-@. 
+<br>
+<br>Special Characters for the iskeyword Option 
+<br>
+<br>a Character a. 
+<br>
+<br>a-z Character range (all characters from a to z). 
+<br>
+<br>45 Character number 45 (in this case, -). 
+<br>
+<br>@ All letters (as defined by isalpha()). 
+<br>
+<br>@-@ The character @. 
+<br>
+<br>^x Exclude the character x. 
+<br>
+<br>^a-c Exclude the characters in the range a through c. 
+<br>
+<br>Note 
+<br>
+<br>You can abbreviate the 'iskeyword' option as isk. 
+<br>
+<br>
+<h3>
+186 Chapter 18 Complete Basic Editing 
+</h3>
+<br>
+<br>Other Types of Words 
+<br>
+<br>The 'iskeyword' option controls what is and is not a keyword. Other types of characters 
+<br>are controlled by similar options, including the following: 
+<br>'isfname' Filenames 
+<br>
+<br>'isident' Identifiers 
+<br>
+<br>'isprint' Printing characters 
+<br>
+<br>The 'isfname' option is used for commands such as the gf command, which edits the 
+<h3>
+file whose name is under the cursor. (See Chapter 23, “Advanced Commands for 
+</h3>
+<br>Programmers,” for more information on this command.) 
+<br>
+<br>The 'isident' option is used for commands such as [d, which searches for the 
+<h3>
+definition of a macro whose identifier is under the cursor. (See Chapter 7, 
+</h3>
+<br>“Commands for Programmers,” for information on this command.) 
+<br>
+<br>The 'isprint' option defines which characters can be displayed literally on the 
+<br>screen. Careful: If you get this wrong the display will be messed up.This is also used 
+<br>by the special search pattern \p, which stands for a printable character. (See Chapter 
+<br>19, “Advanced Searching Using Regular Expressions,” for information on search 
+<br>patterns.) 
+<br>
+<br>There Are “words,” and Then There Are “WORDS” 
+<br>
+<br>So now you know what words are, right? Well, the Vim editor also has commands that 
+<br>affect WORDS.These two terms, WORDS and words, represent two different things. 
+<br>(Only a programmer could think up terms that differ only by case.) 
+<br>
+<br>The term word means a string of characters defined by the 'iskeyword' option.The 
+<br>term WORD means any sequence of non-whitespace characters.Therefore 
+<br>that-all 
+<br>
+<br>is two words, but it is one WORD. 
+<br>The W command moves forward WORDS and the B command moves backward 
+<br>WORDS.The complete list of WORD-related commands is as follows: 
+<br>
+<br><C-Left> 
+<br>
+<br>[count] B 
+<br>
+<br>Move count WORDS backward. 
+<br>[count] E 
+<br>
+<br>
+<br>Move count WORDS forward to the end of the WORD. 
+<br>[count] gE 
+<br>
+<br>Move count WORDS backward to the end of the WORD. 
+<br>
+<br><C-Right> 
+<br>
+<br>[count] W 
+<br>
+<br>Move count WORDS forward. 
+<br>
+<br>Note: <C-Left> is the same as CTRL<LEFT>. See Appendix B for a list of <> key names. 
+<br>
+<br>
+<br>Moving Lines Up and Down 187 
+<br>
+<br>Beginning of a Line 
+<br>
+<br>The ^ command moves you to the first non-blank character on the line. If you want 
+<br>to go to the beginning of the line, use the 0 command. Figure 18.2 shows these 
+<br>commands. 
+<br>
+<br>current_state = modified 
+<br>
+<br>0 
+<br>
+<br>Figure 18.2 ^ and 0 commands. 
+<br>
+<br>Repeating Single-Character Searches 
+<br>
+<br>The fx command searches for the first x after the cursor on the current line.To repeat 
+<br>this search, use the ; command. As usual, this command can take an argument that is 
+<br>the number of times to repeat the search. 
+<br>
+<br>The ; command continues the search in the same direction as the last f or F command. 
+<br>If you want to reverse the direction of the search, use the , command. Figure 
+<br>
+<br>18.3 shows several typical searches. 
+<br>fe ; 
+<br>; 
+<br>
+<br>To err is human, To really foul up you need a computer 
+<br>
+<br>, 
+<br>, 
+<br>
+<br>Figure 18.3 Repeat single-character search. 
+<br>
+<br>Moving Lines Up and Down 
+<br>
+<br>The — command moves up to the first non-blank character on the preceding line. If 
+<br>an argument is specified, the cursor moves up that many lines. 
+<br>The + command moves down to the beginning of the next line. If an argument is 
+<br>specified, the cursor moves down that number of lines. 
+<br>Figure 18.4 shows these commands. 
+<br>
+<br>ATTENTION 
+<br>This room is fullfilled mit special electronische 
+<br>equippment. Fingergrabbing and pressing the 
+<br>
+<br>3– 
+<br>
+<br>cnoeppkes from the computers is allowed for die 
+<br>– 
+<br>
+<br>experts only! So all the “lefhanders” stay away 
+<br>and do not disturben the brainstorming von here 
+<br>
+<br>+ 
+<br>working intelligencies. Otherwise you will be out 
+<br>thrown and kicked anderswhere! Also: please keep 
+<br>4+ 
+<br>still and only watchen astaunished the 
+<br>blinkenlights. 
+<br>
+<br>
+<br>Figure 18.4 The + and -commands. 
+<br>
+<br>
+<h3>
+188 Chapter 18 Complete Basic Editing 
+</h3>
+<br>
+<br>The _ command moves to the first non-blank character of the line. If a count is specified, 
+<br>it moves the first character of the count – 1 line below the cursor. 
+<br>
+<br>Cursor-Movement Commands 
+<br>
+<br>Several commands enable you to move to different parts of the screen.The H command 
+<br>moves to the top of the screen. If a count is specified, the cursor will be positioned 
+<br>to the count line from the top.Therefore, 1H moves to the top line, 2H the 
+<br>second line, and so on. 
+<br>
+<br>The L command is just like H except that the end of the screen is used rather than 
+<br>
+<br>the start. 
+<br>The M command moves to the middle of the screen. 
+<br>Figure 18.5 summarizes the cursor-positioning commands. 
+<br>
+<br>H Line 40 
+<br>2H Line 41 
+<br>3H Line 42 
+<br>Line 43 
+<br>M Line 44 
+<br>Line 45 
+<br>Line 46 
+<br>Line 47 
+<br>2L Line 48 
+<br>L Line 49 
+<br>
+<br>3L 
+<br>
+<br>Figure 18.5 Cursor-positioning commands. 
+<br>
+<br>Jumping Around 
+<br>
+<br>The Vim editor keeps track of where you have been and enables you to go back to 
+<br>previous locations. Suppose, for example, that you are editing a file and execute the 
+<br>following commands: 
+<br>
+<br>1G 
+<br>
+<br>Go to line 1 
+<br>
+<br>10G 
+<br>
+<br>Go to line 10 
+<br>
+<br>20G 
+<br>
+<br>Go to line 20 
+<br>
+<br>Now, you execute this command: 
+<br>:jumps 
+<br>
+<br>You get the following: 
+<br>
+<br>jump line col file/text 
+<br>
+<br>2 1 0 Dumb User Stories 
+<br>
+<br>1 10 0 ventilation holes. Many terminals 
+<br>
+<br>> 
+<br>
+<br>
+<br>Controlling Some Commands 189 
+<br>
+<br>holes” line. Jump 2 is at line 1, column, the “Dumb User Stories” line. 
+<br>
+<br>Line 20 is not recorded in the jump list yet, because you are on it.The jump list 
+<br>records only things after you jump off of them.The > points to the current item in the 
+<br>list; in this case, it points to the blank line at the end indicating an unrecorded location. 
+<br>
+<br>Now that you know what the jump list is, you can use it.The CTRL-O command 
+<br>jumps back one line. Executing this command takes you back to line 10.The jump list 
+<br>
+<br>jump line col file/text 
+<br>
+<br>2 1 0 Dumb User Stories 
+<br>
+<br>> 0 10 0 ventilation holes. Many terminals 
+<br>
+<br>0 20 0 
+<br>
+<br>The > has moved up one line. If you use the CTRL-O command again, you move to line 
+<br>1.The CTRL-I or <TAB> command moves you to the next jump in the list.Thus you 
+<br>have the following: 
+<br>
+<br>1G 
+<br>
+<br>Go to line 1. 
+<br>
+<br>10G 
+<br>
+<br>Go to line 10. 
+<br>
+<br>20G 
+<br>
+<br>Go to line 20. 
+<br>
+<br>CTRL-O 
+<br>
+<br>Jump to previous location (line 10). 
+<br>
+<br>CTRL-O 
+<br>
+<br>Jump to previous location (line 1). 
+<br>
+<br><TAB> 
+<br>
+<br>Jump to next location (line 10). 
+<br>
+<br>Using these commands, you can quickly navigate through a series of jumping off 
+<br>points throughout your file. 
+<br>
+<br>Controlling Some Commands 
+<br>
+<br>Normally Vim stops any left or right movement at the beginning or end of the line. 
+<br>The 'whichwrap' option controls which characters are allowed to go past the end and 
+<br>in which modes.The possible values for this option are as follows: 
+<br>
+<br>Character Command Mode(s) 
+<br>
+<br><BS> 
+<br>
+<br>b Normal and visual 
+<br>
+<br><Space> 
+<br>
+<br>s Normal and visual 
+<br>
+<br>h
+<br>
+<br>h Normal and visual 
+<br>
+<br>l
+<br>
+<br>l Normal and visual 
+<br>
+<br><Left> 
+<br>
+<br>< Normal and visual 
+<br>
+<br><Right> 
+<br>
+<br>> Normal and visual 
+<br>
+<br>~ 
+<br>
+<br>~ Normal 
+<br>
+<br><Left> 
+<br>
+<br>[ Insert and replace 
+<br>
+<br><Right> 
+<br>
+<br>] Insert and replace 
+<br>
+<br>
+<h3>
+190 Chapter 18 Complete Basic Editing 
+</h3>
+<br>
+<br>Figure 18.6 shows how 'whichwrap' affects cursor movement. 
+<br>
+<br>Without “b” in Carelessly planned projects take three time 
+<br>whichwrap <BS> 
+<br>
+<br>longer to complete than expected. Carefully 
+<br>
+<br>stops here. 
+<br>
+<br>planned projects take four times longer to 
+<br>
+<br>With “b” in whichwrap complete than expected, mostly because the 
+<br>the <BS> continues 
+<br>
+<br>planners expect their planning to reduce the 
+<br>
+<br>at the end of the 
+<br>previous line. time it takes. 
+<br>
+<br>
+<br>Figure 18.6 Effects of the 'whichwrap' option. 
+<br>
+<br>Where Am I, in Detail 
+<br>
+<br>The CTRL-G command displays summary information at the bottom of the screen 
+<h3>
+telling you where you are in the file (see Chapter 2). However, you can get more 
+</h3>
+<br>detailed information if you ask.The basic CTRL-G output looks like this: 
+<br>
+<br>“c02.txt” [Modified] line 81 of 153 —52%— col 1 
+<br>
+<br>To get more information, give CTRL-G a count.The bigger the count, the more 
+<br>detailed information you get.The 1CTRL-G command gives you the full path of the 
+<br>file, for example: 
+<br>
+<br>“/usr/c02.txt” [Modified] line 81 of 153 —52%— col 1 
+<br>
+<br>The 2CTRL-G command lists a buffer number as well. (You can read more on buffers in 
+<br><h3>
+<h3>
+Chapter 5, “Windows.”) 
+</h3>
+<br></h3>
+<br>
+<br>buf 1: “/usr/c02.txt” [Modified] line 81 of 153 —52%— col 1 
+<br>
+<br>The gCTRL-G command displays another type of status information indicating the position 
+<br>of the cursor in terms of column, line, and character: 
+<br>
+<br>Col 1 of 0; Line 106 of 183; Char 3464 of 4418 
+<br>
+<br>If you are interested in having the current cursor location displayed all the time, check 
+<h3>
+out the 'ruler' option in Chapter 28, “Customizing the Appearance and Behavior of 
+</h3>
+<br>the Editor.” 
+<br>
+<br>Scrolling Up 
+<br>
+<h3>
+As discussed in Chapter 2, the CTRL-U command scrolls up half a screen. 
+</h3>
+<br>To be precise, the CTRL-U command scrolls up the number of lines specified by the 
+<br>'scroll' option.You can explicitly set this option with a :set command: 
+<br>:set scroll=10 
+<br>
+<br>
+<br>You can also change the value of this option by giving an argument to the CTRL-U 
+<br>command. For example, 2CTRL-U changes the scroll size to 2 and moves up 2 lines. All 
+<br>subsequent CTRL-U commands will only go up 2 lines at a time, until the scroll size is 
+<br>changed. Figure 18.7 shows the operation of the CTRL-U command. 
+<br>
+<br>Line 31 CTRL-U Line 26 2CTRL-U Line 24 
+<br>Line 32 (up 1/2 Line 27 (Set Line 25 
+<br>Line 33 screen. Line 28 scroll Line 26 
+<br>Line 34 
+<br>Line 35 
+<br>Line 36 
+<br>In this 
+<br>case, 5 
+<br>lines) 
+<br>Line 29 
+<br>Line 30 
+<br>Line 31 
+<br>to 2, 
+<br>then 
+<br>move up 
+<br>two 
+<br>Line 27 
+<br>Line 28 
+<br>Line 29 
+<br>Line 37 Line 32 lines.) Line 30 
+<br>Line 38 Line 33 Line 31 
+<br>Line 39 Line 34 Line 32 
+<br>Line 40 Line 35 Line 33 
+<br>
+<br>Figure 18.7 The CTRL-U command. 
+<br>
+<br>To scroll the window up one line at a time, use the CTRL-Y command.This command 
+<br>can be multiplied by an argument. For example, 5CTRL-Y scrolls up 5 lines (see 
+<br>Figure 18.8). 
+<br>
+<br>Line 20 Line 19 Line 14 
+<br>Line 21 Line 20 Line 15 
+<br>Line 22 CTRL-Y Line 21 Line 16 
+<br>Line 23 Line 22 Line 17 
+<br>Line 24 Line 23 Line 18 
+<br>Line 25 Line 24 Line 19 
+<br>
+<br>5CTRL-Y 
+<br>Line 26 Line 25 Line 20 
+<br>Line 27 Line 26 Line 21 
+<br>Line 28 Line 27 Line 22 
+<br>
+<br>Line 29 Line 28 Line 23 
+<br>
+<br>Figure 18.8 The CTRL-Y command. 
+<br>
+<br>The CTRL-B command scrolls up an entire screen at a time (see Figure 18.9). 
+<br>
+<br>Line 40 Line 32 
+<br>Line 41 Line 33 
+<br>Line 42 Line 34 
+<br>Line 43 CTRL-B Line 35 
+<br>Line 44 Line 36 
+<br>Line 45 Line 37 
+<br>Line 46 Line 38 
+<br>Line 47 Line 39 
+<br>Line 48 Line 40 
+<br>Line 49 Line 41 
+<br>
+<br>Figure 18.9 The CTRL-B command. 
+<br>
+<br>Scrolling Up 191 
+<br>
+<br>
+<h3>
+192 Chapter 18 Complete Basic Editing 
+</h3>
+<br>
+<br>You can specify this command as <PageUp> or <S-Up>. (<S-Up> is the Vim notation for 
+<br>the Shift+up-arrow key.) 
+<br>
+<br>Scrolling Up Summary 
+<br>
+<br>Figure 18.10 illustrates the various scrolling commands. Commands move the top line 
+<br>to the indicated location. 
+<br>
+<br>Line 40 
+<br>Line 41 
+<br>
+<br>CTRL-Y 
+<br>
+<br>Line 42 
+<br>
+<br>2CTRL-Y 
+<br>
+<br>Line 43 
+<br>Line 44 
+<br>Line 45 
+<br>
+<br>CTRL-U 
+<br>
+<br>Line 46 
+<br>Line 47 
+<br>Line 48 
+<br>
+<br>CTRL-B 
+<br>
+<br>Line 49 
+<br>
+<br>Figure 18.10 Scrolling commands. 
+<br>
+<br>Scrolling Down 
+<br>
+<br>There are similar commands for moving down as well, including the following: 
+<br>
+<br>CTRL-D 
+<br>
+<br>Move down. The amount is controlled by the 'scroll' option. 
+<br>CTRL-E 
+<br>
+<br>Move down one line. 
+<br>
+<br>CTRL-F 
+<br>
+<br>Move down one screen of data (also <PageDown> or <S-Down>). 
+<br>
+<br>Figure 18.11 summarizes the scrolling commands. 
+<br>
+<br>Screen 
+<br>
+<br>1/2 Screen 
+<br>(value of ’scroll’) 
+<br>Two Lines 
+<br>One Line 
+<br>
+<br>CTRL-U CTRL-Y 
+<br>CTRL-B 2CTRL-Y 
+<br>
+<br>Line 40 
+<br>Line 41 
+<br>Line 42 
+<br>Line 43 
+<br>Line 44 
+<br>Line 45 
+<br>Line 46 
+<br>Line 47 
+<br>Line 48 
+<br>Line 49 
+<br>
+<br>CTRL-E 2CTRL-E CTRL-D CTRL-F 
+<br>
+<br>One Line 
+<br>Two Lines 
+<br>1/2 Screen 
+<br>(value of ’scroll’) 
+<br>
+<br>Screen 
+<br>
+<br>Figure 18.11 More scrolling commands. 
+<br>
+<br>
+<br>Adjusting the View 193 
+<br>
+<br>Define How Much to Scroll 
+<br>
+<br>When you move the cursor off the top or bottom, the window scrolls.The amount of 
+<br>the scrolling is controlled by the 'scrolljump' option. By default this is a single line; if 
+<br>you want more scrolling, however, you can increase this to a jump of 5, as follows: 
+<br>
+<br>:set scrolljump=5 
+<br>
+<br>The 'sidescroll' option does the same thing, except in the horizontal direction. 
+<br>
+<br>Usually the cursor must reach the top or bottom line of the screen for scrolling to 
+<br>occur. If you want to add a little padding to this margin, you can set the 'scrolloff' 
+<br>option.To make sure that there are at least 3 lines above or below the cursor, use the 
+<br>following command: 
+<br>
+<br>:set scrolloff=3 
+<br>
+<br>Adjusting the View 
+<br>
+<br>Suppose you want a given line at the top of the screen.You can use the CTRL-E (up 
+<br>one line) and CTRL-Y (down one line) commands until you get the proper line at the 
+<br>top. Or you can position the cursor on the line and type the command z<Enter>. 
+<br>Figure 18.12 shows how this command changes the screen. 
+<br>
+<br>Enjoys work, but she likes
+<br>
+<br>***** 
+<br>
+<br>the beach more. 
+<br>
+<br>
+<br>She found a good way 
+<br>
+<br>
+<br>To combine work and play: 
+<br>
+<br>
+<br>Ran as slow as did he, 
+<br>
+<br>She sells C shells 
+<br>
+<br>And that's not saying
+<br>
+<br>by the seashore. 
+<br>
+<br>
+<br>***** z<Enter> 
+<br>
+<br>§ 
+<br>
+<br>
+<br>Albert Einstein, when asked 
+<br>
+<br>
+<br>to describe radio, replied: 
+<br>
+<br>
+<br>"You see, wire telegraph is
+<br>
+<br>Ran as slow as did he, 
+<br>
+<br>a kind of a very, very long 
+<br>
+<br>And that's not saying
+<br>
+<br>cat. You pull his tail in
+<br>
+<br>
+<br>New York and his head is 
+<br>meowing in Los Angeles. 
+<br>
+<br>§ 
+<br>
+<br>Do you understand this? 
+<br>
+<br>Figure 18.12 The z<Enter> command. 
+<br>
+<br>If you supply an argument to this command, it will use that line rather than the current 
+<br>one. z<Enter> positions the current line at the top of the screen, for instance, 
+<br>whereas 88z<Enter> positions line 88 at the top. 
+<br>
+<br>The z<Enter> command not only positions the line at the top of the screen, it also 
+<br>moves the cursor to the first non-blank character on the line. If you want to leave the 
+<br>cursor where it is on the line, use the command zt. (If you change the current line by 
+<br>giving the command an argument, Vim will try to keep the cursor in the same column.) 
+<br>Figure 18.13 shows the zt command. 
+<br>
+<br>
+<h3>
+194 Chapter 18 Complete Basic Editing 
+</h3>
+<br>
+<br>the beach more. 
+<br>She found a good wayTo combine work and play: 
+<br>She sells C shells 
+<br>by the seashore. 
+<br>zt 
+<br>Ran as slow as did he, 
+<br>And that's not saying 
+<br>***** § 
+<br>Ran as slow as did he, 
+<br>§ 
+<br>Albert Einstein, when asked 
+<br>to describe radio, replied:
+<br>"You see, wire telegraph isa kind of a very, very long 
+<br>cat. You pull his tail inNew York and his head is 
+<br>meowing in Los Angeles.
+<br>Do you understand this?
+<br>And radio operates@ 
+<br>
+<br>Figure 18.13 The zt command. 
+<br>
+<br>If you want to position a line to the end of the screen, use the zb or z-command.The 
+<br>z-positions the cursor on the first non-blank column, whereas zb leaves it alone. 
+<br>Figure 18.14 shows the effects of these commands. 
+<br>
+<br>the beach more. Equals nine squared
+<br>
+<br>plus zero, no more. 
+<br>She found a good way 
+<br>To combine work and play: ***** 
+<br>
+<br>She sells C shells A UNIX sales lady, Lenore, 
+<br>by the seashore. 
+<br>Enjoys work, but she likes 
+<br>***** the beach more. 
+<br>
+<br>
+<br>Ran as slow as did he, She sells C shells 
+<br>
+<br>And that's not saying by the seashore. 
+<br>***** 
+<br>§ 
+<br>z-
+<br>
+<br>Figure 18.14 The zb and z-commands. 
+<br>
+<br>Finally, the zz and z. commands position the line at the center of the window.The zz 
+<br>command leaves the cursor in its current column, and z. moves it to the first non-
+<br>blank column. Figure 18.15 shows what these commands do. 
+<br>
+<br>
+<br>The C Command 195 
+<br>
+<br>Equals nine squaredplus zero, no more. 
+<br>***** 
+<br>She found a good way 
+<br>To combine work and play: 
+<br>She sells C shells 
+<br>A UNIX sales lady, Lenore, by the seashore. 
+<br>Enjoys work, but she likesthe beach more. z. 
+<br>***** 
+<br>She found a good wayTo combine work and play: 
+<br>She sells C shells 
+<br>by the seashore. 
+<br>zz 
+<br>Ran as slow as did he, 
+<br>And that's not saying 
+<br>***** § 
+<br>
+<br>Figure 18.15 The z. and zz commands. 
+<br>
+<br>Delete to the End of the Line 
+<br>
+<br>The D command deletes to the end of the line. If preceded by a count, it deletes to the 
+<br>end of the line and count – 1 more lines. (The D command is shorthand for d$.) See 
+<br>Figure 18.16 for some examples of this command. 
+<br>
+<br>ATTENTION 
+<br>
+<br>This room is fullfilled mit special electronische D 
+<br>equippment. Fingergrabbing and pressing the 
+<br>cnoeppkes from the computers is allowed for die 
+<br>
+<br>experts only! So all the “lefhanders” stay away 3D 
+<br>and do not disturben the brainstorming von here 
+<br>working intelligencies. Otherwise you will be out 
+<br>thrown and kicked anderswhere! Also: please keep 
+<br>still and only watchen astaunished the 
+<br>blinkenlights. 
+<br>
+<br>Figure 18.16 The D command. 
+<br>
+<br>The C Command 
+<br>
+<br>The C command deletes text from the cursor to the end of the line and then puts the 
+<br>editor in insert mode. If a count is specified, it deletes an additional count –1 lines. In 
+<br>other words, the command works like the D command, except that it puts you in 
+<br>insert mode. 
+<br>
+<br>
+<h3>
+196 Chapter 18 Complete Basic Editing 
+</h3>
+<br>
+<br>The s Command 
+<br>
+<br>The s (substitute) command deletes a single character and puts the editor in insert 
+<br>mode. If preceded by a count, then count characters are deleted. Figure 18.17 illustrates 
+<br>this command. 
+<br>
+<br>Profanity is the q language that all programmers know. 
+<br>
+<br>sone<Esc> 4sunderstand<Esc> 
+<br>
+<br>Profanity is the one language that all programmers understand. 
+<br>
+<br>Figure 18.17 The s command. 
+<br>
+<br>The S Command 
+<br>
+<br>The S command deletes the current line and puts the editor in insert mode. If a count 
+<br>is specified, it deletes count lines.This differs from the C command in that the C command 
+<br>deletes from the current location to the end of the line, whereas the S command 
+<br>always works on the entire line. Figure 18.18 illustrates the use of the S command. 
+<br>
+<br>Over the years system installers have Text deleted by 
+<br>developed many different ways to string C<Esc> 
+<br>cables above false ceilings. One of the 
+<br>
+<br>2C<Esc> 
+<br>
+<br>more innovative is the “small dog” 
+<br>method. One person takes a small dog, 
+<br>ties a string to its collar and puts the S<Esc> (Even if 
+<br>dog in the ceiling. The owner then goes the cursor is in 
+<br>to the spot where they want the cable to the middle of the 
+<br>come out and calls the dog. Dog runs to line.) 
+<br>owner. The attach a cable to the string, 
+<br>
+<br>
+<br>2S<Esc> 
+<br>
+<br>pull it through, and the cable is 
+<br>installed. 
+<br>
+<br>Figure 18.18 The S command. 
+<br>
+<br>Deleting Text 
+<br>
+<br>The “register count x command deletes characters starting with the one under the 
+<br>cursor moving right.The X command deletes characters to the left of the cursor. 
+<br>Figure 18.19 shows how these two commands work. 
+<br>
+<br>
+<br>Arithmetic 197 
+<br>
+<br>1 is equal to 2 for sufficiently large values of 1. 
+<br>
+<br>3x 
+<br>
+<br>1 is equal to 2 for suffintly large values of 1. 
+<br>
+<br>1 is equal to 2 for sufficiently large values of 1. 
+<br>
+<br>3X 
+<br>
+<br>1 is equal to 2 for suciently large values of 1. 
+<br>
+<br>Figure 18.19 The x and X commands. 
+<br>
+<br>Insert Text at the Beginning or End of the Line 
+<br>
+<br>The I command inserts text like the i command does.The only difference is that the 
+<br>I command inserts starting at the beginning of the line. (In this case, “beginning” 
+<br>means at the first non-blank character.) To insert at the first character of the line 
+<br>(space or not), use the gI command.The A command appends text like the a command, 
+<br>except the text is appended to the end of the line. 
+<br>
+<br>Arithmetic 
+<br>
+<br>The Vim editor can perform simple arithmetic on the text.The CTRL-A command 
+<br>increments the number under the cursor. If an argument is specified, that number is 
+<br>added to the number under the cursor. Figure 18.20 shows how various types of numbers 
+<br>are incremented. 
+<br>
+<br>123 0177 0x1E 123 
+<br>CTRL-A CTRL-A CTRL-A CTRL-A 
+<br>124 0200 0x1F 128 
+<br>
+<br>Figure 18.20 Incrementing. 
+<br>
+<br>If a number begins with a leading 0, it is considered an octal number.Therefore, when 
+<br>you increment the octal number 0177, you get 0200. If a number begins with 0x or 
+<br>0X, it is considered a hexadecimal number.That explains 0x1E to 0x1F. 
+<br>
+<br>The Vim editor is smart about number formats, so it will properly increment decimal, 
+<br>hexadecimal, and octal. 
+<br>
+<br>The CTRL-X command works just like the CTRL-A command, except the number is 
+<br>decremented; or if an argument is present, the number is subtracted from the number. 
+<br>Figure 18.21 shows how to decrement numbers. 
+<br>
+<br>
+<h3>
+198 Chapter 18 Complete Basic Editing 
+</h3>
+<br>
+<br>123 0120 0x1E 123 
+<br>CTRL-X CTRL-X CTRL-X 5 CTRL-X 
+<br>124 0117 0x1F 118 
+<br>
+<br>Figure 18.21 Decrementing. 
+<br>
+<br>By default, Vim recognizes the octal and hexadecimal numbers.Which formats are 
+<br>recognized is controlled by the nrformats option. If you want to recognize decimal 
+<br>and octal numbers, for instance, execute the following command: 
+<br>
+<br>:set nrformats=”” 
+<br>
+<br>If you want to recognize just octal numbers, use this command: 
+<br>
+<br>:set nrformats=octal 
+<br>
+<br>The default recognizes decimal, hexadecimal, and octal: 
+<br>
+<br>:set nrformats=octal,hex 
+<br>
+<br>Note 
+<br>
+<br>Decimal is always recognized. Unlike hexadecimal and octal, there is no way to turn off decimal recognition. 
+<br>
+<h3>
+The Vim editor can do more sophisticated calculations. See Chapter 27, “Expressions 
+</h3>
+<br>and Functions,” for information on the “= register. 
+<br>
+<br>Joining Lines with Spaces 
+<br>
+<br>The J command joins the current line with the next one. A space is added to the end 
+<br>of the first line to separate the two pieces that are joined. But suppose you do not 
+<br>want the spaces.Then you use the gJ command to join lines without spaces (see 
+<br>Figure 18.22). It works just like the J command, except that no space is inserted 
+<br>between the joined parts. 
+<br>
+<br>This is a test 
+<br>
+<br>This is 
+<br>
+<br>gJ
+<br>
+<br>a test 
+<br>
+<br>This is This is a test with two lines 
+<br>
+<br>2gJ
+<br>
+<br>a test 
+<br>
+<br>with two lines 
+<br>
+<br>Figure 18.22 The gJ command. 
+<br>
+<br>Note 
+<br>
+<br>If the first line ends with some trailing spaces, the gJ command will not remove them. 
+<br>
+<br>
+<br>Replace Mode 199 
+<br>
+<br>Replace Mode 
+<br>
+<br>The R command causes Vim to enter replace mode. In this mode, each character you 
+<br>type replaces the one under the cursor.This continues until you type <Esc>. Figure 
+<br>
+<br>18.23 contains a short example. 
+<br>This is a test. 
+<br>
+<br>Rmess<Esc> 
+<br>
+<br>This is a mess. 
+<br>
+<br>Figure 18.23 The R command. 
+<br>
+<br>If a count is specified, the command will be repeated count times (see Figure 18.24). 
+<br>
+<br>This is a test. 
+<br>
+<br>3Rmess<Esc> 
+<br>
+<br>This is a messmessmess. 
+<br>
+<br>Figure 18.24 R command with a count. 
+<br>
+<br>You may have noticed that this command replaced 12 characters on a line with only 5 
+<br>left on it.The R command automatically extends the line if it runs out of characters to 
+<br>replace. 
+<br>
+<br>Virtual Replace Mode 
+<br>
+<br>One of the problems with replace comes when you have a <Tab> in the text. If you 
+<br>are sitting on a <Tab> and execute the command rx, the <Tab> will be replaced by 
+<br>x.This can shift your line around (see Figure 18.25). 
+<br>
+<br><Tab> 
+<br>
+<br>This is a test 
+<br>
+<br>rx 
+<br>
+<br>xThis is a test 
+<br>
+<br>Figure 18.25 Simple non-virtual replace. 
+<br>
+<br>If you use the virtual replace command, grcharacter, you replace the “virtual character” 
+<br>under the cursor (see Figure 18.26). If the real character under the cursor is part 
+<br>of a tab, only the space representing the tab jumped over is replaced. 
+<br>
+<br>
+<h3>
+200 Chapter 18 Complete Basic Editing 
+</h3>
+<br>
+<br><Tab> 
+<br>
+<br>This is a test 
+<br>
+<br>Rx 
+<br>
+<br><Tab> 
+<br>
+<br>x This is a test 
+<br>
+<br>Figure 18.26 Virtual replacement. 
+<br>
+<br>The gR command enters virtual replace mode. Each character you type will replace 
+<br>one character in screen space until you finish things off with <Esc>. 
+<br>
+<br>Digraphs 
+<br>
+<h3>
+As learned in Chapter 2, executing CTRL-K character1 character2 inserts a digraph. 
+</h3>
+<br>You can define your own digraphs by using the following command: 
+<br>
+<br>:digraphs character1 character2 number 
+<br>
+<br>This tells Vim that when you type CTRL-K character1 character2 that you should 
+<br>insert the character whose character number is number. 
+<br>
+<br>If you are entering a lot of digraphs, you can turn on the 'digraph' option by 
+<br>using this command: 
+<br>
+<br>:set digraph 
+<br>
+<br>This means that you can now enter digraphs by using the convention 
+<br>character1<BS>character2. (<BS> is the backspace character.) 
+<br>
+<br>This mode has its drawbacks, however.The digraph c<BS>0 is the copyright character 
+<br>(©). If you type x but want to type y, you can correct your mistake by typing x 
+<br>(oops), <BS>, and y. If you do that with c and 0, however, it does not erase the c and 
+<br>put in the 0; instead, it inserts ©. 
+<br>
+<br>Therefore, you need to type c (oops), <BS>, 0 (darn, © appeared), <BS>, and 0. 
+<br>
+<br>To turn off digraph mode, use the following command: 
+<br>
+<br>:set nodigraph 
+<br>
+<br>Changing Case 
+<br>
+<br>The ~ command changes a character’s case.The behavior of the ~ command depends 
+<br>on the value of the 'tildeop' option.With the option unset, the command behaves 
+<br>
+<br>:set notildeop 
+<br>
+<br>If you set the following option, however, the syntax of the command changes to 
+<br>~motion: 
+<br>
+<br>:set tildeop 
+<br>
+<br>For example the command ~fq changes the case of all the characters up to and 
+<br>including the first q on the line. Figure 18.27 shows some examples. 
+<br>
+<br>
+<br>Other Case-Changing Commands 201 
+<br>
+<br>
+<br>3~l ~fM 
+<br>
+<br>Now is the time. . . . Now isTHE time. . . . 
+<br>
+<br>Figure 18.27 ~motion commands. 
+<br>
+<br>The g~motion command changes the case of the indicated characters. It is just like 
+<br>the ~motion command except that it does not depend on the tildeop option. 
+<br>Figure 18.28 shows some examples. 
+<br>
+<br>
+<br>3g~l g~fm 
+<br>
+<br>Now is the time. . . . Now isTHE time. . . . 
+<br>
+<br>Figure 18.28 The g~ command. 
+<br>
+<br>A special version of this command, g~~ or g~g~, changes the case of the entire line (see 
+<br>Figure 18.29). 
+<br>
+<br>Now IS the Time. . . . 
+<br>
+<br>g~~ 
+<br>
+<br>
+<br>Figure 18.29 The g~~ command. 
+<br>
+<br>Other Case-Changing Commands 
+<br>
+<br>The gUmotion command makes the text from the cursor to motion all uppercase.The 
+<br>command gUU or gUgU works on a single line. If count is specified, count lines are 
+<br>changed. 
+<br>
+<br>The gumotion, guu, and gugu act just like their gU counterparts, except that they 
+<br>make the text lowercase. 
+<br>
+<br>Figure 18.30 illustrates these commands. 
+<br>
+<br>g~~
+<br>
+<br>This is Mixed Case line. tHIS IS mIXED cASE LINE. 
+<br>
+<br>gUU
+<br>
+<br>This is Mixed Case line. THIS IS MIXED CASE LINE. 
+<br>
+<br>Figure 18.30 Case-changing commands. 
+<br>
+<br>
+<h3>
+202 Chapter 18 Complete Basic Editing 
+</h3>
+<br>
+<br>Undo Level 
+<br>
+<br>You can execute only so many undo commands.This limit is set by the undolevels 
+<br>option.To set this limit to 5,000 changes, use the following command: 
+<br>
+<br>:set undolevels=5000 
+<br>
+<br>Getting Out 
+<br>
+<br>The ZQ command is an alias for the :q! or :quit! command.The command exits and 
+<br>discards all changes. 
+<br>The :write command writes out the file.The :quit command exits.You can use a 
+<br>shorthand for these commands: 
+<br>
+<br>:wq 
+<br>
+<br>This command can take a filename as an argument. In this case, the edit buffer will be 
+<br>written to the file and then Vim will exit.To save your work under a new filename 
+<br>and exit, for instance, use the following command: 
+<br>
+<br>:wq count.c.new 
+<br>
+<br>This command will fail with an error message if the file count.c.new exists and is 
+<br>read-only. If you want Vim to overwrite the file, use the override option (!): 
+<br>:wq! count.c.new 
+<br>
+<h3>
+Finally, you can give the :wq command a line-range argument. (See Chapter 25, 
+</h3>
+<br>“Complete Command-Mode Commands” for more on ranges.) If a line range is present, 
+<br>only those lines are written to the file.To write out only the first 10 lines of a 
+<br>file and exit, for example, execute the following command: 
+<br>
+<br>:1,10wq count.c.new 
+<br>
+<br>The :xit command acts much like the :wq command except that it only writes the 
+<br>file if the buffer has been modified. 
+<br>
+<br>
+<br>Advanced Searching Using 
+<br>Regular Expressions 
+<br>
+<br>VIMHAS A POWERFUL SEARCH ENGINE THATenables you to perform many different 
+<br>
+<br>types of searches. In this chapter, you learn about the following: 
+<br>
+<br>
+<br>Turning on and off case sensitivity 
+<br>
+<br>
+<br>Search options 
+<br>
+<br>
+<br>Instant word searching 
+<br>
+<br>
+<br>How to specify a search offset 
+<br>
+<br>
+<br>A full description of regular expressions 
+<br>
+<br>Searching Options 
+<br>
+<br>This section describes some of the more sophisticated options that you can use to 
+<br>fine-tune your search. 'hlsearch' has been turned on to show you how these options 
+<br>affect the searching. 
+<br>
+<br>Case Sensitivity 
+<br>
+<br>By default, Vim’s searches are case sensitive.Therefore, include, INCLUDE, and Include 
+<br>are three different words and a search will match only one of them.The following 
+<br>example searched for include. Notice that INCLUDE, Include and iNCLude are not 
+<br>highlighted. Figure 19.1 shows the result of an /include command. 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+204 Chapter 19 Advanced Searching Using Regular Expressions 
+</h3>
+<br>
+<br>* Report the speed of a cd–rom * 
+<br>* (Also works on hard drives and other * 
+<br>* devices) * 
+<br>* * 
+<br>* Usage: * 
+<br>* cd–speed <device> * 
+<br>* * 
+<br>********************************************************/ 
+<br>
+<br>
+<br>#include <iostream.h> 
+<br>#INCLUDE <iomanip.h> 
+<br>#Include <unistd.h> 
+<br>#iNCLude <stdlib.h> 
+<br>/include 
+<br>
+<br>
+<br>Figure 19.1 Case-sensitive search. 
+<br>
+<br>Now let’s turn on the 'ignorecase' option by entering the following command: 
+<br>:set ignorecase 
+<br>
+<br>Now when you search for include, you will get all four flavors of the word as (see 
+<br>Figure 19.2). 
+<br>
+<br>* Report the speed of a cd–rom * 
+<br>* (Also works on hard drives and other * 
+<br>* devices) * 
+<br>* * 
+<br>* Usage: * 
+<br>* cd–speed <device> * 
+<br>* * 
+<br>********************************************************/ 
+<br>
+<br>
+<br>#include <iostream.h> 
+<br>#INCLUDE <iomanip.h> 
+<br>#Include <unistd.h> 
+<br>#iNCLude <stdlib.h> 
+<br>
+<br>
+<br>Figure 19.2 Non-case-sensitive search. 
+<br>
+<br>To turn on case sensitivity, use this command: 
+<br>:set noignorecase 
+<br>
+<br>
+<br>(Technically what you are doing is turning off case insensitivity, but it tortures the 
+<br>English language too much to say it this way.) 
+<br>
+<br>If you have 'ignorecase' set, word matches word, WORD, and Word. It also means 
+<br>that WORD will match the same thing. If you set the following two options, any 
+<br>search string typed in lowercase is searched, ignoring the case of the search string: 
+<br>
+<br>:set ignorecase 
+<br>:set smartcase 
+<br>
+<br>
+<br>If you have a string with at least one uppercase character, however, the search becomes 
+<br>case sensitive. 
+<br>Thus you have the following matches: 
+<br>
+<br>String Matches 
+<br>
+<br>word word,Word,WORD, worD 
+<br>
+<br>Word Word 
+<br>
+<br>WORD WORD 
+<br>
+<br>WorD WorD 
+<br>
+<br>
+<br>Searching Options 205 
+<br>
+<br>Wrapping 
+<br>
+<br>By default, a forward search starts searching for the given string starting at the current 
+<br>cursor location. It then proceeds to the end of the file. If it does not find the string by 
+<br>that time, it starts from the beginning and searches from the start of the file to the 
+<br>cursor location. Figure 19.3 shows how this works. 
+<br>
+<br>1 
+<br>
+<br>2 // Read at most 10MB 
+<br>
+<br>3 const. unsigned int MAX_READ = (10 * 1024 *1024 
+<br>
+<br>Start 4 
+<br>
+<br>5 // Size of a buffer 
+<br>
+<br>6 const unsigned int BUF_SIZE = (62 * 1024); 
+<br>
+<br>1) /unsigned 
+<br>7 
+<br>8 // Buffer to be written 
+<br>
+<br>
+<br>2) n 
+<br>
+<br>9 static unsigned char buffer[BUF_SIZE]; 
+<br>10 
+<br>
+<br>3) n 
+<br>
+<br>Figure 19.3 Wrapping. 
+<br>
+<br>This example starts by searching for unsigned.The first search goes to line 6.The next 
+<br>search moves to line 9.When trying to search again, you reach the end of the file 
+<br>without finding the word. At this point, the search wraps back to line 1 and the search 
+<br>continues.The result is that you are now on line 3. 
+<br>
+<br>Turning Off Search Wrapping 
+<br>
+<br>To turn off search wrapping, use the following command: 
+<br>
+<br>:set nowrapscan 
+<br>
+<br>Now when the search hits the end of the file, an error message displays (see Figure 19.4). 
+<br>
+<br>#include <sys/fcntl.h> 
+<br>
+<br>#include <sys/time.h> 
+<br>
+<br>#include <errno.h> 
+<br>
+<br>// Read at most 10MB 
+<br>
+<br>const unsigned int MAX_READ = (10 * 1024 *1024); 
+<br>
+<br>// Size of a buffer 
+<br>
+<br>const unsigned int BUF_SIZE = (62 * 1024); 
+<br>
+<br>// Buffer to be written 
+<br>static unsigned char buffer[BUF_SIZE]; 
+<br>
+<br>
+<br>search hit BOTTOM without match for: unsigned 
+<br>
+<br>Figure 19.4 nowrapscan. 
+<br>
+<br>To go back to normal wrapping searches, use the following command: 
+<br>
+<br>:set wrapscan 
+<br>
+<br>
+<h3>
+206 Chapter 19 Advanced Searching Using Regular Expressions 
+</h3>
+<br>
+<br>Interrupting Searches 
+<br>
+<br>If you are in the middle of a long search and want to stop it, you can type CTRL-C on a 
+<br>UNIX system or CTRL-BREAK on Microsoft Windows. On most systems, unless you are 
+<br>editing a very large file, searches are almost instantaneous. 
+<br>
+<br>Instant Word Searches 
+<br>
+<br>The * command searches for the word under the cursor. For example, position the 
+<br>cursor on the first const. Pressing * moves the cursor to the next occurrence of the 
+<br>word, specifically line 26. Figure 19.5 shows the results. 
+<br>
+<br>19 #include <sys/fcntl.h> 
+<br>20 #include <sys/time.h> 
+<br>21 #include <errno.h> 
+<br>22 
+<br>23 // Read at most 10MB 
+<br>24 const. unsigned int MAX_READ = (10 * 1024 *1024); 
+<br>25 // Size of a buffer 
+<br>
+<br>
+<br>* 
+<br>
+<br>26 const unsigned int BUF_SIZE = (62 * 1024); 
+<br>27 
+<br>28 // Buffer to be written 
+<br>29 static unsigned char buffer[BUF_SIZE]; 
+<br>
+<br>
+<br>Figure 19.5 * command. 
+<br>
+<br>The # or £ command does an instant word search in the backward direction.These 
+<br>commands work on whole words only. In other words, if you are on const and conduct 
+<br>a * search, you will not match constant.The g* command performs an instant word 
+<br>search, but does not restrict the results to whole words. So whereas * will not match 
+<br>constant, the g* command will match it. 
+<br>
+<br>The g# command does the same thing in the reverse direction. 
+<br>
+<br>Search Offsets 
+<br>
+<br>By default, the search command leaves the cursor positioned on the beginning of the 
+<br>pattern.You can tell Vim to leave it some other place by specifying an offset. For the 
+<br>forward search command (/), the offset is specified by appending a slash (/) and the 
+<br>offset, as follows: 
+<br>
+<br>/const/2 
+<br>
+<br>This command searches for the pattern const and then moves to the beginning of the 
+<br>second line past the pattern. Figure 19.6 shows how this works. 
+<br>
+<br>
+<br>Search Offsets 207 
+<br>
+<br>/const/2 
+<br>
+<br>19 #include <sys/fcntl.h> 
+<br>20 #include <sys/time.h> 
+<br>21 #include <errno.h> 
+<br>
+<br>Find const 
+<br>
+<br>22 
+<br>23 // Read at most 10MB 
+<br>24 const unsigned int MAX_READ = (10 * 1024 *1024); 
+<br>25 // Size of a buffer 
+<br>26 const unsigned int BUF_SIZE = (62 * 1024); 
+<br>
+<br>Move to the 
+<br>27
+<br>
+<br>
+<br>start of the 
+<br>28 // Buffer to be written 
+<br>
+<br>
+<br>pattern +2 lines 
+<br>29 static unsigned char buffer[BUF_SIZE]; 
+<br>
+<br>
+<br>Figure 19.6 Search offsets. 
+<br>
+<br>If the offset is a simple number, the cursor will be placed at the beginning of the offset 
+<br>line from the match.The offset number can be positive or negative. If it is positive, the 
+<br>cursor moves down that many lines; if negative, it moves up. 
+<br>
+<br>If the offset begins with b and a number, the cursor moves to the beginning of the 
+<br>pattern, and then travels the “number” of characters. If the number is positive, the cursor 
+<br>moves forward, if negative, backward.The command /const/b2 moves the cursor 
+<br>to the beginning of the match, for instance, and then two characters to the right (see 
+<br>Figure 19.7). 
+<br>
+<br>const unsigned int BUF_SIZE = (62 * 1024); 
+<br>
+<br>2 characters to the right 
+<br>Results of 
+<br>pattern /const/b2 
+<br>
+<br>Figure 19.7 
+<br>
+<br>/const/b2. 
+<br>
+<br>Note 
+<br>
+<br>The b offset is a synonym for s. Therefore, you can use b (begin), and s (start) for the first character of 
+<br>
+<br>the match. 
+<br>
+<br>The e offset indicates an offset from the end of the match.Without a number it moves 
+<br>the cursor onto the last character of the match.The command /const/e puts the cursor 
+<br>on the t of const. Again, a positive number moves the cursor to the right, a negative 
+<br>
+<br>const unsigned int BUF_SIZE = (62 * 1024); 
+<br>
+<br>pattern end 
+<br>Results of 
+<br>3 characters to the left /const/e-3 
+<br>
+<br>Figure 19.8 /const/e-3. 
+<br>
+<br>
+<h3>
+208 Chapter 19 Advanced Searching Using Regular Expressions 
+</h3>
+<br>
+<br>Finally, there is the null offset.This is the empty string.This cancels the preceding 
+<br>offset. 
+<br>
+<br>Specifying Offsets 
+<br>
+<br>To specify an offset on a forward search (/ command), append /offset to the command, 
+<br>as follows: 
+<br>
+<br>/const/e+2 
+<br>
+<br>If you want to repeat the preceding search with a different offset, just leave out the 
+<br>pattern and specify the new offset: 
+<br>
+<br>//5 
+<br>
+<br>To cancel an offset, just specify an empty offset. 
+<br>// 
+<br>
+<br>For example: 
+<br>/const/e+2 Search moves to the end of the pattern, and then to the right two 
+<br>
+<br>characters. 
+<br>/ Repeats last search, with the preceding offset. 
+<br>// Repeats the last search with no offset. (Cursor will be placed on 
+<br>
+<br>the first character of the pattern.) 
+<br>
+<br>To specify an offset for a reverse search (? command), append ?offset to the 
+<br>command, as follows: 
+<br>
+<br>?const?b5 
+<br>
+<br>To repeat with the same pattern and a new offset, use the following: 
+<br>??-2 
+<br>
+<br>To remove the offset and repeat the search with the preceding pattern, use the following: 
+<br>?? 
+<br>
+<br>One thing to remember when using search offsets, the search always starts from the 
+<br>current cursor position.This can get you into trouble if you use a command such as 
+<br>this: 
+<br>
+<br>/const/-2 
+<br>
+<br>This command searches for const and then moves up two lines. If you then repeat the 
+<br>search with the n command, it goes down two lines, finds the const you just found, and 
+<br>then moves the cursor back up two lines for the offset.The result is that no matter 
+<br>how many times you type n, you go nowhere. 
+<br>
+<br>
+<br>Complete Regular Expressions 209 
+<br>
+<br>Complete Regular Expressions 
+<br>
+<br>The search logic of Vim uses regular expressions.You saw some simple ones in 
+<br><h3>
+<h3>
+Chapter 3,“Searching,” but this chapter goes into them in extreme detail. Regular 
+</h3>
+<br></h3>
+<br>expressions enable you to search for more than simple strings. By specifying a regular 
+<br>expression in your search command, you can search for a character pattern, such as “all 
+<br>words that begin with t and end in ing” (regular expression = \<t[^ ]*ing\>). 
+<br>
+<br>However, the power of regular expressions comes with a price. Regular expressions 
+<br>are quite cryptic and terse. It may take some time for you to get used to all the ins and 
+<br>outs of this powerful tool. 
+<br>
+<br>While learning regular expressions, you should execute the following command: 
+<br>
+<br>:set hlsearch 
+<br>
+<br>This causes Vim to highlight the text you matched with your last search.Therefore, 
+<br>when you search for a regular expression, you can tell what you really matched (as 
+<br>opposed to what you thought you matched). 
+<br>
+<br>A regular expression consists of a series of atoms. An atom is the smallest matching 
+<br>unit in a regular expression. Atoms can be things like a single character, such as a 
+<br>(which matches the letter a), or a special character, such as $ (which matches the end 
+<br>of the line). Other atoms, such as \< (word start, see the following section), consist of 
+<br>multiple characters. 
+<br>
+<br>Beginning (\<) and End (\>) of a Word 
+<br>
+<br>The atom \< matches the beginning of a word.The atom \> matches the end of a 
+<br>word. 
+<br>
+<br>For example, a search for the expression for finds all occurrences of for, even those 
+<br>in other words, such as Californian and Unfortunately. Figure 19.9 shows the results of 
+<br>this search. 
+<br>
+<br>If you use the regular expression \<for\>, however, you match only the actual word 
+<br>for. Figure 19.10 contains the results of this refined search. 
+<br>
+<br>Calls and letters to the company failed to correct 
+<br>this problem. Finally the fellow just gave up and 
+<br>wrote a check for $0.00 and the bills ceased. 
+<br>
+<br>
+<br>A Californian who loved sailing went down and applied 
+<br>for a personalized license plate. He filled in his 
+<br>three choices as 1)SAIL 2)SAILING and 3)NONE. He got 
+<br>a new plate labeled "NONE." 
+<br>
+<br>
+<br>Unfortunately, when the police write out a ticket 
+<br>/for 
+<br>
+<br>
+<br>Figure 19.9 Search for /for. 
+<br>
+<br>
+<h3>
+210 Chapter 19 Advanced Searching Using Regular Expressions 
+</h3>
+<br>
+<br>Calls and letters to the company failed to correct 
+<br>this problem. Finally the fellow just gave up and 
+<br>wrote a check for $0.00 and the bills ceased. 
+<br>
+<br>
+<br>A Californian who loved sailing went down and applied 
+<br>for a personalized license plate. He filled in his 
+<br>three choices as 1)SAIL 2)SAILING and 3)NONE. He got 
+<br>a new plate labeled "NONE." 
+<br>
+<br>Unfortunately, when the police write out a ticket 
+<br>/\<for\> 
+<br>
+<br>
+<br>Figure 19.10 Search for /\<for\>. 
+<br>
+<br>Modifiers and Grouping 
+<br>
+<br>The modifier * is used to indicate that an atom is to be matched 0 or more times.The 
+<br>match is “greedy.” In other words, the editor will try to match as much as possible. 
+<br>Thus, the regular expression te* matches te, tee, teee, and so on. 
+<br>
+<br>The expression te* also matches the string t.Why? Because e* can match a zero-
+<br>length string of e’s. And t is the letter t followed by zero e’s. 
+<br>Figure 19.11 shows the results of the search for te*. 
+<br>
+<br>This is a test. 
+<br>
+<br>te tee teee teee 
+<br>
+<br>~ 
+<br>~ 
+<br>/te* 
+<br>
+<br>
+<br>Figure 19.11 Search for /te*. 
+<br>
+<br>The \+ modifier indicates that the atom is to be matched one or more times. 
+<br>Therefore, te\+ matches te, tee, and teee, but not t. (te\+ is the same as tee*.). 
+<br>Figure 19.12 illustrates what is matched for the search /te\+. 
+<br>
+<br>This is a test. 
+<br>
+<br>te tee teee teee 
+<br>
+<br>~ 
+<br>~ 
+<br>/te\+ 
+<br>
+<br>
+<br>Figure 19.12 Search for /te\+. 
+<br>
+<br>Finally, there is the \= modifier. It causes the preceding atom to be matched zero or 
+<br>one time.This means that te\= matches t and te, but not tee. (Although it will match 
+<br>the first two characters of tee.) Figure 19.13 shows a typical search. 
+<br>
+<br>
+<br>Complete Regular Expressions 211 
+<br>
+<br>This is a test. 
+<br>
+<br>te tee teee teee 
+<br>
+<br>~ 
+<br>~ 
+<br>/te\= 
+<br>
+<br>Figure 19.13 Search for /te\=. 
+<br>
+<br>Special Atoms 
+<br>
+<br>A number of special escaped characters match a range of characters. For example, the 
+<br>\a atom matches any letter, and the \d option matches any digit.The regular expression 
+<br>\a\a\a matches any three letters. 
+<br>
+<br>Now try a search for any four digits. Figure 19.14 displays the results. 
+<br>
+<br>1 
+<br>
+<br>2 // Read at most 10MB 
+<br>
+<br>3 const unsigned int MAX_READ = (10 * 1024 *1024); 
+<br>
+<br>4 
+<br>
+<br>5 // Size of a buffer 
+<br>
+<br>6 const unsigned int BUF_SIZE = (62 * 1024); 
+<br>
+<br>7 
+<br>
+<br>8 // Buffer to be written 
+<br>
+<br>9 static unsigned char buffer[BUF_SIZE]; 
+<br>
+<br>10 
+<br>
+<br>/\d\d\d\d 
+<br>
+<br>Figure 19.14 Search for /\d\d\d\d. 
+<br>
+<br>Now try a search for any three letters followed by an underscore. Figure 19.15 displays 
+<br>the results. 
+<br>
+<br>1 
+<br>
+<br>2 // Read at most 10MB 
+<br>
+<br>3 const unsigned int MAX_READ = (10 * 1024 *1024); 
+<br>
+<br>4 
+<br>
+<br>5 // Size of a buffer 
+<br>
+<br>6 const unsigned int BUF_SIZE = (62 * 1024); 
+<br>
+<br>7 
+<br>
+<br>8 // Buffer to be written 
+<br>
+<br>9 static unsigned char buffer[BUF_SIZE]; 
+<br>
+<br>10 
+<br>/\a\a\a_ 
+<br>
+<br>Figure 19.15 Search for /\a\a\a. 
+<br>
+<br>Character Ranges 
+<br>
+<br>The \a atom matches all the letters (uppercase and lowercase). But suppose you want 
+<br>to match only the vowels.The range operator enables you to match one of a series of 
+<br>characters. For example, the range [aeiou] matches a single lowercase vowel.The 
+<br>string t[aeiou]n matches tan, ten, tin, ton and tun. 
+<br>
+<br>
+<h3>
+212 Chapter 19 Advanced Searching Using Regular Expressions 
+</h3>
+<br>
+<br>You can specify a range of characters inside the brackets ([]) by using a dash. For 
+<br>example, the pattern [0-9], matches the characters 0 through 9. (That is 
+<br>0,1,2,3,4,5,6,7,8,9.) 
+<br>
+<br>You can combine ranges with other characters. For example, [0-9aeiou] matches 
+<br>any digit or lowercase vowel. 
+<br>The ^ character indicates a set of characters that match everything except the indicated 
+<br>characters.To match the constants, for example, you can specify [^aeioAEIOU]. 
+<br>
+<br>Note 
+<br>
+<br>To match the ^, you need to escape it. For example, [\^$.] matches any one of the three symbols 
+<br>
+<br>^, $, or .. 
+<br>
+<br>Pattern Matches 
+<br>
+<br>one[\-]way one-way, but not one way or one+way 
+<br>2\^4 
+<br>
+<br>2^4 
+<br>2[\^*]4 2^4, 2*4 
+<br>
+<br>
+<br>Character Classes 
+<br>
+<br>Suppose you want to specify all the uppercase letters. One way to do this is to use the 
+<br>expression [A-Z]. Another way is to use one of the predefined character classes.The 
+<br>class [:upper:] matches the uppercase characters.Therefore, you can write [A-Z] as 
+<br>[[:upper:]]. 
+<br>
+<br>You can write the entire alphabet, upper-and lowercase, [[:upper:][:lower:]]. 
+<br>There are a large number of different character classes. 
+<br>
+<br>Note 
+<br>
+<br>You cannot use the special atoms like \a and \d in a range. For example, [\a\d] matches the charac
+<br>
+<br>
+<br>ters \, a, \, and d. It does not match the letters (\a) and digits (\d). 
+<br>
+<br>Repeat Modifiers 
+<br>
+<br>You can specify how many times an atom is to be repeated.The general form of a 
+<br>repeat is as follows: 
+<br>\{minimum, maximum} 
+<br>
+<br>For example, the regular expression a\{3,5} will match 3 to 5 a’s. (that is, aaa, aaaa, or 
+<br>aaaaa.) By default, the Vim editor tries to match as much as possible. So a\{3,5} will 
+<br>match as many a’s as it can (up to 5). 
+<br>
+<br>The minimum can be omitted, in which case it defaults to zero.Therefore, a,\{,5} 
+<br>matches 0–5 repeats of the letter.The maximum can be omitted as well, in which case 
+<br>it defaults to infinity. So a\{3,} matches at least 3 a’s, but will match as many a’s as 
+<br>you have got on the line. 
+<br>
+<br>
+<br>Complete Regular Expressions 213 
+<br>
+<br>If only one number is specified, the atom must match exactly that number of times. 
+<br>Therefore, a\{5} matches 5 a’s, exactly. 
+<br>
+<br>Repeating as Little as Possible 
+<br>
+<br>If you put a minus sign (-) before any of the numbers, the Vim editor tries to match as 
+<br>little as possible. 
+<br>
+<br>Therefore, a\{-3,5} will match 3 to 5 a’s, as little as possible. Actually if this expression 
+<br>is by itself, it will always match just three a’s.That is because even if you have the 
+<br>word aaaaa, the editor will match as little as possible. 
+<br>
+<br>The specification a\{-3,} matches 3 or more a’s, as little as possible.The expression 
+<br>a\{-,5} matches 0–5 letters. 
+<br>The expression a\{-} matches 0 to infinity number of characters, as little as possi
+<br>
+<br>
+<br>ble. Note that this pattern by itself will always match zero characters. It only makes 
+<br>sense when there is something after it. For example: [a-z]\{-}x will match cx in cxcx. 
+<br>Using [a-z]*x would have matched the whole cxcx. 
+<br>
+<br>Finally, the specification a\{-5} matches exactly 5 a’s, as little as possible. Because as 
+<br>little as possible is exactly 5, the expression a\{-5} acts just like a\{5}. 
+<br>
+<br>Grouping ( \(\) ) 
+<br>
+<br>You can specify a group by enclosing it in a \( and \). For example, the expression 
+<br>a*b matches b, ab, aab, aaab, and so on.The expression a\(XY\)*b matches ab, aXYb, 
+<br>aXYXYb, aXYXYXYb, and so on. 
+<br>
+<br>When you define a group using \(\), the first enclosed string is assigned to the 
+<br>atom \1.To match the string the the, for instance, use the regular expression \(the\) 
+<br>\1.To find repeated words, you can get a bit more general and use the expression 
+<br>\(\<\a\+\>\) \1. Figure 19.16 breaks this into its components. 
+<br>
+<br>Put matching text in \1 
+<br>
+<br>\ ( \ < \ a +\ >\ ) \ 1 
+<br>
+<br>Match beginning of a word 
+<br>Match a single letter 
+<br>Repeat 1 or more times 
+<br>Ending of a word 
+<br>Match space 
+<br>Match what was in the first \ (... \ ) 
+<br>
+<br>Figure 19.16 The repeat (\1) expression. 
+<br>
+<br>The first group is assigned to \1, the second \2, and so on. 
+<br>
+<br>
+<h3>
+214 Chapter 19 Advanced Searching Using Regular Expressions 
+</h3>
+<br>
+<br>The Or Operator (\|) 
+<br>
+<br>The \| operator enables you to specify two or more possible matches.The regular 
+<br>expression foo\|bar matches foo or bar. 
+<br>For example, the search 
+<br>
+<br>/procedure\|function 
+<br>
+<br>searches for either procedure or function. 
+<br>
+<br>Putting It All Together 
+<br>
+<br>Let’s create a regular expression to match California license plate numbers. A sample 
+<br>license plate looks like 1MGU103.The pattern is one digit, three uppercase letters, 
+<br>and three digits.There are several ways of doing this. 
+<br>
+<br>Start by specifying the digit as [0-9], now add the uppercase letter: [0-9][A-Z]. 
+<br>There are three of them, so you get [0-9][A-Z]\{3}. Finally, you add the three digits 
+<br>on the end, resulting in [0-9][A-Z]\{3}[0-9]\{3}. 
+<br>
+<br>Another way to do this is to recognize that \d represents any digit and \u any 
+<br>uppercase character.The result is \d\u\{3}\d\{3}. 
+<br>The experts tell us that this form is faster than using the [] form. If you are editing 
+<br>
+<br>a file where this speed up makes a difference, however, your file might be too big. 
+<br>You can accomplish this without repeats as well: \d\u\u\u\d\d\d. 
+<br>Finally, you can use the character classes, yielding 
+<br>
+<br>[[:digit:]][[:upper:]]\{3][[:digit:]]\{3}. 
+<br>
+<br>All four of these expressions work.Which version should you use? Whichever one 
+<br>you can remember.You should remember this old adage:The simple way you can 
+<br>remember is much faster than the fancy way you can’t. 
+<br>
+<br>The magic Option 
+<br>
+<br>The expressions discussed so far assume that the 'magic' option is on.When this 
+<br>option is turned off, many of the symbols used in regular expressions lose their magic 
+<br>powers.They only get them back when escaped. 
+<br>
+<br>Specifically, if you execute the command 
+<br>
+<br>:set nomagic 
+<br>
+<br>the *, ., [, and ] characters are not treated as special characters. If you want to use the * 
+<br>for “0 or more repeats,” you need to escape it: \*. 
+<br>You should keep the 'magic' option on (the default) for portability and macro 
+<br>files. 
+<br>
+<br>
+<br>Regular Expressions Reference 215 
+<br>
+<br>Offset Specification Reference 
+<br>
+<br>[num] 
+<br>
+<br>+[num] Down [num] lines. Cursor is placed at the beginning of the line. 
+<br>
+<br>-[num] Up [num] lines. Cursor is placed at the beginning of the line. 
+<br>
+<br>e End of the match. 
+<br>
+<br>e[num] End of the match, the move [num]. If [num] is positive, move right, 
+<br>
+<br>
+<br>b 
+<br>
+<br>s Start of the match. 
+<br>
+<br>b[num] 
+<br>
+<br>s[num] Start of the match, then move [num]. If [num] is positive, move right; 
+<br>
+<br>
+<br>Regular Expressions Reference 
+<br>
+<br>The following table assumes that the 'magic' option is on (the default). 
+<br>
+<br>Simple Atoms 
+<br>
+<br>^ 
+<br>$ 
+<br>. 
+<br>\< 
+<br>\> 
+<br>
+<br>Range Atoms 
+<br>
+<br>[abc] 
+<br>[^abc] 
+<br>[a-z] 
+<br>[a-zA-Z] 
+<br>
+<br>Character Classes 
+<br>
+<br>[:alnum:] 
+<br>[:alpha:] 
+<br>[:ascii:] 
+<br>[:backspace:] 
+<br>
+<br>The literal character x. 
+<br>Start of line. 
+<br>End of line. 
+<br>A single character. 
+<br>Start of a word. 
+<br>End of word. 
+<br>
+<br>
+<br>Match either a, b, or c. 
+<br>Match anything except a, b, or c. 
+<br>Match all characters from a through z. 
+<br>Match all characters from a through z and A through Z. 
+<br>
+<br>
+<br>Match all letters and digits. 
+<br>Match letters. 
+<br>Match all ASCII characters. 
+<br>Match the backspace character (<BS>). 
+<br>
+<br>
+<br>
+<h3>
+216 Chapter 19 Advanced Searching Using Regular Expressions 
+</h3>
+<br>
+<br>[:blank:] 
+<br>[:cntrl:] 
+<br>[:digit:] 
+<br>[:escape:] 
+<br>[:graph:] 
+<br>[:lower:] 
+<br>[:print:] 
+<br>[:punct:] 
+<br>[:return:] 
+<br>[:space:] 
+<br>[:tab:] 
+<br>[:upper:] 
+<br>[:xdigit:] 
+<br>
+<br>Match the space and tab characters. 
+<br>Match all control characters. 
+<br>Match digits. 
+<br>Matches the escape character (<Esc>). 
+<br>Match the printable characters, excluding space. 
+<br>Match lowercase letters. 
+<br>Match printable characters, including space. 
+<br>Match the punctuation characters. 
+<br>Matches the end-of-line (carriage return, <Enter>, <CR>, <NL>). 
+<br>Match all whitespace characters. 
+<br>Match the tab character (<Tab>). 
+<br>Match the uppercase letters. 
+<br>Match hexadecimal digits. 
+<br>
+<br>
+<br>Patterns (Used for Substitutions) 
+<br>
+<br>\(pattern\) 
+<br>Mark the pattern for later use.The first set of \(\) marks a 
+<br>subexpression as \1, the second \2, and so on. 
+<br>
+<br>\1 
+<br>Match the same string that was matched by the first subexpression 
+<br>in \( and \). For example: \([a-z]\).\1 matches ata, 
+<br>ehe, tot, and so forth. 
+<br>
+<br>\2 
+<br>Like \1, but uses second subexpression, 
+<br>
+<br>\9 
+<br>Like \1, but uses ninth subexpression. 
+<br>
+<br>Special Character Atoms 
+<br>
+<br>\a Alphabetic character (A-Za-z). 
+<br>\A Non-alphabetic character (any character except A-Za-z). 
+<br>\b 
+<br>
+<br><BS>. 
+<br>
+<br>\d 
+<br>Digit. 
+<br>
+<br>\D 
+<br>Non-digit. 
+<br>
+<br>\e 
+<br>
+<br><Esc>. 
+<br>
+<br>\f Any filename character as defined by the isfname option. 
+<br>\F Any filename character, but does not include the digits. 
+<br>\h Head of word character (A-Za-z_). 
+<br>\H Non-head of word character (any character except A-Za-z_). 
+<br>\i Any identifier character as defined by the isident option. 
+<br>\I Any identifier character, but does not include the digits. 
+<br>
+<br>
+<br>Regular Expressions Reference 217 
+<br>\k Any keyword character as defined by the iskeyword option. 
+<br>\K Any keyword character, but does not include the digits. 
+<br>\l Lowercase character (a-z). 
+<br>\L Non-lowercase character (any character except a-z). 
+<br>\o Octal digit (0-7). 
+<br>\O Non-octal digit. 
+<br>\p Any printable character as defined by the isprint option. 
+<br>\P Any printable character, but does not include the digits. 
+<br>\r <CR>. 
+<br>\s Whitespace (<Space> and <Tab>). 
+<br>\S Non-whitespace character. (Any character except <Space> and 
+<br><Tab>). 
+<br>\t <Tab>. 
+<br>\u Uppercase character (A-Z). 
+<br>\U Non-uppercase character (any character except A-Z). 
+<br>\w Word character (0-9A-Za-z_). 
+<br>\W Non-word character (any character except 0-9A-Za-z_). 
+<br>\x Hexadecimal digit (0-9 a-f A-F). 
+<br>\X Non-hexadecimal digit. 
+<br>\~ Matches the last given substitute string. 
+<br>Modifiers 
+<br>* Match the previous atom 0 or more times.As much as possible. 
+<br>\+ Match the previous atom 1 or more times.As much as possible. 
+<br>\= Match the previous atom 0 or 1 times. 
+<br>\{} Match the previous atom 0 or more times. (Same as the * 
+<br>modifier.) 
+<br>\{n} 
+<br>\{-n} Match the previous atom n times. 
+<br>\{n,m} Match the previous atom n to m times. 
+<br>\{n,} Match the previous atom n or more times. 
+<br>\{,m} Match the previous atom from 0 to m times. 
+<br>\{-n,m} Match the previous atom n to m times. Match as little as 
+<br>possible. 
+<br>\{-n,} Match the previous atom at least n times. Match as little as 
+<br>possible. 
+<br>
+<br>
+<h3>
+218 Chapter 19 Advanced Searching Using Regular Expressions 
+</h3>
+<br>
+<br>\{-,m} 
+<br>Match the previous atom up to m times. Match as little as 
+<br>possible. 
+<br>
+<br>\{-} 
+<br>Match the previous atom 0 or more times. Match as little as 
+<br>possible. 
+<br>
+<br>str1\|str2 
+<br>Match str1 or str2. 
+<br>
+<br>
+<br>Advanced Text Blocks 
+<br>and Multiple Files 
+<br>
+<h3>
+THE VIM EDITOR HAS LOTS OF DIFFERENT ways of doing things. Chapter 4,“Text 
+</h3>
+<br>
+<br>Blocks and Multiple Files,” presented a representative subset of the commands dealing 
+<br>with text blocks and multiple files and described them. It is entirely possible for you to 
+<br>edit efficiently using only those commands. 
+<br>
+<br>This chapter shows you all the other ways of doing things. If you find that you do 
+<br>a way to get around your annoyances. 
+<br>
+<br>For example, you learned how to yank and put (cut and paste) using a single register 
+<br>to hold the text.That is fine if you are dealing with a single block of text. If you 
+<br>want to deal with more, however, check out how to use multiple registers later in this 
+<br>chapter. 
+<br>
+<br>This chapter covers the following: 
+<br>
+<br>
+<br>Different ways to yank and put 
+<br>
+<br>
+<br>How to use special registers 
+<br>
+<br>
+<br>How to edit all the files containing a specific string 
+<br>
+<br>
+<br>Advanced commands for multiple files 
+<br>
+<br>
+<br>Global marks 
+<br>
+<br>
+<br>Advanced insert-mode commands 
+<br>
+<br>
+<br>How to save and restore your setting by using a VIMINFO file 
+<br>
+<br>
+<br>Dealing with files that contain lines longer than the screen width 
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+</body>
+</html>

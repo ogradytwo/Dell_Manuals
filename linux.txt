@@ -1,0 +1,114 @@
+Ubuntu-14.04
+============
+env  [varible=value...]                                  lists environment variables
+echo $variable-name
+variable-name=value
+rm -r <directory>
+rm -rf <directory>                                      # removes without asking for confirmation
+$ ps aux
+$ ps aux | grep spring
+  ubuntu 12241 0.3 0.5 589960 178416 ? Ssl Sep20 1:46
+  spring app | sample_app | started 7 hours ago
+$ kill -9 12241
+$ spring stop
+$ pkill -9 -f spring
+$ kill -9 <pid>
+$ pkill -9 -f <name>
+$ ssh-keygen -t rsa -C "YOUR@EMAIL.com"
+$ cat ~/.ssh/id_rsa.pub > temp.txt
+ copy temp.txt into Github.
+$ ssh -T git@github.com
+       You should get a message like this:
+       Hi excid3! You've successfully authenticated, but GitHub does not provide shell access.
+$ ln -s /media/user6/FE4A-3DA8/*(say) Tdk              # creates symbolic links in Tdk to point to corresponding entries in first directory
+$ fdisk -l                                             # details of usb's etc mounted.
+ 
+Git
+===
+Once
+----
+$ git config --global user.name "Your Name"
+$ git config --global user.email you@example.com
+$ git config --global push.default matching
+$ git config --global alias.co checkout                 # for example
+$ git config --global color.ui true
+
+To setup git in a project directory
+-----------------------------------
+$ git init
+
+within local environment
+-------------------------
+$ git add --all
+$ git add -A                                            # or --all
+$ git commit -m "message"
+$ git commit -a                                         # bypasses staging
+$ git rm filename|directory|globpattern                 # there is option -f
+$ git rm --cached filename|directory|globpattern        # there is option -f
+$ git mv oldname newname
+$ git log <--stat> --pretty=many options
+$ git log --abbrev-commit --pretty=oneline
+$ git show ab452bj(say)
+$ git reset HEAD filename                               # unstages a file
+$ git checkout filename                                 # replaces file in working directory with the last committed version
+$ git checkout -f filename
+$ git status -s
+$ git diff <--staged>
+$ git checkout -b <new branch name>                     # creates new branch and switches into it
+$ git branch                                            # lists all branches
+$ git checkout master
+$ git merge <branch name>
+$ git branch -d <branch name>                           # deletes the branch after is has been merged
+$ git branch -D <branch name>                           # deletes the branch even if it has not been merged, i.e. abandons it
+
+to and from remote repositories
+-------------------------------
+$ git remote add origin [url] <shortname>
+$ git remote add origin git@bitbuket.com:username/<directory>.git
+$ git remote add origin https://github.com/username/<directory>.git
+$ git clone [url] <new directory to be created and cloned into>                 # copies remote repository to local
+$ git remote -v                                         # lists shortnames and urls of remote directories that have been added
+$ git remote show [url|shortname]
+$ git remote rename oldshortname newshortname
+$ git remote rm [url|shortname]
+$ fetch [url|shortname]
+$ git pull [url|shortname]                              # also merges
+$ git push [url|shortname] [branchname]
+$ git push -u origin --all
+
+Installed
+=========
+
+
+Python              2.7.9
+Python              3.4.3
+
+pip                 ????? 25/06/15 using heroku's script
+virtualenv         13.0.3 25/06/15 using heroku's script
+django              1.8
+
+
+
+Add app to Collection project
+===========================
+django-admin startapp <appname>
+edit mysite/settings.py mysite/urls.py to add new app
+python manage.py makemigrations
+python manage.py migrate
+create in appname urls.py views.py admin.py templates/appname/base.html etc wsgi.py from existing app and edit
+
+Take app from Collection and put into its own project
+=====================================================
+in ~, git clone https://github.com/username/Collection.git <new directory name>
+cd <new directory>
+? git init
+edit mysite/settings.py mysite/urls.py to remove other apps
+edit mysite/urls.py to remove app prefix
+edit appname/urls.py to remove prefix
+python manage.py makemigrations
+python manage.py migrate
+
+
+----------------------------------------------------------------------------------
+
+

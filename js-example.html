@@ -1,0 +1,3152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html lang="en"> 
+<head>
+<title>Local</title>
+  <meta property='site_name'   content='Local' />
+  <meta property='title'   content='Local' />
+  <meta property='description'   content='Local' />
+  <meta http-equiv='Content-Type'   content='text/html; charset=utf-8'/>
+  <!--
+  [if lt IE 9]>   <script src='html5shiv.js'>   </script>   <![endif]
+  -->
+  <style>
+       em   { font-style: normal; color: red; }
+       body {color:GreenYellow;background-color:Black;font-family:arial;font-weight:bold;}
+       p {color:GreenYellow;padding-left:18px}
+       h3 {color:Yellow}
+       h3.date {color:Yellow}
+       h4 {color:Gold}
+       h5 {color:White}
+       a {color:Yellow;padding-left:18px}
+       td {padding-left:18px}
+       tr   {font-weight:bold;}
+   </style>
+</head> 
+
+<body>
+
+<button type="button" onclick="changeFontsize()">Click Me!</button>
+<button 
+  type="button"
+  onclick="document.getElementById('demo').innerHTML = Date()">
+    Click me to display Date and Time.
+</button>
+<button 
+  type="button"
+  onclick="document.getElementById('demo').innerHTML = 'Hello JavaScript!'">
+    Click Me!
+</button>
+
+<img 
+  id="myImage" 
+  onclick="changeImage()" 
+  src="pic_bulboff.gif" 
+  width="100" 
+  height="180">
+
+<p>Please input a number between 1 and 10:</p>
+<input id="numb" type="number">
+<button type="button" onclick="validateNumber()">Submit</button>
+<p id="demo"></p>
+
+// this is a comment
+/*
+this is
+a comment
+*/
+
+<script>
+function changeImage() {
+    var image = document.getElementById('myImage');
+    if (image.src.match("bulbon")) {
+        image.src = "pic_bulboff.gif";
+    } else {
+        image.src = "pic_bulbon.gif";
+    }
+}
+</script>
+<script>
+function changeFontsize() {
+    var x = document.getElementById("js1");
+    x.style.fontSize = "25px";           
+    x.style.color = "red"; 
+}
+</script>
+<!-- <script src="js-validateNumber.js"> </script> -->
+<script>
+function validateNumber() {
+    var x, text;
+
+    // Get the value of the input field with id="numb"
+    x = document.getElementById("numb").value;
+
+    // If x is Not a Number or less than one or greater than 10
+    if (isNaN(x) || x < 1 || x > 10) {
+        text = "Input not valid";
+    } else {
+        text = "Input OK";
+    }
+    document.getElementById("demo").innerHTML = text;
+}
+</script>
+<script>
+window.alert(5 + 6);
+</script>
+<script>
+document.write(7 + 8);
+</script>
+<script>
+document.getElementById("demo").innerHTML = 9 + 9;
+</script>
+<script>
+console.log(23 + 53);
+</script>
+
+<h3 id="top" style="color:Yellow">
+Top
+</h3>
+    <a style="color:PowderBlue;" href="#q"  > q </a>
+
+    <a id="js1" style="color:Aqua;" href="http://html-color-codes.info/color-names/"  target="_blank"> HTML color names </a>
+
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+
+
+<h3 id="dentist" style="color:Yellow">
+Dentist
+</h3>
+<table>
+<tr><td>2014-09-16  </td><td>No problem  </td> <td>Cleaned  </td> <td>young northern woman  </td> <td>Bought green tepes #3.50  </td>
+<tr><td>2015-03-16  </td><td>No problem  </td> <td>Cleaned  </td> <td>young northern woman  </td> <td>paid #18.50
+</table>
+
+<h3 id="blood pressure" style="color:Yellow">
+Blood Pressure
+</h3>
+<table>
+<tr><td>1994-09-30 </td><td>Tue  </td><td>Elthorne Dace </td><td>140/66
+</table>
+
+<h3 id="Weight" style="color:Yellow">
+Weight
+</h3>
+<table>
+<tr><td>1994-10-27 </td><td>Mon  </td><td>Dace withC </td><td>115g=18st01
+<tr><td>1994-10-27 </td><td>Mon  </td><td>           </td><td>18st07=
+<tr><td>1994-11-03 </td><td>Mon  </td><td>           </td><td>17st09=112kg
+</table>
+
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="diabetes" style="color:Yellow">
+Diabetes        
+</h3>
+<p>
+sugar level in blood: 5-6 normal, intermediate upto 6.9 10 abnormal, 20 needinsulin. hbA1c diabetic > 47
+</p>
+<table>
+<tr><td>2014-10-01</td><td>    Wed</td><td> HLTH 9.05am Elthorne, nurse Jackie. Fasting Blood Tes tglucose = 6.7 hbA1c=53
+<tr><td>2014-10-13</td><td>    Mon</td><td> HLTH 10.50 Elthorne Dr.Dace. Early Diabetes. 
+<tr><td>2014-10-14</td><td>    Wed</td><td> HLTH 9.00am. Elthorne- Nurse xxxxxx, Fasting Blood Test. glucose = 5 hbA1c=47
+<tr><td>2014-10-27</td><td>    Mon</td><td> HLTH Elthorne-Dr.Dace. keep to diet. when unable do 5:2. keep statins.
+<tr><td>2014-11-14</td><td>    Fri</td><td> HLTH UCH diabetes stand Finger Prick test glucose = 5.1
+</table>
+<p>
+Agamatrix , Wavesense Jazz, Bayer, Unistick
+</p>
+
+
+<h3 id="eczema" style="color:Yellow">
+Eczema
+</h3>
+<table>
+<tr><td>1993-05-01 </td><td>  </td><td>Dove barrowp </td><td>said eczema or psoriasis.vaseline or oil of ulay
+<tr><td>2014-06-30</td><td>Mon</td><td>9.50am dr.reynolds.</td><td>Diprobase. Moisturizer.
+<tr><td>2014-o6-xx </td><td>  </td><td>elthorne-Reynolds </td><td>Betnovate. Steroid.
+<tr><td>2014-09-10</td><td>Wed</td><td>8.30am elthorne surgery. Nurse Jackie.
+<tr><td>2014-09-11 </td><td>  </td><td>elthorne-locum </td><td>30g Fucidin cream, Fusidic Acid 2% cream. Antibiotic.
+<tr><td>2014-09-11 </td><td>  </td><td>elthorne-locum </td><td>xxxDerm. Steroid.
+<tr><td>2014-09-11 </td><td>  </td><td>elthorne-locum</td><td> 500g Cetomacrogol cream. Moisturizer.
+</table>
+
+<h3 id="Health" style="color:Yellow">
+Health - diary
+</h3>
+<table>
+<tr><td>2014-09-23</td><td>    Tue</td><td> HLTH elthorne nurse. test bloodprssure
+<tr><td>2014-09-30</td><td>    Tue</td><td> HLTH 10.20 Dr.Dace. Prescribed atorvastatin 10mg and 5:2 diet.
+<tr><td>2014-10-22</td><td>    Wed</td><td> HLTH elthorne Dr.Reynolds. Doesn't understand scars, eczema not need steroids. gave 500g Cetomacrogol moisturizer.
+<tr><td>2014-11-14</td><td>    Fri</td><td> HLTH Isenberg 13:50
+<!-- ~HLTH~ -->
+</table>
+
+<h3 style="color:Yellow">
+Health - info
+</h3>
+<p>
+diabetes         sugar level in blood: 5-6 normal, 10 abnormal, 20 needinsulin
+</p>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="walks">
+Walks
+</h3>
+<dl>
+<dt> Fox to Duke of Kent, alone, xx/08/14</dt>
+<dd> Fox to Hanwell Bridge 15mins, to third bridge 17mins, to right fork 9mins, to Ruislip Rd 18mins, to railway 20mins, to D of K 28mins. Total 1hr45mins</dd>
+<dt> D of K to Uxbridge Rd, alone, xx/08/14</dt>
+<dd> 58mins
+<dt> Fox to D of K, ESG, 17/08/14</dt>
+<dd> 1hr35mins.
+<dt> Fox to Plough(Norwood Green), alone, 24/08/14. 1hr34mins</dt>
+<dd> Fox to H&amp;H(with dtour) 44mins, H&amp;H to fork 30mins, to Plough 20mins. Plough return to Fox 40mins.
+<dt> Boston Manor station to Plough(Norwood Green), alone, 21/10/14, 1hr42mins.</dt>
+<dd> B.M. station to Bridge 20mins, to M4 26mins. to OstPark entrance 12mins, to M4 27mins, to Plough 17mins.
+<dt> Boston Manor station to Plough(Norwood Green), ESG12, 16/11/14, 1hr30mins.</dt>
+</dl>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="Plus">
+Plus
+</h3>
+<table>
+<tr><td>2012-02-20</td><td>       </td> <td>just after Paul St went.
+<tr><td>2014-02-12</td><td>    Wed</td> <td>Hillingdon agm 8pm ea
+<tr><td>2014-05-16</td><td>    Fri</td> <td>BCz pizza expr 8.30
+<tr><td>2014-05-17</td><td>    Sat</td> <td>7.15pm collect LRw.7.30pm Arnos Harvester
+<tr><td>2014-05-25</td><td>    Sun</td> <td>MiSh bbq
+<tr><td>2014-06-14</td><td>    Sat</td> <td>BNT Toby, 7.10pm collect LRw.
+<tr><td>2014-06-18</td><td>    Wed</td> <td>SL pennsylvanian 8.00.
+<tr><td>2014-07-20</td><td>    Sun</td> <td>SL  HCP 10.45 Temple.
+<tr><td>2014-08-23</td><td>    Sat</td> <td>BNT 7.10 Toby Barnet.
+<tr><td>2014-08-30</td><td>    Sat</td> <td>BNT 7.30pm MPr meal Southgate. 7.00 Lift for LRw.
+<tr><td>2014-09-02</td><td>    Tue</td> <td>BNT 1:10 Grapes. LCr funeral 3:20.
+<tr><td>2014-09-07</td><td>    Sun</td> <td>LHw 12.45 Good Yarn.
+<tr><td>2014-09-27</td><td>    Sat</td><td> BNT Clare's party. 5.30 LRw. 7.00 party. cheese.  Booked in 18th.
+<tr><td>2014-10-12</td><td>    Sun</td><td> HDON RWr 7.00 Langley Harvester.
+<tr><td>2014-11-07</td><td>    Fri</td><td> PL WASH. 
+<!-- ~PL~ -->
+</table>
+
+<h3 id="ESG">
+ESG
+</h3>
+<table>
+<tr><td>2014-06-22</td><td>    Sun</td> <td>ESG 11.45 Fox walk. London Apprentice
+<tr><td>2014-06-29</td><td>    Sun</td> <td>ESG 10.45 Neasden temple.
+<tr><td>2014-08-03</td><td>    Sun</td> <td>ESG 11.00 Bills
+<tr><td>2014-08-17</td><td>    Sun</td> <td>ESG 11.30 walk Fox to Duke of Kent.
+<tr><td>2014-09-04</td><td>    Thu</td> <td>ESG 7.30 grange quiz. Booked in.
+<tr><td>2014-09-21</td><td>    Sun</td><td> ESG walk. 10.15am bentham club.
+<tr><td>2014-11-16</td><td>    Sun</td><td> ESG walk. Boston Manor to Norwood Green.
+<!-- ~ESG~ -->
+</table>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="KN">
+KN
+</h3>
+<table>
+<tr><td>2014-10-11</td><td>    Sat</td><td> KN Ken's Events, St.Paul's station, Cathedral entrance . £3.
+<!-- ~KN~ -->
+</table>
+<h3 id="HCP">
+HCP
+</h3>
+<table>
+<tr><td>2014-02-15</td><td>    Sat</td> <td> Hcp ag
+<tr><td>2014-05-24</td><td>    Sat</td> <td>yates party
+<tr><td>2014-06-11</td><td>    Wed</td> <td>HCP 2.30pm starbucks pinner.
+<tr><td>2014-07-19</td><td>    Sat</td> <td>HCP 8.00pm collect Dora Sofia .RMr bbq burger and bottle.
+<tr><td>2014-09-18</td><td>    Thu</td><td> SL HCP 8.30 Load of Hay. MaBr LHd HSt
+<tr><td>2014-10-04</td><td>    Sat</td><td> HCP MaSh 8.30 Castle.
+<tr><td>2014-10-25</td><td>    Sat</td><td> HCP 8.30. RMr. Halloween Party. Lift for DLw. SGg hinted new chair,
+<tr><td>2014-11-20</td><td>    Thu</td><td> SL HCP slug n Lettuce 5:45pm.
+<!-- ~HCP~ -->
+</table>
+
+
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>
+<h4> Attendance at HCP Xmas event 13/12/14 Frankie&amp;Bennys </h4>
+
+<h5>Members attended:</h5>
+<br>,harry_stock@yahoo.co.uk                     
+<br>,wannlouise@hotmail.com                      
+<br>,denisews@hotmail.co.uk                      
+<br>,paulhgshogarth@hotmail.co.uk                
+<br>,judith.shepherd_dixon@yahoo.co.uk           
+<br>,kathy_d_jones@hotmail.co.uk                 
+<br>,denisejsutton64@gmail.com                   
+<br>,takethat01@sky.com                          
+<br>,anthony_powell4@sky.com                     
+<br>,john262657@ntlworld.com                     
+<br>Chris Powell                                 
+<br>,zaq552003@yahoo.co.uk                       
+<br>,jackiesegal@live.co.uk                      
+<br>Marion Shiel                                 
+
+
+
+<h5>Others attended:</h5>
+<br>paul dixon                                   
+<br>john wooster                                 
+<br>tracy carter                                 
+
+
+<h5>Members who didn't attend:</h5>
+<br>,jwright99@hotmail.co.uk
+<br>,lawsonbrian@yahoo.co.uk
+<br>,evie1339@gmail.com
+<br>,simongeorg@hotmail.co.uk
+<br>,howardisenberg2001@yahoo.co.uk
+<br>,petersturt@googlemail.com                   
+<br>,dave.halley@tiscali.co.uk                   
+<br>,geoff.friendsrus@gmail.com                  
+<br>,clndavison@yahoo.co.uk                      
+<br>,fan2gills@yahoo.co.uk                       
+<br>,lc_hodgetts@lineone.net                     
+<br>,silver_rainbow@hotmail.co.uk                
+<br>Lesley Ward                                  
+<br>Dave Keeping                                 
+
+<h4>HCP AGM 07/03/15</h4>
+<h5>for federating</h5>
+SGg LHd CDv RMr LWn ALv JMn*
+<h5>     against</h5>
+HSt DWn JSh JJn LWd DKp DHl? LWn JWr
+<br>PHg APw? CPw?
+<h5>    abst  ?</h5>
+DSt
+<h5>     not at meeting</h5>
+JSg* MaSh KJn  eGEv HIs JRn PSt
+<br>BLw GGw JWl
+<br>
+<h4> HCP Membership Renewals 2015</h4>
+<br>
+<br>HSt LWn ALv DWn PHg JJn <br>GEv(pp) JWr(barc)
+<br>DHl LWd MNm SGg APw CPw
+
+<h4> HCP have received email warning remove from Meetup</h4>
+<br>Helen <br>Debs <br>BettyYao
+
+<h5> HCP letter</h5>
+Hi
+
+Meetup have recently changed their pricing policy. At present, it does not cost us to have on our Meetup page persons who are not paid up members. In future, we would have to pay significantly more than if we restricted the Meetup page to paid up members. If you wish to remain connected to the club, please contact us within two weeks to arrange to pay the £10 per year membership fee.
+
+Harry
+
+
+
+<h3 id="WL">
+WL
+</h3>
+<table>
+<tr><td>2014-02-02</td><td>    Sun</td> <td>old orchard
+<tr><td>2014-08-16</td><td>    Sat</td> <td>WL 6.00pm bbq Eileen.
+<tr><td>2014-10-05</td><td>    Sun</td><td> WL JHr Waters Edge breakfast. Waters Edge 10:15am. 07774 479733.
+<!-- ~WL~ -->
+</table>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3 id="OG">
+OG
+</h3>
+<table>
+<tr><td>2013-07-29</td><td></td><td>    EPl say GBP2895.03 assets. This doesn't include AgeUK money.
+<tr><td>2014-05-23</td><td>    Fri</td> <td>kew
+<tr><td>2014-05-27</td><td>    Tue</td> <td>10.00am barry comes
+<tr><td>2014-07-08</td><td>    Tue</td> <td>OG barry comes.
+<tr><td>2014-08-07</td><td>    Thu</td> <td>OG 30th party. 11.00-3.00
+<tr><td>2014-09-19</td><td>    Fri</td><td> OG  neasden temple. 
+<tr><td>2014-10-31</td><td>    Fri</td><td> OG 10.30am Sikh temple.
+<!-- ~OG~ -->
+</table>
+<h3 id="Non club">
+Non club
+</h3>
+<table>
+<tr><td>2010-12-11</td><td>    </td> <td>GPn party
+<tr><td>2014-05-13</td><td>    Tue</td> <td>go JSv
+<tr><td>2014-05-30</td><td>    Fri</td> <td>talktalk installe
+<tr><td>2014-06-21</td><td>    Sat</td> <td>NASS 9.30-4.00-5.30 KC LonBr
+<tr><td>2014-08-02</td><td>    Sat</td> <td>RPl Barbeque 13.30, bring meat  drink
+<tr><td>2014-08-21</td><td>    Thu</td> <td>1.30pm Bob comes.
+<tr><td>2014-09-13</td><td>    Sat</td> <td>KLOS 7.30 scout hut, car park, grimsdyke rd, HA5 4PH. GBP10/6. events@klosmusicaltheatre.co.uk
+<tr><td>2014-09-22</td><td>    Mon</td><td> PP ph JSv re CWr.
+<tr><td>2014-09-25</td><td>    Thu</td><td> PP Fred came.
+<tr><td>2014-10-04</td><td>    Sat</td><td> PP 1st lilac sheet
+<tr><td>2014-10-18</td><td>    Sat</td><td> PP met Alejandro and Gemma in Mattock Lane.
+<!-- ~PP~ -->
+</table>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3 id="xmascards">
+Xmas Cards
+</h3>
+<table>
+<tr><td>last</td><td> received</td><td> last</td><td> sent
+<tr><td>carole-</td><td> 14</td><td> 9th</td><td>14 </td><td> 8th </td><td> crossover
+<tr><td>florrie-and-john</td><td> 14</td><td> 9th</td><td> 14</td><td> 8th</td><td> crossover
+<tr><td>sandra-and-richard</td><td> 14</td><td> 13th</td><td> 14</td><td> 8th</td><td>mefirst
+<tr><td>liane(-and-steve)</td><td> 14</td><td> 13th</td><td> 14</td><td> 8th</td><td>me first
+<tr><td>gina</td><td> 14</td><td>15th</td><td> 14</td><td> 8th</td><td>me first</tr>
+<tr><td>maria-and-louis-</td><td> 14</td><td> 24th</td><td> 14</td><td> 8th</td><td>me first
+<tr><td>rosa-</td><td> 14</td><td> 16th</td><td> 14</td><td> 8th</td><td>me first
+<tr><td>tina,adrian-and-snowy</td><td> 14</td><td> 20th</td><td> 14</td><td> 8th</td><td>me first
+<tr><td>mike-and-rosa</td><td> 14</td><td> 20th</td><td> 14</td><td> 20th</td><td>them first
+<tr><td>carolOG</td><td> 14</td><td> 9th</td><td> </td><td> </td><td>havent replied
+<tr><td>stuart-lorraine</td><td> 14</td><td> 10th</td><td> </td><td> </td><td>havent replied
+<tr><td>vicky-and-roy-</td><td> 14</td><td> 24th</td><td> x</td><td> 12 7th</td><td>haven't replied
+<tr><td>bob-and-?penny--</td><td> 14</td><td> 24th</td><td> 12</td><td> 7th</td><td>haven't replied
+<tr><td>johnny</td><td> 14</td><td> 24th</td><td></td><td></td><td>haven't replied
+<tr><td>joan-</td><td> 12</td><td> 18th</td><td> 14</td><td> 8th lv
+<tr><td>lisa-</td><td> 10</td><td> 11th</td><td>14</td><td>8th
+<tr><td>laura</td><td> 12</td><td> 16th</td><td> 14</td><td>8th
+<tr><td>robin-and-sofia-</td><td> 12</td><td> 17th</td><td> 14</td><td> 8th
+<tr><td>tracey-and-mike-</td><td> 12</td><td> 12th</td><td> 12</td><td> 7th
+<tr><td>robinthey</td><td> handed</td><td> first</td><td> 2012-
+
+<tr><td>denise-and-paul</td><td> 12</td><td> 19th</td><td> (by</td><td> post) 12 7th judith's
+<tr><td>judith-and-paul-</td><td> 12</td><td> 8th</td><td> RMr</td><td> party with lv 12 7th judith's
+<tr><td>louise</td><td> 09</td><td> 19th</td><td> hcp</td><td> x 12 8th RMr party
+<tr><td>lesley-</td><td> 12</td><td> 8th</td><td> RMr</td><td> party 12 8th RMr party
+<tr><td>richard-and-tracy</td><td> 12</td><td> 8th</td><td> RMr</td><td> party 12 8th RMr party
+<tr><td>michelle</td><td> n</td><td> 12</td><td> 8th</td><td> RMr party 12 8th RMr party
+<tr><td>kimh</td><td> 12</td><td> 21st</td><td> 11</td><td> 14th 
+<tr><td>maurice-and-rosanne</td><td> 12</td><td> 8th</td><td> RMr</td><td> party 12 15th (posted)
+<tr><td>natasha,andre-and-family</td><td> 12</td><td> 8th</td><td> RMr</td><td> party
+<tr><td>dave-halley</td><td> 12</td><td> 8th</td><td> mike-sh-</td><td> 12 15 th
+
+<tr><td>cathy</td><td> 12</td><td> 19th</td><td> slough</td><td> club night
+<tr><td>clare</td><td> 12</td><td> 16th
+<tr><td>johnny-</td><td> 12</td><td> 19th</td><td> slough</td><td> club night 10 11th gp
+<tr><td>katherine</td><td> 12</td><td> 22nd</td><td> xxx</td>
+<tr><td>matt-and-helen</td><td> 12</td><td> 22ndi</td><td> sent</td><td> 2009 but no response--
+<tr><td>rhianna-</td><td> 12</td><td> 19th</td><td> slough</td><td> club night 12 15th
+<tr><td>gary-and-vicky</td><td> 09</td><td> 12th</td><td> ramada</td><td> 12 15th
+<tr><td>sharon-and-bill</td><td> 12</td><td> 16th
+<tr><td>katie,mark-and-john</td><td> 09</td><td> 12th</td><td> ramada</td><td> 12 16thhanded
+<tr><td>jane-t-</td><td> 12</td><td> 15th</td><td> 12</td><td> 15th
+<tr><td>barry</td><td> -</td><td> 12</td><td> 15th</td><td> 12 15thandy-and-
+<tr><td>matt</td><td> 12</td><td> 15th</td><td> 12</td><td> 15th
+<tr><td>lucy</td><td> 12</td><td> 16th</td><td> 12</td><td> 16th
+<tr><td>phi</td><td> l-and-lorna</td><td> 12</td><td> 16th</td><td> 12 16th
+<tr><td>lorraine-and-stuart</td><td> 11</td><td> 16th</td><td> 12</td><td> 16th
+<tr><td>deirdre-and-oliver</td><td> 12</td><td> 16th</td><td> xxx</td><td> 12 16th
+<tr><td>francine,paul-and-luke</td><td> 12</td><td> 16th</td><td> 12</td><td> 16th
+<tr><td>grace-and-john-</td><td> 08</td><td> 8th</td><td> 09</td><td> 16th
+</table>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3 id="family">
+Family
+</h3>
+<br>
+<ul>
+<li>james robert chesney = esther rebecca clarke
+  <ul>
+  <li>rose = albert nicholls
+    <ul>
+    <li> albert
+    <li> rose
+    <li> doris = maurice
+    <li> helen
+    </ul>
+  <li>grace = albert paton(1) bill perry (2)
+    <ul>
+    <li>albert
+      <ul>
+      <li>jimmy
+      <li>stanleye
+      <li>laine=peter/michael-cocksedge2
+      <li>janet=peter/michael-cocksedge
+      </ul>
+   <li>grace84=john-clements89 5/1/9
+      <ul>
+      <li>john
+      <li>bob=margaret
+      <li>alan
+      <li>tracey43=shawn/sean norfolk1
+      </ul>
+    <li>rose
+      <ul>
+      <li>william
+        <ul>
+        <li>ѕon
+        <li>daughter
+        </ul>
+      <li>rosalynn
+        <ul>
+        <li>daughter
+        <li>daughter
+        </ul>
+      </ul>
+    <li>beat
+      <ul>
+      <li>roy
+        <ul>
+        <li>royjnr3
+        <li>jason3
+        <li>jemma1
+        </ul>
+      <li>barry13.
+      </ul>
+    </ul>
+  <li>bill=sylvie(1),may(2)
+    <ul>
+    <li>son(may)
+    <li>stepson ? michael(may)
+    </ul>
+  <li>beat=jim-walkerdine
+    <ul>
+    <li>jean=barry-peters
+      <ul>
+        <li>amanda
+      </ul>
+    </ul>
+  <li>bob
+    <ul>
+    </ul>
+  <li>alice
+    <ul>
+    <li>florrie=john-monkage as at 6/1/9 75 79
+      <ul>
+      <li>colin 51?=gail pakdistrict a--if,danish co.  civilengineer thailand 
+        <ul>
+        <li>christopher
+       </ul>
+      <li>david=beatrice builder,france 
+        <ul>
+        <li>englishteacherdaughter 27?daughter 27?
+       </ul>
+      <li>pauline=steph/ven-blakeborough
+        <ul>
+        <li>richard 27
+        <li>mark 24
+        <li>rachel 18
+        </ul>
+      <li>alison=?alan 36 trainsguidedogs
+        <ul>
+        <li>danica 8
+        <li>megan 6florriechild
+        </ul>
+      </ul>
+    </ul>
+  </ul>
+</ul>
+<ul>
+<li>harry thomas stock = florence beatrice hatton
+  <ul>
+  <li>harry thomas william stock = louisa chesney
+    <ul>
+    <li>harry thomas stock
+    </ul>
+  <li>florence = john greenwood, = eric heath
+    <ul>
+    <li>joan = samuel bamford
+      <ul>
+      <li>david = meyni timmer
+        <ul>
+        <li>thomas
+        <li>oliver
+        </ul>
+      <li>stuart = (1), = (2) = kerry
+        <ul>
+        <li>son(1)
+        <li>kieran(2)
+        <li>shelby(3)
+        </ul>
+      </ul>
+    <li>doreen = henry church
+      <ul>
+      <li>jackielyn
+      <li>dean
+        <ul>
+        <li>??
+        <li>??
+        <li>??
+        </ul>
+      </ul>
+    <li>sandra = richard johnson
+    <li>christine = francis noble
+      <ul>
+      <li>gavin
+      <li>gareth
+      </ul>
+    </ul>
+  <li>lilian = ronald wright
+    <ul>
+    <li>carole
+    </ul>
+  </ul>
+</ul>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="surname">
+Surname
+</h3>
+International Comparisons Rate As % of GB rate in 1998 
+<table>
+<tr><td>           </td><td>Frequency 1881 </td><td>Rate 1881 </td><td> Frequency 1998 </td><td>Rate 1998
+<tr><td>GB         </td><td>3720           </td><td>     138  </td><td>         4925   </td><td>       124
+<tr><td>N.I.       </td><td>               </td><td>    23.61 </td><td>                </td><td>                     19.3
+<tr><td>RoI        </td><td>               </td><td>     0.00 </td><td>                </td><td>                     0.0
+<tr><td>Australia  </td><td>               </td><td>   111.25 </td><td>                </td><td>                    90.9 
+<tr><td>NZ         </td><td>               </td><td>    90.61 </td><td>                </td><td>                       74.0
+<tr><td>U.S.       </td><td>               </td><td>    96.75 </td><td>                </td><td>                        79.1
+<tr><td>Canada     </td><td>               </td><td>   101.00 </td><td>                </td><td>                        82.5
+</table>
+<br>
+Derived International Comparisons Rate As % of GB rate in 1998 or 1881 as the case may be
+<table>
+<tr><td>           </td><td>Frequency 1881 </td><td>Rate 1881 </td><td> Frequency 1998 </td><td>Rate 1998
+<tr><td>GB         </td><td>3720           </td><td>     138  </td><td>         4925   </td><td>       124
+<tr><td>N.I.       </td><td>               </td><td>    21.21 </td><td>                </td><td>                     19.3
+<tr><td>RoI        </td><td>               </td><td>     0.00 </td><td>                </td><td>                     0.0
+<tr><td>Australia  </td><td>               </td><td>   99.96 </td><td>                </td><td>                    90.9 
+<tr><td>NZ         </td><td>               </td><td>    81.42 </td><td>                </td><td>                       74.0
+<tr><td>U.S.       </td><td>               </td><td>    86.93 </td><td>                </td><td>                        79.1
+<tr><td>Canada     </td><td>               </td><td>   90.75 </td><td>                </td><td>                        82.5
+</table>
+<br>
+Derived International Comparisons Rates in 1998 or 1881 as the case may be
+<table>
+<tr><td>           </td><td>Frq 1881</td><td>Rt 1881</td><td>Frq 1998</td><td>Rt 1998</td><td>Rt pfl</td><td>pop14 </td><td>Frq14
+<tr><td>UK         </td><td>        </td><td>       </td><td>        </td><td>       </td><td>110.03</td><td>64106 </td><td> 7054
+<tr><td>GB         </td><td>3720    </td><td>   138 </td><td>    4925</td><td>    124</td><td>      </td>
+<tr><td>N.I.       </td><td>        </td><td> 29.28 </td><td>        </td><td>  23.93</td><td>      </td>
+<tr><td>RoI        </td><td>        </td><td>  0.00 </td><td>        </td><td>    0.0</td><td>      </td>
+<tr><td>Australia  </td><td>        </td><td>137.95 </td><td>        </td><td>112.72 </td><td> 104.2</td><td>23594 </td><td> 2458
+<tr><td>NZ         </td><td>        </td><td>112.36 </td><td>        </td><td>  91.76</td><td>79.36 </td><td> 4552 </td><td>  361
+<tr><td>U.S.       </td><td>        </td><td>119.97 </td><td>        </td><td>  98.08</td><td>51.52 </td><td>318719</td><td>16420
+<tr><td>Canada     </td><td>        </td><td>125.24 </td><td>        </td><td>  102.3</td><td>53.64 </td><td> 35428</td><td> 1900
+</table>
+<br>Great Britain Frequency (1998) 4925 100 implies population 39.7m
+<br>Great Britain Frequency (1881) 3720     implies population 27.0m
+<br>Great Britain Rate (1998) 124           must be rate per million
+<br>Great Britain Rate (1881) 138           must be rate per million
+<br>Geographical Spread Geographical Spread
+<br>Statistics 
+<br>Great Britain top area (1881) Chelmsford 
+<br>Great Britain top area (1998) Chelmsford 
+<br>Great Britain top area index * 458 
+<br>Great Britain top postal town Stansted 
+<br>Number of UK gazetteer entries 4 County of gazetteer entry More than one area
+<br>Republic of Ireland top county 
+<br>Republic of Ireland top county index * 
+<br>Australia top state South Australia 
+<br>Australia top state index * 221 
+<br>Australia top standard statistical division Yorke, South Australia 
+<br>New Zealand top province Bay Of Plenty
+<br>New Zealand top province index * 202
+<br>United States top state Utah United States top state index * 285 
+<br>Number of gazetteer
+<br>entires in Africa or Asian none 
+<br>African or Asian country with most gazetteer entries 
+<br>Number of gazetteer entries in African or Asian country named above 
+<br>Social Demographics Social
+<br>Demographics Statistics Category of surname English - Locational Name; 
+<br>Generic Feature; Other Mosaic type with highest index #
+<br>Tourist Attendants Index of top Mosaic type * 215  
+<br>% of people with a more rural name 68 % of people with a more high-status name 10 
+<br>Cultural, Ethnic, Linguistic categories of surname English
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3 id="clothes">
+Clothes
+</h3>
+<h3>
+j
+</h3>
+<table>
+<tr><td>1997 </td><td> oct-dec </td><td> jacket </td><td>  lim total 3 items #120?
+<tr><td>2005 </td><td> jan-mar </td><td> jacket </td><td> blue smartex #20
+<tr><td>2007 </td><td> oct-dec </td><td> jacket </td><td> green ?3.49
+<tr><td>2008 </td><td> apr-jun </td><td> jacket </td><td> italian sand m&amp;s eal.bdy  &pound;69
+</table>
+<h3>
+s
+</h3>
+<table>
+<tr><td>1997 </td><td> oct-dec </td><td> shirt  </td><td> white-vanh lim
+<tr><td>2001 </td><td> jan-mar </td><td> shirt  </td><td> green maria
+<tr><td>2001 </td><td> jul-sep </td><td> shirt  </td><td> GreenYellow allenbros peter england #27
+<tr><td>2004 </td><td> apr-jun </td><td> top    </td><td> black primark00
+<tr><td>2004 </td><td> jul-sep </td><td> shirt  </td><td> red white black50
+<tr><td>2005 </td><td> jul-sep </td><td> shirt  </td><td> red smartex ?0
+<tr><td>2006 </td><td> jan-mar </td><td> shirt  </td><td> beige smartex?0
+<tr><td>2007 </td><td> apr-jun </td><td> shirt  </td><td> green smartex ?5
+</table>
+<h3>
+f
+</h3>
+<table>
+<tr><td>2001 </td><td> jul-sep </td><td> sandals</td><td> blue debenhams  #9.0
+<tr><td>2005 </td><td> oct-dec </td><td> shoes  </td><td> black ?0
+<tr><td>2006 </td><td> jul-sep </td><td> shoes  </td><td> black ?0
+<tr><td>2006 </td><td> jul-sep </td><td> sandals</td><td> air ?0
+<tr><td>2014-12-27 </td><td></td><td> trainers</td><td> blue-white jd eal.bdt #20
+</table>
+<h3>
+b
+</h3>
+<table>
+<tr><td>2005 </td><td> jul-sep </td><td> belt   </td><td> dark ?5
+</table>
+<h3>
+t
+</h3>
+<table>
+<tr><td>1997-11-00 td><td> tr     </td><td>  lim 
+<tr><td>2002-02-00 </td><td> jg     </td><td> blue50
+<tr><td>2003-11-00     </td><td> dark20
+<tr><td>2004-05-00 </td><td> jg     </td><td> black50 
+<tr><td>2005-02-00 </td><td> tr     </td><td> blue fercy #25
+<tr><td>2005-02-00 </td><td> tr     </td><td> blue fercy #25
+<tr><td>2005-11-00     </td><td> blackcedarwood xxl rt 
+<tr><td>2005-11-00     </td><td> blackcedarwood xxl lt(better) 
+<tr><td>2006-02-00 </td><td> jg     </td><td> beige ?
+<tr><td>2006-11-00     </td><td> blackdirt
+<tr><td>2008-05-00 </td><td> tr     </td><td> linen brown 44 #29.50
+<tr><td>2008-05-00 </td><td> tr     </td><td> italian sand m&s eal.bdy  #35
+<tr><td>2008-08-00 </td><td> tr     </td><td> cotton white 42 #15
+<tr><td>2008-08-00 </td><td> tr     </td><td> cotton dark blue 42 #35
+<tr><td>2008-11-00     </td><td> cotton black 40 #15
+<tr><td>2008-11-00     </td><td> cotton light blue 40 #6
+<tr><td>2008-11-00     </td><td> cotton black 42 #8
+<tr><td>2009-08-00 </td><td> tr     </td><td> 55%linen #8.81 (reduced from #19.50)
+<tr><td>2009-08-00 </td><td> tr     </td><td> 55%linen#8.81 (reduced from #19.50)
+<tr><td>2012-08-00 </td><td> jg     </td><td> dkblu primeal cwood #500=34
+<tr><td>2014-10-09   </td><td> jg     </td><td> mdblu primeal cwood xl dropcrtch #9.00</td><td>1stu 2014-11-12
+</table>
+<h3>
+p
+</h3>
+<table>
+<tr><td>           </td><td>xx</td><td> wht whl</td><td> jg blk cwood rt
+<tr><td>           </td><td>xx</td><td> wht sht</td><td> jg blk cwood lt
+<tr><td>           </td><td>xx</td><td> wht lt</td><td> jg gry prim(doras)
+<tr><td>           </td><td>ms</td><td> lnk whl</td><td> jg gry prim(doras)
+<tr><td>           </td><td>ea</td><td> wht rt</td><td> jg gry prim(doras)
+<tr><td>           </td><td>bt</td><td> blu/whtchk whl</td><td> jg gry prim(doras)
+<tr><td>           </td><td>ea</td><td> blu snp</td><td> jg blk prim activelarge
+<tr><td>           </td><td>ms</td><td> chn whl</td><td> jg drkblu short inside
+<tr><td>           </td><td>ea</td><td> wht lt</td><td> ca thkgry
+<tr><td>           </td><td>dp</td><td> grnstrp whl</td><td> ca thkgry d
+<tr><td>           </td><td>ea</td><td> blu whl</td><td> ca thkgry
+<tr><td>           </td><td>ms</td><td> chn rl</td><td> ca thncrm
+<tr><td>           </td><td>ea</td><td> blustrp rt</td><td> st blucyp1
+<tr><td>           </td><td>bt</td><td> blk whl</td><td> st blucyp2(?/130810)
+<tr><td>           </td><td>jky</td><td> wht whl(fd)</td><td> ca thkbrntable>
+<tr><td>2007-08-00 </td><td>      </td><td> wht
+<tr><td>2009-05-00 </td><td>laura         
+<tr><td>2009-05-00 </td><td>laura         
+<tr><td>2009-05-00 </td><td>laura         
+<tr><td>2009-05-00 </td><td>laura         
+<tr><td>2009-05-00 </td><td>laura         
+<tr><td>2009-05-00 </td><td>laura         
+<tr><td>           </td><td>ms eg xx-large</td><td>wht</td><td>rgtlft</td><td>jg blk prim activelarge? 
+<tr><td>           </td><td>ms eg xx-large</td><td>wht</td><td>rgt</td><td> jn blk wlsy
+<tr><td>----------
+<tr><td>           </td><td>ms eg xx-large</td><td>wht</td><td>whl</td><td>none
+<tr><td>2012-11-00 </td><td>prim xl bttn</td><td>dkgry </td><td>whl </td><td>none
+<tr><td>2012-11-00 </td><td>prim xl bttn</td><td>ltgry </td><td>whl </td><td>none
+<tr><td>2012-11-00 </td><td>cdwd</td><td>drkblu</td><td> whl</td><td> t2006-02-00</td><td>1stu 2013-10-05
+<tr><td>2013-08-00 </td><td>5*-100%c</td><td> lgtblu </td><td>rgt</td><td> t2006-02-00 prev2012-08-00</td><td>1stu 2013-10-04
+<tr><td>2013-08-00 </td><td>xx-large</td><td> blk </td><td>whl</td><td>greendg </td><td>1stu 2014-11-12  
+<tr><td>2013-08-00 </td><td>xx-large</td><td> mdmblu </td><td>lftrgt</td><td>t2014-10-09  </td><td>1stu 2014-11-12
+<tr><td>2013-11-00 </td><td>5* 2x-large</td><td>lgtblu </td><td>lft</td><td>t2014-10-09 </td><td>1stu 2015-03-06
+<tr><td>2013-11-00 </td><td>5* 2x-large</td><td>lgtblu </td><td>whl</td><td>none
+<tr><td>2013-11-00 </td><td>5* 2x-large</td><td>mdmblu</td><td>whl </td><td>none
+</table>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<br>
+<h3 id="camera">
+Camera & Phone
+</h3>
+<br>samsung camera--------------lexar
+<br>sdhc card 569 </dt><dt> 0707 includes corel snapfire plus semobile------to
+<br>send SMS: select from menu,enter message(forconfirmation start
+<br>*0#),dest. number,sendinfotouch: taxi
+<br>placename,send,222,send. weather as wellas taxi.urn:
+<br>D000011865165oldaccount no: 3327816to retrieve messages from
+<br>abroad: mobile-of-oregon * 4-digit-pin-code(default 8705)-now-n 2
+<br>(xx-44-7802-090100) *? will then ask for phone number and then
+<br>send the above individual number plus the default pin code (8705)n as
+<br>a SMS to the mobilefor imei
+<br>i
+<!-- Macros
+/<p>\|<\/p>\|<hr>
+df>
+o proc1.txt
+<h3
+2f d04wdw0Pi-3wdwF-pi-2wdwF-pwllldwd$Ji</td><td>$a0i<tr><td>Ea</td><td>
+-->
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3>
+Diary - Past
+</h3>
+<!-- 001 start Diary - Past -->
+<table>
+<tr><td>2014-11-01</td><td>    Sat</td><td> CHIS Halloween disco. 
+<tr><td>2014-11-11</td><td>    Tue</td><td> PP AgeUK AGM 2.00pm Manor House, Northolt Village Comm.Centre, UB5 6AD
+<h3 class="date"> Wednesday 01 April 2015 <a style="color:PowderBlue;" href="#top">Top</a></h3>
+PP DYh WongKei
+</table>
+<!-- 002 end Diary - Past -->
+
+<h3>
+Slough Plus Facebook 
+</h3>
+<table>
+<tr><td>	2013-03-03	</td><td>fran-seen</td><td>bea          </td><td>we accept	</td><td>immed	
+<tr><td>	2013-03-06	</td><td>susan </td><td>berry		</td><td>we accept	</td><td>immed		
+<tr><td>	          	</td><td>samantha</td><td>biddle 	</td><td>         	</td><td>     	
+<tr><td>	2013-03-08	</td><td>glyn </td><td>bull         	</td><td>he accept	</td><td>immed		
+<tr><td>	          	</td><td>liane  </td><td>browning</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>faye   </td><td>bunyan 	</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>tina   </td><td>bunyan 	</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>emily  </td><td>burgess	</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>patrick </td><td>byrne  	</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>michael</td><td>clarkson       </td><td>         	</td><td>     	
+<tr><td>	2013-03-25	</td><td>joan </td><td>clifford		</td><td>we accept	</td><td>immed		
+<tr><td>	2013-03-04	</td><td>ian </td><td>crawshaw		</td><td>he accept	</td><td>immed	
+<tr><td>	2013-03-06(h)	</td><td>lance </td><td>creed		</td><td>he accept	</td><td>immed		
+<tr><td>	2014-09-27	</td><td>jason </td><td>creighton-moss  </td><td>he accept      </td><td>immed
+<tr><td>	          	</td><td>simon  </td><td>davies 	</td><td>         	</td><td>     	
+<tr><td>	2013-03-06	</td><td>colin </td><td>davison		</td><td>he accept	</td><td>immed	
+<tr><td>	          	</td><td>gerry </td><td>edwards		</td><td>         	</td><td>     	
+<tr><td>	2013-03-07(h)	</td><td>lorraine </td><td>fairfax-sissaoui</td><td>she accept	</td><td>immed		
+<tr><td>	2013-04-03	</td><td>julia </td><td>favell		</td><td>we accept	</td><td>immed		
+<tr><td>	          	</td><td>david  </td><td>funnell	</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>susan  </td><td>glover 	</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>lee    </td><td>gilbert	</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>rachel </td><td>grant  	</td><td>         	</td><td>     	
+<tr><td>	2014-09-27	</td><td>angela </td><td>gunn           </td><td>she accept     </td><td>immed
+<tr><td>	2013-03-08	</td><td>joseph </td><td>gurney		</td><td>he accept	</td><td>immed		
+<tr><td>	          	</td><td>keith-g </td><td>harding	</td><td>         	</td><td>     	
+<tr><td>	2013-03-06(h)	</td><td>mark </td><td>harrington	</td><td>he accept	</td><td>immed		
+<tr><td>	2013-03-06	</td><td>lewis </td><td>hodgetts	</td><td>he accept	</td><td>immed	
+<tr><td>	          	</td><td>keith  </td><td>israel 	</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>paul-james</td><td>jeffrey	</td><td>         	</td><td>     	
+<tr><td>	2014-09-27	</td><td>bryony </td><td>lanham         </td><td>she accept     </td><td>immed
+<tr><td>	2014-09-27	</td><td>debbie </td><td>lewis          </td><td>she accept     </td><td>immed
+<tr><td>	          	</td><td>tim    </td><td>luckett        </td><td>         	</td><td>     	
+<tr><td>	2014-09-29	</td><td>louise </td><td>lukins         </td><td>she accept     </td><td>immed   
+<tr><td>	          	</td><td>judy   </td><td>mander 	</td><td>         	</td><td>     	
+<tr><td>	2013-03-08(+h)	</td><td>jayne </td><td>manley		</td><td>she accept	</td><td>immed		
+<tr><td>	2012-03-05	</td><td>clare </td><td>martin		</td><td>we accept	</td><td>immed	
+<tr><td>	          	</td><td>katy   </td><td>mcdonnell</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>richard</td><td>merrett  </td><td>         	</td><td>     	
+<tr><td>	          	</td><td>dave   </td><td>parfitt	</td><td>         	</td><td>     	
+<tr><td>	2013-03-02	</td><td>westkent </td><td>plus		</td><td>he accept	</td><td>5d		
+<tr><td>	2013-03-11	</td><td>johnny </td><td>pope		</td><td>he accept	</td><td>immed		
+<tr><td>	          	</td><td>martin </td><td>posner         </td><td>         	</td><td>     	
+<tr><td>	          	</td><td>manoj  </td><td>pra            </td><td>         	</td><td>     	
+<tr><td>	2014-09-27	</td><td>roland </td><td>rat            </td><td>he accept      </td><td>immed
+<tr><td>	          	</td><td>steve  </td><td>rolfe  	</td><td>         	</td><td>     	
+<tr><td>	          	</td><td>nicky  </td><td>rolfe  	</td><td>         	</td><td>     	
+<tr><td>	2013-03-02	</td><td>laura </td><td>rowe		</td><td>she accept	</td><td>3d		
+<tr><td>	2013-03-02	</td><td>andy </td><td>rutter		</td><td>she accept	</td><td>immed		
+<tr><td>	          	</td><td>phil   </td><td>saffer 	</td><td>         	</td><td>     	
+<tr><td>	2013-03-02(+h)	</td><td>gary </td><td>schwimmer	</td><td>he accept	</td><td>6d	
+<tr><td>	2013-xx-xx	</td><td>mike </td><td>shapcott		</td><td>he accept      </td><td>immed
+<tr><td>	2013-03-02	</td><td>lucy </td><td>smith		</td><td>she accept	</td><td>immed		
+<tr><td>	2013-03-01	</td><td>harry </td><td>stock		</td><td>he accept	</td><td>immed	
+<tr><td>	2013-04-01	</td><td>peter </td><td>sturt		</td><td>he accept	</td><td>immed		
+<tr><td>	          	</td><td>dave   </td><td>sugden 	</td><td>         	</td><td>     	
+<tr><td>	2013-03-03	</td><td>michelle </td><td>townsend     </td><td>we accept	</td><td>immed	
+<tr><td>	2013-03-03	</td><td>lorraine </td><td>tyrell	</td><td>she accept	</td><td>immed		
+<tr><td>	2013-03-03	</td><td>stuart </td><td>tyrell		</td><td>he accept	</td><td>immed		
+<tr><td>	          	</td><td>paul   </td><td>west   	</td><td>         	</td><td>     	
+<tr><td>	2013-03-04	</td><td>lorraine </td><td>whiting	</td><td>we accept	</td><td>immed		
+<tr><td>	2013-03-04(h)	</td><td>gemma </td><td>winslow		</td><td>she accept	</td><td>immed		
+<tr><td>	2013-03-02	</td><td>rhianna </td><td>wright	</td><td>we accept	</td><td>immed	
+<tr><td>	2014-09-27	</td><td>chris </td><td>mann            </td><td>not yet        
+<tr><td>	2014-09-27	</td><td>magda </td><td>bel             </td><td>not yet        
+</table>
+<h3>
+Slough Plus Facebook  resigned
+</h3>
+<table>
+<tr><td>	2013-03-08	</td><td>kathy </td><td>morris		</td><td>she accept	</td><td>immed	
+tr><td>	2013-03-03(+h)	</td><td>lisa </td><td>howlett		</td><td>she accept	</td><td>asap
+</table>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3 id="calendar">
+Local
+</h3>
+<br>start past
+<br>==========
+<br>
+<br>pension	2011-08-09	michael of blue team 2 (uk state pensions), on 0800-731-7898, confirmed that they had received my claim and would so inform the 			person from pension credit who phoned me yesterday and raised the issue
+<br>	2011-08-10	sent form to prudential ?£8205.96 (?847.60/pa)
+<br>
+<br>
+<br>soc	2003-11-01	mb-ty		marry
+<br>soc	2007-03-21	bangkok-	drm in grp with at house in country. Afterwards they in black cthr top wanting someone , not specifically me. I search can hear voice but not see and wander all around,
+<br>soc	2007-04-28	mike-br-	greensh-beigetr-kshoes.
+<br>					20-?21ex-hcp:suea,martinb+flickb,kathyc,adrian+fraukec,kareng,stanleyg+sharong,margg,krisk,barbl,simonm+janetm,adrianm+traceym,martino+laureno,paular,philw,?aliced
+<br>					curr-hcp-but-not-then-renrw14:aarons,brain,davies,harrisj,houston,coombes,longden,mistry,oswell,pares,sangster,hook,scott,toogood
+<br>					curr-hcp-qnd-then-renrw27:allemagne,anderson,bindra,pol,brumham,burnett,eden,costigang,costigans,forbes,gooch,gossage,lake,lewis,smith,long,masters,moutiez,braidman,moutrie,newsteadd,newsteadc,north,stock,thorne,williams,wooster
+<br>soc	2007-05-19	sandra--	40th
+<br>soc	2007-07-18	mb-ty		good yarn,uxbridge
+<br>
+<br>hcp	2000-09-17	 me-	walk chipperf8.rogk-davek-petem-simonc-mariam-rutha-jackieh 
+<br>hcp	2001-06-22	 me	fri.bowling14.philw-grahame-andrea-keith-mikef-ruthd-jane-johnh-jenny-shaunb-debbieb-sandraw-patrickb	
+<br>hcp	2005-05-23	 me----	clove.peterm-daveg-darrenw-andye-alisonb-lisah-annab-melishas-sujatas-lorrainef-karenf-rosiel-(philg)
+<br>hcp	2005-05-30	 kamini	harek.anna-kim-lesley-alison-andy-ralph-neil
+<br>hcp	2005-06-29	 me----	giralda.peterm-lisah-annab-karenf-jenniferp-philg-brianl
+<br>hcp	2005-08-29	 me----	chipperfield.pierrick-maurice-jennifer
+<br>hcp	2005-11-07	 me---	mon.clove.sofia-rosie-lorraine-karen-shirley-phil-jackson-(kamini)
+<br>hcp	2005-12-17	 xmas-	bridgehot. goalone. dl say s was 2 when split. now 18 therefore 16y ago. n 24 sec.gd wemb.jobcen.
+<br>hcp	2006-02-18	 agm--	uxbcricketc. benjy 7m black bigears cornish... anyone, phoebe 5f tabby , sophie 3f white , sapphire 3f white .
+<br>hcp	2006-04-xx	 me---	clove.piers-eamon-gavin-daves-debbie-carolinea-karenf
+<br>hcp	2006-05-07	 me---	perivale-ballotbox.tracyo-janew-lorrainef-rosie-karenf-rutha-pierrick-piers-katha
+<br>hcp	2006-07-xx	 summ	poclub. takesof
+<br>hcp	2006-10-xx	 autm	gaa. takesof+ros. mo dotdress
+<br>hcp	2006-12-16?	 xmass	westruis. takesof+ros. mo blackdress danced with mf
+<br>hcp	2007-05-06	 me---	perivale-ballotbox.judith-karenp-emmanuelle-simonb-jackson-phil-jamesmo-lewis
+<br>hcp	2007-05?06?	 me	shigi. lisah.brianl,(janem,rhianna)
+<br>hcp	2007-07-01	 me	walk. noone
+<br>hcp	2007-07-19	 me	home. colind
+<br>hcp	2007-08-04	 karenp	pizzexp-pinn. susie-sue-terry-christina-karenf-lewis-louie-graham
+<br>hcp	2007-08-26	 sports-day	10. mike-rosa-grace-susie-kimh-johnwoo-jamesm-jackson-andrewk
+<br>hcp	2007-12-15	 xmas-	beigetr-greensh-kshoes.
+<br>hcp	2008-05-02	 me--	crown. juliet-vicky-loiuse-karenp-denise-suel-pierrick-peterm-davek-piers-paulh-lewis-phil
+<br>hcp	2008-08-02	 me--	crown. --------------------karenp-----------------------------------------------lewis------lisa-kim-jackson-brian 
+<br>hcp	2008-09-17	me---	og43.lisah-jacksonj
+<br>hcp	2009-02-21	agm	biegesuit-beigeshirt-kshoes
+<br>hcp	2011-07-16	rich.merrett bday at sisters
+<br>
+<br>barnet	2009-01-19	clare	i ph . mention phils remarks. ask to become member
+<br>barnet	2009-01-26	lisah	i ph. ls had sent txt "Hi lisa we got probs at our club coz harry and johnny keep cming down and sme dnt want them i esp
+<br>				want johnny to f off"
+<br>hilling	2010-04-30	EWt	her d.final 326.00. me with GPn
+<br>hilling	2011-01-28	me	pangsc. 22
+<br>				Arrived,Hillingdon: 	8. LH-GS-JaneT-RhW-Esther-JeffR-Lewis-Johnny-
+<br>				Arrived,Chiswick: 	3. Barry-InC-Chrissy-
+<br>				Arrived,Slough: 	1. me-
+<br>				Arrived,Dunst: 		1. VWh-
+<br>				Arrived,HCP: 		9. Judith-PaulD-Louise-GrahamR-Denise-PaulH-PhilG-JohnWi-ColinD. 
+<br>				Didnt turn up: 		1. MikeSh. 
+<br>				Cancelled: 		1. TinaH
+<br>				Maybebutdidnt: 		1. Faye
+<br>				Declined,Hillingdon: 	5. RichardMah-Scott-KathMc-MattD-GP-
+<br>				Declined,Barnet:	5. Francine-Lucy-Manoj-Laura-PhilS-
+<br>				Declined,Dunst:		2. RobB-Nichole-
+<br>				Declined,OtherPlus:	1. AndyR-
+<br>				Declined,HCP: 		5. James-RichardMerr-Sean-BrianL-PeterM-
+<br>				NoAnswer,Hillingdon: 	1. DaveC
+<br>				NoAnswer,Chiswic:	1. SusanM-
+<br>				NoAnswer,Slough:	2. BobbyB-BexiC
+<br>				NoAnswer,Barnet:	6. Lance-Lorraine_StuartT-ClareS-RichardP-AngelaG-
+<br>				NoAnswer,OtherPlus:	3. NickG-JoM-MattW
+<br>				NoAnswer,HCP:		6. KimH-KarenP-PeterS-SophiaZ-JaneR-SheilaT-
+<br>				NoAnswer,Other: 	2. JayneM-AndyW
+<br>hilling	2012-01-25	me	persian pal. 12
+<br>				Arrived,Hillingdon:	8. GS-JaneT-JeffR-Lewis-Jackson-MattD-Philippa-PaulS
+<br>				Arrived, Slough:	1. me
+<br>				Arrived, Barnet:	2. LR-MP
+<br>				Arrived,Dunst:		1. VWh
+<br>				Didnt turn up(Sick): 	1. Barry
+<br>				Declined,Hillingdon:	7. LH(sick),Katherine(busy),Rhianna(work),MattW(money),Esther,Scott,Corinne
+<br>				Declined,HCP:		1. RichardM(too early)
+<br>				Declined,Slough:	2. Tina(sick),Colin(busy)
+<br>				Declined,Chiswick:	1. IanC(busy)
+<br>				Declined,Lichfield:	1. AndyR(too far)
+<br>				Declined,Anglia:	1. JoM(too far)
+<br>				Maybebutdidnt:		2. Bexi,PeterS
+<br>				NoAnswer,Slough:	2. Faye,SimonG
+<br>				NoAnswer,HCP:		1. JayneM
+<br>hilling	2012-02-28		paul st funeral
+<br>off-prog 2013-02-02		coach&h(ricky) 24
+<br>				Arrived,Hillingdon: 	10. GSw-RWr-MDc-PRg-DPf-RMf-KMc-EWt-JRe-JMl
+<br>				Arrived,Barnet		5. LRw-MPr-BCl-LCr-LSm
+<br>				Arrived,Chiswick: 	0.
+<br>				Arrived,Slough: 	2. HSt-JJn
+<br>				Arrived,Dunst: 		1. VWh-
+<br>				Arrived,SouthBucks:	1. MSp
+<br>				Arrived,other:		1. MarcBr
+<br>				Arrived,other-HCP: 	4. RMr-MBr-DKp-LWd
+<br>				Didnt turn up: 		0.
+<br>				Cancelled: 		1. CSm 
+<br>				Maybebutdidnt: 		0.
+<br>				Declined,Hillingdon: 	3. LHw-JPp-ARt
+<br>				Declined,Barnet:	2. FBr-MHk
+<br>				Declined,Slough:	1. TBu
+<br>				Declined,Chiswick:	1. ICr
+<br>				Declined,Dunst:		0. 
+<br>				Declined,HCP: 		4. KJn-DLw-RPl-LHd
+<br>				NoAnswer:		13. MWl-GEd-PSf-STy-LTy-OPv-DBr-RCp-RBf-NHd-AKl-JSp-PMt-(other-HCP-Barnet)
+<br>				UnInv:			SGg-CDv-BCz
+<br>				put on fb -24(few), booked with nicola -21 for 15attendees, served by Rhiannon
+<br>off-prog 2014-01-25             coach&h(ricky) 16
+<br>                                Arrived,Hillingdon: 	8. GSw-RWr-MDk-KMc-JRe-JMl-MarcBr-LHw
+<br>				Arrived,Barnet		1. LSm
+<br>				Arrived,Chiswick: 	0.
+<br>				Arrived,Slough: 	2. HSt-JJn
+<br>				Arrived,Dunst: 		3. VWh-RBf-NHd
+<br>				Arrived,SouthBucks:	1. MSp
+<br>				Arrived,other-HCP: 	1. LWd
+<br>				Didnt turn up: 		0.
+<br>				Cancelled: 		7. LCr-EWt-FBr-PBr-LBr-STy-LTy
+<br>				Maybebutdidnt: 		1. JPp
+<br>				Declined,Hillingdon: 	1. ARt
+<br>				Declined,Barnet:	2. LRw-MPr
+<br>				Declined,Slough:	1. TBu 
+<br>				Declined,HCP: 		1. KJn
+<br>                                Declined,Other:         2. AKl-CTk
+<br>				NoAnswer:		7. MWl-OPv-DBr-MBr-RPl-RGr-MHr
+<br>				UnInv:			SGg-CDv-LHd-BCz-PRg
+<br>				booked with emily/shauna
+<br>				bill=287.85,paid=306.50,tip=18.65,6.48%.
+<br>                                HSt:bill=22.65,tip=4.15,18.32%
+<br>                                GSwVSw:bill=30.60.tip=3.10,10.13%
+<br>                                JMl:bill=20.00,tip=2.00,10%
+<br>                                JRe:bill=20.00,tip=2.00,10%
+<br>                                LSm:bill=20.00,tip=2.00,10%
+<br>                                JJn:bill=16.40,tip=1.60,09.76%
+<br>                                MSp:bill=20.00,tip=0.00,00%
+<br>                                Others:bill=138.20,paid=,tip=3.80,2.75%
+<br>                                paid:RBfNHd=27.50,LHw=30.00(cd),MDk=22.20(cd),KMc=14.30(cd),RWr=12.50
+<br>
+<br>
+<br>wash	2007	lisa		harvester-goldington,?				slough
+<br>brean 	2008	*adrian								slough
+<br>wash	2008	lisa&barry	harvester-pboro,?				slough
+<br>brean	2009	ianc		?,pizza-bath					barnet(chris,lance)
+<br>wash	2009	laura&manoj	harvester-goldington(twice)			barnet(laura&manoj,stuart&lorraine,chris,lance)
+<br>brean	2010	laura&manoj	harvester-swindon,brewersfayre-chippenham?	slough(tina,adrian,faye,simon,?)
+<br>wash	2010	laura&manoj	a10,ex-moons-ely				slough(simong,robertg)
+<br>brean	2011	laura&manoj	harvester-swindon,stonehenge,moons-salisbury	barnet(lance(room),laura&manoj,christil,?bobby)
+<br>wash	2011	laura&manoj	a10,ex-moons-ely, cambridge			barnet(bobby(room),bill&sharon)
+<br>brean	2012	laura&manoj	harvester-swindon,2toby-swindon			barnet
+<br>wash	2012	laura&manoj	a10,ex-moons-ely, downhammarket-fish&c		barnet(bobby(room),laura&manoj)
+<br>brean   2013	laura&manoj     
+<br>wash    2013    laura&manoj     a10,ex-moons-ely, downhammarket-fish&c	        slough(nickl(room),tina&adrian)	
+<br>brean   2014	laura&manoj     
+<br>wash    2014    laura&manoj     golden lion (wthsp) newmkt, (wthsp) kings lynn  slough(LHd(room),Bexi)	
+<br>
+<br>wl	2005-12-18	xmas	mo say parents div ?20y ago. both diab, at least 1 inj. 
+<br>wl	2006-11-26	 me---	home.ruth-mags-jackie
+<br>wl	2006-12-02	 me---	lagiralda. no one
+<br>wl	2007-05-18	 me---	chezg.yellowsh-blackprimark-blackshoes.janet(planner)-ruth-karen
+<br>wl	2007-12-15	 karen-	beigetr-darkyellowsh-kshoes.
+<br>wl	2008-01-09	 karen	cyprussuit-whitesh-blacksh.
+<br>wl	2008-05-26	 jonn-	mags-janet-brett-jackie-katherine-chris(kfriend)-ruth-mikef
+<br>wl	2008-06-22	catht	garden
+<br>wl	2008-07-27	me	cart&horses. mags,janet. redwhiteblacksh-linentr-boots
+<br>wl	2008-08-15	brett	whitetr-sandals
+<br>wl	2008-xx-xx	mikef	northwood-hills-cafe
+<br>wl	2009-01-01	brett
+<br>
+<br>
+<br>
+<br>jf			anne-?-mill-2for1
+<br>jf			frances-b
+<br>jf			ann-mcg
+<br>*jf			geoff don
+<br>jf	2008-08-xx	nicki wickes
+<br>
+<br>og	2013-02-14	stevenc	me-rattan-ron-neville-steven-emerald-eileen-betty-janet-valda-barbara-danuta-gwen-josie-carole
+<br>
+<br>
+<br>mike	2005-03-09	he come m52.pangs-hillingdon clare(host)-mike-darren-jemmadawn
+<br>mike	2008-05-06	he come og43
+<br>			i go hertf
+<br>
+<br>bob	2006-01-27	they come m52. shigi. yeadingbrookA40.
+<br>bob	2006-10-16	they come with penny
+<br>bob	2007-04-20	they come with penny on walk to greenford
+<br>bob	2007-09-28	he ph re next stage of walk. i suggest noodles
+<br>bob			he email re next step of walk. i ph suggest noodles, he vague
+<br>bob	2008-05-21?	i email happy bday why not visit.
+<br>bob	2008-06-11	he came. discussed. walk
+<br>bob	2008-12-19	he came
+<br>	2009-06-xx	he invite fb
+<br>	2010-12-03	h3e came
+<br>	2011-01-11	he ph
+<br>	2012-03-07	i ph
+<br>
+<br>fred	1999-07-04	to jaflong with mina
+<br>fred	1999-10-24	jaflong
+<br>fred	2001-01-29	they ph
+<br>fred	2003-03-05	see with stu in qway
+<br>fred	2006-07-23	to jaflong
+<br>fred	2007-11-11	i ph. eric at imp.soon nmove whitton av. mina ask if marr.
+<br>fred	2008-07-07	he ph to give new phone number
+<br>fred	2008-08-02	i ph
+<br>
+<br>davey	2005-10-15	they ph
+<br>davey	2006-07-26	to swan,penz petr=?4/2=?7 swan=?0/2days penz-?5/5days join=?5.95
+<br>dabey	2007-01-13	i go p till 03-01
+<br>davey	2007-04-xx	come wth rosa,sofia,robin duck
+<br>davey	2007-04-21	they ph
+<br>davey	2007-06-01	came for duck with lisa and brenda
+<br>davey	2007-07-17	wong kei
+<br>davey	2008-01-18	i go p till 03-10
+<br>davey	2008-05-17	i ph. weekends prob with tube.he will ph in a couple ofweeks
+<br>davey	2008-10-18	i ph. he no go p, tired. mimi died heart. son 21 ist yrae at plymonuth uni. sally cancer, not have ph. ytei emp die, return indon.
+<br>davey	2009-01-20	i ph. he stays at home. he will ph when it is warmer for us to go to wongkei
+<br>	2011-01-11	i ph
+<br>
+<br>roger	2003-08-09	see with john at cricketers/ip
+<br>
+<br>----------------------------------------------------------------------------------------------------------
+<br>
+<br>chesn	2005-04-24	georgem-	i ph. bills died ?2001-12-25. gm has bronchitis. bm has osteoporosis. roy(elder) lives canvey island. barry(younger) lives IOW.
+<br>
+<br>chesn	2005-04-27	roses---	i ph. bill died 2000-12-25? william has son+daughter rosalind has 2 daughters. rose knee problem
+<br>chesn	2005-04-27	family--	sent change of address cards to florrie,beat,rose,grace,sandra,carole
+<br>chesn	2007-01-06	beat-m--	i go
+<br>chesn	2008-02-xx	beat-m--	i send pcard from p
+<br>
+<br>
+<br>pol	2007-04-10	pol.course	1st lesson
+<br>pol	2007-06-26	pol.course	end. meal at posk
+<br>
+<br>firestat	2007-05-31?	1st go
+<br>firestat	2008-05-29	1+7. x-rosa. danuta wiesia anna tadeusz eva      ela 1fem x-wnada x-zosia x-hela.
+<br>
+<br>=====================================================================================================
+<br>rosam	2011-02-23	she ph
+<br>
+<br>gemmaw	2011-02-21	she chat on fb. going brean, posibly barnet disco but mums bday on 18th march
+<br>
+<br>
+<br>lesley	2008-02-xx	i send pcard from p
+<br>	2009-09-05	sat. i ph offer lift to andy bbq. she sick , had drunk 10 shorts last night.
+<br>
+<br>
+<br>
+<br>anita	2009-08-19	prop
+<br>
+<br>ixi772	2009-08-06	renault. on recep at michaelf
+<br>
+<br>diane	2009-08-04	she ph. invite visit. i reluctant, hcp meeting, cd. she insistant, not seriou w cd, not engaged, ne not possessive, he wouldnt object, did their own things last sunday
+<br>
+<br>deb	2007-05-26	sat. 16:32.she leftmessage on landline: 
+<br>			"hi, hi, harry, it's debbie, em, from coffee pot 
+<br>			could you give me a call, sometime, em, on 0208 429 1612. 
+<br>			i just want to find out a bit more about 18 plus, 
+<br>			i don't think it's called 18 plus anymore but em, for my son, 
+<br>			cos he's interested in it. ok, thanks, bye, rlf "
+<br>deb	2008-07-12	hcp-summer. we danced
+<br>deb	2008-11-10	i ph xmas tickets. moving old cottage near chesham. sara(h) at uni. partner not work. nathan middx uni hendon.long talk. 5:20
+<br>deb	2008-12-13	hcp xmas. if split dave would b happy live alone. she suggst agency. i say about mariak. i say offer lh
+<br>deb	2008-12-30?	i drm
+<br>deb	2008-12-31	i send e-mail
+<br>deb	2009-01-02	i cry
+<br>deb	2009-01-03	i cry
+<br>deb	2009		get reply
+<br>deb	2009-04-xx	i send email. get reply
+<br>	2009-06-25	i drm. go to her event. she with someone. on return get impress she will  w h. she indicate will see me later
+<br>	2009-08-04	she ph , thank 4 voucher fro toys r us, invite lunch next sun in chesham
+<br>	2010-12-xx	she invite me to honister. friend of sarah has candle party. I go with gp + lr? + mp?
+<br>	2011-07-16	sat. she and d got to richm hcp bbq.	
+<br>	2011-08-19	fri. i go her hcp event at moons in stanmore. d came, also jackson. i invited philb but he silly.
+<br>	2011-12-10	 she not go richm hcp event. richm invited d also. d wanted to go with her, she didnt so he didnt either.	
+<br>	2011-12-29	she come my hcp event waters edge. she split with d last summer. trigger was she want to go alone to visit school friend in france. d to move out in may when his tenants leave. she has contacted kb on facebook but got no reply. d's family is hostile. runs with club metro on saturday mornings and on thursday on stanmore common. will go on hawog walking holiday with d.
+<br>	2012-01-01	i txt happy n y.she txt back with x
+<br>	2012-01-04	wed. we go judith. tomorrow,5th, goes to sarah. no bowling, short of cash at month end. might go grapes,10th.
+<br>	2012-02-25	sat. i drm. after leaving event, we go separate routes. she chat to another woman. didnt look back at me.
+<br>	2012-02-27	mon. she phn mob after my 2 calls. she will phn again. on saturday she goes event for mother's 80th birthday.
+<br>
+<br>
+<br>denise	2009-01-01	i sent email. she reply immed
+<br>denise	2009-01-14	wjolle. blacksk. p not like dance and j if she go. she stand for tr.
+<br>denise	2009-02-01	barnhotel. she like bridge bcos mathematical. perhaps pinner bridge club. tv irritates except when cleaning
+<br>denise	2009-02-21	hcp-agm. which women i at ceroc? 3witches
+<br>denise	2009-03-xx	send email. no reply
+<br>
+<br>
+<br>
+<br>
+<br>teresa	2009-03-15	1st she visit profile 13:49. send ks received 07:40 . send msg 13:43 ciesze sie ze moge do ciebie napisac .jestes wspanialym mezczyzna.pozdrawiam.terenia
+<br>teresa	2009-03-26	her 2nd msg. milo cie poznac.jestes interesujacym mezczyzna i wspanialym czlowiekiem.pozdrawiam.Terenia
+<br>teresa	2009-04-02	my msg
+<br>teresa	2009-		1stmeet. i drive guil bus stat. not eat. we drive park near her
+<br>teresa	2009-		2ndmeet. she come wat. we eat wongkei
+<br>teresa	2009-		3rdmeet. i drive nearby park. she come. we bus to guilfcent. eat jap
+<br>teresa	2009-		4thmeet. she come wat. we eat ?wongkei?leics
+<br>teresa	2009-		5thmeet. i drive cumb. we eat at c48. walk finish at lake
+<br>teresa	2009-		6thmeet. she come wat. i late due tube strike. we eat ?wongkei?leics, return bus to og43
+<br>teresa	2009-		7thmeet. i go train. we eat mandarin. she buy tieclip
+<br>teresa	2009-07-09	8thmeet. she come wat. we return via brentford. much ks, enter but no ej
+<br>	2009-07-16	9th. i go car. garden, forest
+<br>	2009-07-28	10th. she came brentf. stay in. she return e8
+<br>	2009-08-	11th.i go car. garden, cathedral
+<br>	2009-08-21	12th. she came wat. primark. caverj. i drive gford
+<br>	2009-09-02	13th. i go car. aldershot
+<br>	2010-06-10	she ph
+<br>
+<br>laura	2006-xx-xx	01.1st see in richmond
+<br>laura	----------	haven(2ce) hemel-bowl lance-croxley watford 
+<br>laura	2007-11-02	wash
+<br>laura	2007-11-18 	sun. railway with lh medit food
+<br>laura	2008-04-11	brean
+<br>laura	2008-11-09	10.sun. art centre healthy eating
+<br>laura	2008-11-14	11.fri-wash. blue evening dress. thin straps
+<br>laura	2008-11-15	sat-wash. she hello outside pool. in venue complimented me on flowery tie, she black top, fractal bottom. pink wrap. again she acknol
+<br>laura	2008-11-16	sun-wash. chat in jacuzzi, i mention nephews communion, she ask if have car. in venue, acknol me, took photo of me alone and of me between her and lorraine.
+<br>laura	2008-11-22	12.sat. francine-bday-bouga-doihavesiblings-doilikegardening.isay 3ainmathsthendegree retirednoneedtowork nocloserelatives 
+<br>laura	2008-12-27	15.sat. trent park, paul&francine
+<br>laura	2009-03-07	sat. ottomans bday meal. 2ks
+<br>laura	2009-03-10	tue. she ph ask take luggage brean
+<br>laura	2009-03-20	fri-brean. dark blue dress as at wash
+<br>laura	2009-03-21	sat-brean. bikers n rock chicks. short dress black at bottom, pink n black on white at top. clarks village. likes bacon fat
+<br>laura	2009-03-22	sun-brean. olive green luminescent dress, gleaming as oil on water. wookey hole. 
+<br>laura	2009-03-23	mon-brean. bath pool, pizza. ks
+<br>laura	2009-03-xx	brean. father 76 retired builder n decorator, has allotment but doesnt like veg. mother 66. 1ks in car park
+<br>laura	2009-03-28	finchley bowl. she show photp silver engagement ring argos, size being changed. i take cases to hers then manoj's
+<br>laura	2009-04-xx	sun. walk she work 12-6 mon,thu,fr 12-4 thur. father was confirmed yday
+<br>laura	2009-04-18	sat. gary-bday. i gave lift back
+<br>laura	2009-04-xx	i comment fb normal nice
+<br>laura	2009-06-29	she ph 020 enquire about car
+<br>laura	2009-09-27	barnet. she absent, fast for test. paul: inconsiderate at meeting, bad to m., newbarnetfair
+<br>							   sharon: lucky not karaoke, gives others a chance
+<br>							   deidre, oliver, lucy also
+<br>							   she said people over 40 are boring
+<br>
+<br>lisah	2007-04-21	move into cgp2
+<br>lisah	2007-06-01	came for duck with brenda and dave
+<br>lisah	2007-06-04	came my hcp event with rhianna, jane, brian
+<br>lisah	2007-09-11	gave lift to ricky.md had 3X ask for hol. had inh 3k
+<br>lisah	2007-12-31	frimleyg. she fan 4plus:gary,mattw,ianp,ianc; 3hcp:reg,julian,ralph,(roy)
+<br>lisah	2008-02-xx	i send pcard from p. also txts
+<br>lisah	2008-11-15	sat-wash. she suggest o/hand
+<br>lisah	2008-xx-xx	i ph to remind. she say change mind bcos not fanc
+<br>lisah	2008-11-30	after lon.dunge/wongkei. bottle plumwine. i facebchat. h:just fin bottle l:u pissed? h:just alittle h: ur gorgeous
+<br>			h: r u angry l: little, why shd i b h:sorry 4 b emot, only want to pl l: anita... h: tell m gb n approve
+<br>			l: i am going to p y o m k and s u b. this has got 2 stop, do u want 2 lose my fr? but u r a gb n i do approve.
+<br>			h: dont want 2 lose ur fr. l: saying gb is childish l: u can do better than that, grovel to the -- lol. h:whatever
+<br>			l:grovel grovel, h, i want 2 do this but cant as i dont fanc u . dont feel right h: yearn to cr
+<br>			l: thought u couldnt g i u. h: can with ci n pmp l: as i am a bi---. ok, will i like it d style	
+<br>lisah	2008-12-08	harvester. cg2 flash.pref tng
+<br>lisah	2008-12-09	no i'm not. i'm trying 2 give it up. havent done it 4 2weeks4days and before that 4 23weeks6days
+<br>			it is morally wrong bcos it deprives women of power. when we r f we can easily b controlled by women, which is how it shd be
+<br>lisah	2008-12-10	i say hi on facebook but no reply
+<br>lisah	2008-12-22	i ph short talk , dad coming with presents
+<br>lisah	2008-12-23	jbbar
+<br>lisah	2008-12-24	she ph apol 4 neglecting me last night
+<br>lisah	2008-12-27	she ph
+<br>lisah	2008-12-28	she ph. annoyed i not go her 31st
+<br>lisah	2008-12-30	she ph. ask jane's ph number
+<br>lisah	2008-12-31	she ph. ask about who told bg about party
+<br>lisah	2009-01-01	i ph. she say ph back. i did but no reply(already gone to work)
+<br>lisah	2009-01-02	she ph
+<br>lisah	2009-01-05?	h, sweetheart, you're gonna have to lick my p out sometime baby, cos i'm feeling fucking horny --ah-- . Last night I was
+<br>			just, J.C. .I don't know what's wrong with me lately. I don't know if it's the cold but i'm feeling so..so...sexed-up --huuh---.
+<br>			Fulfill my fantasies, baby. Give my pussy a good licking. Thank you.
+<br>	2009-01-14	21.11.51 this has got to stop
+<br>			h: ok
+<br>			21.13.53 we will get together just pls dont send metexts like that
+<br>			h: ok sorry
+<br>			21.17.40 bad bad bad very bad
+<br>			h: i agree. i'm very bad.ur 2 gd 4 me
+<br>			21.29.19 if you keep sending me texts i will give you bum pain inside lol
+<br>			H: i'm so n i'm sure i deservewhatver p u choose 2 infl. however p it is i will b b4 u aft.. nthank u 4 corr me. wanna takeu out 4 a
+<br>				meal n stroke ur hair
+<br>			21.38.19 massage pls can you do
+<br>			h: yes whenver u want
+<br>			h: yes
+<br>	2009-01-15	02:22:15 you awake
+<br>			02:23:59 i dint know what to do i am hurting cha...
+<br>lisah	2009-01-16	13:44:31H: wanna give u some really gd g...		
+<br>			15:28:34h: sorry. i will control myself.
+<br>lisah	2009-01-17	she ph ?guest room. would i like to ..
+<br>lisah	2009-01-18	i ph. haras... stare.. obsessive   stroke
+<br>lisah	2009-01-19	she ph. phils ahd said to davec. confused why i dont go to my own group. why go lance.
+<br>lisah	2009-01-21	i gave lift 2 coach. she had drunk wine and i bought glass. i massage back then leg after alpa
+<br>lisah	2009-03-09	clear her room. sleep lounge
+<br>lisah	2009-03-10	obothw
+<br>lisah	2009-03-17	monthly
+<br>lisah	2009-03-23	she came 2 use computer. went sains for pizza, icecraem, cherry pie, chocolate. massg shoulders, head, feet
+<br>lisah	2009-03-24	she txt ask loan 90. i agree
+<br>	2009-07-01	she ph. moan about richard
+<br>
+<br>
+<br>vckywy	2008-11-01	i give lift bushey. she do assignment northolt. not int music, int film,tv,theatre,visualarts. roy int tim?westwood.
+<br>vckywy	2009-02-21	hcp-agm. klips dance. new car.
+<br>vckywy	2009-05-07	socialb. klips arrive. kcheek leave car
+<br>vckywy	2009-06-03?	i go lambeth. klipps eat thai pub
+<br>vckywy	2009-06-xx	kimh spiritual
+<br>vckywy	2009-08-14	halfmoon. klips
+<br>
+<br>
+<br>sheila	2007-11-19	i ph re ricky disco
+<br>sheila	2007-12-15	hcp-xmas i gave lift back
+<br>sheila	2008-02-xx	i send pcard from p
+<br>sheila	2008-03-xx	crown club night sat next to me
+<br>sheila	2008-05-23	i ph after she confirmed facebook
+<br>sheila	2008-05-27	coach&h club night. she studies pol at cactus picc. circus
+<br>sheila	2009-02-21	hcp-agm. shespeak dance. job  badly paid, wboro every day
+<br>
+<br>jana	2008-07-17	came acton
+<br>jana	2008-11-27	came acton
+<br>jana	2008-12-18	acton. she phoned later 2 say had enjoyed event
+<br>jana	2009-02-25	i ph .perhaps i go posk. perhaps i visit for meal
+<br>jana	2009-04-23/4	she ph
+<br>
+<br>blanche	2008-07-	buffet cricket club
+<br>blanche	2008-12-06	posk
+<br>	
+<br>ela	2007-09-27	thu. link arms drink. 1st-kh 
+<br>ela	2007-12-13	thu. she come meal. 2nd-kh
+<br>ela	2008-09-21	sun. we gobrighton. 58, 9y married stanislaw(?15), 15y alone(?26), came here 1989(?39), marry patrick 1991(?41), married3.5y, 14y alone
+<br>ela	2008-10-03	fri. i go windsoreat. shecameog43play draughts idrivehome 4th-kh
+<br>ela	2008-10-09	thu. she come acton.
+<br>ela	2008-10-10	fri. i go windsorgymeat. we go ruis lido chessiwin1. i dirive church
+<br>ela	2008=10-14	tue. i go windsor,5th-kh. we go hamptonswim,tescoeat,og43chessshewin3
+<br>ela	2008=10-31	fri. we go windsor. go millla, chess, walk, she want come pen
+<br>
+<br>
+<br>
+<br>
+<br>bh	2008-11-03	mon. i redshirt-blacktr. suggest swim. she slipped disc
+<br>bh	2008-12-05	fri. she ph. i offer meal with son after swim. she 3 sons plus partner. i say no prob. she say against rules.
+<br>bh	2009-04-17	fri. i show camera say part is l pers in w. she say thank you
+<br>
+<br>
+<br>joand	2008-08-16	blueshirt-whitetr-sandals
+<br>
+<br>---------------------------------------------------------------------------------------------------------------------
+<br>
+<br>diana	2008-10-04	fairway2for1. olivegreem dress wideblackbeltring for buckle compliment me on nice. beigesuit-greenshirt-kshoes
+<br>diana	2008-10-05	i ph. she work 4d soon 5d . son is alex. has daughters. primark. brenda is lovely, son is 15.
+<br>diana	2009-01-01	i ph . mother ill, eldest daughter 28 tday. not talk long
+<br>
+<br>
+<br>janer	2007-09-28	fri. cheekos. lift back, spoke teaching eng, age conc, 
+<br>janer	2008-07-23	her cinema. wall-e
+<br>janer	2008-07-24	i send email
+<br>
+<br>mariak	2008-09-28	sun.i go n.greenw
+<br>
+<br>magda	2008-01-03	she ph	
+<br>magda	2008-04-??	she ph	
+<br>magda	2008-xx-xx	i go
+<br>magda	2008-09-03	i go with wiesia hela
+<br>magda	2008-09-03	she ph
+<br>magda	2008-09-05	i ph
+<br>magda	2008-12-xx	i go
+<br>
+<br>eva	2007-08-16	thu. kings head
+<br>eva	2008-06-01	sun. plus mattw moon-rayn
+<br>eva	2008-01-22	she ph happy bday
+<br>eva	2012-02-27	ealing bdy station. she now lives avenue road
+<br>
+<br>danuta	2008-07-19	met at posk.i brownlinentr-creamshirt-blackshoes
+<br>danuta	2008-07-29	spitfire. brownlinentr-greensh-blacksho
+<br>
+<br>stjames	2008-04-20	matthew introduced caroline, serving tea, doug, sara(h) his fiancee, to be married this year. 
+<br>					heather, irish, talked. 
+<br>					t(h)eresa talked: student at plymouth; ?mother committed suicide; she attempted suicide in 1994 at ealing hospital; 
+<br>						five years ago son died; has daughter fabienne; sister was here. money,popularity,plreasure,power,prestige.
+<br>stjames	2008-04-27	michael 63 spoke to me.
+<br>stjames	2008-05-18	cyprustr-beigesh
+<br>stjames	2008-05-25	mextr-beigesh. spoke t(h)eresa. she not ambitious. single is just a different walk.
+<br>stjames	2008-06-01	spoke with t.  has nissan micra. difficult go frinton bcos school. younger daughter genevieve. son was gabriel
+<br>			spoke chris? from hanwell, wife is vivian. was congrg. then went baptist went st. john
+<br>			ray? treaurer 13k upkeep 41k quota. roy. lynn(e) who had been on door. michael didnt remember my name. joke harald is thy name.
+<br>			martyn spoke at front. studied econ at liverpool converted. age -11?	pamia ahd accident ?bike
+<br>
+<br>			
+<br>paulmum	2008-04-20	spoke to me. 
+<br>paulmum	2008-06-08	white dress. paul slept
+<br>
+<br>
+<br>kathmc	2008-07-18	spinning wheel. she bought me drink.
+<br>kathmc	2008-11-27	she ph.
+<br>
+<br>kim	2003-01-12	i ph
+<br>kim	2007-12-22	beigetr-greensh-kshoes. woodman
+<br>kim	2009-02-04	i ph invite barnet disco. she out with family but chatted
+<br>
+<br>
+<br>cathth	2008-08-22	garden event. she said looked good. i ph thanks for saying so, i value her good opin, if anything ... , qu deserve wor&obed
+<br>cathth	2009-08-19?	i ph. she just finished with 28year old. i mention plus
+<br>cathth	2009-10-17	i invite lon.colney. she busy but pleased to be asked
+<br>
+<br>
+<br>brenda	2000-12-06	i drm marr
+<br>brenda	2005-02-22	i go. 1st she off kh
+<br>brenda	2005-03-07	she come m52
+<br>brenda	2005-03-27	dragon king. also jeff,ruth,peter,brendapen,iang,nickh,richardm,jean,george
+<br>brenda	2006-07-11	she come og43
+<br>brenda	2006-07-23	i go. sharon, johnw
+<br>brenda	2007-03-xx	harvester. black&white dress. khem. 10minholdb
+<br>brenda	2007-03-16	uxb.golf.carv. purpledress. biegetrous+brownkshoes+redshirt.also sharon,fiona,iansg,brendapen,marina,dee,johnnotwh,2women,1man
+<br>brenda	2007-04-01	pangs-sharon. i go(they dont like driving). lightjumper+jeans. mextrous+midblussh+blackshoes. they suggest visit sharon afterwards
+<br>brenda	2007-04-08	six-bells. they arrange to come but cancel
+<br>brenda	2007-06-01	came for duck with lisa and dave
+<br>brenda	2007-06-05	i go.
+<br>brenda	2007-06-17	sun. white house. is rm bp asaf
+<br>brenda	2007-07-15	i go garden party 10m11f rm bp davidh fiona diane not-is
+<br>brenda	2007-08-25	i go.we walk canal.eat ballot box.
+<br>brenda	2007-09-18	i go. we walk uxb. eat toby denham
+<br>brenda	2007-10-22	she come harvester ealing common
+<br>brenda	2007-12-05	i go. cyprbluetr,redwhitebackshirt,blackshoes. we eat toby denham. then back to ick etc
+<br>brenda	2007-12-12	gerald died
+<br>brenda	2007-12-17	i ph. gerald died prev wed
+<br>brenda	2007-12-27	i go. harvester-ruislip.i pay.beigetr-green?/red?sh-kshoes. floral-red/blacktop-blacksk-silverwaistchain
+<br>brenda	2007-12-30	i go. r11. frances/martin. beigetr-darkyellowsh-kshoes. greenjumper-blacktr
+<br>brenda	2008-01-09	i go. solicitor.cyprussuit-whitesh-blacksh. toby
+<br>brenda	2008-02-xx	i send pcard from p. also ph
+<br>brenda	2008-03-13	slough
+<br>brenda	2008-04-23	she agree d-up but didnt. ruisliplidocarvery. me-david-nickh! 
+<br>brenda	2008-05-09	i ph to ask permis to contact gf
+<br>brenda	2008-07-04	frances brry. dress. khbg
+<br>brenda	2008-07-xx	ane(e) mcgarry
+<br>brenda	2008-08-01	geoff donald party. italsuit-creamshirt-kshoes bluedress-whitedots
+<br>brenda	2008-09-19	jf watersedge. geoffd-ken-sharon-barry
+<br>brenda	2008-10-28	i go. knl,prop.marr, she say nothing in common: plants,spiritualism,tv. drive whitehouse , i say have 3/4, drive moonruism, eat
+<br>brenda	2008-12-15	she ph. i will go sun after xmas
+<br>brenda	2008-12-28	i go. we go moons ruismanor. i pay her jacket+crayfish
+<br>brenda	2010-01-xx	i ph. cold.
+<br>-------------------------------------------------------------------
+<br>
+<br>monc	2002-09-01	to 2002-10-31? sofia arrive uk
+<br>monc	2003-05-12	sofia marry
+<br>monc	2003-11-20	?11d in tenn
+<br>monc	2004-02-04	7d in br
+<br>monc	2006-02-18	i go maria
+<br>monc	2006-04-28	i go maria, leo christening
+<br>monc	2007-04-xx	rosa,sofia wth dave, robin duck
+<br>monc	2007-04-21	go maria , leo 1st bday. sofia no-rosa
+<br>monc	2007-05-26	go sofia, alejo bday. rosa
+<br>monc	2007-06-17	go maria. jamile. rosa sofia robin
+<br>monc	2007-07-13	go m43 bcos they go away soon. didnt give alejolift bcos had to register with doctor
+<br>monc	2007-07-14	sofia ph. when hcp party? said already happened. she disappointed: been saying for long time want go
+<br>monc	2007-07-30	mon. 14.46 sof enq internet. i reply
+<br>monc	2007-08-03	fri. 12.08 awaiting you for meal
+<br>monc	2007-08-04	sat. 13.53 mobile.inv to latino event
+<br>monc	2007-08-05	sun. i ph sofia. she invite.i invite. she refuse
+<br>monc	2007-09-10	mon. soph ph. she had senn car for event at yates.
+<br>monc	2007-09-25	tue. go b69 meal. they pay 2*(750+200) visa appns. will go mumbai
+<br>monc	2007-10-20	sat, meal at maria for sof bday. i not go had cold
+<br>monc	2007-10-21	sun. i ph sof.happy bday. say not go bcos had cold also said i didnt go hcp
+<br>monc	2007-12-xx	i send xmas cards to rosa,sof,mar
+<br>monc	2007-12-xx	sof send email happy xmas
+<br>monc	2007-12-31	mon. 3.xx sof left voicem on landl
+<br>monc	2008-01-01	tue. 4.40 sof left voicem on landl
+<br>monc	2008-01-02	wed. 12.19 sof ph landl
+<br>monc	2008-01-04	fri. 13.30 sof ph. would i like to go to malaga
+<br>monc	2008-01-25	sof sent email. happy bday. 20 y of know each. no reply
+<br>monc	2008-04-08	sof ph. what did i bring her from holiday? when is next dance?
+<br>monc	2009-01-01	i ph rm. salvador is here
+<br>monc	2009-01-09	salvador comes for 5 days
+<br>	2011-01-07	i go b69 robin,dora,rosa
+<br>
+<br> 
+<br>joan	2001-04-03	i ph.goes hosp 16th.d hse+car+1700/m+t
+<br>joan	2001-07-14	i go
+<br>joan	2005-04-01	i go. 4 nights. visit beryl,yvonne,markrt-h,chris
+<br>joan	2006-05-01	i ph	
+<br>joan	2007-04-27	her bday.i send card
+<br>joan	2007-05-26	i receive postcard from spain
+<br>joan	2007-09-01	i ph. carole phd this morn: lil died. joan goes coach to italy 1 week with beryl in nov. next year doreen
+<br>joan	2007-10-23	she ph. have i bee4n with carole to manp. i phnd carole then phnd joan back. david was about to arrive
+<br>joan	2008-02-xx	i send pcard from p
+<br>joan	2008-08-xx	i go
+<br>
+<br>
+<br>carole	2007-09-06	funeral
+<br>carole	2007-11-11	she ph. still has not collected ashes
+<br>carole	2007-12-26	i went. gross=405k 380k p64 15k hal 10k court. net=403k dd=41k
+<br>carole	2008-02-xx	i send pcard from p
+<br>carole	2008-04-05	i ph. she has fluid on heart and feet. doc wanted her 2 weeks hosp but she refused bcos cat. edna died. now friends with t(h)eresa again.
+<br>carole	2008-05-11	i go. eat in garden with tony. c and me drie to high beech. she will see solicitor next day. house will be shared me,joan,tony
+<br>carole	2008-12-06	i ph. she has had heart scan. good job has md wll. xmas day with bob. perhaps we see after xmas
+<br>carole	2009-08-21	fri. i ph. she ask whether joan sent me card. had health prob ? dehydration. said mustve had brainstorm to buy cats. bob, 83, visits. she doesnt like dancing on thur because of dark.
+<br>carole	2010-07-07	wed. eagle. bob's bday
+<br>carole	2012-04-02	mon. she ph. wants to move to somewhere smaller. now has 4 cats.
+<br>carole	2012-06-xx	bobs bday event. cafe brunch.
+<br>carole	2015-03-16	sun. she ph. have i heard from JSv.She hasn't and didn't get bday card. Will invite me in summer when garage is done.
+<br>
+<br>
+<br>------------------------------------------------------------------
+<br>
+<br>zara	1991-07-23	c(-c)
+<br>
+<br>mt	1992-06-07	c(-c)
+<br>mt	1992-07-06	c(+c),p
+<br>
+<br>spo	1996-02-26
+<br>
+<br>fulham	1987-11-21	c1(+c)
+<br>fulham	1993-02-02	c96(-c)
+<br>fulham	1993-12-25	p2	
+<br>fulham	1994-12-20?	we go m&s marble arch		
+<br>fulham	1997-06-03	i ph. they:'it's good that not see now. phaps find new'
+<br>fulham	1997-03-17	dd? they ph. no longer SKen. now Cadogan sq.
+<br>fulham	1997-08-11	they left end of message
+<br>fulham	1997-09-03	they ph. left message
+<br>fulham	1997-09-04	i wr
+<br>fulham	2000-06-23	i drm
+<br>fulham	2000-10-06	i drm fr new bf bookshop?
+<br>fulham	2001-04-29	i drm
+<br>fulham	2001-08-22	i drm (is mart)
+<br>fulham	2003-04-21	i drm (ks)
+<br>fulham	2005-07-09	i drm. they not want to give me addr, but give to kb
+<br>fulham	2005-10-27	i drm. they nowin pv;gauntsad
+<br>fulham	2008-12-07	i drm.
+<br>fulham	2009-09-02	wed. she contacted via fb
+<br>fulham	2009-09-03	thur. i go nottinghillgatestarbucks-shepherdsbushnoodles
+<br>fulham	2009-09-04	fri. she ph many times starting 7:21.i not reply. she wr fb wall
+<br>fulham	2009-09-05	sat. i ph. she on train to kent
+<br>fulham	2009-09-06	sun. she ph. photos on fb
+<br>fulham			mon,wed,fri 3*4 hours dir.of.llo. highestpdfemdir. other 43hours. both £10/hour. they pay tax/ni
+<br>fulham	2009-10-16	she ph.cannot come tomorrow as ill
+<br>fulham	2009-11-28	sat. i go aroma,westfield. abd pagadian 3 girls, ronnie fishfarm nr pagadian 2boys 4girls, adessa zamb 1girl, vernon student manila
+<br>fulham	2010-12-31	rhianna party. argue. bustup
+<br>fulham	2011-05-08	sun. i drm. away. moved bed outside. when cold tired and cold moved bed back in and got in. then felt someone beside me, gp.
+<br>fulham	2012-03-31	sat. i ph re chat from daisy. she ask what i do over the bank holiday 
+<br>fulham	2015-03-21	sat. i go aroma. sign form for passport appn. she return shirt, pants. she give rum cake.
+<br>
+<br>
+<br>rafsoc	1987-12-21?	raf		i go
+<br>rafsoc	1989-03-19	raf		c1(-c)
+<br>rafsoc	1990-01-21	soc		1c(-c)
+<br>rafsoc	1990-07-07	soc		10c(-c)
+<br>rafsoc	1991-06-01?	raf		i go
+<br>rafsoc	1994-01-30	raf		c56(-c)
+<br>rafsoc	1998-05-10	raf		p
+<br>rafsoc	2005-01-22	raf---		p
+<br>
+<br>=======================================================================
+<br>
+<br>
+<br>dentist	2006-08-08	nwood-hills	sonal-parmar-cleaning
+<br>dentist	2008-05-07	nwood-hills	sonal-parmar-small-filling-right-back
+<br>dentist	2011-12-23	nwood-hills	rukjit randhawa, cleaned, said use sensadyne, red brush
+<br>
+<br>anky-sp	2006-07-21	corinne-fisher	blood tests were ok. will arrange osteoporosis test
+<br>anky-sp	2006-08-09	ucl-nuclear	bone density test
+<br>anky-sp	2007-03-16	ucl-lazarus	has worsened
+<br>anky-sp	2007-07-16	1st-hydro
+<br>anky-sp	2007-08-07	6th-hydro
+<br>anky-sp	2007-08-17	paul-aston	last visit
+<br>anky-sp 2007-11-16	ucl-narshi	must exercise. blood test better than prev, no inflam. measuements same. if pain try anti-inflam like ibuprufen
+<br>anky-sp	2008-		bubear
+<br>......	2009-11-20	isenberg	ed prob not from a/s
+<br>
+<br>uveitis	2007-03-02	glen-carp?	gave maxidex (dexamethasone 0.1%)
+<br>					 every 2hrs 1wk 6/day 1wk 4/day 1wk 3/day 1wk 2/day 1wk 1/day 1wk then as directed
+<br>					 and h 
+<br>uveitis	2007-03-19	abraham-	still some inflam. gave more maxidex
+<br>uveitis	2007-04-23	una o'colman	has cleared up. pressure good. if blurry come back. if abroaqd see doctor
+<br>
+<br>health	1998-08-01	barrowp-	cholestorol 6.4(normal < 5.2) triglycerides 2.24H normal 0.40-1.52) O.K.
+<br>health	2001-08-27	raju(harmoni)	first cellulitis antibiotics
+<br>health	2001-11-27	chiev(dixon)	last cellulitis antibiotics
+<br>health	2001-12-17	chiev.......	district nurse  wt(clothed) 125.45kg ht 5ft7.5in. doppler on 4 limbs o.k. tri-phasic, no problem of circulation for arteries.
+<br>health	2003-10-17	barrowp-	sheridan. co-amoxiclav(augmentin) for cough
+<br>health	2005-09-29	barrowp-	dresler. prostate blood test was O.K. Kidneys O.K. felt left hernia, agreed.
+<br>health	2005-11-07	nwick-park	dr.dawood. white blotched on hand. vertilaigo? not important. need blood test for thyroid
+<br>health	2005-12-16	nwick-park	dr.nowfal?(appt. arranged for stewart gould). no hernia. he did not have scan.
+<br>health	2007-01-11	barrowp-	nurse rosie lake gave hepatitis a/typhoid jab
+<br>
+<br>memory	2007-08-04	og43------	3rdtime found cooker on
+<br>
+<br>hearing	2007-05-02	barro-kaye	ask for hearing aid
+<br>hearing	2007-08-31	ashok-waghe	got oticon spirit 3 hearing aid;got p13 * 1 pkt of batteries with 6
+<br>
+<br>hearing	2009-09-01	elthorne	ruby brennan removed wax from ear
+<br>
+<br>bowel-c	2009-xx-xx	nwick-pk	screening swabs ok
+<br>
+<br>shin	2007-05-17	on waking and sporadically thru day
+<br>shin	2007-05-19	dr. reynolds could not think what it is but didnt think it was serious
+<br>
+<br>ed	1996-11-01	cent-middx--	dr-luigi-cormio-said-could-go-40-cave-?colour-doppler-sonography
+<br>ed	1998-09-14	m.o.h.		if treat for i before this,v on nhs(date licenced)
+<br>ed	2005-09-08	cent-middx--	maria petrova, victor izegbu 4 x 20mg levitra
+<br>ed	2005-10-27	cent-middx--	maria petrova, i say no ptnr, she say no more prescr. psychol.
+<br>ed	2005-11-03	nwick-park	ultrascan. no hernia. varicose vein in left scrotum
+<br>ed	2005-11-22	nwick-park	dr.jeram. ultrascan. varicule in left scrotum. hot blood can harm fertility. testes fine. he volunteered right t is mobile. often when one is more mobile, other is not. due to length of attachment.
+<br>ed	2006-04-27	ucl---------	dr.bonnello. gave 4 * 20?g cialis
+<br>ed	2006-06-01	ucl---------	dr.jeremy ockram. blood test ok except testosterone was borderline.retested
+<br>ed	2007-02-06	logan-----	dr noel tests: testosterone 381.99 ng/dL (normal male 195 - 1138 female 5 - 73)	
+<br>ed	2007-02-15	logan-----	dr noel gave nebido
+<br>ed	2007-12-13	ucl-------	dr ?gharbi said testosterone ok = 27 (normal = 10 - 30).all others ok.
+<br>ed	2008-07-03	ucl-------	dr minhas says tests normal p.s.a. 1.66 testosterone 15
+<br>ed	2008-10-09	ucl-------	dr minhas continue as at present. i say not in rel. he say no connect betw varicose vein and insensitivity. no point in testosterone as levels were normal
+<br>ed	2009-04-09	ucl-------	dr. abbas khadra. will wr gp caverject with cialis. nerve prob due to back ( he say arthritis)
+<br>ed	2009-08-13	ucl-------	dr. kalsi. said go uo to 20 caverject without cialis
+<br>ed	2009-11-19	ucl-------	mr.shukla contact elthorne again. take photos
+<br>ed	2010-02-25	ucl-------	mr. shukla. showed him photos. bending at base, not middle. blood to scrot form groin, indep of blood to pen. inflam of scrot not significant. no surgery
+<br>
+<br>
+<br>glucose	1998-07-01	barrowp-	prick-finger=5.8 diabetes-urine-test=OK 
+<br>glucose	2000-08-03	barrowp-	prick-finger=6.8 diabetes-urine-test=OK
+<br>glucose	2001-03-31	soho-walk-in	prick-finger=7.0 diabetes-urine-test=OK
+<br>glucose	2001-12-17	chiev(hennesse)	prick-finger=7.7
+<br>glucose	2004-05-14	bristol-walk-in	prick-finger=4.7 diabetes-urine-test=OK
+<br>glucose	2005-05-xx	barrowp-	bloodfromarm=6.5
+<br>glucose	2005-09-20	barrowp-	bloodfromarm=5.3
+<br>glucose	2006-05-xx	barrowp-	bloodfromarm=5.6
+<br>glucose	2007-02-06	logan----	bloodfromarm=4.8 mmo1/L 	optimal 3.8 - 5.8 random 3.8 - 11.0
+<br>glucose	2007-07-18	?elthorne	bloodfromarm= all normal
+<br>glucose	2008-09-01	elthorne	bloodfromarm= 5.3
+<br>glucose	2009-09-08	elthorne-navi	bloodfromarm= 
+<br>glucose	2012-01-06	midhurst	prick-finger=5.7
+<br>
+<br>
+<br>blood-p	1998-07-01	barrowp-		150/80
+<br>blood-p	2001-12-17	chiev(hennesse)		160/110 on couch then 160/100 sitting
+<br>blood-p	2001-12-21	chiev(dyson)		146/92
+<br>blood-p	2005-04-01	highgrove		134/79	
+<br>blood-p	2005-04-26	barrowp-		130/80
+<br>blood-p	2005-11-16	barrowp-		124/60
+<br>blood-p	2006-04-10	barrowp-		130/80
+<br>blood-p	2006-06-12	western-eye-h		125/75
+<br>blood-p	2006-06-12	barrowp-		140/70
+<br>blood-p	2007-07-20	elthorne-tracey		153/79
+<br>blood-p	2007-10-01	elthorne		142/86
+<br>blood-p	2008-08-12	elthorne-ruby-brennan	123/69
+<br>blood-p	2009-04-18	veggie-show		136/75 good
+<br>blood-p	2009-07-16	teresa			138/62
+<br>blood-p	2012-01-06	midhurst		118/66
+<br>
+<br>
+<br>height	2007-07-20	elthorne-tracey	176
+<br>
+<br>
+<br>pulse	2005-04-01	highgrove	85
+<br>pulse	2005-11-16	barrowp-	54
+<br>pulse	2006-06-12	western-eye-h	56
+<br>pulse	2009-07-16	teresa		62
+<br>
+<br>
+<br>		in mmol/l LDL=bad(should be < 2) HDL=good(optimal >1.0) total/HDL(optimal <5.0)
+<br>lipids	2006-05-xx	barrowp-	total chol: bit high; 
+<br>lipids	2007-02-06	logan----	total chol: 5.6 
+<br>lipids	2007-02-06	logan----	Triglycerides:	1.48 mmo1/L 	optimal: < 1.70
+<br>lipids	2006-05-xx	barrowp-				HDL: 0.98
+<br>lipids	2007-02-06	logan----				HDL: 0.9
+<br>lipids	2006-05-xx	barrowp-						LDL: 3.43 
+<br>lipids	2007-02-06	logan----						LDL: 4.0
+<br>lipids	2006-05-xx	barrowp-	total chol: 5.3
+<br>lipids	2007-02-06	logan----								Total/HDL: 6.2
+<br>lipids	2012-01-6	midhurst	total chol: 5.21	HDL: 0.99	LDL:?		total/HDL: 5.2
+<br>
+<br>
+<br>
+<br>checks	2006-05-xx	barrowp-	kidneys, thyroid, liver, blood count all normal
+<br>lipids	2008-09-01	elthorne	serum cholesterol 4.2
+<br>
+<br>
+<br>
+<br>1.76m
+<br>-----
+<br>		underweight
+<br>18.5	57.3
+<br>		normal
+<br>25	77.4
+<br>		overweight
+<br>30	92.9
+<br>		obese
+<br>40	123.9
+<br>		morbidly obese
+<br>
+<br>weight	 82	12st12
+<br>
+<br>
+<br>weight	 87	13st09
+<br>weight	 87.5	13st10.5
+<br>weight	 88	13st12
+<br>weight	 88.5	13st13
+<br>weight	 88.7	89.3	14-00
+<br>weight	 89.4	89.7	14-01
+<br>weight	 89.8	90.2	14-02
+<br>weight	 90.3	90.6	14-03
+<br>weight	 90.7	91.1	14-04
+<br>weight	 91.2	91.5	14-05
+<br>weight	 91.6	92.0	14-06
+<br>weight	 92.1	92.4	14-07
+<br>weight	 92.5	14st07.5
+<br>weight	 92.6	92.9	14-08
+<br>weight	 93.0	93.4	14-09
+<br>weight	 93.5	93.8	14-10	
+<br>weight	 93.9	94.3	14-11
+<br>weight	 94.4	94.7	14-12
+<br>weight	 94.8	95.2	14-13
+<br>weight	 95.3	95.6	15-00
+<br>weight	 95.7	96	15-01
+<br>weight	 96.1	96.5	15-02
+<br>weight	 96.6	97	15-03
+<br>weight	 97.1	97.4	15-04
+<br>weight	 97.5	15st04.5
+<br>weight	 97.6	15st05
+<br>weight	 97.8	15st05
+<br>weight	 98	15st06
+<br>weight	 98.2	15st06
+<br>weight	 98.5	15st07
+<br>weight	 98.7	15st07
+<br>weight	 99	15st08
+<br>weight	 99.4	15st09
+<br>weight	 99.5	15st09
+<br>weight	100	15st10
+<br>weight	100.5	15st11
+<br>weight	100.6	15st11
+<br>weight	100.7	101.1	15-12
+<br>weight	101.2	101.5	15-13
+<br>weight	101.6	102.0	16-00
+<br>weight	102.1	102.4	16-01
+<br>weight	102.5	102.5	16-01.5
+<br>weight	102.6	102.9	16-02
+<br>weight	103.0	103.4	16-03
+<br>weight	103.5	16st04
+<br>weight	103.8	16st04
+<br>weight	104	16st05
+<br>weight	104.3	16st05
+<br>weight	104.4	104.7	16-06
+<br>weight	104.8	105.2	16-07
+<br>weight	105.3	105.6	16-08
+<br>weight	105.7	106.1	16-09
+<br>weight	106.2	106.5	16-10
+<br>weight	106.6	107.0	16-11
+<br>weight	107.1	107.4	16-12
+<br>weight	107.5	107.5	16-12.5
+<br>weight	107.6	107.9	16-13
+<br>weight	108.0	108.3	17-00
+<br>weight	108.5	17st01	
+<br>weight	108.6	17st01
+<br>weight	109	17st02
+<br>weight	109.1	17st02
+<br>weight	109.5	17st03	
+<br>weight	110	17st04
+<br>weight	110.5	17st05
+<br>
+<br>weight	113	17st11
+<br>weight	113.6	17st12		
+<br>weight	114	17st13
+<br>	114.4	114.7	18st00
+<br>weight	114.8	115.2	18st01
+<br>weight	115.3	18st02
+<br>weight	116	18st03
+<br>weight	116.5	18st04
+<br>weight	117	18st05
+<br>weight	117.5	18st
+<br>weight	118	18st08
+<br>weight	118.5	18st09
+<br>weight	119	18st10
+<br>weight	119.5	18st11
+<br>weight	120	18st12
+<br>weight	120.6	18st13
+<br>
+<br>holidays away
+<br>-------------
+<br>071106 /109.1	17-02 	+2.2/4	wash 2007
+<br>30  	S/96.5	15-02	+2.8/2	2007/08? magda-brighton ham-cheese-bread sausages salmon-strawbs-cheese-cider spitfire-cutlet-kapusta
+<br>08xx15  /95.3	15-00	-0.6/4	brean 2008?
+<br>081118  /91.5	14-05	+0.5/4	wash 2008
+<br>090523  /92.8	14-08	+1.3/4	mike
+<br>090616  /93.1	14-09	+1.0/4	sady 2009
+<br>090722	/94.7	14-12	+2.5/5	Kings Lynn 2009, Joan
+<br>090919	 95.5	15-00	+3.2/9	tenerife 2009
+<br>091117  /95.6	15-00	+1.6/4	wash 2009
+<br>
+<br>------------------------------------------
+<br>
+<br>0523		/16-00
+<br>0524		/16-01
+<br>0525		/16-02
+<br>0526		/16-06
+<br>0527		/15-13
+<br>0528		/15-12
+<br>0529		16-00
+<br>0530		/15-13
+<br>0531		/15-13
+<br>
+<br>0601		15-13
+<br>0602		16-00
+<br>0603		16-00
+<br>0604		16-00
+<br>
+<br>
+<br>========================
+<br>		16-05
+<br>		16-05
+<br>		16-03
+<br>---------------------
+<br>		16-02
+<br>		16-02
+<br>		16-00
+<br>----------------------
+<br>
+<br>
+<br>
+<br>* = +16.6
+<br>weight	2006-06-30	3months up to	*126.6		      2LB
+<br>weight	2006-09-30	3months up to	*124.6		      4LB
+<br>weight	2006-12-31	3months up to	*120.6	18-13	      9LB
+<br>weight	2007-03-31	3months up to	*114.6	18-00	=    13LB
+<br>-------------------------------------------
+<br>weight	2007-06-30	3months up to	*113.6	17-12	=     2LB
+<br>weight	2007-09-30	3months up to	*108.6	17-01	=    11LB	
+<br>weight	2007-12-31	3months up to	 106.5	16-10	=     5LB
+<br>weight	2008-03-31	3months up to	 100.25 15-11	=    13LB
+<br>-----------------------------------  --------
+<br>weight	2008-06-30	3months up to	  95.0	14-13	=    12LB	 
+<br>weight	2008-09-30	3months up to	  93.1  14-09	=     4LB
+<br>weight	2008-12-31	3months up to	  91.3	14-05	=     4LB
+<br>weight	2009-03-31	3months up to	  91.1	14-04	=     0LB
+<br>-------------------------------------------
+<br>weight	2009-06-30	3months up to	  91.6  14-06	=    +1LB
+<br>weight	2009-09-30	3months up to	  93.5  14-10	=    +4LB
+<br>weight	2009-12-31	3months up to	  94.6	14-12	=    +2LB
+<br>weight	2010-03-31	3months up to	  97.0		=    +5LBS
+<br>--------------------------------------------
+<br>weight	2010-06-30	3months up to	  98.7	15-07	=    +4LB
+<br>weight	2010-09-30	3months up to	 104.9		     +14LB
+<br>
+<br>
+<br>weight	2010-12-31	3months up to	 105.0  16-07   =      0LB
+<br>weight	2011-03-31	3months up to	 105.0  16-07   =      0LB
+<br>===========================================
+<br> 
+<br>weight	1995-12-31	2years up to	*120.1				
+<br>weight	1997-12-31	2years up to	*125.6	------	+ 5.5/2  = + 2.75
+<br>weight	1998-12-31	1year up to	*131.6	------	+ 6.0/1  = + 6.0
+<br>weight	2000-12-31	2years up to	*123.1	------	- 8.5/2  = - 4.25
+<br>weight	2003-03-31	2years up to	*134.6	------	+11.5/2  = + 5.75
+<br>weight	2005-03-31	2years up to	*138.6	21-11	+ 4.0/2  = + 2.0
+<br>weight	2006-03-31	1year up to	*132.1	20-11	- 6.5/1  = - 6.5		= -1st00LB
+<br>weight	2007-03-31	1year up to	*122.6	19-04	- 9.5/1  = - 9.5		= -1st07LB
+<br>weight	2008-03-31	1year up to	 107.55	16-13	-15.05/1 = -15.05		= -2st05LB	
+<br>weight	2009-03-31	1year up to	  92.2	14-07	-15.35/1 = -15.35		= -2st06LB
+<br>weight	2010-03-31	1year up to	  94.05	14-11	+ 1.85/1 = + 1.85		= +   05LB
+<br>weight	2011-03-31	1year up tp	 105.0	16-07	+10.50/1 = +10.50		= +1st09LB 
+<br>
+<br>
+<br>
+<br>walk---	2005-06-12	2:05+0:40=2:45	6.00km= 3.75m= 1.36mph 
+<br>sun.rickmansworth
+<br>walk---	2005-06-14	2:30+0:00=2:30	6.25km= 3.91m= 1.56mph 
+<br>tue.kingscollege-sixbells-bayhurst-howletts-parkrd-kingscoll.
+<br>walk---	2005-06-16	1:15+0:40=1:55	4.00km= 2.50m= 1.30mph 
+<br>thu.kingscollege-lido-kingscollege
+<br>walk---	2005-06-19	2:10+1:00=3:10	6.25km= 3.91m= 1.23mph 
+<br>sun.kingscollege-hastehill-lido-kingscollege
+<br>walk---	2005-06-22	2:00+0:00=2:00	xxxxxxxxxxxxxxxxxxxxxx 
+<br>wed.kingscollege-hastehill-kingscollege
+<br>walk---	2005-06-26	1:11+0:00=1:11	5.00km= 3.13m= 2.65mph 
+<br>sun.m52-shaftesburycircus
+<br>walk---	2005-07-10	xxxxxxxxxx3:00	8.25km= 5.16m= 1.72mph 
+<br>sun.m52-limetrees-m52
+<br>walk---	2005-07-12	xxxxxxxxxx3:15	7.75km= 4.84m= 1.49mph 
+<br>tue.m52-limetrees-tenacres-gutteridge-hillingdonstation	
+<br>walk---	2005-07-22	xxxxxxxxxx3:08	7.25km= 4.53m= 1.45mph 
+<br>fri.m52-ruisg-yeadbr-a40-gutteridge-tenacres-shavel-busstop
+<br>walk---	2005-10-08	xxxxxxxxxxxxxx	7.25km= 4.53m= xxxxmph 
+<br>sat.m52-ruisg-yeadbr-a40-gutteridge-7stiles-shavel-busstop
+<br>walk---	2006-01-01	xxxxxxxxxxxxxx		
+<br>
+<br>swim	2007-07-30	mon. gurnell 2000m = 80 * 25m in 2hr15min = 0.25m/s
+<br>swim	2007-11-13	tue. gurnell 1000m in 1hr12mmin then 50m breast
+<br>
+<br>
+<br>accom	1946-01-22	in  r32		8/2
+<br>accom	1954-xx-xx	in  w200	32/6	early54,possibly late 53
+<br>accom	1986-09-01	in  s33		1/0
+<br>accom	1987-09-01	in  p9		8/7
+<br>accom	1996-04-16	in  c132	1/4
+<br>accom	1997-08-01	in  m43		1/3
+<br>accom	1998-11-14	in  b9		1/10
+<br>accom	2000-09-03	in  bb-host	4/6
+<br>accom	2005-02-27	in  m52		1/4
+<br>accom	2006-06-26	in  og43        8/9 as at 2015-03-26
+<br>
+<br>
+<br>car	2001-07-02	in 4and 1/4 yrs without car(adding to 31/3/01), cost of 
+<br>taxis averaged #3.35/w. Also #93 for car hire for hay (which would add 
+<br>40p to average)
+<br>car	2001-07-02	collect ka from maidenhead ch.no - 22238 1streg = 
+<br>18/06/01 4 miles
+<br>
+<br>1c01	1991-03-16	start d (ctret)
+<br>1c12	1991-10-16	yearm-became?-d 
+<br>1c34	1993-04-30	still d
+<br>1c34	1993-10-xx	c201 start
+<br>1c34	1993-11-xx	h end
+<br>1c45	1994-04-xx	j end
+<br>1c67	1996-04-xx	all #100 pin to a of 132
+<br>1c67	1996-04-15	move 132 
+<br>1c78	1997-04-30	accs to
+<br>1c09	1998-06-30	ret to
+<br>1c01	2000-10-xx	end
+<br>1c12	2001-07-xx	ret to
+<br>1c34	2003-04-xx	end
+<br>
+<br>
+<br>
+<br>tax67	1997-04-02	last day se
+<br>tax89	1998-10-02	1996 and 1997 pers. tx.rt. to sjd
+<br>tax90	1999-06-22	stewart d
+<br>tax56	2005-04-19	stewart d
+<br>tax56	2005-05-16	sent bootle tax.ret dated 15th for y/e 2005-04-05.Q11 jobseekers allw. 
+<br>			#887 statutory payms. #2059. No int or other income.
+<br>tax56	2005-05-26	sent bootle tax.ret dated 26th for y/e 2004-04-05.Q11 jobseekers allw. No int or other income.
+<br>tax56	2005-08-30	sent bootle tax.ret dated 28th for y/e 2003-04-05. Everything No.
+<br>tax56	2005-10-28	sent bootle tax.ret dated 27th for y/e 2002-04-05. Everything No.
+<br>tax56	2005-11-10	sent worthing tax.ret dated 10th for y/e 2001-04-05 s/e ?245 everthing else no.
+<br>tax56	2005-11-10	sent worthing tax.ret dated 10th for y/e 2000-04-05 s/e ?132 everthing else no.
+<br>tax56	2005-11-10	sent worthing tax.ret dated 10th for y/e 1999-04-05 s/e ?861 everthing else no.
+<br>tax56	2005-12-07	reply for y/e 2001-04-05 liability 226.80 i-tax only not int or n.i.
+<br>tax56	2005-12-07	reply for y/e 2000-04-05 liability 218.31 i-tax only not int or n.i.
+<br>tax56	2005-12-07	reply for y/e 1999-04-05 too late to change determination
+<br>tax67	2006-04-11	received and sent bootle short tax.ret dated 11th for y/e 2006-04-05. 
+<br>			#4138 other state benefits. #51 net interest(#64 gross). No other income.
+<br>tax78	2008-01-05	sent bootle short tax return dated 4th for y/e 2007-04-05.
+<br>			#6136 other taxable state benefits. ?#77 net interest(#97 gross). Noother income.
+<br>tax89	2009-01-20	for y/e 2008-04-05.£6514 other taxable state benefits . £98 net interest
+<br>			Your submission receipt reference number is: C6TUNO7TO4LLBY2ESOYLOUB6SYM3VJZ6 
+<br>			PAID 103.25 14/03/09 REF=IR10260315.
+<br>tax90	2010-01-15	for y/e 2009-04-05.£0 other taxable state benefits . £0 net interest
+<br>			Your submission receipt reference number is: EUPG6IX2RVSRM4WFH7VTAIIBADOUXJPY 
+<br>pension	2011-10-11	john lawless of pension service phoned re marcol. he said assets as of february £7,700. i said received £8405.17 from 
+<br>			prudential/marcol, paid into nationwide on  17/08/11,assets now £13,606. he said benefits would reduce by £7/week.
+<br>	2012-01-14	for y/e 2011-04-05	stae pension=£5754. other = 0. reference no.=LGSAJT66ZWKO7C4PBGPUTAT4GVV4WORO 
+<br>
+<br>
+<br>
+<br>
+<br>selfe=self employed jobsk=jobseekers allowance stpy=statutory payments otsb=other taxable state benefits nint=net interest gint=gross interest oinc=other income liab=their stated liability(inc.tax only not int or n.i.)
+<br>
+<br>	year/end	date sent  dated selfe  jobsk  stpy 	otsb  nint gint oinc where  type  liab
+<br>	--------	---------  ----- -----  -----  ----     ----  ---- ---- ---- -----  ----  ----
+<br>
+<br>y/end	1999-04-05	2005-11-10 10th  #?861  -----   -----   ----- --- ---   --   ------ ----- too late to change determination
+<br>
+<br>y/end	2000-04-05	2005-11-10 10th  #?132  -----   -----   ----- --- ---   --   ------ ----- #218.31
+<br>y/end	2001-04-05	2005-11-10 10th  #?245  -----   -----   ----- --- ---   --   ------ ----- #226.80  
+<br>y/end	2002-04-05	2005-10-28 27th  -----  -----   -----   ----- --- ---   --   ------ -----
+<br>y/end	2003-04-05	2005-08-30 28th  -----  -----   -----   ----- --- ---   --   ------ -----
+<br>y/end	2004-04-05	2005-05-26 ----  -----	#????	-----	----- --- ---	--   ------ -----
+<br>y/end	2005-04-05	2005-05-16 ----	 -----	 #887	#2059	----- #0   #0   #0   bootle -----
+<br>y/end	2006-04-05	2006-04-11 11th	 -----	-----	-----	#4138 #51  #64  #0   bootle short
+<br>y/end	2007-04-05	2008-01-05  4th  -----	-----	-----	#6136 ?#77 #97  #0   bootle short 
+<br>y/end	2008-04-05	2009-01-20 ----	 -----	-----	-----	6514	98 ---	--	
+<br>y/end	2009-04-05		
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>other	1975-04-28	htws 7422.70 - 139.50 = 7283.20
+<br>=========================
+<br>...
+<br>...
+<br>other	1984-01-24	ls 8069.64 - 412.00
+<br>=========================
+<br>...
+<br>...
+<br>oth78	1997-05-15	deadcat last pay
+<br>oth78	1997-09-01	dd?mm? bow cc deadcat judgement
+<br>oth78	1997-10-01	el-reg 12NY9A
+<br>========================
+<br>oth89	1998-10-06	sale deadcat according cardiff(1yr later 15.9)
+<br>oth89	1999-03-31	during 1st q 99 last move pn lcrh
+<br>========================
+<br>...
+<br>oth01	2000-07-01	sic 50.30
+<br>========================
+<br>oth12	2001-xx-xx	q2/q1? finish mere to y
+<br>oth12	2001-07-02	el-reg 147th (entered 2/2)
+<br>oth12	2001-07-xx	finish samuel (start xx/12/96) to bb
+<br>oth12	2001-08-25	r holly nwj 282828 theresa ruellan ?33056 ?29/8 31/5 
+<br>21/7(initiate int) 1/8 mr r.b
+<br>oth12	2002-xx-xx	q1/q4? finish beryl b to bo
+<br>oth12	2002-xx-xx	q1/q4? finish dim to griffin
+<br>========================
+<br>oth23	2002-xx-xx	problem at bradenham gl	
+<br>========================
+<br>oth34	2003-05-31	b.o.s. expired
+<br>oth34	2003-12-05	finish nds to bo
+<br>oth34	2004-01-23	finish richard to bill
+<br>oth34	2004-02-17	show sk ?nd at l-ch
+<br>oth34	2004-03-31	0.24/4
+<br>========================
+<br>oth45	2005-03-10	bt landline start
+<br>oth45	2005-03-31	1.47/4  2.50	3853
+<br>========================
+<br>oth56	2005-05-16	close pt 1.5 5862-1172 (Open 9m)
+<br>oth56	2005-06-30	0.28/1 3501	2118
+<br>oth56	2005-09-30	0.42/1 5066	3063
+<br>oth56	2005-12-31	0.49/1 5374	3231
+<br>oth56	2006-02-04	k.g-s. g'ton ?saw allyaddr+simonenumber+haldeatailsincname,regaddr+jrnumber+500.blujac+bluvalertrous+greyjump+kglasses+??bluwhat
+<br>oth56	2006-02-04	jr to ll doublesp.commas.d/m/yyyy,a/cunderdash,pl-tr-words(digits),Y..S..,noname
+<br>oth56	2006-03-24	jp to 1,2,3 wh 3x3 swit A/c-underl wordso 3let
+<br>oth56	2006-03-31	0.05/1 7033	4212	all4 3288
+<br>========================
+<br>oth67	2006-06-06	david murtagh at hillingdon. asst1097. left b9 sept00 wk. no fixed ab between bp m52.
+<br>oth67	2006-07-11	rm 20 1,3 br-long 2x2 conv Ref:-underl wordso s------- e----
+<br>oth67	2006-06-30	0.42/1 5563	3319
+<br>oth67	2006-07-25	jr to ll london small, no date, Ref:=underdash pl-sen-words(digits), Y..S.., name 
+<br>oth67	2006-08-17	h open f2. 5k. bondst? aldw? subseqent from patrick sk others?
+<br>oth67	2006-10-28	bondst. op (m52) in 4885
+<br>oth67	2006-12-18	jp bridie from beverley, show al
+<br>oth67	2007-01-17	h op f3.from bondst
+<br>
+<br>oth67	2007-03-13	bondst. in ch 10.43
+<br>oth67	2007-04-03	bondst. in intnt 11.74(14.68-2.94)
+<br>oth67	2007-04-03	bondst. cl out 57.17
+<br>========================
+<br>oth78	2007-07-18	pickpocket, XB7268
+<br>oth78	2007-12-28	close y
+<br>oth78	2007-03-31	73.54
+<br>========================
+<br>oth89	2008-04-30	to b3 sharp swiss nnth goldpaper smallbrown env 2X2
+<br>oth89	2008-06-16	h close f2. 34k. to doug
+<br>oth89	2008-07-26	deleted em
+<br>oth89	2008-09-25	bill from lawyg
+<br>=======================
+<br>oth90	2009-07-07	jp close f3
+<br>oth90	2009-08-30	ealing bdy. outside pub 3,4 young men. hb of nd. i wearing lightbluejeans,greenjacket,bluewoolyhat
+<br>
+<br>
+<br>
+<br>
+<br>			chair	vchair	sec	treas	memb	plan	check	publ	publ	repro
+<br>coffp	1991-02-15	gra.f	col.t	tra.r	ali.c	jan.b
+<br>coffp	1992-02-15	ali.c	...	tra.r
+<br>coffp	1993-02-15	ali.c	...	tra.r
+<br>coffp	1994-02-15	bar.c	...	tra.r
+<br>coffp	1995-02-15	bar.c	...	tra.r	
+<br>coffp	1996-02-15	sus.l	...	tra.r	.....	.....	.....	.....	.....	.....	.....	Li
+<br>coffp	1997-02-15	kar.l	...	chr.r	.....	.....	.....	.....	.....	.....	.....	HS 
+<br>coffp	1998-02-15	adr.c	...	chr?r	...	...	...	...	.....	.....	mik.b
+<br>coffp	1999-02-15	gav.c	jul.o	san.c	mar.v	jon.n	.....	.....	.....	.....	mik.b	Ea
+<br>coffp	2000-02-15	gav.c	ric.m	rut.a	.....	dar.n	joh.p	mik.f	joh.h	sim.b	ele.p	?R 
+<br>coffp	2001-02-15	and.s	ric.m	rut.a	sue.p	dar.n	mar.g	jam.m	cat.t	sim.b	mik.b	R  
+<br>coffp	2002-02-15	and.s	ric.m	tra.y	san.c	cat.t	mag.o	jam.m	mar.g	bil.j	mik.b	Li 
+<br>coffp	2003-02-15	ric.m	kri.b	tra.y	mic.s	dar.n	bil.j	gil.h	mic.g	tra.m	mik.b	Li 
+<br>coffp	2004-02-21	jam.m	sus.l	ral.m	jac.h	dar.n	mag.o	jan.d	ali.b	den.d	pie.a	Li
+<br>coffp	2004------	-----	-----	jan.d	-----	jon.n	-----	rut.a	-----	-----	-----
+<br>coffp	2005-02-19	pet.m	sus.l	-----	phi.g	-----	sim.b	emm.m	ral.m	jem.p	pie.a
+<br>coffp	2005------	-----	-----	har.s	-----	jul.p	-----	-----	-----	-----	-----
+<br>coffp	2006-02-18	jem.p	ros.l	lis.h	phi.g	dar.n	sus.l	emm.m	har.s	ros.p	pie.a	
+<br>coffp	2007-02-24	sus.l	ros.l	lis.h	har.s	eam.b	bri.l	ali.b	phi.g	jac.j	pie.a
+<br>coffp	2008-02-xx	pie.a	ric.m	har.s	bri.i	eam.b	lis.h	ali.b	jul.m	sop.z	phi.g
+<br>coffp	2009-02-xx	pie.a	-----	har.s	den.w	sue.l	-----	sus.l	col.d	kar.f	-----
+<br>*coffp	2009-09-xx	har.s	-----	-----	den.w	sue.l	-----	-----	col.d	kar.f	?phi.g	n/a
+<br>coffp	2010-02-xx	har.s	-----	-----	den.w	?js?sl	-----	-----	-----	-----	?phi.g	Whitt
+<br>coffp	2011-02-xx	har.s	-----	-----	den.w	jud.s	-----	-----	-----	-----	-----
+<br>coffp	2012-02-xx	har.s	-----	-----	den.w	jud.s	-----	-----	-----	-----	-----	M&R
+<br>coffp	2013-02-xx	har.s	-----	-----	den.w	jud.s	-----	-----	ric.m	-----	-----	M&R
+<br>coffp	2014-02-xx	har.s	-----	-----	den.w	jud.s*	-----	-----	ric.m	-----	-----	RMr
+<br>coffp	2015-02-xx	har.s	-----	-----	den.w	jud.s*	-----	-----	ric.m	-----	-----	RMr
+<br>
+<br>parktic	2002-xx-xx	enfield?	
+<br>parktic	2002-xx-xx	broxbourne?
+<br>========================	
+<br>parkt23	2002-au-xx	spelthorne	staines
+<br>parkt23	2002-11-29	harrow--	pinnbarb
+<br>parkt23	2002-12-27	camden
+<br>parkt23	2003-02-23	westminster	cass(pd),
+<br>========================
+<br>========================
+<br>parkt45	2004-08-08	hillingdon	lido
+<br>========================
+<br>parkt56	2005-05-24	harrow--	barrowpoint
+<br>parkt56	2005-05-30	watford-	clarendon
+<br>========================
+<br>========================
+<br>
+<br>
+<br>car insurance
+<br>-------------
+<br>2013-06-13  query to Saga about whether park on road
+<br> I live in a block of flats, sheltered housing in West Ealing. There are two places where I park my car at night. Opposite the flats is a Sainsburys and I have the right to park there at any time. The parking is on the top floor, not under cover, and the entrance is locked at 11pm and reopened the following morning. Sometimes I arrive back after 11pm, in which case I park in the road, a few minutes walk from where I live. What do I put for where I park?
+<br> 13:20:09 : Gary Beeching: You would need to put down "On the road" to be correctly covered.
+<br> 13:20:21 : Customer: OK.
+<br>	
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+	
+<h3 id="Facebook">
+Facebook
+</h3>
+<table>
+<tr><td>    2009-03-24</td><td>    adam redshaw       </td><td> he accept</td><td>    immed 
+<tr><td>    2008-01-26</td><td>    adrian c       </td><td> he accept</td><td>     immed
+<tr><td>    2011-12-28</td><td>    agatha kaluska       </td><td> she accept</td><td>    immed
+ <tr><td>        2014-11-24</td><td>      alejandro moncada</td><td> he accept</td><td>    immed
+<tr><td>    2011-10-14</td><td>    alex barker       </td><td> i accept</td><td>    ?
+<tr><td>    2009-03-24</td><td>    alison jones       </td><td> she accept</td><td>    immed
+<tr><td>    2012-07-27</td><td>    amanda corder       </td><td> she accept</td><td>    3d
+<tr><td>    2009-03-27</td><td>    andrew watson       </td><td> he accept</td><td>    immed
+<tr><td>    2009-09-18</td><td>    andrew withers       </td><td> he accept</td><td>    immed
+<tr><td>    2008-04-21</td><td>    andy r           </td><td> she accept</td><td>    immed
+<tr><td>    2009-06-18</td><td>    angela gunn       </td><td> she accept</td><td>    immed
+<tr><td>    2013-08-27</td><td>    angela june mcleod   </td><td> she accept</td><td>    immed
+        <tr><td>2014-12-05 </td><td>     ann susan howlett</td><td> she accept</td><td>    immed
+<tr><td>     2008-12-17</td><td>    ann susan h h       </td><td> she accept</td><td>    11d
+<tr><td>      2009-01-26</td><td>    andrea sangster       </td><td> i accept</td><td>    immed
+<tr><td>    2011-05-15</td><td>    barry cozens       </td><td> i accept</td><td>    immed
+<tr><td>    2010-02-22</td><td>    becki cooke       </td><td> she accept</td><td>    immed
+<tr><td>    2011-10-14</td><td>    beth wylde       </td><td> she accept</td><td>    immed
+<tr><td>    2009-06-24</td><td>    bob cole       </td><td> i accept</td><td>    immed
+<tr><td>    2007-11-20</td><td>    brett g           </td><td> he accept</td><td>      wait
+<tr><td>     2011-06-11</td><td>    bryony lanham       </td><td> she accept</td><td>    10d
+<tr><td>    2012-01-23</td><td>    carlos emilio moncada c   </td><td> i accept</td><td>    immed
+<tr><td>    2010-10-06</td><td>    caroline lynch       </td><td> she accept</td><td>    immed
+<tr><td> 2??</td><td>           cherish thomas       </td><td> i accept</td><td>    immed
+<tr><td>   2??</td><td>     2014-06-05 </td><td>     chris robinson         </td><td> she accept</td><td>      immed
+<tr><td>    2009-03-24</td><td>    christine t       </td><td> she accept</td><td>    immed
+<tr><td>    2010-03-03</td><td>    clare smithers       </td><td> she accept</td><td>    immed
+<tr><td>    2009-06-06</td><td>    colin davison       </td><td> he accept</td><td>    2 months
+<tr><td>    2010-05-21</td><td>    colin mills       </td><td> i accept</td><td>    immed
+<tr><td>    2011-05-08</td><td>    corinne gaulton       </td><td> she accept</td><td>    immed
+<tr><td>      2013-10-01</td><td>    czeslawa sadurek   </td><td> she accept</td><td>    immed
+<tr><td>    2011-03-17</td><td>    daisy puengan       </td><td> i accept</td><td>    immed
+<tr><td>    2009-09-08</td><td>    dave parfitt       </td><td> i accept</td><td>    immed
+<tr><td>    2011-10-09</td><td>    dave williams       </td><td> he accept</td><td>    immed
+<tr><td>2014-11-13     </td><td> david bamford</td><td> he accept</td><td>    immed
+<tr><td>    2012-10--3</td><td>    david funnel       </td><td> i accept</td><td>    4d
+<tr><td>    2010-05-03</td><td>    david halley       </td><td> he accept</td><td>    1d
+<tr><td>    2009-08-11</td><td>    david smith       </td><td> he accept</td><td>    1y6.5m
+<tr><td>    2008-10-13</td><td>    david stu cow       </td><td> he accept</td><td>    immed
+<tr><td> 2??</td><td>           david sugden
+<tr><td>    2009-07-23</td><td>    dawn catterwell       </td><td> she accept</td><td>    2d
+<tr><td>    2010-04-02</td><td>    debbie lewis       </td><td> i accept</td><td>    immed
+<tr><td>    2012-10-31</td><td>    deirdre brookes       </td><td> i accept</td><td>    immed
+<tr><td>      2010-10-05</td><td>    denise woon-sam       </td><td> i accept</td><td>    immed
+<tr><td>    xxxxxxxxxx</td><td>    eamon b    
+<tr><td>    2009-07-27</td><td>    eleanor turner       </td><td> she accept</td><td>    3d
+<tr><td>   2??</td><td>         emily burgess
+<tr><td>     2010-06-28</td><td>    emma strong       </td><td> i accept</td><td>    immed
+<tr><td>    2009-06-18</td><td>    faye bunyan(2)       </td><td> she accept</td><td>    immed
+<tr><td>    2009-09-20</td><td>    fil northerner       </td><td> he accept</td><td>    immed
+<tr><td>    2009-03-28</td><td>    fran seen bea       </td><td> she accept</td><td>(mp)    immed
+<tr><td>    2011-08-09</td><td>    francis a wallington   </td><td> he accept</td><td>    immed
+<tr><td>     2008-04-19</td><td>    frauke c       </td><td> i accept</td><td>    immed
+<tr><td>    2008-01-14</td><td>    gary sch       </td><td> he accept</td><td>      wait-short
+<tr><td>    2010-10-14</td><td>    gary silver       </td><td> i accept</td><td>    immed
+<tr><td>    2009-11-16</td><td>    gemma winslow       </td><td> i accept</td><td>    immed
+<tr><td>    2009-11-16</td><td>    gemma crader       </td><td> she accept</td><td>    immed
+<tr><td>    2013-01-11</td><td>    gerry edwards        </td><td> he accept</td><td>    immed
+<tr><td>    2013-06-27</td><td>    gita prabhu       </td><td> she accept</td><td>    2d
+<tr><td>    2100-04-28</td><td>    glyn bull       </td><td> he accept</td><td>    immed
+<tr><td>     2010-06-29</td><td>    graham evans    `   </td><td> he accept
+<tr><td>    2008-04-19</td><td>    heather f       </td><td> i accept</td><td>    immed
+<tr><td>     2013-11-25</td><td>    helen thompson   </td><td> she accept</td><td>    immed
+<tr><td>      2007-12-01</td><td>    ian c           </td><td> he accept</td><td>      wait
+<tr><td>    2010-02-22</td><td>    james anthony oliver   </td><td> he accept</td><td>    immed
+<tr><td>      2007-xx-xx</td><td>    james mccann       </td><td> i accept</td><td>       immed
+<tr><td>    2010-10-02</td><td>    james mobbs       </td><td> i accept</td><td>    immed
+<tr><td>    2009-11-09</td><td>    jane ruhland       </td><td> i accept</td><td>    immed
+<tr><td>      2008-07-22</td><td>    jane ta           </td><td> i accept</td><td>    immed
+<tr><td>      2007-11-23</td><td>    janet d           </td><td> i accept</td><td>       immed    
+<tr><td>      2009-08-19</td><td>    jayne manley       </td><td> she accept</td><td>    immed
+<tr><td>      2009-09-02</td><td>    jenny puingan       </td><td> i accept</td><td>    immed
+<tr><td>    2011-12-09</td><td>    jesseminda carraca   </td><td> i accept</td><td>    immed
+<tr><td>    2009-11-16</td><td>    joan clifford       </td><td> she accept</td><td>    immed
+<tr><td>    2010-10-24</td><td>    joanna miller       </td><td> she accept</td><td>    immed
+<tr><td>      2009-03-27</td><td>    john a smith       </td><td> he accept</td><td>    immed
+<tr><td>      2009-10-12</td><td>    john braun       </td><td> he accept</td><td>    immed
+<tr><td>    2012-02-12</td><td>    john 'doc' stark   </td><td> i accept</td><td>    immed
+<tr><td>    2011-09-01</td><td>    jon tricker       </td><td> he accept</td><td>    immed
+<tr><td>      2008-04-21</td><td>    joseph g       </td><td> he accept</td><td>    immed
+<tr><td>    2010-07-15</td><td>    judith shepherd       </td><td> i accept</td><td>    immed    
+<tr><td>      2009-07-23</td><td>    julia favell       </td><td> i accept</td><td>    immed
+<tr><td>      2008-05-08</td><td>    julian m       </td><td> he accept</td><td>    4weeks
+<tr><td>    2010-06-04</td><td>    karen longden       </td><td> she accept</td><td>    immed
+<tr><td>      2009-07-28</td><td>    karen parsons       </td><td> she accept
+<tr><td>      2008-06-26</td><td>    katherine mcd       </td><td> she accept</td><td>    6d
+<tr><td>    2011-03-15</td><td>    katherine paley       </td><td> she accept</td><td>    immed
+<tr><td>    2011-07-xx</td><td>    kathy morris       </td><td> i accept</td><td>    immed
+<tr><td>      2009-07-24</td><td>    keith israel       </td><td> he accept</td><td>    24d
+<tr><td>    2010-06-07</td><td>    kim haleA        </td><td> she accept</td><td>    3d
+<tr><td>    2011-05-26</td><td>    kim haleB       </td><td> i accept
+<tr><td>    2010-11-01</td><td>    kim westbrook       </td><td> she accept</td><td>    immed
+<tr><td>        2013-12-07</td><td>      kings lynn plus(group)
+<tr><td>      2011-05-20</td><td>    kurt putney       </td><td> he accept</td><td>    immed
+<tr><td>      2009-11-01</td><td>    lance creed       </td><td> i accept</td><td>    immed
+<tr><td>      2008-10-08</td><td>    laura rowe       </td><td> she accept</td><td>    immed
+<tr><td>    2013-01-19</td><td>    lauren ottewill       </td><td> i accept</td><td>    immed
+<tr><td>    2012-07-27</td><td>    lee gilbert       </td><td> he accept</td><td>    immed
+<tr><td>      2009-03-24</td><td>    liane browning       </td><td> she accept</td><td>    4d
+<tr><td>    2010-04-02?</td><td>    lindy toogood       </td><td> she accept</td><td>    invited 2008-02-13
+<tr><td>      2008-12-14</td><td>    lisa b           </td><td> she accept</td><td>(2nd)    immed
+<tr><td>      2008-01-08</td><td>    lisa h           </td><td> i accept</td><td>       immed
+<tr><td>    2009-11-16</td><td>    lisa maloney       </td><td> she accept</td><td>    immed
+<tr><td>    2011-05-16</td><td>    lorraine fairfax    </td><td> she accept</td><td>    immed
+<tr><td>    2011-02-07</td><td>    lorraine rowe       </td><td> she accept</td><td>    3weeks
+<tr><td>      2009-02-11</td><td>    lorraine tA       </td><td> she accept</td><td>   </td><td> i month
+<tr><td>      2011-03-06</td><td>    lorraine tB       </td><td> i accept</td><td>    immed
+<tr><td>      2008-01-13</td><td>    louise wann       </td><td> she accept</td><td>     wait-long
+<tr><td>    2008-08-08</td><td>    lucy smith       </td><td> i accept</td><td>    immed
+<tr><td>      2011-03-11</td><td>    lumanog camille       </td><td> i accept</td><td>    immed
+<tr><td>    2011-03-20</td><td>    macca puengan       </td><td> i accept</td><td>    immed
+<tr><td>      2008-10-11</td><td>    manoj p           </td><td> he accept</td><td>    immed
+<tr><td>      2009-11-01</td><td>    marcellus brown       </td><td> i accept</td><td>    immed
+<tr><td>      2008-02-23</td><td>    margaret o       </td><td> she accept</td><td>    4w    .i delete 30/03/09? reinvite 13/11/09</td><td> she accept</td><td> immed
+<tr><td>      2009-02-12</td><td>    marieta ilieva       </td><td> she accept</td><td>    immed
+<tr><td>      2008-08-26</td><td>    mark harrington       </td><td> i accept</td><td>    immed
+<tr><td>      2008-07-12</td><td>    mark holt       </td><td> he accept</td><td>    11w4d
+<tr><td>2014-11-13 </td><td>     martin kenna</td><td> he accept</td><td>    immed
+<tr><td>    2013-03-09</td><td>    martin posner       </td><td> he accept</td><td>    immed
+<tr><td>   2??</td><td>         martin wilson
+<tr><td>      2008xxxx</td><td>    matthewd       </td><td> i accept</td><td>    immed
+<tr><td>      2008-01-09</td><td>    matt w           </td><td> he accept</td><td>      wait
+<tr><td>      2009-06-22</td><td>    maurice blanco       </td><td> i accept</td><td>    immed
+<tr><td>    2012-07-27</td><td>    micael clarkson       </td><td> i accept</td><td>    immed
+<tr><td>      2009-08-12</td><td>    michael sharpe       </td><td> he accept</td><td>    4d
+<tr><td>      2008-06-xx</td><td>    michelle t       </td><td> i accept</td><td>    immed
+<tr><td>      2008-04-27</td><td>    mike brad       </td><td> he accept</td><td>    6d
+<tr><td>      2008-01-26</td><td>    mike brown       </td><td> i accept</td><td>      immed
+<tr><td>      2009-04-22</td><td>    mike frey       </td><td> he accept</td><td>    immed
+<tr><td>    2011-07-08</td><td>    natasha martell       </td><td> i accept</td><td>    immed
+<tr><td>2014-11-13     </td><td> nicholas leeks</td><td> he accept</td><td>    immed
+<tr><td>      2009-09-24</td><td>    nichole hedger       </td><td> she accept</td><td>    immed
+<tr><td>    2009-02-28</td><td>    nick grant       </td><td> i accept</td><td>    immed
+<tr><td>     2011-10-09</td><td>    nicola williams       </td><td> she accept</td><td>    immed
+<tr><td>     2009-09-22</td><td>    oliver pavey       </td><td> i accept</td><td>    immed
+<tr><td>    2010-11-01</td><td>    patrick byrne       </td><td> he accept</td><td>    immed
+<tr><td>      2009-07-24</td><td>    paul catterwell       </td><td> he accept</td><td>    3d
+<tr><td>    2011-05-26</td><td>    paul favell       </td><td> i accept</td><td>    immed
+<tr><td>  2??</td><td>          paul stark
+<tr><td>      2009-09-20</td><td>    paul turner       </td><td> i accept</td><td>    immed    
+<tr><td>    2011-09-30</td><td>    paula gaggin       </td><td> i accept</td><td>    immed
+<tr><td>      2008-04-20</td><td>    peter mann       </td><td> he accept</td><td>    immed
+<tr><td>    2010-05-07</td><td>    peter sturt       </td><td> i accept</td><td>    immed
+<tr><td>      2008-10-12</td><td>    philip saf       </td><td> he accept</td><td>    immed
+<tr><td>    2011-01-18</td><td>    philippa rogers       </td><td> she accept</td><td>    immed
+<tr><td>    2008-07-10</td><td>    pierrick a       </td><td> he accept</td><td>    immed
+<tr><td>     2??</td><td>         puengan norhamsha
+<tr><td>   2??</td><td>         rachelle winborne
+<tr><td>      2009-04-17</td><td>    rebecca horne       </td><td> i accept</td><td>    immed
+<tr><td>    2008-01-02</td><td>    rhianna w       </td><td> i accept</td><td>       immed
+<tr><td>2014-11-13     </td><td> richard leach</td><td> he accept</td><td>       immed
+<tr><td>      2008-07-24</td><td>    richard mah       </td><td> i accept</td><td>    immed
+<tr><td>      2009-03-xx</td><td>    richard merrett       </td><td> i accept</td><td>    immed
+<tr><td>      2008-12-06</td><td>    richard p       </td><td> he accept</td><td>(rw)
+<tr><td>      2009-09-21</td><td>    rob buffham       </td><td> he accept</td><td>    3d
+<tr><td>      2009-06-28</td><td>    robert blanks       </td><td> i accept</td><td>    immed
+<tr><td>    2010-11-11</td><td>    robert greenstein   </td><td> he accept</td><td>    immed
+<tr><td>    2010-04-28</td><td>    robert jones       </td><td> he accept</td><td>    immed
+<tr><td>      2009-10-18</td><td>    rory cornish       </td><td> he accept</td><td>    immed
+<tr><td>      2008-01-23</td><td>    rosa p           </td><td> she accept</td><td>    immed
+<tr><td>    2010-11-28</td><td>    rosaleen long       </td><td> i accept</td><td>    immed
+<tr><td>    2007-xx-xx</td><td>    russell carpenter   </td><td> i accept</td><td>       immed
+<tr><td>      2013-01-14</td><td>    russell taylor       </td><td> he accept</td><td>    immed
+<tr><td>    2011-10-06</td><td>    sam nacan       </td><td> i accept</td><td>    immed
+<tr><td>    2011-04-09</td><td>    samantha biddle       </td><td> i accept</td><td>    immed
+<tr><td>    2010-20-28</td><td>    sandra costigan       </td><td> she accept</td><td>    6d
+<tr><td>2014-11-22   </td><td>   sandra simeone</td><td> she accept</td><td>    immed
+<tr><td>    2010-04-25</td><td>    sanya preston       </td><td> i accept</td><td>    immed
+<tr><td>    2010-04-26</td><td>    sarah morris       </td><td> i accept</td><td>    immed
+<tr><td>      2009-05-19</td><td>    sean biddle       </td><td> i accept</td><td>    immed
+<tr><td>    2010-01-17</td><td>    sean byrne       </td><td> i accept</td><td>    immed
+<tr><td>      2008-05-23</td><td>    sheila t       </td><td> she accept</td><td>    4months-10days
+<tr><td>    2011-08-10</td><td>    simon george       </td><td> i accept</td><td>    immed
+<tr><td>      2009-06-10</td><td>    simon paterson       </td><td> he accept</td><td>    5d
+<tr><td>      2008-01-29</td><td>    sophia z       </td><td> she accept</td><td>     immed
+<tr><td>      2009-03-27</td><td>    stephen b       </td><td> he accept</td><td>    immed
+<tr><td>      2008-11-20</td><td>    stephen sykes       </td><td> he accept</td><td>    7 months
+<tr><td>      2??</td><td>      steve rolfe
+<tr><td>2014-11-24  </td><td>    stuart ratcliffe</td><td> he accept</td><td>immed
+<tr><td>      2008-11-19</td><td>    stuart t       </td><td> he accept</td><td>(lr)    immed
+<tr><td>    2012-07-27</td><td>    susan berry       </td><td> i accept</td><td>    immed
+<tr><td>      2008-01-12</td><td>    susan g           </td><td> i accept</td><td>       immed
+<tr><td>      2010-01-31</td><td>    susan monaghan       </td><td> she accept</td><td>    immed
+<tr><td>      2009-10-24</td><td>    theresa byrne       </td><td> i accept</td><td>    immed
+<tr><td>      2009-07-28</td><td>    tina bunyan       </td><td> i accept</td><td>    immed
+<tr><td>     2007-xx-xx</td><td>    tracey y       </td><td> i accept</td><td>       immed
+<tr><td>     2009-05-20</td><td>    west kent plus     </td><td>   they accept</td><td>    immed
+<tr><td>     2013-03-09</td><td>    zena wigram       </td><td> she accept</td><td>    immed
+</table>
+<br>----
+<br>182 fb count 2012-08-30
+<br>179+1 fb count 2013-10-21 but 176+1 above
+<br>189 fb count 2014-06-05
+<br>190 fb count 2014-09-05
+<br>184 here count 2014-11-17
+<br>217 fb count 2014-11-17
+<br>207 fb statement 2014-11-17
+<br>
+<br>group membership
+<br>----------------
+<br>    2013-12-06  hcp---------------------        i create
+<br>    2013-12-06  maths-------------------        ian crawshaw accept immed
+<br>    2013-12-06  midland-area-plus(group)        kathy morris accept immed
+<br>    2013-12-06  slough-plus-------------        i create
+<br>    
+<br>they reject invite to join fb        2
+<br>------------------------------
+<br>    2008-02-05    ruth a        she refuse immed
+<br>    2008-02-17    lorraine f    i invite
+<br>
+<br>they haven't accepted me        
+<br>-------------------
+<br>*	2009-05-13	cathy turk					she leave fb on/before 2009-12-04
+<br>*	(	raninder ch )						I wdr 2009-10-03
+<br>	2009-09-09	ann susan howlett				I wdr 2009-11-18
+<br>	2009-10-02	neil malik					I wdr 2009-11-18
+<br>	2009-11-16	janet rintoul					I wdr 2009-12-04
+<br>	2010-01-03	retro betty					I wdr 2010-02-02
+<br>	2010-04-25	andy campbell					I wdr 2010-05-09
+<br>	2010-07-18	debbie burke					I wdr 2010-09-13
+<br>	2010-11-01	pui yee						I wdr 2011-01-03
+<br>	2011-03-15	alison williams					I wdr 2011-03-20
+<br>	2008-01-04	alison k		she accept 	immed	she leave fb on/before 2009-05-26
+<br>	2010-11-13	kevin crowfoot		he accept	immed	he leave fb/remove me on/b 2011-05-25
+<br>	2011-08-10	gavin peachey					I wdr
+<br>	2011-08-26	lee rowland					I wdr 2011-10-14
+<br>	2011-10-27	christine patmore				I wdr 2011-11-10
+<br>	2011-11-08	erica knight					i wdr 2011-11-23
+<br>	2011-11-08	michelle moth					i wdr 2011-11-23
+<br>	2012-01-26	catherine hughes				i wdr 2012-02-02
+<br>	2012-02-12	david filer					i wdr 2012-02-26
+<br>	2013-03-01	colin thompson					i wdr 2013-03-09
+<br>	2013-03-09	jon north					i wdr 2013-03-12
+<br>	2013-03-09	dunstable activeplus        			i wdr
+<br>	2013-03-09	mark hewson					i wdr 2013-03-12
+<br>	2013-05-02	corinna teale					i wdr 2013-05-24
+<br>	2013-08-27	scott whitehead					i wdr 2013-09-12
+<br>	2013-09-12	wenda barlow					i wdr 2013-10-01
+<br>                        geoff buller                                    i wdr 2014-06-06
+<br>	2014-11-13      stuart bamford
+<br>	2014-11-13      chris brown                                     i wdr 2014-11-22
+<br>	2014-11-13      adrian masters                                  i wdr 2014-11-22
+<br>        2014-11-18      nicki short                                     i wdr 2014-11-29
+<br>
+<br>they unaccepted me but accepted others later			4
+<br>--------------------------------------------
+<br>*	2008-09-14	mike shapcott	23/5 23+37=60	04/12 36+37=73	I wdr 2009-12-04
+<br>*	2009-05-19	sue latham	23/5 7+0=7	23/9 9+1=10	I wdr 2009-10-03
+<br>	2009-08-08	eileen houston	8/8 3+4=7	23/9 6+9=15	I wdr 2009-10-03
+<br>*	2009-04-21	grace forbes	23/5 6+19=25	23/9 7+20=27	I wdr 2009-10-03
+<br>	2010-05-18	brian lawson					I wdr 2010-06-23
+<br>	2011-05-10	lewis hodgetts	16/5/11,5+2			I wdr 2011-06-11
+<br>
+<br>they declined me		
+<br>------------------------------------------
+<br>	2008-04-22	david j
+<br>	2008-07-10	anna b
+<br>	2008-06-05	michelle g
+<br>	2008-08-17	sharon f
+<br>			kirsty van l
+<br>	2009-03-27	paul hudson
+<br>	2009-04-02	darren newstead
+<br>	2009-04-22	holly brotherson
+<br>	2009-05-10	helen bean
+<br>	2009-05-25	rachel dillon	
+<br>	2009-05-10	kelly la porte
+<br>	2009-03-27	ian st parkes
+<br>	2009-03-14	vicky whitton	i tried again 2009-10-20 but withdrew invite on 2009-11-02
+<br>	2009-10-20	deirdre brooks
+<br>	2009-10-16	alpa raja
+<br>	2010-03-23	traci macdonald jones
+<br>	2010-07-07	tracey masters	
+<br>	2011-01-02	alpa raja 
+<br>	2011-05-18	claire law		she accept	5d then remove soon after
+<br>	2011-11-08	john wells(?which)
+<br>	2013-03-09	kathy jones
+<br>        2013-03-18	olga brooks
+<br>	2013-11-15	stuart clarke
+<br>
+<br>they deleted me				
+<br>---------------
+<br>	2008-04-29	ben a			he accept	immed he remove 2009-01-2x
+<br>	2008-09-12	juliet fox		she accept	immed	she remove 30/03/09 or before
+<br>	2009-06-15	tahir hussain		i accept	immed  he remove 15/07/09 or shortly before
+<br>	2009-01-28	steve grayston		i accept	immed he remove 27/11/09 or before
+<br>	2008-09-10	carys evans		she accept(sg)	4d    she remove 05/12/09 or before
+<br>	2009-10-18	mark bonehill		i accept	2d	he remove 2010-07-08 or before
+<br>	2009-05-14	rebecca a woolf		she accepp	immed	she remove 2010-07-08 or before
+<br>	2008-04-23	susie lake		She accept	immed 	she remove 2010-10-25 or before
+<br>			dawn petty					she remove on/b 2011-05-26
+<br>	2011-03-23	biverlie diringan	i accept	immed	she removed me on/before 2011-07-10
+<br> 	2010-05-01	bobby bacchus		he accept	2d	he removed me on/before 2011-04-04
+<br>	2010-07-25	pete redrup		he accept		he left fb on/before 2011-07-10
+<br>	2008-07-01	louis greenA		he accept	7d
+<br>			louis londonB
+<br>	2009-12-15	sonia lovett		she accept	3d	she deleted me on/before 2011-10-04
+<br>	2008-04-22	phil gigg		he accept	immed	he left fb on/before 2011-10-14
+<br>	2009-07-10	esther watson		i accept	immed	she delet3d me on/before 2013-05-28
+<br>	2009-08-01	vicky northridge	she accept	24d	she left fb on/before 2013-09-11
+<br>	2012-12-19	ivan dimitrov		i accept	immed	
+<br>	2010-08-31	keith hook		i accept	immed	he deleted me
+<br>	2008-08-08	kwonmiya		she accept	6w1d
+<br>	2010-10-30	louise walker-smith	i accept	immed
+<br>	2010-11-xx	marion sugrue		she accept	immed
+<br>	2010-04-24	myra misti blue		i accept	immed
+<br>f-	2009-02-08	natalie dolby		she accept	immed she deleted me 18/10/09 or before then reinstated me 18/10/09
+<br>	2010-07-07	peter moutrie		i accept	immed
+<br>	2012-01-04	maria eugenia		i accept	immed
+<br>			doris doris
+<br>	2011-08-01	sofia alexander		i accept	immed
+<br>	2012-08-30	rosa moncada		i accept	immed
+<br>
+<br>i unaccepted them			2
+<br>-----------------
+<br>
+<br>			johnny pope			25/5 23+12=35
+<br>	2009-12-12	ebenezer
+<br>	2011-08-30	steve geary 08-30=110/34 09-01=116/36
+<br>
+<br>
+<br>i declined them				0
+<br>---------------
+<br>i deleted them				4
+<br>--------------
+<br>			zoe andrews
+<br>	2008-09-06	melvyn d	i accept	immed i remove 2009-01-27
+<br>	2008-10-14	lorraine w	she accept(2nd)	4d	i remove 2009-06-09
+<br>	2008-05-22	steve geary	i accept	immed	i remove 2009-11-24
+<br>	2010-01-03	magda bell	i accept	longtime	ipoke 2007-01-07 i remove 2013-05-14
+<br>			simon james				i remove 2013-10-01
+<br>                        gordon tytler                   i remove 06/12/14 MDk ICr MaBr louiseWS were mutualf
+<br>
+<br>linked in
+<br>---------
+<br>they haven't accepted:
+<br>    2013-12-17  mark harrington
+<br>    2013-12-17  judith shepherd
+<br>    2013-12-17  sheila thiyagarajah
+<br>    2013-12-17  sandra costigan-dijkstra
+<br>------------------------------------------------------
+<br>------------------------------------------------------
+<br>facebook co
+<br>	2012-09-10	lisa howlett		she accept	immed
+<br>	2012-09-10	rebecca horne		she accept	immed
+<br>	2012-09-12	steven wildsmith	he accept	immed
+<br>	2012-09-13	stewart ablett		he accept	immed
+<br>	2012-09-14	linda harding		she accept	immed
+<br>	2012-09-13	jarrett smith		he accept	immed
+<br>			saffy cat
+<br>			lucy harding
+<br>			bethany
+<br>they haven't accepted me		
+<br>-------------------
+<br>	2012-09-12	alison lincoln
+<br>	2012-09-12	chris snuggs
+<br>	2012-09-12	paul west
+<br>	2012-09-12	cherry foxall
+<br>	2012-09-13	zoe andrews
+<br>	2012-09-13	martin spruce
+<br>	2012-09-13
+<br>	2012-09-13
+<br>i withdrew invitation
+<br>---------------------
+<br>	2012-09-10	dave cowan	
+<br>	2012-09-10	west kent plus
+<br>	2012-09-10	piper chapman	
+<br>they declined me
+<br>---------------
+<br>	2012-09-10	lucy smith
+<br>	2012-09-10	adam redshaw
+<br>	2012-09-13	dotti sallis
+<br>	2012-09-13	melanie sayers
+<br>	------------------------------------------------------
+<br>----------------pending---------------
+<br>	2013-03-02(h)	matt dickenson
+<br>	</td><td>2013-03-03(h)	philippa rogers
+<br>	2013-03-04(h)	keith israel
+<br>	2013-03-04(h)	john a smith
+<br>	2013-03-06(h)	pete mann
+<br>	2013-03-06(h)	fil northerner
+<br>	2013-03-06(h)	dave parfitt
+<br>	2013-03-06(h)	lee gilbert
+<br>	2013-03-06(h)	bryony lanham
+<br>	2013-03-06(h)	liane browning
+<br>	2013-03-06(h)	stephen browning
+<br>	2013-03-06(+h)	simon george
+<br>	2013-03-07(h)	phil saffer
+<br>	2013-03-07(h)	sanya preston
+<br>	2013-03-08	stephen richard sykes
+<br>	2013-03-08(h)	sofia alexander
+<br>	2013-03-11(h)	katherine mcdonnell
+<br>	2013-09-23	faye bunyan
+<br>	2013-11-25	geoff buller
+<br>	2013-11-25	john a smith
+<br>	2013-11-25	martin posner
+<br>	2013-11-25	jean caswell
+<br>    2013-12-04  max bull
+<br>    2013-12-04  nicky rolfe
+<br>    2013-12-04  james oliver
+<br>    2013-12-04  jane talbot-mala
+<br>    2013-12-04  richard teale
+<br>    2014-04-24	francesca barclay
+<br>    2014-04-24	dawn catterwell
+<br>    2014-04-24	sanya preston
+<br>------they-withdrew`------------------
+<br>	2013-03-07(h+)	matt wilson
+<br>--------we-withdrew`------------------
+<br>	2013-03-08	rob buffham
+<br>	2013-03-08	nichole hedger
+<br>	2013-03-08	mark hewson
+<br>	2013-03-08	gerry edwards
+<br>	2013-03-02	matt dickenson
+<br>	2013-03-03	philippa rogers
+<br>	2013-03-03	lorraine tyrellB
+<br>	2013-03-04	paul catterwell
+<br>	2013-03-03	richard mahaffey
+<br>	2013-03-08	jane ruhland
+<br>	2013-03-08	richard parker
+<br>	2013-03-08	dunstable activeplus
+<br>	2013-03-08	simon paterson
+<br>	2013-03-08	eleanor turner
+<br>	2013-03-08	amanda corder
+<br>	2013-03-08	ben allen
+<br>	2013-03-08	kim hale
+<br>	2013-03-08	gemma crader
+<br>	2013-03-08	jenny puingan
+<br>	2013-03-08	rory cornish
+<br>	2013-03-08	tom seddon
+<br>	2013-03-08	suzy seddon
+<br>	2013-03-08	corinne gaulton
+<br>	2013-03-08	dawn petty
+<br>	2013-03-08	gary silver
+<br>	2013-03-08	paul hudson
+<br>	2013-03-06(h+)	lisa maloney
+<br>	2013-03-02	dave cowan
+<br>	2013-03-02	manoj pra
+<br>--------------------------
+<br>			katherine mcdonnell
+<br>			nick grant
+<br>------------------------------------------------------
+<br>		10-07	20:58
+<br>amand l		10-07	21:09
+<br>darren trutw	10-07	22:28
+<br>(manoj		10-08	19:33
+<br>richard mah
+<br>lucy sm
+<br>andy ru
+<br>paul h
+<br>dave c)
+<br>(tracey c	10-08	20:58
+<br>kirst
+<br>joe gurney
+<br>ben curley
+<br>adam redshaw
+<br>sanya preston
+<br>rhianna
+<br>harry s)
+<br>( ben allen	10-08	21:07
+<br>jason moss)
+<br>steve geary	10-09	01:03
+<br>
+<br>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="Meetup">
+<br>Meetup number viewed in past few days
+</h3>
+<table>
+<tr><td>date</td><td>HCP</td><td>Bnt</td><td>ESG</td><td>WLOG</td><td>Ken
+<tr><td>2014-12-20</td><td>18</td><td>17</td><td>81</td><td>41</td><td>825
+<tr><td>2014-12-24</td><td>13</td><td>19</td><td>65</td>
+<tr><td>2014-12-xx</td><td></td><td></td><td></td>
+</table>
+
+<h3 id="Ogrady">
+<br>Ogrady
+</h3>
+<dl>
+<dt> 2014-11-26 Xmas Meal Red Lion &amp; Pineapple
+  <dd> Liseby Carol(e) Helen KDm DBn ChrisD, Bette EPl John Lydia, Gwen Theresa Josie Donna BCr, Pritam HSt Musa Parveen Joyce Christina Pwife
+<dt> 2015-04-16
+  <dd> Barry came.
+  </dd>
+</dt>
+
+<dt> Laundry times
+  <dd> Mon-Fri 0800-2100 , Sat 0800-1800, Sun 0800-1500.
+
+<dt> Committee members
+<dd>Harry         Chair</dd>
+<dd>Rattan        Vice-Chair</dd>
+<dd>Eileen        Treasurer</dd>
+<dd>Janet         Secretary</dd>
+<dd>Kirit         Assistant Treasurer</dd>
+<dd>Danuta        </dd>
+<dd>Bette        </dd>
+<dd>?        </dd>
+<dd>?        </dd>
+</dt>
+
+<dt> Payments to computer club
+<dd>Danuta 4/10/13 48</dd>
+<dd>Janet 7/11/13 24</dd>
+<dd>X     8/4 24</dd>
+<dd>X     6/11 24</dd>
+<dd>Theresa 22/11/14 24</dd>
+<dd>Donalda 22/11/14  24</dd>
+<dd>Rattan</dd>
+<dd>Harry s.o.</dd>
+<dd>Barbara s.o</dd>
+</dt>
+</dl>
+
+<br>
+<h3 id="LinkedIn">
+LinkedIn
+</h3>
+<br>		James McCann
+<br>2011-01-11	Mike Brown	i accept	immed
+<br>2011-01-11	rosa pol	she accept	immed
+<br>
+<br>2011-01-19	zena wigram	i accept	immed
+<br>2011-01-20	roger knight	he accept	immed
+<br>2011-01-19	jackie harris	she accept	5d
+<br>2011-01-19	brett gossage	he accept	5d
+<br>2011-02-01	ruth aarons	she accept	6d
+<br>2011-01-12	andrea sangster	she accept	6weeks
+<br>2011-03-29	janet davies	she accept	immed
+<br>2012-03-27	diego moncada
+<br>2012-03-27	elisabeth sweeney
+<br>2012-03-27	david varley	he accept	immed
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+<h3 id="Yearly">
+Yearly
+</h3>
+<br>
+<br>birthd	1944-01-23	carole----------
+<br>birthd	1954-01-27	ful-------------
+<br>birthd	1900-01-27	richardb--------	
+<br>birthd	1949-01-28	mike------------
+<br>birthd	1930-02-xx	martin-beat-----	
+<br>annual	xxxx-02-04	dd? ful-nwd-stat
+<br>birthd	1961-02-10	debbie-l--------	
+<br>birthd	1962-02-23	clive o
+<br>birthd	1948-03-08	john b----------	48?
+<br>birthd	1977-03-09	laura-r
+<br>birthd	1949-03-20	brenda
+<br>birthd	1955-03-21	rosa
+<br>birthd	xxxx-04-11	anna	
+<br>birthd	1972-04-20	gary
+<br>birthd	1931-04-27	joan
+<br>birthd	1957-04-27	mandy
+<br>birthd	1958-04-xx	harris-john-dave
+<br>birthd	1959-04-xx	frey-mike-------	
+<br>birthd	1956-05-01	luis-eduardo----	
+<br>birthd	xxxx-05-02	matt-wilson-----
+<br>birthd	1967-05-04	michelle-g------	
+<br>birthd	1963-05-06	jane-ma---------	
+<br>birthd	1972-05-14	anita-----------	72 (nwt)
+<br>birthd	1948-05-22	bobco-----------
+<br>birthd	1983-05-24	heather---------
+<br>birthd	1988-05-26	diego-alejandro-
+<br>birthd	1967-06-15	frederick s
+<br>birthd	1983-06-24	charmaine-------
+<br>birthd	1963-07-18?	richard-merrett-
+<br>birthd	XXXX-07-20?	richard-mahaffey		
+<br>birthd	2007-07-27	jaden------------	
+<br>birthd	1979-08-07	rhianna---------	
+<br>------	xxxx-08-27	elect-reg-form
+<br>birthd	1969-09-03	sharon-folley---
+<br>birthd	1969-09-11	vicky-wylde
+<br>birthd	xxxx-09-25	sally-----------
+<br>birthd	1972-09-26	tracey y -------	
+<br>birthd	1971-09-26	mike bradb------	
+<br>......	xxxx-10-05	any changes to ir list
+<br>birthd	1967-10-17	michelle-n------	
+<br>birthd	1964-10-17	thorne-catherine	1964?
+<br>birthd	1957-10-21	sofia-----------	
+<br>birthd	1976-10-25	lisa-h----------
+<br>birthd	1960-10-25	longden-karen---	1960
+<br>birthd	1967-10-27	andrea----------
+<br>birthd	1930-10-29	robin-----------	
+<br>birthd	1955-11-06	susie l---------	
+<br>birthd	1953-11-13	kathy-----------
+<br>birthd	1969-11-18?	long-rosie------
+<br>birthd	1964-11-18?	hartley-gillian-	
+<br>birthd	1957-11-20	gina-o----------
+<br>birthd	1967-11-20	darren-n--------
+<br>birthd	yyyy-11-20	colin-d---------
+<br>birthd	1972-11-23	kim h
+<br>birthd	1954-11-25?	lesley-ward-----
+<br>birthd	1986-11-26	katherine mcdonnell
+<br>birthd	1993-11-29	sophia-p--------
+<br>birthd	1991-12-03	young h---------	
+<br>birthd	1968-12-10	alison s
+<br>birthd	1961-12-11	tina b
+<br>birthd	1954-12-23	shapcot mike
+<br>birthd	1926-12-26	jane m father
+<br>birthd	1969-12-31	maria e
+<br>birthd	1972-12-x2	lisa b
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<h3 id="Food" style="color:Yellow">
+Food<a style="color:PowderBlue;" href="#top"> Top </a>
+</h3>
+<a style="color:PowderBlue;" href="#Food Weights and Measures"  > Food Weights</a>
+<table>
+<tr><td>date</td><td>breakfast</td><td>midday</td><td>evening</td><td>kcal<td>weight</td><td>surg
+<tr><td>----------
+<tr><td>2014-10-13</td><td>50gOats</td><td> 3crt 4mush grl Chl CanSard</td><td> 50gOats </td> <td>695</td>
+<tr><td>2014-10-14</td><td>50gOats</td><td> 3crt 4mush grl Chl CanSard</td> <td></td> <td>616</td>
+<tr><td>2014-10-15</td><td>50gOats</td><td> 3crt 4mush grl Chl CanSard</td><td> 50gOats </td><td>785</td>
+<tr><td>2014-10-16</td><td>50gOats</td><td> LargeEgg Rice 1garl 1chils</td><td> 2LargeBananas 2Onge</td> <td>645</td>
+<tr><td>2014-10-17</td><td>50gOats</td><td> ½canSalmon</td><td> canKidneyBeans 31stkSpag</td> <td>600</td>
+<tr><td>2014-10-18</td><td>50gOats</td><td> ½canSalmon 17stkSpag</td><td> 9"Banana Onge</td> <td>600</td>
+<tr><td>2014-10-19</td><td>50gOats</td><td>  tesco-chicken-caesar-salad</td><td> 8.6"Banana </td> <td>600</td>
+</table>
+<tr><td>-<em>649</em>------
+<hr>
+<table>
+<tr><td>2014-10-20</td><td>50gOats</td><td>canChickenSoup</td><td> 9"Banana Onge </td> <td>600</td>
+<tr><td>2014-10-21</td><td>50gOats</td><td>SainsGrkSal</td><td>canSard 16stkSpag</td> <td>600</td>
+<tr><td>2014-10-22</td><td>canChickenSoup</td><td>LargeEgg Rice 2chil 2garl</td><td>9"Banana</td> <td>600</td>
+<tr><td>2014-10-23</td><td>50gOats</td><td>SainsGrkSal</td><td>canKidneyBeans canAnchovies</td> <td>600</td>
+<tr><td>2014-10-24</td><td>Bananas</td><td>½canBakedBeans 17stkSpag</td><td>½canBakedBeans 8Olives</td> <td>600</td>
+<tr><td>2014-10-25</td><td>&frac13;canCornedB</td><td>SainsTomMozSal </td><td>SmokedMack BottleTonicWater</td> <td>600</td>
+<tr><td>2014-10-26</td><td>&frac13;canCornedB</td><td>SainsGrkSal </td><td>SmokedMack </td> <td>600</td>
+</table>
+<tr><td>-<em>600</em>------
+<hr>
+<table>
+<tr><td>2014-10-27</td><td>50gOats</td><td>canSard GlsTonW</td><td>SainsGrkSal GlsBittL </td> <td>561</td><td>18st07=118kg</td><td>115kg
+<tr><td>2014-10-28</td><td>50gOats</td><td>SainsGrkSal 2glassTonicW</td><td>canSard 2Tea</td> <td>563</td>
+<tr><td>2014-10-29</td><td>50gOats 2Tea</td><td>8"Banana LargeEgg</td><td>1RyeBread 36gCashews</td> <td>701</td>
+<tr><td>2014-10-30</td><td>50gOats Tea</td><td><em>diwali ogrady</em></td><td></td> <td>600</td>
+<tr><td>2014-10-31</td><td></td><td><em>Curry meal at Southall</em></td><td>SainsGrkSal</td> <td>600</td>
+<tr><td>2014-11-01</td><td>1SliceRye </td><td>50gOats</td><td>SainsTomMozSal 1SliceRye</td> <td>583</td>
+<tr><td>2014-11-02</td><td>SainsEggSal </td><td>50gOats ½glassTonicW</td><td>1SliceRye</td> <td>552</td>
+</table>
+<tr><td>-<em>594</em>------
+<hr>
+<table>
+<tr><td>2014-11-03</td><td>½CanHerring</td><td>50gOats ½CanHerring</td><td>Onge &frac15;SliceRye</td> <td>600</td><td>17st09=112kg
+<tr><td>2014-11-04</td><td>50gOats</td><td>&frac45;SliceRye Onge</td><td>SainsTomMozSal &frac58;SliceRye</td><td>592
+<tr><td>2014-11-05</td><td>50gOats Onge</td><td>CanChickenSoup</td><td>1SliceRye 4Olives<td>600
+<tr><td>2014-11-06</td><td>1SliceRye Onge</td><td>CanChicPeas Onge</td><td>1&frac38;SliceRye 2Olives Tea</td> <td>599
+<tr><td>2014-11-07</td><td><em>toastie salad</em></td><td></td><td>15%pitta</td><td>600</td>
+<tr><td>2014-11-08</td><td>CanSard 25%pitta</td><td><em>HamSalad</em></td><td>Cckl Mussl 2Tea</td><td>600</td>
+<tr><td>2014-11-09</td><td>50%pitta</td><td><em>CheeseSalad</em> Tea</td><td>CanChicPeas 50%pitta 3Tea</td><td>595
+<tr><td>2014-11-10</td><td></td><td><em>Ham2EggChips</em></td><td></td><td>697
+</table>
+<br>wk(8d)<em class="weekly">04</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">607</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">17st06</em>  (111kg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">03LB</em>
+<hr>
+<table>
+<tr><td>2014-11-11</td><td>1pitta</td><td>Salad</td><td>LargeEgg Orange 10%Pitta</td><td>535
+<tr><td>2014-11-12</td><td>50gOats</td><td>SainsGrkSal Tea</td><td>LargeEgg ½Pitta Tea</td><td>528
+<tr><td>2014-11-13</td><td>Orange</td><td>CanChicPeas ½Pitta Tea</td><td>LidlCrayf CanAchov ½Pitta Tea</td><td>580
+<tr><td>2014-11-14</td><td></td><td><em>BrisketBeef Noodles</em></td><td></td><td>600<td></td><td>109kg
+<tr><td>2014-11-15</td><td>½Pitta</td><td>8"banana LargeEgg Orange Tea</td><td>100gPrawns ½Pitta 5mlOil 6Olives Tea</td><td>583
+<tr><td>2014-11-16</td><td>LargeEgg ½Pitta Tea</td><td><em>ChickenBreast MashedPotatoes</em></td><td></td><td>713
+</table>
+<br>wk(6d)<em class="weekly">05</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">590</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">17st07</em>  (111kg)&nbsp;&nbsp;&nbsp;&nbsp;<em class="weekly">weight gain</em> = 01LB
+<hr>
+<table>
+<tr><td>2014-11-17</td><td>Orange</td><td>LargeEgg ½Pitta 5mlOil</td><td>2*8"Bananas Orange Tea</td><td>572
+<tr><td>2014-11-18</td><td>Orange</td><td>SainsEggSalad Tea</td><td>½CanSalmon 1Rye Tea</td><td>594
+<tr><td>2014-11-19</td><td>½CanSalmon 1Rye</td><td>Orange</td><td>LargeEgg 1Rye 125gBlueberries Tea</td><td>600
+<tr><td>2014-11-20</td><td>50gBasm&amp;Len ChilGarl Tea</td><td>CanSardines</td><td>LargeEgg 1Rye</td><td>560
+<tr><td>2014-11-21</td><td>50gOats</td><td>CanChicPeas 5mlOil</td><td>9"Banana ½Rye 2Tea</td><td>598
+<tr><td>2014-11-22</td><td></td><td>WaitrPrawnSalad Tea</td><td>LargeEgg 1Rye Tea BittL</td><td>575
+<tr><td>2014-11-23</td><td></td><td>CanChicPeas 5mlOil</td><td>10"Banana Plum Egg 1Rye Tea</td><td>581
+</table>
+<br>wk<em class="weekly">06</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">583</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">16st11</em>  (107kg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">10LB</em>
+<hr>
+<table>
+<tr><td>2014.11.24</td><td></td><td><em>BisketBeef Noodles</em></td><td></td><td>540
+<tr><td>2014.11.25</td><td>8"Banana Tea</td><td></td><td>200gMussels SainsGrkSal Plum</td><td>526
+<tr><td>2014.11.26</td><td></td><td><em>WetherSalmonVegRoastPot</em></td><td></td><td>1224
+<tr><td>2014.11.27</td><td></td><td>SainsGrkSal Tea</td><td>8"Banana 1Rye</td><td>396
+<tr><td>2014.11.28</td><td>CanRedKidn 5mlOil Tea</td><td></td><td>155gPicklMussels Egg</td><td>436
+<tr><td>2014.12.29</td><td></td><td>CanChicPeas 5mlOil Tea</td><td>155gPicklCockles <em>FayeBuffet</em></td><td>943
+<tr><td>2014.11.30</td><td></td><td>Egg</td><td>2Plums</td><td>134
+</table>
+<br>wk<em class="weekly">07</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">600</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">16st07</em>  (105kg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">04LB</em>
+<hr>
+<table>
+<tr><td>2014.12.01</td><td>2Eggs 2Plums</td><td>7½"+8"Bananas</td><td>SainsGrkSal glsBittL</td><td>592
+<tr><td>2014.12.02</td><td>CanChicPeas 5mlOil</td><td>SainsGrkSal Tea</td><td>8"Banana &frac34;Rye</td><td>689
+<tr><td>2014.12.03</td><td></td><td></td><td><em>HarvSalmonBasmChil 2Salads</em></td><td>1085
+<tr><td>2014.12.04</td><td>Orange</td><td>Plum</td><td>Egg Cracker Plum</td><td>243
+<tr><td>2014.12.05</td><td>CanSardines 5mlOil</td><td>Egg Orange</td><td>SainsGrkSal</td><td>549
+<tr><td>2014.12.06</td><td>CanRedKidn 5mOil</td><td>SainsGrkSal Tea</td><td>Apple Egg Orange</td><td>698
+<tr><td>2014.12.07</td><td>10"Banana</td><td>PicklCockles</td><td>Apple</td><td>341
+</table>
+<br>wk<em class="weekly">08</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">600</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">16st04</em>  (104kg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">03LB</em>
+<hr>
+<table>
+<tr><td>2014.11.08</td><td>10"Banana</td><td>SainsGrkSal</td><td>50mgLentils 5mlOil Apple BittLem</td><td>593
+<tr><td>2014.12.09</td><td>CanChicPeas 5mlOil Tea</td><td>10"Banana</td><td>PicklMussels Apple</td><td>576
+<tr><td>2014.12.10</td><td>CanSardines</td><td>Orange Plum</td><td>SainsGrkSal Egg</td><td>576
+<tr><td>2014.12.11</td><td>CanChicPeas Oil</td><td>Orange Plum</td><td>evening</td><td>596
+<tr><td>2014.12.12</td><td>CanRedKidn</td><td>Leek Oil</td><td>Banana Egg</td><td>594
+<tr><td>2014.12.13</td><td></td><td></td><td><em>Frankie and Bennys</em></td><td>1361
+<tr><td>2014.12.14</td><td></td><td></td><td></td><td>0
+</table>
+<br>wk<em class="weekly">09</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">614</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">16st00</em>  (102kg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">04LB</em>
+<hr>
+<table>
+<tr><td>2014.12.15</td><td>Banana</td><td>2Oranges</td><td>WaitrPrawnSal</td><td>587
+<tr><td>2014.12.16</td><td>Banana</td><td>CanRedKidn</td><td>SainsGrkSal</td><td>578
+<tr><td>2014.12.17</td><td>&frac12;CanHerring Yoghurt</td><td>RedLentils Oil</td><td>Apple Yoghurt Olives BittL</td><td>577
+<tr><td>2014.12.18</td><td>&frac12;CanHerring Tea</td><td>Apple Egg Tea</td><td>Prawns LidlSal</td><td>587
+<tr><td>2014.12.19</td><td>Mussels LidlSal</td><td>Egg LidlSal Banana</td><td>Mussels</td><td>579
+<tr><td>2014.12.20</td><td>Banana &frac12;CanSalmon</td><td></td><td>&frac12;CanSalmon LdlSal Oil BittL DietPepsi</td><td>563
+<tr><td>2014.12.21</td><td>Banana</td><td>CanVegSoup</td><td>Mussels LidlSal</td><td>600
+</table>
+<br>wk<em class="weekly">10</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">582</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">15st11</em>  (100)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">03LB
+	</em>
+<hr>
+<table>
+<tr><td>2014.12.22</td><td>CanSardines Tea</td><td>CanVegSoup Cheese</td><td>Egg Orange</td><td>600 
+<tr><td>2014.12.23</td><td>Herring Orange Tea</td><td>Cheese Herring</td><td>Orange Cashews</td><td>600
+<tr><td>2014.12.24</td><td>Orange Salad</td><td>Orange</td><td>Salmon Salad Orange</td><td>581
+<tr><td>2014.12.25</td><td>Salmon Salad</td><td>Orange RedKidn</td><td>RedKidn Salad</td><td>591
+<tr><td>2014.12.26</td><td>Banana Orange</td><td>Salmon Salad</td><td>Salmon Salad</td><td>588
+<tr><td>2014.12.27</td><td>Banana Orange</td><td>ChicPeas Salad</td><td>Herring Tomatoes</td><td>599
+<tr><td>2014.12.28</td><td>ChicPeas Salad Orange</td><td>Herring</td><td>Tomatoes Egg </td><td>600
+</table>
+<br>wk<em class="weekly">11</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">594</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">15st06</em>  (098kg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">05LB</em>
+<hr>
+<table>
+<tr><td>2014.12.29</td><td>Banana Orange RedLent Oil HerringRoe Banana</td><td>601
+<tr><td>2014.12.30</td><td>ChicPeas Salad Cockles Mushrooms Orange HerringRoe  Egg Salad Mushrooms Orange</td><td>600
+<tr><td>2014.12.31</td><td>Roe Orange ChicPeas Mushrooms Roe Orange  <em> PeterI-party</em></td><td>722
+<tr><td>2015.01.01</td><td>Roe Banana SainsGrkSal Orange Mussels</td><td>547
+<tr><td>2015.01.02</td><td>ChicPeas Roe Tomatoes Silverskins Olives Mushroom Banana Plums Cheese Yoghurt</td><td>603
+<tr><td>2015.01.03</td><td>Plums  Cockles  <em>lamb biryani</em></td><td>776
+<tr><td>2015.01.04</td><td><em>pret-a-manger-sandwich</em></td><td>410
+</table>
+<br>wk<em class="weekly">12</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">608</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">15st08</em>  (099kg)&nbsp;&nbsp;&nbsp;&nbsp;<em class="weekly">weight gain</em> = 02LB
+<hr>
+<table>
+<tr><td>2015.02.16</td>
+<tr><td>2015.02.17</td>
+<tr><td>2015.02.18</td>
+<tr><td>2015.02.19</td><td>canSardines GreekSalad MarinatedHerring Orange</td><td>669
+<tr><td>2015.02.20</td><td>Orange CanSard 4Slices GreekSalad</td><td>717
+<tr><td>2015.02.21</td><td>2Oranges CanSard 6Slices Oil</td><td>775
+<tr><td>2015.02.22</td><td>Orange <em>WatersEdgeCarvery</em>
+</table>
+<br>wk<em class="weekly">19</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">xxx</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">14st10</em>  (094kg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">12LB(7weeks),i.e 1.7LB per week</em>
+<hr>
+<table>
+<tr><td>2015.02.23</td><td>Orange 2Slices Oil Egg HerringRoe GreekSalad</td><td>577
+<tr><td>2015.02.24</td><td>70gOats Egg 2Oranges HerringRoe 2Bananas</td><td>676
+<tr><td>2015.02.25</td><td>CanSard 4Slices 2Bananas </td><td>704
+<tr><td>2015.02.26</td><td>Egg Banana GreekSalad Orange 1Slice Oil HerringRoe</td><td>592
+<tr><td>2015.02.27</td><td>CanSard 4Slices 2Bananas</td><td>703
+<tr><td>2015.02.28</td><td>HerringRoe 50gOats <em> HarvesterRuislipBreakfast</em></td><td>xxx
+<tr><td>2015.03.01</td><td>ParsonsMussels HerringRoe PintWhlMilk</td><td>610
+</table>
+<br>wk<em class="weekly">20</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">xxx</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">14st05</em>  (091kg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">05LB</em>
+<hr>
+<table>
+<tr><td>2015.03.02</td><td>HerringRoe 3Oranges GreekSalad CanRedKidn</td><td>580
+<tr><td>2015.03.03</td><td>2HerringRoe 3Oranges 2Bananas ParsonsCockles</td><td>610
+<tr><td>2015.03.04</td><td>Egg 2Oranges 50gOats HerringRoe 2Bananas ParsonsMussels</td><td>761
+<tr><td>2015.03.05</td><td>Egg 2Oranges HerringRoe Banana &frac12;CanSard 50gOats</td><td>585
+<tr><td>2015.03.06</td><td>HerringRoe 2Oranges <em>Mussels Cockles JelliedEels 1ptBeer</em></td><td>xxx
+<tr><td>2015.03.07</td><td>2HerringRoes 2Oranges Banana <em>HamCheeseBaguette</em> &frac12;CanSard <em>HCP AGM party</em></td><td>xxx
+<tr><td>2015.03.08</td><td><em>CrownNortholtBreakfast</em></td><td>xxx
+</table>
+<br>wk<em class="weekly">21</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">xxx</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">14st05</em>  (091kg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">00LB</em>
+<hr>
+<table>
+<tr><td>2015.03.09</td><td>Egg 3Oranges 2Bananas GreekSalad HerringRoe</td><td>582
+<tr><td>2015.03.10</td><td>&frac12;CanSard 50gOats Orange</td><td>xxx
+<tr><td>2015.03.11</td><td></td><td>xxx
+<tr><td>2015.03.12</td><td>2Eggs 3Oranges CodRoe Banana GreekSalad</td><td>599
+<tr><td>2015.03.13</td><td><em>Thames in Brentford</em></td><td>xxx
+<tr><td>2015.03.14</td><td>2Bananas 2Oranges HerringRoe &frac12;CanSalmon Egg</td><td>598
+<tr><td>2015.03.15</td><td>&frac12;CanSalmon Orange Banana 1PittaButter HotDogs</td><td>xxx
+</table>
+<br>wk<em class="weekly">22</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">xxx</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">14st05</em>  (091kg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">00LB</em>
+<hr>
+<hr>
+
+<h3 id="Calories consumed" style="color:Yellow">
+Calories consumed
+</h3>
+
+<!--
+<table>
+<tr><td>2015.03.02</td><td>q</td>
+<tr><td>2015.03.03</td><td>q</td>
+<tr><td>2015.03.04</td><td>q</td>
+<tr><td>2015.03.05</td><td>q</td>
+<tr><td>2015.03.06</td><td>q</td>
+<tr><td>2015.03.07</td><td>q</td>
+<tr><td>2015.03.08</td><td>q</td>
+</table>
+<br>wk<em class="weekly">nn</em>&nbsp;&nbsp;&nbsp;&nbsp;average kcal per day = <em class="weekly">xxx</em>&nbsp;&nbsp;&nbsp;&nbsp;weight = <em class="weekly">zzzzzz</em>  (qqqkg)&nbsp;&nbsp;&nbsp;&nbsp;weight loss = <em class="weekly">**LB</em>
+<hr>
+-->
+</table>
+<hr>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="Calorie Counter" style="color:Yellow">
+Calorie Counter
+</h3>
+<table>
+<tr><td>Lentils  </td> <td>3417  
+<tr><td>----------
+<tr><td>CashewNuts  </td> <td>5737
+<tr><td>----------
+<tr><td>Oats  </td> <td>3852  </td>
+<tr><td>Brown Rice  </td> <td>3621  
+<tr><td>WholewhSpag </td> <td>3400  
+<tr><td>Wholewh Bread </td> <td>2170  
+<tr><td>Wholewh Bread Roll </td> <td>2440  
+<tr><td>Crusty White Roll</td> <td>2620  
+<tr><td>----------
+<tr><td>CarrotsRaw  </td> <td>340  
+<tr><td>ParsnipsRaw  </td> <td>640  
+<tr><td>MushroomsRaw  </td> <td>70  
+<tr><td>MushroomSteamed  </td> <td>110  
+<tr><td>Frozen Peas  </td> <td>700  
+<tr><td>Stuffed Olives</td> <td>1400  
+<tr><td>----------
+<tr><td>LeeksSteamed  </td> <td>210  
+<tr><td>LeeksRaw  </td> <td>220  
+<tr><td>Cherry Tomatoes  </td> <td>220  
+<tr><td>Standard Tomatoes  </td> <td>140  
+<tr><td>Oakl BabyLeafRocktSal</td> <td>1110  
+<tr><td>----------
+<tr><td>BananasPeeled  </td> <td>1030  
+<tr><td>apples(edible part)  </td>   <td>510
+<tr><td>apples granny sm(edible part)  </td>   <td>450
+<tr><td>apples goldend(edible part)  </td>   <td>430
+<tr><td>apples cox's(edible part)  </td>   <td>460
+<tr><td>apples(edible part)  </td>   <td>510
+<tr><td>OrangesPeeled  </td>   <td>360
+<tr><td>PlumsWithoutStone  </td>   <td>360
+<tr><td>GrapesRedSeedless  </td>   <td>670
+<tr><td>----------
+<tr><td>Mussels  </td> <td>860  
+<tr><td>Mussels(Sains)  </td> <td>1040  
+<tr><td>Mussels(ParsonsPikl)  </td> <td>973  
+<tr><td>Cockles(ParsonsPikl)  </td> <td>820  
+<tr><td>Crayfish  </td> <td>820  
+<tr><td>Salmon(Lidl)  </td> <td>2610  
+<tr><td>SmokMack </td> <td>3033  
+<tr><td>----------
+<tr><td>Egg  </td> <td>1480  
+<tr><td>Pork steaks  </td> <td>2250  
+<tr><td>prem CornB  </td> <td>2160  
+<tr><td>ord CornB  </td> <td>2300  
+<tr><td>----------
+<tr><td>Olive Oil  </td> <td>8210  
+<tr><td>Butter</td> <td>7440  
+<tr><td>Balsamic dressing</td> <td>1520  
+</table>
+<table>
+<tr><td>banana  </td> <td>x"</td>  <td>(x-7)*18+94</td><td>len=(cal-94)/
+</table>
+
+
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="Pulse Prices" style="color:Yellow">
+Pulse Prices
+</h3>
+<table>
+<tr><td>2014-09-15  </td><td>red kidney beans  </td> <td>AldiHoun  </td> <td>240g  </td> <td>#0.23  </td> <td>#0.96/kg  
+<tr><td>2014-09-16  </td><td>split red lentils  </td><td>nextIcel</td> <td>1kg </td><td>#1.59 </td><td>#1.59/kg  </td> <td>  </td>
+<tr><td>2014-09-19  </td><td>oily toor dal  </td> <td>Sayona  </td> <td>500g  </td> <td>#1.29  </td> <td>#2.58/kg  
+</table>
+
+<h3 id="Rice Prices" style="color:Yellow">
+Rice Prices
+</h3>
+<table>
+<tr><td>2014-09-16      </td><td>brown basmati  </td><td>nextIcel</td> <td>2kg </td><td>#3.99 </td><td>#1.99/kg  </td>
+<tr><td>2014-09-17  </td><td>brown basmati  </td> <td>SainsWE  </td> <td>1kg  </td> <td>#1.80  </td> <td>#1.80/kg  
+</table>
+
+<h3 id="Wholemeal Bread Prices" style="color:Yellow">
+Wholemeal Bread Prices
+</h3>
+<table>
+<tr><td>2014-09-24  </td><td>Basics Sliced  </td> <td>SainsWE  </td> <td>800g  </td> <td>#0.55  </td> <td>#0.69/kg  
+</table>
+
+<h3 id="Oats Prices" style="color:Yellow">
+Oats Prices
+</h3>
+<table>
+<tr><td>2014-09-24  </td><td>  </td> <td>TescoEBdy  </td> <td>1kg  </td> <td>#0.75  </td> <td>#0.75/kg  
+<tr><td>2014-10-07  </td><td>  </td> <td>LidlWE  </td> <td>500g  </td> <td>#0.39  </td> <td>#0.78/kg  
+</table>
+
+<h3 id="Rye Bread Prices" style="color:Yellow">
+Rye Bread Prices
+</h3>
+<table>
+<tr><td>2014-09-20  </td><td>German Rye  </td> <td>LidlWE  </td> <td>500g  </td> <td>#0.69  </td> <td>#1.38/kg  
+</table>
+
+<h3 id="Cheese Prices" style="color:Yellow">
+Cheese Prices
+</h3>
+<table>
+<tr><td>2014-09-16</td><td>halloumi             </td><td>nextIcel</td> <td>225g</td><td>#1.99 </td><td>#8.84/kg  </td> <td>  </td>
+<tr><td>2014-09-20  </td><td>halloumi  </td> <td>LidlWE  </td> <td>225g  </td> <td>#1.65  </td> <td>#7.33/kg  
+<tr><td>2014-09-20  </td><td>Maure Stilton  </td> <td>LidlWE  </td> <td>220g  </td> <td>#1.69  </td> <td>#7.68/kg  
+</table>
+
+<h3 id="Oil Prices" style="color:Yellow">
+Oil Prices
+</h3>
+<table>
+<tr><td>2014-09-20  </td><td>primadonna olive oil  </td> <td>Lidl  </td> <td>750ml  </td> <td>#1.99  </td> <td>#2.65/L  
+</table>
+</h3>
+</table>
+
+<h3 id="Yeast Extract Prices" style="color:Yellow">
+Yeast Extract Prices
+</h3>
+<table>
+<tr><td>2014-09-24  </td><td>  </td> <td>TescoEBdy  </td> <td>225g  </td> <td>#1.89  </td> <td>#8.40/kg  
+</table>
+
+<h3 id="Tea Prices" style="color:Yellow">
+Tea Prices
+</h3>
+<table>
+<tr><td>2014-09-17  </td><td>clipper green tbags  </td> <td>SainsWE  </td> <td>50g  </td> <td>#1.30  </td> <td>#26.00/kg  
+<tr><td>2014-10-07  </td><td>dogadan green tbags  </td> <td>BroadwayWE  </td> <td>35g  </td> <td>#1.19  </td> <td>#34.00/kg  
+<tr><td>2014-10-15  </td><td>palanquin redbush & cardamon  </td> <td>CudiWE  </td> <td>100g  </td> <td>#1.89  </td> <td>#18.90/kg  
+</table>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="Nuts Prices" style="color:Yellow">
+Nuts Prices
+</h3>
+<table>
+<tr><td>2014-09-19  </td><td>fudco almonds  </td> <td>Sayona  </td> <td>700g  </td> <td>#5.99  </td> <td>#8.56/kg  
+<tr><td>2014-09-19  </td><td>fudco almonds  </td> <td>SainsWE  </td> <td>750g  </td> <td>#7.00  </td> <td>#9.33/kg  
+<tr><td>2014-09-22  </td><td>almonds  </td> <td>LidlWE  </td> <td>  </td> <td>  </td> <td>#9.00/kg  
+<tr><td>2014-09-19  </td><td>fudco cashews  </td> <td>Sayona  </td> <td>500g  </td> <td>#3.99  </td> <td>#7.98/kg  
+<tr><td>2014-09-19  </td><td>fudco cashews  </td> <td>SainsWE  </td> <td>250g  </td> <td>#3.20  </td> <td>#12.80/kg  
+<tr><td>2014-09-22  </td><td>cashews  </td> <td>LidlWE  </td> <td>  </td> <td>  </td> <td>#8.00/kg  
+<tr><td>2014-09-22  </td><td>pistaccios  </td> <td>LidlWE  </td> <td>  </td> <td>  </td> <td>#8.00/kg  
+<tr><td>  </td><td>  </td> <td>  </td> <td>  </td> <td>  </td>
+<tr><td>  </td><td>  </td> <td>  </td> <td>  </td> <td>  </td>
+</table>
+
+<h3 id="Potato Prices" style="color:Yellow">
+Potato Prices
+</h3>
+<table>
+<tr><td>2014-09-26  </td><td>charlotte potatos  </td> <td>SainsWE  </td> <td>1kg  </td> <td>#1.45  </td> <td>#1.45/kg  
+</table>
+
+<h3 id="Leeks Prices" style="color:Yellow">
+Leeks Prices
+</h3>
+<table>
+<tr><td>2014-09-26  </td><td>Leeks loose  </td> <td>SainsWE  </td> <td>335g  </td> <td>#0.90  </td> <td>#2.70/kg  
+</table>
+
+<h3 id="Carrot Prices" style="color:Yellow">
+Carrot Prices
+</h3>
+<table>
+<tr><td>2014-09-26  </td><td>Carrots loose  </td> <td>SainsWE  </td> <td>310g  </td> <td>#0.25  </td> <td>#0.80/kg  
+</table>
+
+<h3 id="Mushroom Prices" style="color:Yellow">
+Mushroom Prices
+</h3>
+<table>
+<tr><td>2014-10-10  </td><td>White Closed  </td> <td>SainsWE  </td> <td>150g  </td> <td>#0.41  </td> <td>#2.70/kg  
+</table>
+
+<h3 id="Grape Prices" style="color:Yellow">
+Grape Prices
+</h3>
+<table>
+<tr><td>2014-09-26  </td><td>Grapes loose  </td> <td>SainsWE  </td> <td>585g  </td> <td>#2.05  </td> <td>#3.50/kg  
+<tr><td>2014-10-11  </td><td>Grapes red  </td> <td>LidlWE  </td> <td>500g  </td> <td>#1.39  </td> <td>#2.78/kg  
+</table>
+
+<h3 id="Olive Prices" style="color:Yellow">
+Olive Prices
+</h3>
+<table>
+<tr><td>2014-09-26  </td><td>Pitted Green Olives  </td> <td>LidlWE  </td> <td>490g  </td> <td>#1.99  </td> <td>#4.06/kg  
+</table>
+
+<h3 id="Egg Prices" style="color:Yellow">
+Egg Prices
+</h3>
+<table>
+<tr><td>2014-10-11  </td><td>Large Free Range  </td> <td>LidlWE  </td> <td>6  </td> <td>#0.99  </td> <td>#0.165/item  
+</table>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="Tracer" style="color:Yellow">
+Tracer
+</h3>
+
+<h3 id="TicketSell" style="color:Yellow">
+TicketSell
+</h3>
+
+<h3 id="Teaching" style="color:Yellow">
+Teaching
+</h3>
+
+<h3 id="Android" style="color:Yellow">
+Android
+</h3>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>
+
+<h3 id="HowNHSfunded" style="color:Yellow">
+HowNHSfunded
+</h3>
+
+<h3 id="CWr" style="color:Yellow">
+CWr
+</h3>
+
+<h3 id="LRw " style="color:Yellow">
+LRw
+
+</h3>
+
+<h3 id="KHl" style="color:Yellow">
+KHl
+</h3>
+
+<h3 id="GPn" style="color:Yellow">
+GPn
+</h3>
+
+    <a style="color:PowderBlue;" href="#top"> Top </a>

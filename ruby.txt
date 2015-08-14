@@ -1,0 +1,638 @@
+Ruby
+====
+# encoding: UTF-8
+# coding: UTF-8
+# -*- coding: UTF-8 -*-
+if elsif else end
+
+Ruby Regex
+----------
+/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i 	full regex
+/ 	start of regex
+\A 	match start of a string
+[\w+\-.]+ 	at least one word character, plus, hyphen, or dot
+@ 	literal “at sign”
+[a-z\d\-.]+ 	at least one letter, digit, hyphen, or dot
+\. 	literal dot
+[a-z]+ 	at least one letter
+\z 	match end of a string
+/ 	end of regex
+i 	case-insensitive
+
+
+iRuby
+-----
+>> first_name = "Michael"   
+>> last_name = "Hartl"
+>> first_name + " " + last_name     => "Michael Hartl"
+
+>> puts "foo"     # put string
+foo
+=> nil
+
+>> print "foo"    # print string (same as puts, but without the newline)
+foo=> nil
+>> print "foo\n"          # Same as puts "foo"
+foo                       => nil
+
+>> "foobar".length        => 6      # Passing the "length" message to a string
+>> "foobar".empty?        => false
+>> "".empty?              => true
+
+Note the question mark at the end of the empty? method. This is a Ruby convention indicating that the return value is boolean: true or false. Booleans are especially useful for control flow:
+
+>> s = "foobar"
+>> if s.empty?
+>>   "The string is empty"
+>> else
+>>   "The string is nonempty"
+>> end                    => "The string is nonempty"
+
+>> if s.nil?
+>>   "The variable is nil"
+>> elsif s.empty?
+>>   "The string is empty"
+>> elsif s.include?("foo")
+>>   "The string includes 'foo'"
+>> end                    => "The string includes 'foo'"
+
+>> x = "foo"              => "foo"
+>> y = ""                  => ""
+>> puts "Both strings are empty" if x.empty? && y.empty?        => nil
+>> puts "One of the strings is empty" if x.empty? || y.empty?
+"One of the strings is empty"                                    => nil
+>> puts "x is not empty" if !x.empty?
+"x is not empty"                                                 => nil
+
+Since everything in Ruby is an object, it follows that nil is an object, so it too can respond to methods. One example is the to_s method that can convert virtually any object to a string:
+
+>> nil.to_s
+=> ""
+
+This certainly appears to be an empty string, as we can verify by chaining the messages we pass to nil:
+
+>> nil.empty?
+NoMethodError: undefined method `empty?' for nil:NilClass
+>> nil.to_s.empty?      # Message chaining
+=> true
+
+>> string = "foobar"
+>> puts "The string '#{string}' is nonempty." unless string.empty?
+The string 'foobar' is nonempty.
+=> nil
+
+It’s worth noting that the nil object is special, in that it is the only Ruby object that is false in a boolean context, apart from false itself. We can see this using !! (read “bang bang”), which negates an object twice, thereby coercing it to its boolean value:
+
+>> !!nil                               => false
+
+In particular, all other Ruby objects are true, even 0:
+
+>> !!0                                 => true
+
+>> def string_message(str = '')
+>>   if str.empty?
+>>     "It's an empty string!"
+>>   else
+>>     "The string is nonempty."
+>>   end
+>> end
+=> :string_message
+>> puts string_message("foobar")       The string is nonempty.
+>> puts string_message("")             It's an empty string!
+>> puts string_message                 It's an empty string!
+
+>> def string_message(str = '')
+>>   return "It's an empty string!" if str.empty?
+>>   return "The string is nonempty."
+>> end
+
+>>  "foo bar     baz".split     # Split a string into a three-element array.
+=> ["foo", "bar", "baz"]
+>> "fooxbarxbazx".split('x')
+=> ["foo", "bar", "baz"]
+>> a = [42, 8, 17]
+=> [42, 8, 17]
+>> a[2]
+=> 17
+>> a[-1]              # Indice
+=> 17
+
+array methods
+-------------
+>> x = a.length       # Like strings, arrays respond to the 'length' method.
+=> 3
+>> x == 3
+=> true
+=> [42, 8, 17]
+>> a.empty?
+=> false
+>> a.include?(42)
+=> true
+>> a.sort
+=> [8, 17, 42]
+>> a.reverse
+=> [17, 8, 42]
+>> a.shuffle
+=> [17, 42, 8]
+>> a
+=> [42, 8, 17]
+
+Note that none of the methods above changes a itself. To mutate the array, use the corresponding “bang” methods (so-called because the exclamation point is usually pronounced “bang” in this context):
+
+>> a
+=> [42, 8, 17]
+>> a.sort!
+=> [8, 17, 42]
+>> a
+=> [8, 17, 42]
+
+You can also add to arrays with the push method or its equivalent operator, <<:
+
+>> a.push(6)                  # Pushing 6 onto an array
+=> [42, 8, 17, 6]
+>> a << 7                     # Pushing 7 onto an array
+=> [42, 8, 17, 6, 7]
+>> a << "foo" << "bar"        # Chaining array pushes
+=> [42, 8, 17, 6, 7, "foo", "bar"]
+
+This last example shows that you can chain pushes together, and also that, unlike arrays in many other languages, Ruby arrays can contain a mixture of different types (in this case, integers and strings).
+
+Before we saw split convert a string to an array. We can also go the other way with the join method:
+
+>> a
+=> [42, 8, 17, 7, "foo", "bar"]
+>> a.join                       # Join on nothing.
+=> "428177foobar"
+>> a.join(', ')                 # Join on comma-space.
+=> "42, 8, 17, 7, foo, bar"
+
+Closely related to arrays are ranges, which can probably most easily be understood by converting them to arrays using the to_a method:
+
+>> 0..9
+=> 0..9
+>> 0..9.to_a              # Oops, call to_a on 9.
+NoMethodError: undefined method `to_a' for 9:Fixnum
+>> (0..9).to_a            # Use parentheses to call to_a on the range.
+=> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+Though 0..9 is a valid range, the second expression above shows that we need to add parentheses to call a method on it.
+
+Ranges are useful for pulling out array elements:
+
+>> a = %w[foo bar baz quux]         # Use %w to make a string array.
+=> ["foo", "bar", "baz", "quux"]
+>> a[0..2]
+=> ["foo", "bar", "baz"]
+
+A particularly useful trick is to use the index -1 at the end of the range to select every element from the starting point to the end of the array without explicitly having to use the array’s length:
+
+>> a = (0..9).to_a
+=> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>> a[2..(a.length-1)]               # Explicitly use the array's length.
+=> [2, 3, 4, 5, 6, 7, 8, 9]
+>> a[2..-1]                         # Use the index -1 trick.
+=> [2, 3, 4, 5, 6, 7, 8, 9]
+
+Ranges also work with characters:
+
+>> ('a'..'e').to_a
+=> ["a", "b", "c", "d", "e"]
+
+
+Rails
+=====
+ 
+Rails CLI
+---------
+$ gem update
+$ gem -v
+
+
+$ rails new (directory to be created and filled)
+$ rails generate scaffold User name:string email:string
+$ rails generate controller StaticPages home help
+$ rails generate controller Users home help                  # creates files app/   controllers/              users_controller.rb
+                                                                           app/   views/                    users/mew.html.erb
+                                                                           app/   helpers/                  users_helper.rb
+                                                                           app/   assets/      javascripts/ users.js.coffee
+                                                                           app/   assets/      stylesheets/ users.css.scss
+                                                                           test/  controllers/              users_controller_test.rb
+                                                                           test/  helpers/                  users_helper_test.rb
+$ rails generate model User name:string email:string         # creates files db/    migrate/                  nnnnn_create_users.rb
+                                                                           app/   models/                   user.rb
+                                                                           test/  models/                   user_test.rb
+                                                                           test/  fixtures/                 user.yml
+$ rails generate migration add_index_to_users_email
+$ rails generate migration add_password_digest_to_users password_digest:string
+If for any reason something went wrong, you can always reset the database as follows:
+   $ rm -f development.sqlite3 at the command line to remove the database. (We’ll learn a more in Chapter 7.)
+   Re-run the migrations using 
+   $ bundle exec rake db:migrate.
+$ rails server --environment production
+If you view your app running in production, it won’t work without a production database, which we can create by running
+   rake          db:migrate in production:
+   $ bundle exec rake db:migrate RAILS_ENV=production
+
+
+
+Rails console
+-------------
+>> Rails.env                            => "development"
+>> Rails.env.development?               => true
+>> Rails.env.test?                      => false
+>> first_name = "Michael"   
+>> "#{first_name} Hartl"                => "Michael Hartl"
+>> last_name = "Hartl"
+>> "#{first_name} #{last_name}"         => "Michael Hartl"       # The equivalent interpolation
+>> user.errors.full_messages
+>> user.save
+>> %w[ string1 string2]                 => [ "string1", "string2"]
+>> addresses =%w[ addr1 addr2 addr3 ]   => [ "addr1", "addr2", "addr3" ]
+>> addresses.each do |address|
+?>   puts address
+>> end
+addr1
+addr2
+addr3
+$ rails console test
+Loading test environment
+>> Rails.env                            => "test"
+>> Rails.env.test?                      => true
+
+
+Once
+----
+gem install bundler
+gem install rails -v 4.2.2
+gem install rails -v 4.1.8
+
+For new project
+---------------
+rails new <directory to be created and filled>
+rails _4.2.2_(say) new <directory to be created and filled>
+edit Gemfile to specify rails, '4.1.8'
+
+bundle install
+bundle install --without production
+git init
+edit .gitignore to add /*~ /*new /*old /*.swp
+mv README.rdoc README.md
+git add --all
+git commit -m "Changed .gitignore, README to .md, 1st commit"
+rails generate scaffold, controllers, models
+git remote add bitbucket git@bitbucket.org:<username>/<appname>.git
+git remote add github https://github.com/<username>/<appname>.git
+git push -u origin --all # pushes up the repo and its refs for the first time
+bundle exec rake db:migrate
+(bundle exec rake db:rollback)
+rails console --sandbox
+user = User.new(name: "          ", email: "        ")     # user = User.create(... also does the save
+user.valid?
+user.save                                                 
+(user.destroy)
+User.find(3)
+User.find_by(email: "          ")
+User.first
+User.all
+user.email
+user.email = "                 "
+user.reload.email
+user.email = "            "
+user.save
+user.email
+user.created_at
+user.updated_at
+user.update_attributes(name: "           ", email: "         ")
+user.update_attribute(
+rails generate migration add_index_to_users_email
+class AddIndexToUsersEmail < ActiveRecord::Migration
+  def change
+    add_index :users, :email, unique: true
+  end
+end
+
+
+
+
+rails server -b $IP -p $PORT                               # on cloud9
+rails server                                               # on local server
+edit README.md OR .rdoc
+git add -A
+git commit -m "message"
+heroku create
+git push heroku master
+in browser, see xxxx-yyyy-nnnn.herokuapp.com
+if ok, 
+heroku rename <new name>
+
+to edit a project
+-----------------
+$ edit Gemfile                                               # if necessary
+$ bundle install                                             # if Gemfile has changed
+$ git checkout master
+$ git checkout -b <branch-name>
+edit files
+$ bundle exec rake test
+$ git add --all
+$ git commit -m "message"
+$ git branch                                                 # to check that we are on master. If not, $ git checkout master
+$ git merge <branch-name>
+$ git push -u github master
+$ git push -u heroku master                                 # then, in browser, see <appname>.herokuapp.com
+$ heroku run rake db:migrate
+$ git branch -d <branch-name>                               # deletes branch after it has been merged
+
+
+
+Undoing things
+---------------
+  ($ rails generate controller StaticPages home help)
+  $ rails destroy  controller StaticPages home help
+  ($ rails generate model User name:string email:sting)
+  $ rails destroy model User
+  ($ bundle exec rake db:migrate)
+  $ bundle exec rake db:rollback
+  $ bundle exec rake db:migrate VERSION=0
+
+
+ad hoc
+------
+$ bundle exec rake -T
+$ bundle exec rake -T db
+$ rails console
+>> first_user = User.first
+>> first_user.microposts
+>> micropost = first_user.microposts.first    # Micropost.first would also work.
+>> micropost.user
+>> exit
+$ heroku logs
+$ bundle exec rake test
+$ bundle exec guard
+
+
+terminology CRUD       SQL,            HTTP,               Rails urls,               Rails actions
+---------------------------------------------------------------------------------------------------------------------------
+            Create     Insert          GET                 /xxxx/new                 new                  page to make a new xxxx
+            Create     Insert          POST                /xxxx                     create               create a new xxxx
+            Read       Select          GET                 /xxxx/1                   show                 page mto show xxxx with id=1
+            Read       Select          GET                 /xxxx                     index                page to list all xxxx's
+            Update     Update          GET                 /xxxx/1/edit              edit                 page to edit xxxx with id=1
+            Update     Update          PATCH               /xxxx/1                   update               update xxxx with id=1
+            Delete     Delete          DESTROY             /xxxx/1                   destroy              delete xxxx with id=1
+
+Gemfile in Toy_App
+------------------
+source 'https://rubygems.org'
+
+
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+#                gem 'rails', '4.1.8'
+# Use sqlite3 as the database for Active Record
+#                   gem 'sqlite3'
+# Use SCSS for stylesheets
+#                  gem 'sass-rails', '~> 4.0.3'
+# Use Uglifier as compressor for JavaScript assets
+#                 gem 'uglifier', '>= 1.3.0'
+# Use CoffeeScript for .js.coffee assets and views
+#                 gem 'coffee-rails', '~> 4.0.0'
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer',  platforms: :ruby
+
+# Use jquery as the JavaScript library
+#              gem 'jquery-rails'
+# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+#              gem 'turbolinks'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+#                 gem 'jbuilder', '~> 2.0'
+# bundle exec rake doc:rails generates the API under doc/api.
+#           gem 'sdoc', '~> 0.4.0',          group: :doc
+
+# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+#              gem 'spring',        group: :development
+
+# Use ActiveModel has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
+
+# Use debugger
+# gem 'debugger', group: [:development, :test]
+
+#gem 'rails',        '4.2.2'
+#gem 'sass-rails',   '5.0.2'
+#gem 'uglifier',     '2.5.3'
+#gem 'coffee-rails', '4.1.0'
+#gem 'jquery-rails', '4.0.3'
+#gem 'turbolinks',   '2.3.0'
+#gem 'jbuilder',     '2.2.3'
+#gem 'sdoc',         '0.4.0', group: :doc
+
+#group :development, :test do
+ # gem 'sqlite3',     '1.3.9'
+  #gem 'byebug',      '3.4.0'
+  #gem 'web-console', '2.0.0.beta3'
+  #gem 'spring',      '1.1.3'
+#end
+
+
+ruby  '2.1.2'
+gem 'rails', '4.1.8'
+gem 'sass-rails', '~> 4.0.3'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.0.0'
+gem 'jquery-rails'
+gem 'turbolinks'
+gem 'jbuilder', '~> 2.0'
+gem 'sdoc', '~> 0.4.0',          group: :doc
+gem 'sprockets', '~> 2.12'
+
+group :development, :test do
+  gem 'sqlite3'
+  gem 'byebug',      '3.4.0'
+  gem 'web-console', '2.0.0.beta3'
+  gem 'spring',        group: :development
+end
+
+group :production do
+  gem 'pg',             '0.17.1'
+  gem 'rails_12factor', '0.0.2'
+end
+
+Rails/Toy_App/controllers/application_controller.rb
+--------------------------------------------------
+class ApplicationController < ActionController::Base
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
+  def hello
+    render text: "hello, world!"
+  end
+end
+
+
+Rails/Toy_App/controllers/users_controller.rb (added by rails generate scaffold ... )
+-------------------------------------------------------------------------------------
+class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+  # GET /users
+  # GET /users.json
+  def index
+    @users = User.all
+  end
+
+  # GET /users/1
+  # GET /users/1.json
+  def show
+  end
+
+  # GET /users/new
+  def new
+    @user = User.new
+  end
+
+  # GET /users/1/edit
+  def edit
+  end
+
+  # POST /users
+  # POST /users.json
+  def create
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { render :new }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /users/1
+  # PATCH/PUT /users/1.json
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /users/1
+  # DELETE /users/1.json
+  def destroy
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def user_params
+      params.require(:user).permit(:name, :email)
+    end
+end
+
+
+Rails/Toy_App/app/views/users/index.html.erb (added by rails generate scaffold ... )
+-------------------------------------------------------------------------------------
+<h1>Listing users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>
+
+Rails/Toy_App/app/models/user.rb
+-------------------------------
+class User < ActiveRecord::Base
+  has_many :microposts
+end
+
+Rails/Toy_App/app/models/micropost.rb
+------------------------------------
+class Micropost < ActiveRecord::Base
+  belongs_to :user
+  validates :content, length: { maximum: 140 }
+  validates :content, length: { maximum: 140 },
+                      presence: true
+end
+
+Directory structure
+-------------------
+config
+  routes.rb
+    root 'static_pages#home'
+    get  'static_pages/help'
+    get 'static_pages/about'
+app
+  models
+  controllers
+    application_controller.rb
+    static_pages_controller.rb
+      def home
+      def help
+      def about
+  views
+    layouts
+      application.html.erb
+    static_pages
+      home.html.erb
+      help.html.erb
+      about.html.erb
+test
+  models
+  controllers
+    static_pages_controller_test.rb
+      test 'should get home'
+      test 'should get help'
+      test 'should get about'
+  integration
+
+
+require 'rubygems'
+require 'bundler/setup'
+require 'xxxxx'
+bundle exec rspec spec/models
+
+
